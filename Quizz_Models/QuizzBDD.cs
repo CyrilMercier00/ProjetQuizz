@@ -11,17 +11,17 @@ namespace Quizz_Models
      *  Il y a deja des methodes pour servir d'exemple
      */
 
-    public sealed class DAOQuizzBDD
+    public sealed class QuizzBDD
     {
         /* --- Attributs --- */
         bdd_quizz_Entities bdd_entities;        // Reference aux entites de la bdd quizz
-        static DAOQuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
-        static readonly Lazy<DAOQuizzBDD> LazyInstance = new Lazy<DAOQuizzBDD> (() => new DAOQuizzBDD ());    // Singleton
+        static QuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
+        static readonly Lazy<QuizzBDD> LazyInstance = new Lazy<QuizzBDD> (() => new QuizzBDD ());    // Singleton
 
 
 
         /* --- Constructeur --- */
-        private DAOQuizzBDD ()
+        private QuizzBDD ()
         {
             bdd_entities = new bdd_quizz_Entities ();
         }
