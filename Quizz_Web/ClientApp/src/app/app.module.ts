@@ -10,8 +10,11 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
+import { QuizzQuestionComponent } from './quizz_question/quizz_question.component';
+
 @NgModule({
   declarations: [
+    QuizzQuestionComponent,
     AppComponent,
     NavMenuComponent,
     HomeComponent,
@@ -23,7 +26,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: QuizzQuestionComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
     ])
