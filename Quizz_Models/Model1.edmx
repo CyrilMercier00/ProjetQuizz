@@ -185,7 +185,6 @@
             <PropertyRef Name="pk_quizz" />
           </Key>
           <Property Name="pk_quizz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fk_question" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="fk_compte" Type="Int32" Nullable="false" />
           <Property Name="fk_complexite" Type="Int32" Nullable="false" />
           <Property Name="theme" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
@@ -344,7 +343,6 @@
             <EntityTypeMapping TypeName="bdd_quizz_Model.quizz">
               <MappingFragment StoreEntitySet="quizz">
                 <ScalarProperty Name="pk_quizz" ColumnName="pk_quizz" />
-                <ScalarProperty Name="fk_question" ColumnName="fk_question" />
                 <ScalarProperty Name="fk_compte" ColumnName="fk_compte" />
                 <ScalarProperty Name="fk_complexite" ColumnName="fk_complexite" />
                 <ScalarProperty Name="theme" ColumnName="theme" />
