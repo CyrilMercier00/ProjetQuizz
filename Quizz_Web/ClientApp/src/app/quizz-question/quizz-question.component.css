@@ -1,0 +1,18 @@
+.flex {
+  display: flex;
+}
+
+.flex-center-container {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-center-item {
+  max-width: 25%;
+  min-width: 20%;
+  margin: 1rem;
+}
+
+.flex-center {
+  align-self: center;
+}
