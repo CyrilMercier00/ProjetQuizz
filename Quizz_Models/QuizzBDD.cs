@@ -52,9 +52,15 @@ namespace Quizz_Models
             return bdd_entities.compte.Find (prmID);
         }
 
-        public void CreerCompte ( compte prmCompte )
+        public void InsertCompte ( compte prmCompte )
         {
             bdd_entities.compte.Add (prmCompte);
+        }
+
+        /* Quizz */
+        public void InsertQuizz (quizz prmQuizz)
+        {
+            bdd_entities.quizz.Add (prmQuizz);
         }
     }
 }
