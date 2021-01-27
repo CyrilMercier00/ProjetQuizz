@@ -13,8 +13,8 @@ namespace Quizz_Models
     public sealed class QuizzBDD
     {
         /* --- Attributs --- */
-        bdd_quizz_Entities bdd_entities;        // Reference aux entites de la bdd quizz
-        static QuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
+        bdd_quizz_Entities bdd_entities;        // Reference aux entites de la bdd quizz generees par entity framework
+        public static QuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
         static readonly Lazy<QuizzBDD> LazyInstance = new Lazy<QuizzBDD> (() => new QuizzBDD ());    // Singleton
 
 
@@ -58,9 +58,52 @@ namespace Quizz_Models
         }
 
         /* Quizz */
-        public void InsertQuizz (quizz prmQuizz)
+        public void InsertQuizz ( int nbQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
-            bdd_entities.quizz.Add (prmQuizz);
+            quizz quizzCreation = new quizz ();
+            int? idComplex = null;
+            int? idTheme = null;
+
+            // Get id complex avec le nom
+            // Inserer le quizz
+            // lier 30 questions au quizz
+
+            try
+            {
+                quizzCreation.theme = prmTheme;
+
+                // Recuperer la cle primaire ou le nom correspond a celui rentré en parametre
+                idComplex = bdd_entities.taux_complexite
+                     .Where (x => x.niveau == prmComplex)
+                     .Single ().pk_complexite;
+
+                if ( idComplex != null )
+                {
+                    if ( idTheme != null )
+                    {
+                        bdd_entities.quizz.Add (quizzCreation);
+                        Console.WriteLine ($"L'objet a été inséré avec les parametres: ");
+                    }
+                    else
+                    {
+                        throw new Exception ("Erreur lors de la recuperation de l'id du theme.");
+                    }
+                }
+                else
+                {
+                    throw new Exception ("Erreur lors de la recuperation de l'id du niveau de complexité.");
+                }
+
+
+
+
+
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine (e.Message);
+            }
+
         }
     }
 }
