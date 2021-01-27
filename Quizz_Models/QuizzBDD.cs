@@ -74,13 +74,14 @@ namespace Quizz_Models
         }
 
         /* Quizz */
-        public void InsertQuizz ( int nbQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void InsertQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
             quizz quizzCreation = new quizz ();
-            List<question> listQuestionCreation = new List<question>();
+            List<question> listQuestionCreation = new List<question> ();
             int? idComplex = null;
             int? idTheme = null;
 
+            // todo
             // Get id complex avec le nom
             // Get id theme evec le nom
             // Inserer le quizz avec les fk recuperees
@@ -99,6 +100,10 @@ namespace Quizz_Models
                         bdd_entities.quizz.Add (quizzCreation);
                         Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
+                        for ( int i = 0; i < prmNBQuestion; i++ )
+                        {
+
+                        }
                     }
                     else
                     {
