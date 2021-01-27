@@ -34,18 +34,6 @@
           <Property Name="modifier_quest" Type="tinyint" />
           <Property Name="suppr_question" Type="tinyint" />
         </EntityType>
-        <EntityType Name="personnage">
-          <Key>
-            <PropertyRef Name="pk_personnage" />
-          </Key>
-          <Property Name="pk_personnage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nom" Type="varchar" MaxLength="45" />
-          <Property Name="vie" Type="float" />
-          <Property Name="degat" Type="float" />
-          <Property Name="defense" Type="float" />
-          <Property Name="nb_round" Type="int" />
-          <Property Name="id_groupe" Type="int" />
-        </EntityType>
         <EntityType Name="proposition_reponse">
           <Key>
             <PropertyRef Name="pk_reponse" />
@@ -92,17 +80,6 @@
           <Property Name="commentaire" Type="varchar" MaxLength="45" />
           <Property Name="fk_compte" Type="int" Nullable="false" />
           <Property Name="fk_question" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="skill">
-          <Key>
-            <PropertyRef Name="pk_skill" />
-          </Key>
-          <Property Name="pk_skill" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="frequence" Type="float" />
-          <Property Name="degat" Type="int" />
-          <Property Name="nom" Type="varchar" MaxLength="45" />
-          <Property Name="type" Type="int" />
-          <Property Name="personnage_idpersonnage" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="taux_complexite">
           <Key>
@@ -265,29 +242,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_skill_personnage1">
-          <End Role="personnage" Type="Self.personnage" Multiplicity="1" />
-          <End Role="skill" Type="Self.skill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personnage">
-              <PropertyRef Name="pk_personnage" />
-            </Principal>
-            <Dependent Role="skill">
-              <PropertyRef Name="personnage_idpersonnage" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="bdd_quizzModelStoreContainer">
           <EntitySet Name="compte" EntityType="Self.compte" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="compte_quizz" EntityType="Self.compte_quizz" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="permission" EntityType="Self.permission" Schema="bdd_quizz" store:Type="Tables" />
-          <EntitySet Name="personnage" EntityType="Self.personnage" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="proposition_reponse" EntityType="Self.proposition_reponse" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="question" EntityType="Self.question" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="quizz" EntityType="Self.quizz" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="quizz_question" EntityType="Self.quizz_question" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="reponse_candidat" EntityType="Self.reponse_candidat" Schema="bdd_quizz" store:Type="Tables" />
-          <EntitySet Name="skill" EntityType="Self.skill" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="taux_complexite" EntityType="Self.taux_complexite" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="theme" EntityType="Self.theme" Schema="bdd_quizz" store:Type="Tables" />
           <AssociationSet Name="fk_compte_has_quizz_compte1" Association="Self.fk_compte_has_quizz_compte1">
@@ -338,10 +301,6 @@
             <End Role="question" EntitySet="question" />
             <End Role="proposition_reponse" EntitySet="proposition_reponse" />
           </AssociationSet>
-          <AssociationSet Name="fk_skill_personnage1" Association="Self.fk_skill_personnage1">
-            <End Role="personnage" EntitySet="personnage" />
-            <End Role="skill" EntitySet="skill" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -356,7 +315,6 @@
           <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="role" Type="Int32" />
           <Property Name="fk_permission" Type="Int32" Nullable="false" />
           <NavigationProperty Name="permission" Relationship="Self.fk_compte_Permission1" FromRole="compte" ToRole="permission" />
           <NavigationProperty Name="reponse_candidat" Relationship="Self.fk_reponse_candidat_compte1" FromRole="compte" ToRole="reponse_candidat" />
@@ -372,19 +330,6 @@
           <Property Name="modifier_quest" Type="SByte" />
           <Property Name="suppr_question" Type="SByte" />
           <NavigationProperty Name="compte" Relationship="Self.fk_compte_Permission1" FromRole="permission" ToRole="compte" />
-        </EntityType>
-        <EntityType Name="personnage">
-          <Key>
-            <PropertyRef Name="pk_personnage" />
-          </Key>
-          <Property Name="pk_personnage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="vie" Type="Single" />
-          <Property Name="degat" Type="Single" />
-          <Property Name="defense" Type="Single" />
-          <Property Name="nb_round" Type="Int32" />
-          <Property Name="id_groupe" Type="Int32" />
-          <NavigationProperty Name="skill" Relationship="Self.fk_skill_personnage1" FromRole="personnage" ToRole="skill" />
         </EntityType>
         <EntityType Name="proposition_reponse">
           <Key>
@@ -437,18 +382,6 @@
           <NavigationProperty Name="compte" Relationship="Self.fk_reponse_candidat_compte1" FromRole="reponse_candidat" ToRole="compte" />
           <NavigationProperty Name="question" Relationship="Self.fk_reponse_candidat_question1" FromRole="reponse_candidat" ToRole="question" />
         </EntityType>
-        <EntityType Name="skill">
-          <Key>
-            <PropertyRef Name="pk_skill" />
-          </Key>
-          <Property Name="pk_skill" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="frequence" Type="Single" />
-          <Property Name="degat" Type="Int32" />
-          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="type" Type="Int32" />
-          <Property Name="personnage_idpersonnage" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="personnage" Relationship="Self.fk_skill_personnage1" FromRole="skill" ToRole="personnage" />
-        </EntityType>
         <EntityType Name="taux_complexite">
           <Key>
             <PropertyRef Name="pk_complexite" />
@@ -491,18 +424,6 @@
             </Principal>
             <Dependent Role="reponse_candidat">
               <PropertyRef Name="fk_compte" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_skill_personnage1">
-          <End Role="personnage" Type="Self.personnage" Multiplicity="1" />
-          <End Role="skill" Type="Self.skill" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="personnage">
-              <PropertyRef Name="pk_personnage" />
-            </Principal>
-            <Dependent Role="skill">
-              <PropertyRef Name="personnage_idpersonnage" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -589,12 +510,10 @@
         <EntityContainer Name="bdd_quizzEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="compte" EntityType="Self.compte" />
           <EntitySet Name="permission" EntityType="Self.permission" />
-          <EntitySet Name="personnage" EntityType="Self.personnage" />
           <EntitySet Name="proposition_reponse" EntityType="Self.proposition_reponse" />
           <EntitySet Name="question" EntityType="Self.question" />
           <EntitySet Name="quizz" EntityType="Self.quizz" />
           <EntitySet Name="reponse_candidat" EntityType="Self.reponse_candidat" />
-          <EntitySet Name="skill" EntityType="Self.skill" />
           <EntitySet Name="taux_complexite" EntityType="Self.taux_complexite" />
           <EntitySet Name="theme" EntityType="Self.theme" />
           <AssociationSet Name="fk_compte_Permission1" Association="Self.fk_compte_Permission1">
@@ -604,10 +523,6 @@
           <AssociationSet Name="fk_reponse_candidat_compte1" Association="Self.fk_reponse_candidat_compte1">
             <End Role="compte" EntitySet="compte" />
             <End Role="reponse_candidat" EntitySet="reponse_candidat" />
-          </AssociationSet>
-          <AssociationSet Name="fk_skill_personnage1" Association="Self.fk_skill_personnage1">
-            <End Role="personnage" EntitySet="personnage" />
-            <End Role="skill" EntitySet="skill" />
           </AssociationSet>
           <AssociationSet Name="fk_reponse_question1" Association="Self.fk_reponse_question1">
             <End Role="question" EntitySet="question" />
@@ -655,7 +570,6 @@
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="prenom" ColumnName="prenom" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
-                <ScalarProperty Name="role" ColumnName="role" />
                 <ScalarProperty Name="fk_permission" ColumnName="fk_permission" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -668,19 +582,6 @@
                 <ScalarProperty Name="ajouter_quest" ColumnName="ajouter_quest" />
                 <ScalarProperty Name="modifier_quest" ColumnName="modifier_quest" />
                 <ScalarProperty Name="suppr_question" ColumnName="suppr_question" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="personnage">
-            <EntityTypeMapping TypeName="bdd_quizzModel.personnage">
-              <MappingFragment StoreEntitySet="personnage">
-                <ScalarProperty Name="pk_personnage" ColumnName="pk_personnage" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
-                <ScalarProperty Name="vie" ColumnName="vie" />
-                <ScalarProperty Name="degat" ColumnName="degat" />
-                <ScalarProperty Name="defense" ColumnName="defense" />
-                <ScalarProperty Name="nb_round" ColumnName="nb_round" />
-                <ScalarProperty Name="id_groupe" ColumnName="id_groupe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -724,18 +625,6 @@
                 <ScalarProperty Name="commentaire" ColumnName="commentaire" />
                 <ScalarProperty Name="fk_compte" ColumnName="fk_compte" />
                 <ScalarProperty Name="fk_question" ColumnName="fk_question" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="skill">
-            <EntityTypeMapping TypeName="bdd_quizzModel.skill">
-              <MappingFragment StoreEntitySet="skill">
-                <ScalarProperty Name="pk_skill" ColumnName="pk_skill" />
-                <ScalarProperty Name="frequence" ColumnName="frequence" />
-                <ScalarProperty Name="degat" ColumnName="degat" />
-                <ScalarProperty Name="nom" ColumnName="nom" />
-                <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="personnage_idpersonnage" ColumnName="personnage_idpersonnage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
