@@ -1,0 +1,36 @@
+#container-quizz .container-input {
+  margin: 1rem;
+  min-width: 10rem;
+  flex-basis: 100%;
+  position: relative;
+}
+
+#container-quizz form button
+{
+  min-width: 8rem;
+  margin-top: 3rem;
+  padding: 0.5rem;
+	background-color:#415a77;
+	border-radius:10px;
+	border:0;
+  color:inherit;
+  font-size: 18px;
+	text-decoration:none;
+}
+
+#container-quizz .container-input button:hover {
+	background-color:#4b688a ;
+}
+
+#container-quizz .container-input button:active {
+	position:relative;
+	top:1px;
+}
+
+#container-quizz form select,
+#container-quizz form input {
+  position: absolute;
+  left: 0; top: 100%;
+  width: 100%;
+  height: 100%;
+}

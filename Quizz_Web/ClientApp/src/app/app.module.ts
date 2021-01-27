@@ -32,6 +32,7 @@ import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'quizz-question', component: QuizzQuestionComponent },
+      { path: 'gen-quizz', component: GenQuizzComponent },
     ])
   ],
   providers: [],
