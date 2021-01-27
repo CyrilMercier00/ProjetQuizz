@@ -4,18 +4,28 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="fa108657de554dc28307e9abd67e9fa8" Name="Diagram1">
-        <EntityTypeShape EntityType="bdd_quizz_Model.compte" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdd_quizz_Model.question" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdd_quizz_Model.quizz" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdd_quizz_Model.reponse" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdd_quizz_Model.reponse_candidat" Width="1.5" PointX="7.5" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="bdd_quizz_Model.taux_complexite" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="bdd_quizz_Model.fk_quizz_candidat1" ManuallyRouted="false" />
-        <AssociationConnector Association="bdd_quizz_Model.fk_question_quizz1" ManuallyRouted="false" />
-        <AssociationConnector Association="bdd_quizz_Model.fk_reponse_candidat_question1" ManuallyRouted="false" />
-        <AssociationConnector Association="bdd_quizz_Model.fk_reponse_question1" ManuallyRouted="false" />
-        <AssociationConnector Association="bdd_quizz_Model.fk_quizz_taux_complexite1" ManuallyRouted="false" />
+      <Diagram DiagramId="d4aad52b0bfa493eb306ac127c74df20" Name="Diagram1">
+        <EntityTypeShape EntityType="bdd_quizzModel.compte" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.permission" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.personnage" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.proposition_reponse" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.question" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.quizz" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.reponse_candidat" Width="1.5" PointX="5.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.skill" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.taux_complexite" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdd_quizzModel.theme" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="bdd_quizzModel.fk_compte_Permission1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_reponse_candidat_compte1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_skill_personnage1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_reponse_question1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_question_taux_complexite1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_question_theme1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_reponse_candidat_question1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_quizz_taux_complexite1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.fk_quizz_theme1" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.compte_quizz" ManuallyRouted="false" />
+        <AssociationConnector Association="bdd_quizzModel.quizz_question" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

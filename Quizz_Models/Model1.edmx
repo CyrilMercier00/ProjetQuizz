@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bdd_quizz_Model.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="bdd_quizzModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="8.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="compte">
           <Key>
             <PropertyRef Name="pk_compte" />
@@ -13,7 +13,47 @@
           <Property Name="nom" Type="varchar" MaxLength="45" />
           <Property Name="prenom" Type="varchar" MaxLength="45" />
           <Property Name="mail" Type="varchar" MaxLength="45" />
-          <Property Name="role" Type="varchar" MaxLength="45" />
+          <Property Name="role" Type="int" />
+          <Property Name="fk_permission" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="compte_quizz">
+          <Key>
+            <PropertyRef Name="fk_compte" />
+            <PropertyRef Name="fk_quizz" />
+          </Key>
+          <Property Name="fk_compte" Type="int" Nullable="false" />
+          <Property Name="fk_quizz" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="permission">
+          <Key>
+            <PropertyRef Name="pk_permission" />
+          </Key>
+          <Property Name="pk_permission" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="generer_quizz" Type="tinyint" />
+          <Property Name="ajouter_quest" Type="tinyint" />
+          <Property Name="modifier_quest" Type="tinyint" />
+          <Property Name="suppr_question" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="personnage">
+          <Key>
+            <PropertyRef Name="pk_personnage" />
+          </Key>
+          <Property Name="pk_personnage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" />
+          <Property Name="vie" Type="float" />
+          <Property Name="degat" Type="float" />
+          <Property Name="defense" Type="float" />
+          <Property Name="nb_round" Type="int" />
+          <Property Name="id_groupe" Type="int" />
+        </EntityType>
+        <EntityType Name="proposition_reponse">
+          <Key>
+            <PropertyRef Name="pk_reponse" />
+          </Key>
+          <Property Name="pk_reponse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="texte" Type="longtext" />
+          <Property Name="est_bonne" Type="tinyint" />
+          <Property Name="fk_question" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="question">
           <Key>
@@ -23,79 +63,181 @@
           <Property Name="nv_complexite" Type="varchar" MaxLength="45" />
           <Property Name="enonce" Type="longtext" />
           <Property Name="a_repondu" Type="tinyint" />
-          <Property Name="fk_quizz" Type="int" Nullable="false" />
+          <Property Name="fk_theme" Type="int" Nullable="false" />
+          <Property Name="fk_complexite" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="quizz">
           <Key>
             <PropertyRef Name="pk_quizz" />
           </Key>
           <Property Name="pk_quizz" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="fk_question" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="fk_compte" Type="int" Nullable="false" />
+          <Property Name="chrono" Type="time" Precision="0" />
+          <Property Name="fk_theme" Type="int" Nullable="false" />
           <Property Name="fk_complexite" Type="int" Nullable="false" />
-          <Property Name="theme" Type="varchar" MaxLength="45" Nullable="false" />
         </EntityType>
-        <EntityType Name="reponse">
+        <EntityType Name="quizz_question">
           <Key>
-            <PropertyRef Name="pk_reponse" />
+            <PropertyRef Name="fk_quizz" />
+            <PropertyRef Name="fk_question" />
           </Key>
-          <Property Name="pk_reponse" Type="int" Nullable="false" />
-          <Property Name="reponse" Type="longtext" />
-          <Property Name="est_bonne" Type="tinyint" />
+          <Property Name="fk_quizz" Type="int" Nullable="false" />
           <Property Name="fk_question" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="reponse_candidat">
           <Key>
-            <PropertyRef Name="id_reponse" />
+            <PropertyRef Name="pk_reponse" />
           </Key>
-          <Property Name="id_reponse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pk_reponse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="reponse" Type="longtext" />
           <Property Name="commentaire" Type="varchar" MaxLength="45" />
+          <Property Name="fk_compte" Type="int" Nullable="false" />
           <Property Name="fk_question" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="taux complexite">
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="pk_skill" />
+          </Key>
+          <Property Name="pk_skill" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="frequence" Type="float" />
+          <Property Name="degat" Type="int" />
+          <Property Name="nom" Type="varchar" MaxLength="45" />
+          <Property Name="type" Type="int" />
+          <Property Name="personnage_idpersonnage" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="taux_complexite">
           <Key>
             <PropertyRef Name="pk_complexite" />
           </Key>
           <Property Name="pk_complexite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="niveau" Type="varchar" MaxLength="45" />
-          <Property Name="quest_junior" Type="int" />
+          <Property Name="question_junior" Type="int" />
           <Property Name="quest_confirme" Type="int" />
-          <Property Name="quest_experimente" Type="int" />
+          <Property Name="question_experimente" Type="int" />
         </EntityType>
-        <Association Name="fk_question_quizz1">
-          <End Role="quizz" Type="Self.quizz" Multiplicity="1" />
-          <End Role="question" Type="Self.question" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="quizz">
-              <PropertyRef Name="pk_quizz" />
-            </Principal>
-            <Dependent Role="question">
-              <PropertyRef Name="fk_quizz" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_quizz_candidat1">
+        <EntityType Name="theme">
+          <Key>
+            <PropertyRef Name="pk_theme" />
+          </Key>
+          <Property Name="pk_theme" Type="int" Nullable="false" />
+          <Property Name="nom_theme" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="fk_compte_has_quizz_compte1">
           <End Role="compte" Type="Self.compte" Multiplicity="1" />
-          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+          <End Role="compte_quizz" Type="Self.compte_quizz" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="compte">
               <PropertyRef Name="pk_compte" />
             </Principal>
-            <Dependent Role="quizz">
+            <Dependent Role="compte_quizz">
               <PropertyRef Name="fk_compte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_compte_has_quizz_quizz1">
+          <End Role="quizz" Type="Self.quizz" Multiplicity="1" />
+          <End Role="compte_quizz" Type="Self.compte_quizz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quizz">
+              <PropertyRef Name="pk_quizz" />
+            </Principal>
+            <Dependent Role="compte_quizz">
+              <PropertyRef Name="fk_quizz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_compte_Permission1">
+          <End Role="permission" Type="Self.permission" Multiplicity="1" />
+          <End Role="compte" Type="Self.compte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permission">
+              <PropertyRef Name="pk_permission" />
+            </Principal>
+            <Dependent Role="compte">
+              <PropertyRef Name="fk_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_question_taux complexite1">
+          <End Role="taux_complexite" Type="Self.taux_complexite" Multiplicity="1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="taux_complexite">
+              <PropertyRef Name="pk_complexite" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="fk_complexite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_question_theme1">
+          <End Role="theme" Type="Self.theme" Multiplicity="1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme">
+              <PropertyRef Name="pk_theme" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="fk_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quizz_has_question_question1">
+          <End Role="question" Type="Self.question" Multiplicity="1" />
+          <End Role="quizz_question" Type="Self.quizz_question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="pk_question" />
+            </Principal>
+            <Dependent Role="quizz_question">
+              <PropertyRef Name="fk_question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quizz_has_question_quizz1">
+          <End Role="quizz" Type="Self.quizz" Multiplicity="1" />
+          <End Role="quizz_question" Type="Self.quizz_question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quizz">
+              <PropertyRef Name="pk_quizz" />
+            </Principal>
+            <Dependent Role="quizz_question">
+              <PropertyRef Name="fk_quizz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_quizz_taux complexite1">
-          <End Role="taux complexite" Type="Self.taux complexite" Multiplicity="1" />
+          <End Role="taux_complexite" Type="Self.taux_complexite" Multiplicity="1" />
           <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="taux complexite">
+            <Principal Role="taux_complexite">
               <PropertyRef Name="pk_complexite" />
             </Principal>
             <Dependent Role="quizz">
               <PropertyRef Name="fk_complexite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_quizz_theme1">
+          <End Role="theme" Type="Self.theme" Multiplicity="1" />
+          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme">
+              <PropertyRef Name="pk_theme" />
+            </Principal>
+            <Dependent Role="quizz">
+              <PropertyRef Name="fk_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reponse_candidat_compte1">
+          <End Role="compte" Type="Self.compte" Multiplicity="1" />
+          <End Role="reponse_candidat" Type="Self.reponse_candidat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compte">
+              <PropertyRef Name="pk_compte" />
+            </Principal>
+            <Dependent Role="reponse_candidat">
+              <PropertyRef Name="fk_compte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -113,34 +255,80 @@
         </Association>
         <Association Name="fk_reponse_question1">
           <End Role="question" Type="Self.question" Multiplicity="1" />
-          <End Role="reponse" Type="Self.reponse" Multiplicity="*" />
+          <End Role="proposition_reponse" Type="Self.proposition_reponse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="question">
               <PropertyRef Name="pk_question" />
             </Principal>
-            <Dependent Role="reponse">
+            <Dependent Role="proposition_reponse">
               <PropertyRef Name="fk_question" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bdd_quizz_ModelStoreContainer">
+        <Association Name="fk_skill_personnage1">
+          <End Role="personnage" Type="Self.personnage" Multiplicity="1" />
+          <End Role="skill" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personnage">
+              <PropertyRef Name="pk_personnage" />
+            </Principal>
+            <Dependent Role="skill">
+              <PropertyRef Name="personnage_idpersonnage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdd_quizzModelStoreContainer">
           <EntitySet Name="compte" EntityType="Self.compte" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="compte_quizz" EntityType="Self.compte_quizz" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="permission" EntityType="Self.permission" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="personnage" EntityType="Self.personnage" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="proposition_reponse" EntityType="Self.proposition_reponse" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="question" EntityType="Self.question" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="quizz" EntityType="Self.quizz" Schema="bdd_quizz" store:Type="Tables" />
-          <EntitySet Name="reponse" EntityType="Self.reponse" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="quizz_question" EntityType="Self.quizz_question" Schema="bdd_quizz" store:Type="Tables" />
           <EntitySet Name="reponse_candidat" EntityType="Self.reponse_candidat" Schema="bdd_quizz" store:Type="Tables" />
-          <EntitySet Name="taux complexite" EntityType="Self.taux complexite" Schema="bdd_quizz" store:Type="Tables" />
-          <AssociationSet Name="fk_question_quizz1" Association="Self.fk_question_quizz1">
+          <EntitySet Name="skill" EntityType="Self.skill" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="taux_complexite" EntityType="Self.taux_complexite" Schema="bdd_quizz" store:Type="Tables" />
+          <EntitySet Name="theme" EntityType="Self.theme" Schema="bdd_quizz" store:Type="Tables" />
+          <AssociationSet Name="fk_compte_has_quizz_compte1" Association="Self.fk_compte_has_quizz_compte1">
+            <End Role="compte" EntitySet="compte" />
+            <End Role="compte_quizz" EntitySet="compte_quizz" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compte_has_quizz_quizz1" Association="Self.fk_compte_has_quizz_quizz1">
             <End Role="quizz" EntitySet="quizz" />
+            <End Role="compte_quizz" EntitySet="compte_quizz" />
+          </AssociationSet>
+          <AssociationSet Name="fk_compte_Permission1" Association="Self.fk_compte_Permission1">
+            <End Role="permission" EntitySet="permission" />
+            <End Role="compte" EntitySet="compte" />
+          </AssociationSet>
+          <AssociationSet Name="fk_question_taux complexite1" Association="Self.fk_question_taux complexite1">
+            <End Role="taux_complexite" EntitySet="taux_complexite" />
             <End Role="question" EntitySet="question" />
           </AssociationSet>
-          <AssociationSet Name="fk_quizz_candidat1" Association="Self.fk_quizz_candidat1">
-            <End Role="compte" EntitySet="compte" />
+          <AssociationSet Name="fk_question_theme1" Association="Self.fk_question_theme1">
+            <End Role="theme" EntitySet="theme" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quizz_has_question_question1" Association="Self.fk_quizz_has_question_question1">
+            <End Role="question" EntitySet="question" />
+            <End Role="quizz_question" EntitySet="quizz_question" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quizz_has_question_quizz1" Association="Self.fk_quizz_has_question_quizz1">
             <End Role="quizz" EntitySet="quizz" />
+            <End Role="quizz_question" EntitySet="quizz_question" />
           </AssociationSet>
           <AssociationSet Name="fk_quizz_taux complexite1" Association="Self.fk_quizz_taux complexite1">
-            <End Role="taux complexite" EntitySet="taux complexite" />
+            <End Role="taux_complexite" EntitySet="taux_complexite" />
             <End Role="quizz" EntitySet="quizz" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quizz_theme1" Association="Self.fk_quizz_theme1">
+            <End Role="theme" EntitySet="theme" />
+            <End Role="quizz" EntitySet="quizz" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reponse_candidat_compte1" Association="Self.fk_reponse_candidat_compte1">
+            <End Role="compte" EntitySet="compte" />
+            <End Role="reponse_candidat" EntitySet="reponse_candidat" />
           </AssociationSet>
           <AssociationSet Name="fk_reponse_candidat_question1" Association="Self.fk_reponse_candidat_question1">
             <End Role="question" EntitySet="question" />
@@ -148,14 +336,18 @@
           </AssociationSet>
           <AssociationSet Name="fk_reponse_question1" Association="Self.fk_reponse_question1">
             <End Role="question" EntitySet="question" />
-            <End Role="reponse" EntitySet="reponse" />
+            <End Role="proposition_reponse" EntitySet="proposition_reponse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_skill_personnage1" Association="Self.fk_skill_personnage1">
+            <End Role="personnage" EntitySet="personnage" />
+            <End Role="skill" EntitySet="skill" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="bdd_quizz_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="bdd_quizzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="compte">
           <Key>
             <PropertyRef Name="pk_compte" />
@@ -164,8 +356,45 @@
           <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="role" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="quizz" Relationship="Self.fk_quizz_candidat1" FromRole="compte" ToRole="quizz" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="fk_permission" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="permission" Relationship="Self.fk_compte_Permission1" FromRole="compte" ToRole="permission" />
+          <NavigationProperty Name="reponse_candidat" Relationship="Self.fk_reponse_candidat_compte1" FromRole="compte" ToRole="reponse_candidat" />
+          <NavigationProperty Name="quizz" Relationship="Self.compte_quizz" FromRole="compte" ToRole="quizz" />
+        </EntityType>
+        <EntityType Name="permission">
+          <Key>
+            <PropertyRef Name="pk_permission" />
+          </Key>
+          <Property Name="pk_permission" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="generer_quizz" Type="SByte" />
+          <Property Name="ajouter_quest" Type="SByte" />
+          <Property Name="modifier_quest" Type="SByte" />
+          <Property Name="suppr_question" Type="SByte" />
+          <NavigationProperty Name="compte" Relationship="Self.fk_compte_Permission1" FromRole="permission" ToRole="compte" />
+        </EntityType>
+        <EntityType Name="personnage">
+          <Key>
+            <PropertyRef Name="pk_personnage" />
+          </Key>
+          <Property Name="pk_personnage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="vie" Type="Single" />
+          <Property Name="degat" Type="Single" />
+          <Property Name="defense" Type="Single" />
+          <Property Name="nb_round" Type="Int32" />
+          <Property Name="id_groupe" Type="Int32" />
+          <NavigationProperty Name="skill" Relationship="Self.fk_skill_personnage1" FromRole="personnage" ToRole="skill" />
+        </EntityType>
+        <EntityType Name="proposition_reponse">
+          <Key>
+            <PropertyRef Name="pk_reponse" />
+          </Key>
+          <Property Name="pk_reponse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="texte" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
+          <Property Name="est_bonne" Type="SByte" />
+          <Property Name="fk_question" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="question" Relationship="Self.fk_reponse_question1" FromRole="proposition_reponse" ToRole="question" />
         </EntityType>
         <EntityType Name="question">
           <Key>
@@ -175,43 +404,50 @@
           <Property Name="nv_complexite" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="enonce" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="a_repondu" Type="SByte" />
-          <Property Name="fk_quizz" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="quizz" Relationship="Self.fk_question_quizz1" FromRole="question" ToRole="quizz" />
+          <Property Name="fk_theme" Type="Int32" Nullable="false" />
+          <Property Name="fk_complexite" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="proposition_reponse" Relationship="Self.fk_reponse_question1" FromRole="question" ToRole="proposition_reponse" />
+          <NavigationProperty Name="taux_complexite" Relationship="Self.fk_question_taux_complexite1" FromRole="question" ToRole="taux_complexite" />
+          <NavigationProperty Name="theme" Relationship="Self.fk_question_theme1" FromRole="question" ToRole="theme" />
           <NavigationProperty Name="reponse_candidat" Relationship="Self.fk_reponse_candidat_question1" FromRole="question" ToRole="reponse_candidat" />
-          <NavigationProperty Name="reponse" Relationship="Self.fk_reponse_question1" FromRole="question" ToRole="reponse" />
+          <NavigationProperty Name="quizz" Relationship="Self.quizz_question" FromRole="question" ToRole="quizz" />
         </EntityType>
         <EntityType Name="quizz">
           <Key>
             <PropertyRef Name="pk_quizz" />
           </Key>
           <Property Name="pk_quizz" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="fk_question" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="fk_compte" Type="Int32" Nullable="false" />
+          <Property Name="chrono" Type="Time" />
+          <Property Name="fk_theme" Type="Int32" Nullable="false" />
           <Property Name="fk_complexite" Type="Int32" Nullable="false" />
-          <Property Name="theme" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="compte" Relationship="Self.fk_quizz_candidat1" FromRole="quizz" ToRole="compte" />
-          <NavigationProperty Name="question" Relationship="Self.fk_question_quizz1" FromRole="quizz" ToRole="question" />
           <NavigationProperty Name="taux_complexite" Relationship="Self.fk_quizz_taux_complexite1" FromRole="quizz" ToRole="taux_complexite" />
-        </EntityType>
-        <EntityType Name="reponse">
-          <Key>
-            <PropertyRef Name="pk_reponse" />
-          </Key>
-          <Property Name="pk_reponse" Type="Int32" Nullable="false" />
-          <Property Name="reponse1" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
-          <Property Name="est_bonne" Type="SByte" />
-          <Property Name="fk_question" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="question" Relationship="Self.fk_reponse_question1" FromRole="reponse" ToRole="question" />
+          <NavigationProperty Name="theme" Relationship="Self.fk_quizz_theme1" FromRole="quizz" ToRole="theme" />
+          <NavigationProperty Name="compte" Relationship="Self.compte_quizz" FromRole="quizz" ToRole="compte" />
+          <NavigationProperty Name="question" Relationship="Self.quizz_question" FromRole="quizz" ToRole="question" />
         </EntityType>
         <EntityType Name="reponse_candidat">
           <Key>
-            <PropertyRef Name="id_reponse" />
+            <PropertyRef Name="pk_reponse" />
           </Key>
-          <Property Name="id_reponse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pk_reponse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="reponse" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" />
           <Property Name="commentaire" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="fk_compte" Type="Int32" Nullable="false" />
           <Property Name="fk_question" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="compte" Relationship="Self.fk_reponse_candidat_compte1" FromRole="reponse_candidat" ToRole="compte" />
           <NavigationProperty Name="question" Relationship="Self.fk_reponse_candidat_question1" FromRole="reponse_candidat" ToRole="question" />
+        </EntityType>
+        <EntityType Name="skill">
+          <Key>
+            <PropertyRef Name="pk_skill" />
+          </Key>
+          <Property Name="pk_skill" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="frequence" Type="Single" />
+          <Property Name="degat" Type="Int32" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="Int32" />
+          <Property Name="personnage_idpersonnage" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="personnage" Relationship="Self.fk_skill_personnage1" FromRole="skill" ToRole="personnage" />
         </EntityType>
         <EntityType Name="taux_complexite">
           <Key>
@@ -219,32 +455,90 @@
           </Key>
           <Property Name="pk_complexite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="niveau" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
-          <Property Name="quest_junior" Type="Int32" />
+          <Property Name="question_junior" Type="Int32" />
           <Property Name="quest_confirme" Type="Int32" />
-          <Property Name="quest_experimente" Type="Int32" />
+          <Property Name="question_experimente" Type="Int32" />
+          <NavigationProperty Name="question" Relationship="Self.fk_question_taux_complexite1" FromRole="taux_complexite" ToRole="question" />
           <NavigationProperty Name="quizz" Relationship="Self.fk_quizz_taux_complexite1" FromRole="taux_complexite" ToRole="quizz" />
         </EntityType>
-        <Association Name="fk_quizz_candidat1">
+        <EntityType Name="theme">
+          <Key>
+            <PropertyRef Name="pk_theme" />
+          </Key>
+          <Property Name="pk_theme" Type="Int32" Nullable="false" />
+          <Property Name="nom_theme" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="question" Relationship="Self.fk_question_theme1" FromRole="theme" ToRole="question" />
+          <NavigationProperty Name="quizz" Relationship="Self.fk_quizz_theme1" FromRole="theme" ToRole="quizz" />
+        </EntityType>
+        <Association Name="fk_compte_Permission1">
+          <End Role="permission" Type="Self.permission" Multiplicity="1" />
+          <End Role="compte" Type="Self.compte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="permission">
+              <PropertyRef Name="pk_permission" />
+            </Principal>
+            <Dependent Role="compte">
+              <PropertyRef Name="fk_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reponse_candidat_compte1">
           <End Role="compte" Type="Self.compte" Multiplicity="1" />
-          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+          <End Role="reponse_candidat" Type="Self.reponse_candidat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="compte">
               <PropertyRef Name="pk_compte" />
             </Principal>
-            <Dependent Role="quizz">
+            <Dependent Role="reponse_candidat">
               <PropertyRef Name="fk_compte" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_question_quizz1">
-          <End Role="quizz" Type="Self.quizz" Multiplicity="1" />
+        <Association Name="fk_skill_personnage1">
+          <End Role="personnage" Type="Self.personnage" Multiplicity="1" />
+          <End Role="skill" Type="Self.skill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personnage">
+              <PropertyRef Name="pk_personnage" />
+            </Principal>
+            <Dependent Role="skill">
+              <PropertyRef Name="personnage_idpersonnage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_reponse_question1">
+          <End Role="question" Type="Self.question" Multiplicity="1" />
+          <End Role="proposition_reponse" Type="Self.proposition_reponse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="question">
+              <PropertyRef Name="pk_question" />
+            </Principal>
+            <Dependent Role="proposition_reponse">
+              <PropertyRef Name="fk_question" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_question_taux_complexite1">
+          <End Role="taux_complexite" Type="Self.taux_complexite" Multiplicity="1" />
           <End Role="question" Type="Self.question" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="quizz">
-              <PropertyRef Name="pk_quizz" />
+            <Principal Role="taux_complexite">
+              <PropertyRef Name="pk_complexite" />
             </Principal>
             <Dependent Role="question">
-              <PropertyRef Name="fk_quizz" />
+              <PropertyRef Name="fk_complexite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_question_theme1">
+          <End Role="theme" Type="Self.theme" Multiplicity="1" />
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme">
+              <PropertyRef Name="pk_theme" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="fk_theme" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -256,18 +550,6 @@
               <PropertyRef Name="pk_question" />
             </Principal>
             <Dependent Role="reponse_candidat">
-              <PropertyRef Name="fk_question" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_reponse_question1">
-          <End Role="question" Type="Self.question" Multiplicity="1" />
-          <End Role="reponse" Type="Self.reponse" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="question">
-              <PropertyRef Name="pk_question" />
-            </Principal>
-            <Dependent Role="reponse">
               <PropertyRef Name="fk_question" />
             </Dependent>
           </ReferentialConstraint>
@@ -284,31 +566,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="bdd_quizz_Entities" annotation:LazyLoadingEnabled="true">
+        <Association Name="fk_quizz_theme1">
+          <End Role="theme" Type="Self.theme" Multiplicity="1" />
+          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="theme">
+              <PropertyRef Name="pk_theme" />
+            </Principal>
+            <Dependent Role="quizz">
+              <PropertyRef Name="fk_theme" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="compte_quizz">
+          <End Role="compte" Type="Self.compte" Multiplicity="*" />
+          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+        </Association>
+        <Association Name="quizz_question">
+          <End Role="question" Type="Self.question" Multiplicity="*" />
+          <End Role="quizz" Type="Self.quizz" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="bdd_quizzEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="compte" EntityType="Self.compte" />
+          <EntitySet Name="permission" EntityType="Self.permission" />
+          <EntitySet Name="personnage" EntityType="Self.personnage" />
+          <EntitySet Name="proposition_reponse" EntityType="Self.proposition_reponse" />
           <EntitySet Name="question" EntityType="Self.question" />
           <EntitySet Name="quizz" EntityType="Self.quizz" />
-          <EntitySet Name="reponse" EntityType="Self.reponse" />
           <EntitySet Name="reponse_candidat" EntityType="Self.reponse_candidat" />
+          <EntitySet Name="skill" EntityType="Self.skill" />
           <EntitySet Name="taux_complexite" EntityType="Self.taux_complexite" />
-          <AssociationSet Name="fk_quizz_candidat1" Association="Self.fk_quizz_candidat1">
+          <EntitySet Name="theme" EntityType="Self.theme" />
+          <AssociationSet Name="fk_compte_Permission1" Association="Self.fk_compte_Permission1">
+            <End Role="permission" EntitySet="permission" />
             <End Role="compte" EntitySet="compte" />
-            <End Role="quizz" EntitySet="quizz" />
           </AssociationSet>
-          <AssociationSet Name="fk_question_quizz1" Association="Self.fk_question_quizz1">
-            <End Role="quizz" EntitySet="quizz" />
+          <AssociationSet Name="fk_reponse_candidat_compte1" Association="Self.fk_reponse_candidat_compte1">
+            <End Role="compte" EntitySet="compte" />
+            <End Role="reponse_candidat" EntitySet="reponse_candidat" />
+          </AssociationSet>
+          <AssociationSet Name="fk_skill_personnage1" Association="Self.fk_skill_personnage1">
+            <End Role="personnage" EntitySet="personnage" />
+            <End Role="skill" EntitySet="skill" />
+          </AssociationSet>
+          <AssociationSet Name="fk_reponse_question1" Association="Self.fk_reponse_question1">
+            <End Role="question" EntitySet="question" />
+            <End Role="proposition_reponse" EntitySet="proposition_reponse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_question_taux_complexite1" Association="Self.fk_question_taux_complexite1">
+            <End Role="taux_complexite" EntitySet="taux_complexite" />
+            <End Role="question" EntitySet="question" />
+          </AssociationSet>
+          <AssociationSet Name="fk_question_theme1" Association="Self.fk_question_theme1">
+            <End Role="theme" EntitySet="theme" />
             <End Role="question" EntitySet="question" />
           </AssociationSet>
           <AssociationSet Name="fk_reponse_candidat_question1" Association="Self.fk_reponse_candidat_question1">
             <End Role="question" EntitySet="question" />
             <End Role="reponse_candidat" EntitySet="reponse_candidat" />
           </AssociationSet>
-          <AssociationSet Name="fk_reponse_question1" Association="Self.fk_reponse_question1">
-            <End Role="question" EntitySet="question" />
-            <End Role="reponse" EntitySet="reponse" />
-          </AssociationSet>
           <AssociationSet Name="fk_quizz_taux_complexite1" Association="Self.fk_quizz_taux_complexite1">
             <End Role="taux_complexite" EntitySet="taux_complexite" />
+            <End Role="quizz" EntitySet="quizz" />
+          </AssociationSet>
+          <AssociationSet Name="fk_quizz_theme1" Association="Self.fk_quizz_theme1">
+            <End Role="theme" EntitySet="theme" />
+            <End Role="quizz" EntitySet="quizz" />
+          </AssociationSet>
+          <AssociationSet Name="compte_quizz" Association="Self.compte_quizz">
+            <End Role="compte" EntitySet="compte" />
+            <End Role="quizz" EntitySet="quizz" />
+          </AssociationSet>
+          <AssociationSet Name="quizz_question" Association="Self.quizz_question">
+            <End Role="question" EntitySet="question" />
             <End Role="quizz" EntitySet="quizz" />
           </AssociationSet>
         </EntityContainer>
@@ -317,71 +647,133 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="bdd_quizz_ModelStoreContainer" CdmEntityContainer="bdd_quizz_Entities">
+        <EntityContainerMapping StorageEntityContainer="bdd_quizzModelStoreContainer" CdmEntityContainer="bdd_quizzEntities">
           <EntitySetMapping Name="compte">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.compte">
+            <EntityTypeMapping TypeName="bdd_quizzModel.compte">
               <MappingFragment StoreEntitySet="compte">
                 <ScalarProperty Name="pk_compte" ColumnName="pk_compte" />
                 <ScalarProperty Name="nom" ColumnName="nom" />
                 <ScalarProperty Name="prenom" ColumnName="prenom" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="fk_permission" ColumnName="fk_permission" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="question">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.question">
-              <MappingFragment StoreEntitySet="question">
-                <ScalarProperty Name="pk_question" ColumnName="pk_question" />
-                <ScalarProperty Name="nv_complexite" ColumnName="nv_complexite" />
-                <ScalarProperty Name="enonce" ColumnName="enonce" />
-                <ScalarProperty Name="a_repondu" ColumnName="a_repondu" />
-                <ScalarProperty Name="fk_quizz" ColumnName="fk_quizz" />
+          <EntitySetMapping Name="permission">
+            <EntityTypeMapping TypeName="bdd_quizzModel.permission">
+              <MappingFragment StoreEntitySet="permission">
+                <ScalarProperty Name="pk_permission" ColumnName="pk_permission" />
+                <ScalarProperty Name="generer_quizz" ColumnName="generer_quizz" />
+                <ScalarProperty Name="ajouter_quest" ColumnName="ajouter_quest" />
+                <ScalarProperty Name="modifier_quest" ColumnName="modifier_quest" />
+                <ScalarProperty Name="suppr_question" ColumnName="suppr_question" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="quizz">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.quizz">
-              <MappingFragment StoreEntitySet="quizz">
-                <ScalarProperty Name="pk_quizz" ColumnName="pk_quizz" />
-                <ScalarProperty Name="fk_question" ColumnName="fk_question" />
-                <ScalarProperty Name="fk_compte" ColumnName="fk_compte" />
-                <ScalarProperty Name="fk_complexite" ColumnName="fk_complexite" />
-                <ScalarProperty Name="theme" ColumnName="theme" />
+          <EntitySetMapping Name="personnage">
+            <EntityTypeMapping TypeName="bdd_quizzModel.personnage">
+              <MappingFragment StoreEntitySet="personnage">
+                <ScalarProperty Name="pk_personnage" ColumnName="pk_personnage" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="vie" ColumnName="vie" />
+                <ScalarProperty Name="degat" ColumnName="degat" />
+                <ScalarProperty Name="defense" ColumnName="defense" />
+                <ScalarProperty Name="nb_round" ColumnName="nb_round" />
+                <ScalarProperty Name="id_groupe" ColumnName="id_groupe" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="reponse">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.reponse">
-              <MappingFragment StoreEntitySet="reponse">
+          <EntitySetMapping Name="proposition_reponse">
+            <EntityTypeMapping TypeName="bdd_quizzModel.proposition_reponse">
+              <MappingFragment StoreEntitySet="proposition_reponse">
                 <ScalarProperty Name="pk_reponse" ColumnName="pk_reponse" />
-                <ScalarProperty Name="reponse1" ColumnName="reponse" />
+                <ScalarProperty Name="texte" ColumnName="texte" />
                 <ScalarProperty Name="est_bonne" ColumnName="est_bonne" />
                 <ScalarProperty Name="fk_question" ColumnName="fk_question" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="question">
+            <EntityTypeMapping TypeName="bdd_quizzModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="pk_question" ColumnName="pk_question" />
+                <ScalarProperty Name="nv_complexite" ColumnName="nv_complexite" />
+                <ScalarProperty Name="enonce" ColumnName="enonce" />
+                <ScalarProperty Name="a_repondu" ColumnName="a_repondu" />
+                <ScalarProperty Name="fk_theme" ColumnName="fk_theme" />
+                <ScalarProperty Name="fk_complexite" ColumnName="fk_complexite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quizz">
+            <EntityTypeMapping TypeName="bdd_quizzModel.quizz">
+              <MappingFragment StoreEntitySet="quizz">
+                <ScalarProperty Name="pk_quizz" ColumnName="pk_quizz" />
+                <ScalarProperty Name="chrono" ColumnName="chrono" />
+                <ScalarProperty Name="fk_theme" ColumnName="fk_theme" />
+                <ScalarProperty Name="fk_complexite" ColumnName="fk_complexite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="reponse_candidat">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.reponse_candidat">
+            <EntityTypeMapping TypeName="bdd_quizzModel.reponse_candidat">
               <MappingFragment StoreEntitySet="reponse_candidat">
-                <ScalarProperty Name="id_reponse" ColumnName="id_reponse" />
+                <ScalarProperty Name="pk_reponse" ColumnName="pk_reponse" />
                 <ScalarProperty Name="reponse" ColumnName="reponse" />
                 <ScalarProperty Name="commentaire" ColumnName="commentaire" />
+                <ScalarProperty Name="fk_compte" ColumnName="fk_compte" />
                 <ScalarProperty Name="fk_question" ColumnName="fk_question" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="taux_complexite">
-            <EntityTypeMapping TypeName="bdd_quizz_Model.taux_complexite">
-              <MappingFragment StoreEntitySet="taux complexite">
-                <ScalarProperty Name="pk_complexite" ColumnName="pk_complexite" />
-                <ScalarProperty Name="niveau" ColumnName="niveau" />
-                <ScalarProperty Name="quest_junior" ColumnName="quest_junior" />
-                <ScalarProperty Name="quest_confirme" ColumnName="quest_confirme" />
-                <ScalarProperty Name="quest_experimente" ColumnName="quest_experimente" />
+          <EntitySetMapping Name="skill">
+            <EntityTypeMapping TypeName="bdd_quizzModel.skill">
+              <MappingFragment StoreEntitySet="skill">
+                <ScalarProperty Name="pk_skill" ColumnName="pk_skill" />
+                <ScalarProperty Name="frequence" ColumnName="frequence" />
+                <ScalarProperty Name="degat" ColumnName="degat" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="personnage_idpersonnage" ColumnName="personnage_idpersonnage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="taux_complexite">
+            <EntityTypeMapping TypeName="bdd_quizzModel.taux_complexite">
+              <MappingFragment StoreEntitySet="taux_complexite">
+                <ScalarProperty Name="pk_complexite" ColumnName="pk_complexite" />
+                <ScalarProperty Name="niveau" ColumnName="niveau" />
+                <ScalarProperty Name="question_junior" ColumnName="question_junior" />
+                <ScalarProperty Name="quest_confirme" ColumnName="quest_confirme" />
+                <ScalarProperty Name="question_experimente" ColumnName="question_experimente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="theme">
+            <EntityTypeMapping TypeName="bdd_quizzModel.theme">
+              <MappingFragment StoreEntitySet="theme">
+                <ScalarProperty Name="pk_theme" ColumnName="pk_theme" />
+                <ScalarProperty Name="nom_theme" ColumnName="nom_theme" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="compte_quizz" TypeName="bdd_quizzModel.compte_quizz" StoreEntitySet="compte_quizz">
+            <EndProperty Name="compte">
+              <ScalarProperty Name="pk_compte" ColumnName="fk_compte" />
+            </EndProperty>
+            <EndProperty Name="quizz">
+              <ScalarProperty Name="pk_quizz" ColumnName="fk_quizz" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="quizz_question" TypeName="bdd_quizzModel.quizz_question" StoreEntitySet="quizz_question">
+            <EndProperty Name="question">
+              <ScalarProperty Name="pk_question" ColumnName="fk_question" />
+            </EndProperty>
+            <EndProperty Name="quizz">
+              <ScalarProperty Name="pk_quizz" ColumnName="fk_quizz" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -399,7 +791,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
