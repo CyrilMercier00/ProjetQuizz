@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
+import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { QuizzQuestionComponent } from './quizz-question/quizz-question.componen
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    GenQuizzComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
