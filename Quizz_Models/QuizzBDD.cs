@@ -13,7 +13,7 @@ namespace Quizz_Models
     public sealed class QuizzBDD
     {
         /* --- Attributs --- */
-        bdd_quizz_Entities bdd_entities;        // Reference aux entites de la bdd quizz generees par entity framework
+        bdd_quizzEntities bdd_entities;        // Reference aux entites de la bdd quizz generees par entity framework
         public static QuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
         static readonly Lazy<QuizzBDD> LazyInstance = new Lazy<QuizzBDD> (() => new QuizzBDD ());    // Singleton
 
@@ -22,7 +22,7 @@ namespace Quizz_Models
         /* --- Constructeur --- */
         private QuizzBDD ()
         {
-            bdd_entities = new bdd_quizz_Entities ();
+            bdd_entities = new bdd_quizzEntities ();
         }
 
 
@@ -57,32 +57,48 @@ namespace Quizz_Models
             bdd_entities.compte.Add (prmCompte);
         }
 
+        /* Complexite */
+        private int GetComplexiteByNom ( String prmNomComplexite )
+        {
+            return bdd_entities.taux_complexite
+                     .Where (x => x.niveau == prmNomComplexite)
+                     .Single ().pk_complexite;
+        }
+        /* Theme */
+        private int GetThemeByNom ( String prmNomComplexite )
+        {
+            // Recuperer la cle primaire ou le nom correspond a celui rentré en parametre
+            return bdd_entities.theme
+            .Where (x => x.nom_theme == prmNomComplexite)
+            .Single ().pk_theme;
+        }
+
         /* Quizz */
         public void InsertQuizz ( int nbQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
             quizz quizzCreation = new quizz ();
+            List<question> listQuestionCreation = new List<question>;
             int? idComplex = null;
             int? idTheme = null;
 
             // Get id complex avec le nom
-            // Inserer le quizz
+            // Get id theme evec le nom
+            // Inserer le quizz avec les fk recuperees
             // lier 30 questions au quizz
 
             try
             {
-                quizzCreation.theme = prmTheme;
-
                 // Recuperer la cle primaire ou le nom correspond a celui rentré en parametre
-                idComplex = bdd_entities.taux_complexite
-                     .Where (x => x.niveau == prmComplex)
-                     .Single ().pk_complexite;
+                idComplex = GetComplexiteByNom (prmComplex);
 
                 if ( idComplex != null )
                 {
+
                     if ( idTheme != null )
-                    {
+                    {   // Ajouter quizz dans la base puis recuperer 30 questions au hasard
                         bdd_entities.quizz.Add (quizzCreation);
-                        Console.WriteLine ($"L'objet a été inséré avec les parametres: ");
+                        Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
+
                     }
                     else
                     {
