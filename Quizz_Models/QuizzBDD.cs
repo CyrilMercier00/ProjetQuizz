@@ -39,6 +39,19 @@ namespace Quizz_Models
             bdd_entities.question.Add (prmQuestion);
         }
 
+        private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, int prmIDTheme, String prmComplex )
+        {
+            for ( int i = 0; i < prmNBQuestions; i++ )
+            {
+                prmListQuestion.Add (bdd_entities.question
+                    .Where (x => x.fk_theme == prmIDTheme)
+                    .Where (x => x.nv_complexite == prmComplex)
+                    .Single ()
+                );
+
+
+            }
+        }
         /* Reponse Candidat */
         public void InsertReponseCandidat ( reponse_candidat prmRepCand )
         {
@@ -74,13 +87,14 @@ namespace Quizz_Models
         }
 
         /* Quizz */
-        public void InsertQuizz ( int nbQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void InsertQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
             quizz quizzCreation = new quizz ();
-            List<question> listQuestionCreation = new List<question>();
+            List<question> listQuestionCreation = new List<question> ();
             int? idComplex = null;
             int? idTheme = null;
 
+            // todo
             // Get id complex avec le nom
             // Get id theme evec le nom
             // Inserer le quizz avec les fk recuperees
@@ -95,10 +109,11 @@ namespace Quizz_Models
                 {
 
                     if ( idTheme != null )
-                    {   // Ajouter quizz dans la base puis recuperer 30 questions au hasard
+                    {   // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
                         bdd_entities.quizz.Add (quizzCreation);
                         Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
+                        // GenererQuestions ();
                     }
                     else
                     {
