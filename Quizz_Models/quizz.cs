@@ -17,17 +17,20 @@ namespace Quizz_Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public quizz()
         {
+            this.compte = new HashSet<compte>();
             this.question = new HashSet<question>();
         }
     
         public int pk_quizz { get; set; }
-        public int fk_compte { get; set; }
+        public Nullable<System.TimeSpan> chrono { get; set; }
+        public int fk_theme { get; set; }
         public int fk_complexite { get; set; }
-        public string theme { get; set; }
     
-        public virtual compte compte { get; set; }
+        public virtual taux_complexite taux_complexite { get; set; }
+        public virtual theme theme { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<compte> compte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<question> question { get; set; }
-        public virtual taux_complexite taux_complexite { get; set; }
     }
 }

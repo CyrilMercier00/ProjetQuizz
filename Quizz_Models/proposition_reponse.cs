@@ -12,10 +12,10 @@ namespace Quizz_Models
     using System;
     using System.Collections.Generic;
     
-    public partial class reponse
+    public partial class proposition_reponse
     {
         public int pk_reponse { get; set; }
-        public string reponse1 { get; set; }
+        public string texte { get; set; }
         public Nullable<sbyte> est_bonne { get; set; }
         public int fk_question { get; set; }
     

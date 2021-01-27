@@ -12,15 +12,15 @@ namespace Quizz_Models
     using System;
     using System.Collections.Generic;
     
-    public partial class reponse_candidat
+    public partial class skill
     {
-        public int pk_reponse { get; set; }
-        public string reponse { get; set; }
-        public string commentaire { get; set; }
-        public int fk_compte { get; set; }
-        public int fk_question { get; set; }
+        public int pk_skill { get; set; }
+        public Nullable<float> frequence { get; set; }
+        public Nullable<int> degat { get; set; }
+        public string nom { get; set; }
+        public Nullable<int> type { get; set; }
+        public int personnage_idpersonnage { get; set; }
     
-        public virtual compte compte { get; set; }
-        public virtual question question { get; set; }
+        public virtual personnage personnage { get; set; }
     }
 }

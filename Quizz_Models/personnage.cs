@@ -12,26 +12,23 @@ namespace Quizz_Models
     using System;
     using System.Collections.Generic;
     
-    public partial class compte
+    public partial class personnage
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public compte()
+        public personnage()
         {
-            this.reponse_candidat = new HashSet<reponse_candidat>();
-            this.quizz = new HashSet<quizz>();
+            this.skill = new HashSet<skill>();
         }
     
-        public int pk_compte { get; set; }
+        public int pk_personnage { get; set; }
         public string nom { get; set; }
-        public string prenom { get; set; }
-        public string mail { get; set; }
-        public Nullable<int> role { get; set; }
-        public int fk_permission { get; set; }
+        public Nullable<float> vie { get; set; }
+        public Nullable<float> degat { get; set; }
+        public Nullable<float> defense { get; set; }
+        public Nullable<int> nb_round { get; set; }
+        public Nullable<int> id_groupe { get; set; }
     
-        public virtual permission permission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reponse_candidat> reponse_candidat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<quizz> quizz { get; set; }
+        public virtual ICollection<skill> skill { get; set; }
     }
 }

@@ -12,26 +12,21 @@ namespace Quizz_Models
     using System;
     using System.Collections.Generic;
     
-    public partial class compte
+    public partial class permission
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public compte()
+        public permission()
         {
-            this.reponse_candidat = new HashSet<reponse_candidat>();
-            this.quizz = new HashSet<quizz>();
+            this.compte = new HashSet<compte>();
         }
     
-        public int pk_compte { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string mail { get; set; }
-        public Nullable<int> role { get; set; }
-        public int fk_permission { get; set; }
+        public int pk_permission { get; set; }
+        public Nullable<sbyte> generer_quizz { get; set; }
+        public Nullable<sbyte> ajouter_quest { get; set; }
+        public Nullable<sbyte> modifier_quest { get; set; }
+        public Nullable<sbyte> suppr_question { get; set; }
     
-        public virtual permission permission { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reponse_candidat> reponse_candidat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<quizz> quizz { get; set; }
+        public virtual ICollection<compte> compte { get; set; }
     }
 }
