@@ -10,27 +10,26 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
-import { QuestionCandidat } from './quizz_question/quizz-question.component';
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
 
 @NgModule({
   declarations: [
-    QuestionCandidat,
+    QuizzQuestionComponent,
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    QuizzQuestionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: QuestionCandidat, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'quizz-question', component: QuizzQuestionComponent },
     ])
   ],
   providers: [],
