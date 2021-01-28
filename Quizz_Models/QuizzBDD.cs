@@ -71,12 +71,16 @@ namespace Quizz_Models
         }
 
         /* Complexite */
-        private int GetComplexiteByNom ( String prmNomComplexite )
+        private List<int?> GetComplexiteByNom ( String prmNomComplexite )   // <int?> car la valeur peur etre nulle
         {
             return bdd_entities.taux_complexite
                      .Where (x => x.niveau == prmNomComplexite)
-                     .Single ().pk_complexite;
+                     .Select (x => new { x.question_junior, x.quest_confirme, x.question_experimente })
+                     .AsEnumerable()
+                     .Select(x => new )
+                     .ToList ();
         }
+
         /* Theme */
         private int GetThemeByNom ( String prmNomComplexite )
         {
@@ -91,6 +95,7 @@ namespace Quizz_Models
         {
             quizz quizzCreation = new quizz ();
             List<question> listQuestionCreation = new List<question> ();
+            List<taux_complexite> listTauxComplex;
             int? idComplex = null;
             int? idTheme = null;
 
@@ -102,28 +107,26 @@ namespace Quizz_Models
 
             try
             {
-                // Recuperer la cle primaire ou le nom correspond a celui rentré en parametre
-                idComplex = GetComplexiteByNom (prmComplex);
 
-                if ( idComplex != null )
+
+                idTheme = GetThemeByNom (prmTheme);
+
+                if ( idTheme != null )
                 {
+                    listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer les champs de la table
 
-                    if ( idTheme != null )
-                    {   // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
-                        bdd_entities.quizz.Add (quizzCreation);
-                        Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
+                    // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
+                    bdd_entities.quizz.Add (quizzCreation);
+                    Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                        // GenererQuestions ();
-                    }
-                    else
-                    {
-                        throw new Exception ("Erreur lors de la recuperation de l'id du theme.");
-                    }
+                    //GenererQuestions ();
                 }
                 else
                 {
-                    throw new Exception ("Erreur lors de la recuperation de l'id du niveau de complexité.");
+                    throw new Exception ("Erreur lors de la recuperation de l'id du theme.");
                 }
+
+
 
 
 
