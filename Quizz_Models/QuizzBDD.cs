@@ -13,10 +13,10 @@ namespace Quizz_Models
     public sealed class QuizzBDD
     {
         /* --- Attributs --- */
-        bdd_quizzEntities bdd_entities;        // Reference aux entites de la bdd quizz generees par entity framework
+        bdd_quizzEntities bdd_entities;        // Reference aux entites de la bdd quizz generees par entity 
         public static QuizzBDD bdd_instance { get { return LazyInstance.Value; } }       // Instance de cette classe 
         static readonly Lazy<QuizzBDD> LazyInstance = new Lazy<QuizzBDD> (() => new QuizzBDD ());    // Singleton
-
+        Random rnd = new Random ();
 
 
         /* --- Constructeur --- */
@@ -38,17 +38,52 @@ namespace Quizz_Models
         {
             bdd_entities.question.Add (prmQuestion);
         }
-
+        /// <summary>
+        /// Selectionne des questions au hasard et les ajoute a liste passée.
+        /// </summary>
+        /// <param name="prmListQuestion"></param>
+        /// <param name="prmListNBQuestions"></param>
+        /// <param name="prmIDTheme"></param>
+        /// <param name="prmComplex"></param>
         private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, int prmIDTheme, String prmComplex )
         {
-            prmListQuestion.Add (bdd_entities.question
-                .Where (x => x.fk_theme == prmIDTheme)
-                .Where (x => x.nv_complexite == prmComplex)
+            int i = 0;
+            // Recuperer le nombre de questions total pour ce theme & niv de complexite
+            int nbQuestTotal = bdd_entities.question
+                .Where (x => x.fk_theme == prmIDTheme && x.nv_complexite == prmComplex)
+                .Count ();
 
-                .Single ()
-            );
+            // Recuper un certain nombre de question pour ce theme & niv de complexite
+            var data = bdd_entities.question
+                .Where (x => x.fk_theme == prmIDTheme && x.nv_complexite == prmComplex)
+                .OrderBy (x => Guid.NewGuid ())
+                .Take (prmNBQuestions);
+
+            i++;
+
+            foreach ( question q in data )
+            {
+                prmListQuestion.Add (q);
+            }
+        }
+
+        /// <summary>
+        /// Prend fait la liaison entre la table quizz et les questions rentrées
+        /// </summary>
+        /// <param name="prmListQuestion"></param>
+        /// <param name="prmQuizz"></param>
+        private void MAJManyToManyQuest ( List<question> prmListQuestion, quizz prmQuizz )
+        {
+            foreach ( question q in prmListQuestion )
+            {
+                bdd_entities.Entry (q)
+                .Collection (x => x.quizz).Load ();
+                q.quizz.Add (prmQuizz);
+                bdd_entities.SaveChanges ();
+            }
 
         }
+
 
         /* Reponse Candidat */
         public void InsertReponseCandidat ( reponse_candidat prmRepCand )
@@ -80,13 +115,19 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        private List<int?> GetComplexiteByNom ( String prmNomComplexite ) 
+        
+        private List<int?> GetComplexiteByNom ( String prmNomComplexite )
         {
             List<int?> ListeRetour = new List<int?> ();
 
             var data = bdd_entities.taux_complexite
                     .Where (x => x.niveau == prmNomComplexite)
-                    .Select (x => new { x.question_junior, x.quest_confirme, x.question_experimente })
+                    .Select (x => new
+                    {
+                        x.question_junior,
+                        x.quest_confirme,
+                        x.question_experimente
+                    })
                     .ToList ();
 
             foreach ( var v in data )
@@ -99,7 +140,16 @@ namespace Quizz_Models
 
             return ListeRetour;
         }
-
+        /// <summary>
+        /// Retourne une liste avec tout les niveau de complexité trouvés
+        /// </summary>
+        /// <returns></returns>
+        private List<String> GetAllNomComplexite ()
+        {
+            return bdd_entities.taux_complexite
+                .Select (x => x.niveau)
+                .ToList ();
+        }
         /* Theme */
         /// <summary>
         /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
@@ -114,7 +164,7 @@ namespace Quizz_Models
         }
 
         /* Quizz */
-        public void InsertQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
             quizz quizzCreation = new quizz ();
             List<question> listQuestionCreation = new List<question> ();
@@ -122,16 +172,27 @@ namespace Quizz_Models
             int idTheme;
 
             try
-            { 
+            {
                 idTheme = GetThemeByNom (prmTheme);
 
-                listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer une liste avec les 3 taux de complexité
+                listTauxComplex = GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
 
                 // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
                 bdd_entities.quizz.Add (quizzCreation);
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                GenererQuestions (listQuestionCreation, prmNBQuestion, idTheme, prmComplex);
+                for ( int i = 0; i < 3; i++ )                                        // 3 car 3 niveau de complexitée
+                {   // Calcul du nombre de question necessaire
+                    int nbQ = (int) Math.Round (
+                        prmNBQuestion /                                              // Nb question / % question
+                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en %
+                        );
+
+                    GenererQuestions (listQuestionCreation, nbQ, idTheme, prmComplex);
+                }
+
+
+                MAJManyToManyQuest (listQuestionCreation, quizzCreation);           // Relier les questions a la table quizz
             }
             catch ( Exception e )
             {
