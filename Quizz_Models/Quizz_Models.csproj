@@ -172,6 +172,8 @@
     <Compile Include="compte.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\CompteDTO.cs" />
+    <Compile Include="DTO\PermissionDTO.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
