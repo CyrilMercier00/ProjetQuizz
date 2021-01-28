@@ -115,7 +115,7 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        
+
         private List<int?> GetComplexiteByNom ( String prmNomComplexite )
         {
             List<int?> ListeRetour = new List<int?> ();
@@ -166,29 +166,33 @@ namespace Quizz_Models
         /* Quizz */
         public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
-            quizz quizzCreation = new quizz ();
-            List<question> listQuestionCreation = new List<question> ();
-            List<int?> listTauxComplex;
-            int idTheme;
-
             try
             {
+                quizz quizzCreation = new quizz ();         // Le nouveau quizz
+                List<question> listQuestionCreation = new List<question> ();    // La liste des questions choisies
+                List<String> listComplexite;                // Contient tout les nom des taux de compléxité
+                List<int?> listTauxComplex;                 // Contient les taux de complexité pour le niveau demandé
+                int idTheme;
+
                 idTheme = GetThemeByNom (prmTheme);
 
                 listTauxComplex = GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
+
 
                 // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
                 bdd_entities.quizz.Add (quizzCreation);
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                for ( int i = 0; i < 3; i++ )                                        // 3 car 3 niveau de complexitée
-                {   // Calcul du nombre de question necessaire
-                    int nbQ = (int) Math.Round (
+                listComplexite = GetAllNomComplexite ();                             // Recuperer tout les niveau de complexité possibles 
+
+                for ( int i = 0; i < listComplexite.Count(); i++ )                    
+                {   // Calcul du nombre de question necessaire pour ce niveau de complexité
+                    int nbQuest = (int) Math.Round (
                         prmNBQuestion /                                              // Nb question / % question
-                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en %
+                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en % (70 => 0.70)
                         );
 
-                    GenererQuestions (listQuestionCreation, nbQ, idTheme, prmComplex);
+                    GenererQuestions (listQuestionCreation, nbQuest, idTheme, prmComplex);
                 }
 
 
