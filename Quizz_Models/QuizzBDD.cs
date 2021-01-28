@@ -41,17 +41,15 @@ namespace Quizz_Models
 
         private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, int prmIDTheme, String prmComplex )
         {
-            for ( int i = 0; i < prmNBQuestions; i++ )
-            {
-                prmListQuestion.Add (bdd_entities.question
-                    .Where (x => x.fk_theme == prmIDTheme)
-                    .Where (x => x.nv_complexite == prmComplex)
-                    .Single ()
-                );
+            prmListQuestion.Add (bdd_entities.question
+                .Where (x => x.fk_theme == prmIDTheme)
+                .Where (x => x.nv_complexite == prmComplex)
 
+                .Single ()
+            );
 
-            }
         }
+
         /* Reponse Candidat */
         public void InsertReponseCandidat ( reponse_candidat prmRepCand )
         {
@@ -70,14 +68,19 @@ namespace Quizz_Models
             bdd_entities.compte.Add (prmCompte);
         }
 
-        public void DeleteCompte( int compteID )
+        public void DeleteCompte ( int compteID )
         {
-            compte compteEntity = bdd_entities.compte.Find(compteID);
-            bdd_entities.compte.Remove(compteEntity);
+            compte compteEntity = bdd_entities.compte.Find (compteID);
+            bdd_entities.compte.Remove (compteEntity);
         }
 
         /* Complexite */
-        private List<int?> GetComplexiteByNom ( String prmNomComplexite )   // <int?> car la valeur peur etre nulle
+        /// <summary>
+        /// La methode retourne une liste avec les taux recuperes dans la base
+        /// </summary>
+        /// <param name="prmNomComplexite"></param>
+        /// <returns></returns>
+        private List<int?> GetComplexiteByNom ( String prmNomComplexite ) 
         {
             List<int?> ListeRetour = new List<int?> ();
 
@@ -86,7 +89,7 @@ namespace Quizz_Models
                     .Select (x => new { x.question_junior, x.quest_confirme, x.question_experimente })
                     .ToList ();
 
-           foreach (var v in data)
+            foreach ( var v in data )
             {
                 ListeRetour.Add (v.question_junior);
                 ListeRetour.Add (v.quest_confirme);
@@ -96,11 +99,15 @@ namespace Quizz_Models
 
             return ListeRetour;
         }
-        //https://social.msdn.microsoft.com/Forums/en-US/6a7c4365-d2f9-4234-bb62-67383bc049df/how-do-i-select-only-some-columns-into-an-entity
+
         /* Theme */
+        /// <summary>
+        /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
+        /// </summary>
+        /// <param name="prmNomComplexite"></param>
+        /// <returns></returns>
         private int GetThemeByNom ( String prmNomComplexite )
         {
-            // Recuperer la cle primaire ou le nom correspond a celui rentré en parametre
             return bdd_entities.theme
             .Where (x => x.nom_theme == prmNomComplexite)
             .Single ().pk_theme;
@@ -112,41 +119,19 @@ namespace Quizz_Models
             quizz quizzCreation = new quizz ();
             List<question> listQuestionCreation = new List<question> ();
             List<int?> listTauxComplex;
-            int? idTheme = null;
-
-            // todo
-            // Get id complex avec le nom
-            // Get id theme evec le nom
-            // Inserer le quizz avec les fk recuperees
-            // lier 30 questions au quizz
+            int idTheme;
 
             try
-            {
-
-
+            { 
                 idTheme = GetThemeByNom (prmTheme);
 
-                if ( idTheme != null )
-                {
-                    listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer une liste avec les 3 taux de complexité
+                listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer une liste avec les 3 taux de complexité
 
-                    // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
-                    bdd_entities.quizz.Add (quizzCreation);
-                    Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
+                // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
+                bdd_entities.quizz.Add (quizzCreation);
+                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                    //GenererQuestions ();
-                }
-                else
-                {
-                    throw new Exception ("Erreur lors de la recuperation de l'id du theme.");
-                }
-
-
-
-
-
-
-
+                GenererQuestions (listQuestionCreation, prmNBQuestion, idTheme, prmComplex);
             }
             catch ( Exception e )
             {
@@ -159,9 +144,9 @@ namespace Quizz_Models
         /// Méthode qui insère une permission.
         /// </summary>
         /// <param name="permissionEntity">Entité de la permission</param>
-        public void InsertPermission(permission permissionEntity)
+        public void InsertPermission ( permission permissionEntity )
         {
-            bdd_entities.permission.Add(permissionEntity);
+            bdd_entities.permission.Add (permissionEntity);
         }
 
         /// <summary>
@@ -169,14 +154,14 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="permissionEntity">Entité de la permission</param>
         /// <returns>Retourne la permission trouvée ou lance une exception si aucune n'a été trouvée.</returns>
-        public permission FindPermissionByValues(permission permissionEntity)
+        public permission FindPermissionByValues ( permission permissionEntity )
         {
             return bdd_entities.permission
-                    .Where(x => x.ajouter_quest == permissionEntity.ajouter_quest
-                        && x.generer_quizz == permissionEntity.generer_quizz
-                        && x.modifier_quest == permissionEntity.modifier_quest
-                        && x.suppr_question == permissionEntity.suppr_question)
-                    .Single();
+                    .Where (x => x.ajouter_quest == permissionEntity.ajouter_quest
+                         && x.generer_quizz == permissionEntity.generer_quizz
+                         && x.modifier_quest == permissionEntity.modifier_quest
+                         && x.suppr_question == permissionEntity.suppr_question)
+                    .Single ();
         }
     }
 }
