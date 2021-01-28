@@ -8,8 +8,8 @@ namespace Quizz_Models.DTO
 {
     class CompteDTO
     {
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string mail { get; set; }
+        public string Nom { get; set; }
+        public string Prenom { get; set; }
+        public string Mail { get; set; }
     }
 }

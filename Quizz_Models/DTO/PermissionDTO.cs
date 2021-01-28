@@ -8,9 +8,9 @@ namespace Quizz_Models.DTO
 {
     class PermissionDTO
     {
-        public Nullable<bool> generer_quizz { get; set; }
-        public Nullable<bool> ajouter_quest { get; set; }
-        public Nullable<bool> modifier_quest { get; set; }
-        public Nullable<bool> suppr_question { get; set; }
+        public Nullable<bool> Generer_quizz { get; set; }
+        public Nullable<bool> Ajouter_quest { get; set; }
+        public Nullable<bool> Modifier_quest { get; set; }
+        public Nullable<bool> Suppr_question { get; set; }
     }
 }
