@@ -70,6 +70,12 @@ namespace Quizz_Models
             bdd_entities.compte.Add (prmCompte);
         }
 
+        public void DeleteCompte( int compteID )
+        {
+            compte compteEntity = bdd_entities.compte.Find(compteID);
+            bdd_entities.compte.Remove(compteEntity);
+        }
+
         /* Complexite */
         private int GetComplexiteByNom ( String prmNomComplexite )
         {
