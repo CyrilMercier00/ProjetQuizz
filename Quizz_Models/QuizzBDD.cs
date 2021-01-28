@@ -70,6 +70,12 @@ namespace Quizz_Models
             bdd_entities.compte.Add (prmCompte);
         }
 
+        public void DeleteCompte( int compteID )
+        {
+            compte compteEntity = bdd_entities.compte.Find(compteID);
+            bdd_entities.compte.Remove(compteEntity);
+        }
+
         /* Complexite */
         private List<int?> GetComplexiteByNom ( String prmNomComplexite )   // <int?> car la valeur peur etre nulle
         {
@@ -105,8 +111,7 @@ namespace Quizz_Models
         {
             quizz quizzCreation = new quizz ();
             List<question> listQuestionCreation = new List<question> ();
-            List<taux_complexite> listTauxComplex;
-            int? idComplex = null;
+            List<int?> listTauxComplex;
             int? idTheme = null;
 
             // todo
@@ -123,7 +128,7 @@ namespace Quizz_Models
 
                 if ( idTheme != null )
                 {
-                    listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer les champs de la table
+                    listTauxComplex = GetComplexiteByNom (prmComplex);  // Recuperer une liste avec les 3 taux de complexité
 
                     // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
                     bdd_entities.quizz.Add (quizzCreation);
@@ -148,6 +153,30 @@ namespace Quizz_Models
                 Console.WriteLine (e.Message);
             }
 
+        }
+
+        /// <summary>
+        /// Méthode qui insère une permission.
+        /// </summary>
+        /// <param name="permissionEntity">Entité de la permission</param>
+        public void InsertPermission(permission permissionEntity)
+        {
+            bdd_entities.permission.Add(permissionEntity);
+        }
+
+        /// <summary>
+        /// Méthode qui cherche une permission par ses différentes valeurs.
+        /// </summary>
+        /// <param name="permissionEntity">Entité de la permission</param>
+        /// <returns>Retourne la permission trouvée ou lance une exception si aucune n'a été trouvée.</returns>
+        public permission FindPermissionByValues(permission permissionEntity)
+        {
+            return bdd_entities.permission
+                    .Where(x => x.ajouter_quest == permissionEntity.ajouter_quest
+                        && x.generer_quizz == permissionEntity.generer_quizz
+                        && x.modifier_quest == permissionEntity.modifier_quest
+                        && x.suppr_question == permissionEntity.suppr_question)
+                    .Single();
         }
     }
 }
