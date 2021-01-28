@@ -73,14 +73,24 @@ namespace Quizz_Models
         /* Complexite */
         private List<int?> GetComplexiteByNom ( String prmNomComplexite )   // <int?> car la valeur peur etre nulle
         {
-            return bdd_entities.taux_complexite
-                     .Where (x => x.niveau == prmNomComplexite)
-                     .Select (x => new { x.question_junior, x.quest_confirme, x.question_experimente })
-                     .AsEnumerable()
-                     .Select(x => new )
-                     .ToList ();
-        }
+            List<int?> ListeRetour = new List<int?> ();
 
+            var data = bdd_entities.taux_complexite
+                    .Where (x => x.niveau == prmNomComplexite)
+                    .Select (x => new { x.question_junior, x.quest_confirme, x.question_experimente })
+                    .ToList ();
+
+           foreach (var v in data)
+            {
+                ListeRetour.Add (v.question_junior);
+                ListeRetour.Add (v.quest_confirme);
+                ListeRetour.Add (v.question_experimente);
+                Console.WriteLine ("GetComplexiteByNom fin foreach atteint");
+            }
+
+            return ListeRetour;
+        }
+        //https://social.msdn.microsoft.com/Forums/en-US/6a7c4365-d2f9-4234-bb62-67383bc049df/how-do-i-select-only-some-columns-into-an-entity
         /* Theme */
         private int GetThemeByNom ( String prmNomComplexite )
         {
