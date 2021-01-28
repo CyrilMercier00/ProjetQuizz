@@ -45,17 +45,19 @@ namespace Quizz_Models
         /// <param name="prmListNBQuestions"></param>
         /// <param name="prmIDTheme"></param>
         /// <param name="prmComplex"></param>
-        private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, int prmIDTheme, String prmComplex )
+        private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, String prmTheme, String prmComplex )
         {
+            int idTheme = GetIDThemeByNom (prmTheme);
+
             int i = 0;
             // Recuperer le nombre de questions total pour ce theme & niv de complexite
             int nbQuestTotal = bdd_entities.question
-                .Where (x => x.fk_theme == prmIDTheme && x.nv_complexite == prmComplex)
+                .Where (x => x.fk_theme == idTheme && x.nv_complexite == prmComplex)
                 .Count ();
 
             // Recuper un certain nombre de question pour ce theme & niv de complexite
             var data = bdd_entities.question
-                .Where (x => x.fk_theme == prmIDTheme && x.nv_complexite == prmComplex)
+                .Where (x => x.fk_theme == idTheme && x.nv_complexite == prmComplex)
                 .OrderBy (x => Guid.NewGuid ())
                 .Take (prmNBQuestions);
 
@@ -115,7 +117,7 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        
+
         private List<int?> GetComplexiteByNom ( String prmNomComplexite )
         {
             List<int?> ListeRetour = new List<int?> ();
@@ -156,7 +158,7 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        private int GetThemeByNom ( String prmNomComplexite )
+        private int GetIDThemeByNom ( String prmNomComplexite )
         {
             return bdd_entities.theme
             .Where (x => x.nom_theme == prmNomComplexite)
@@ -166,29 +168,30 @@ namespace Quizz_Models
         /* Quizz */
         public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
-            quizz quizzCreation = new quizz ();
-            List<question> listQuestionCreation = new List<question> ();
-            List<int?> listTauxComplex;
-            int idTheme;
-
             try
             {
-                idTheme = GetThemeByNom (prmTheme);
+                quizz quizzCreation = new quizz ();         // Le nouveau quizz
+                List<question> listQuestionCreation = new List<question> ();    // La liste des questions choisies
+                List<String> listComplexite;                // Contient tout les nom des taux de compléxité
+                List<int?> listTauxComplex;                 // Contient les taux de complexité pour le niveau demandé
 
                 listTauxComplex = GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
+
 
                 // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
                 bdd_entities.quizz.Add (quizzCreation);
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                for ( int i = 0; i < 3; i++ )                                        // 3 car 3 niveau de complexitée
-                {   // Calcul du nombre de question necessaire
-                    int nbQ = (int) Math.Round (
+                listComplexite = GetAllNomComplexite ();                             // Recuperer tout les niveau de complexité possibles 
+
+                for ( int i = 0; i < listComplexite.Count (); i++ )
+                {   // Calcul du nombre de question necessaire pour ce niveau de complexité
+                    int nbQuest = (int) Math.Round (
                         prmNBQuestion /                                              // Nb question / % question
-                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en %
+                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en % (70 => 0.70)
                         );
 
-                    GenererQuestions (listQuestionCreation, nbQ, idTheme, prmComplex);
+                    GenererQuestions (listQuestionCreation, nbQuest, prmTheme, prmComplex);
                 }
 
 
