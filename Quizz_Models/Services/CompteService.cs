@@ -7,7 +7,7 @@ using Quizz_Models.DTO;
 
 namespace Quizz_Models.Services
 {
-    class CompteService
+    public class CompteService
     {
         public CompteService() { }
 
@@ -58,6 +58,13 @@ namespace Quizz_Models.Services
 
         }
 
+        public CompteDTO GetCompte(int compteID)
+        {
+            compte c = QuizzBDD.bdd_instance.GetCompteByID(compteID);
+            CompteDTO compteDTO = TransformCompteEntityToCompteDTO(c);
+            return compteDTO;
+        }
+
         /// <summary>
         /// Transforme un CompteDTO en entité compte.
         /// </summary>
@@ -88,6 +95,17 @@ namespace Quizz_Models.Services
             p.suppr_question = Convert.ToSByte(permissionDTO.Suppr_question);
 
             return p;
+        }
+
+        private CompteDTO TransformCompteEntityToCompteDTO(compte cpt)
+        {
+            CompteDTO compteDTO = new CompteDTO();
+
+            compteDTO.Nom = cpt.nom;
+            compteDTO.Prenom = cpt.prenom;
+            compteDTO.Mail = cpt.mail;
+
+            return compteDTO;
         }
     }
 }
