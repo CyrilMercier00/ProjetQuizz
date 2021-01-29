@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="DTO\CompteDTO.cs" />
     <Compile Include="DTO\PermissionDTO.cs" />
+    <Compile Include="MailUtils.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +206,7 @@
     <Compile Include="reponse_candidat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\CompteService.cs" />
     <Compile Include="taux_complexite.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

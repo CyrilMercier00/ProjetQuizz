@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quizz_Models.DTO
 {
-    class PermissionDTO
+    public class PermissionDTO
     {
         public Nullable<bool> Generer_quizz { get; set; }
         public Nullable<bool> Ajouter_quest { get; set; }

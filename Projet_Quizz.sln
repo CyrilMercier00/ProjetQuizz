@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quizz_Models", "Quizz_Models\Quizz_Models.csproj", "{139F8F18-3C52-4CF2-9120-D0EA56F459A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quizz_Web", "Quizz_Web\Quizz_Web.csproj", "{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{139F8F18-3C52-4CF2-9120-D0EA56F459A3} = {139F8F18-3C52-4CF2-9120-D0EA56F459A3}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autres", "Autres", "{91D50CD0-6B1A-4FB5-9240-9369AE9A198D}"
 	ProjectSection(SolutionItems) = preProject
