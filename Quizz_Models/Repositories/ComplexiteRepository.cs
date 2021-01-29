@@ -1,9 +1,9 @@
 namespace Quizz_Models.Services
 {
-    public class ComplexiteService
+    public class ComplexiteRepository
     {
 
-        public ComplexiteService()
+        public ComplexiteRepository ()
         {
 
         }

@@ -1,9 +1,9 @@
 namespace Quizz_Models.Services
 {
-    public class QuizzService
+    public class QuizzRepository
     {
 
-        public QuizzService()
+        public QuizzRepository ()
         {
 
         }

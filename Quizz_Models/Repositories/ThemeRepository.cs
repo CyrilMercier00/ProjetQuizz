@@ -7,9 +7,8 @@ using Quizz_Models.DTO;
 
 namespace Quizz_Models.Services
 {
-    public class ThemeService
-    {
-        public ThemeService() { }
+    public class ThemeRepository    {
+        public ThemeRepository () { }
 
         /* Theme */
         /// <summary>
