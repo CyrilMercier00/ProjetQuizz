@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* Provide sufficient contrast against white background */
+/* --- Modif CSS Globales --- */
 a {
   color: #0366d6;
 }
@@ -9,8 +7,8 @@ code {
   color: #e01a76;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+html ,
+body {
+  color: rgb(220, 220, 220);           /* Texte global */
+  background-color: #0D1B2A;           /* Couleur de fond */
 }
