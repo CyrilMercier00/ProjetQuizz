@@ -209,6 +209,7 @@
     <Compile Include="Repositories\PermissionRepository.cs" />
     <Compile Include="Repositories\ComplexiteRepository.cs" />
     <Compile Include="Repositories\CompteRepository.cs" />
+    <Compile Include="Services\QuizzService.cs" />
     <Compile Include="Services\CompteService.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\QuizzRepository.cs" />
