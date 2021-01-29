@@ -50,6 +50,12 @@ namespace Quizz_Models.Services
             repoCompte.InsertCompte(c);
         }
 
+        public void AjoutCompte(CompteDTO compteDTO)
+        {
+            compte c = TransformCompteDTOToCompteEntity(compteDTO);
+            repoCompte.InsertCompte(c);
+        }
+
 
         /// <summary>
         /// Méthode qui crée un compte avec un CompteDTO et le nom d'une permission.<br></br>

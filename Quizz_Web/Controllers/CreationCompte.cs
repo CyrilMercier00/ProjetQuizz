@@ -9,7 +9,7 @@ using Quizz_Models.Services;
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/compte")]
     public class CreationCompte : Controller
     {
         CompteService compteService;
@@ -26,9 +26,10 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] CompteDTO compteDTO, PermissionDTO permissionDTO)
+        public void Post([FromBody] CompteDTO compteDTO)
         {
-            this.compteService.AjoutCompte(compteDTO, permissionDTO);
+            Console.WriteLine(compteDTO.Nom);
+            this.compteService.AjoutCompte(compteDTO);
         }
     }
 }
