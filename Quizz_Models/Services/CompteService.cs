@@ -10,8 +10,8 @@ namespace Quizz_Models.Services
 {
     public class CompteService
     {
-        PermissionRepository repoPermission = new PermissionRepository();
-        CompteRepository repoCompte = new CompteRepository();
+        readonly PermissionRepository repoPermission = new PermissionRepository();
+        readonly CompteRepository repoCompte = new CompteRepository();
 
         public CompteService() { }
 
@@ -82,10 +82,12 @@ namespace Quizz_Models.Services
         /// <returns>Retourne l'entité correspondante.</returns>
         private compte TransformCompteDTOToCompteEntity(CompteDTO compteDTO)
         {
-            compte c = new compte();
-            c.nom = compteDTO.Nom;
-            c.prenom = compteDTO.Prenom;
-            c.mail = compteDTO.Mail;
+            compte c = new compte
+            {
+                nom = compteDTO.Nom,
+                prenom = compteDTO.Prenom,
+                mail = compteDTO.Mail
+            };
 
             return c;
         }
@@ -97,23 +99,25 @@ namespace Quizz_Models.Services
         /// <returns>Retourne l'entité correspondante.</returns>
         private permission TransformPermissionDTOToPermissionEntity(PermissionDTO permissionDTO)
         {
-            permission p = new permission();
-
-            p.ajouter_quest = Convert.ToSByte(permissionDTO.Ajouter_quest);
-            p.generer_quizz = Convert.ToSByte(permissionDTO.Generer_quizz);
-            p.modifier_quest = Convert.ToSByte(permissionDTO.Modifier_quest);
-            p.suppr_question = Convert.ToSByte(permissionDTO.Suppr_question);
+            permission p = new permission
+            {
+                ajouter_quest = Convert.ToSByte (permissionDTO.Ajouter_quest),
+                generer_quizz = Convert.ToSByte (permissionDTO.Generer_quizz),
+                modifier_quest = Convert.ToSByte (permissionDTO.Modifier_quest),
+                suppr_question = Convert.ToSByte (permissionDTO.Suppr_question)
+            };
 
             return p;
         }
 
         private CompteDTO TransformCompteEntityToCompteDTO(compte cpt)
         {
-            CompteDTO compteDTO = new CompteDTO();
-
-            compteDTO.Nom = cpt.nom;
-            compteDTO.Prenom = cpt.prenom;
-            compteDTO.Mail = cpt.mail;
+            CompteDTO compteDTO = new CompteDTO
+            {
+                Nom = cpt.nom,
+                Prenom = cpt.prenom,
+                Mail = cpt.mail
+            };
 
             return compteDTO;
         }

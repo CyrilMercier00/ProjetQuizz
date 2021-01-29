@@ -12,7 +12,7 @@ namespace Quizz_Web.Controllers
     [Route("api/compte")]
     public class CreationCompte : Controller
     {
-        CompteService compteService;
+        readonly CompteService compteService;
 
         public CreationCompte()
         {

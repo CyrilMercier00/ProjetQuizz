@@ -6,7 +6,7 @@ namespace Quizz_Models.Services
 {
     public class CompteRepository
     {
-        bdd_quizzEntities bdd_entities;
+        private readonly bdd_quizzEntities bdd_entities = new bdd_quizzEntities ();
         public CompteRepository () { }
 
         public compte GetCompteByID ( int prmID )

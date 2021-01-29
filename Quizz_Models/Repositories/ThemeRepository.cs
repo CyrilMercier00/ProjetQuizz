@@ -6,7 +6,7 @@ namespace Quizz_Models.Services
 {
     public class ThemeRepository
     {
-        bdd_quizzEntities bdd_entities;
+        private readonly bdd_quizzEntities bdd_entities = new bdd_quizzEntities ();
 
         public ThemeRepository () { }
 

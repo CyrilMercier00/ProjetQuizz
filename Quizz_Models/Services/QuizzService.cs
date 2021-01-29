@@ -10,9 +10,9 @@ namespace Quizz_Models.Services
 {
     public class QuizzService
     {
-        ComplexiteRepository repoComplex;
-        QuestionRepository repoQuest;
-        QuizzRepository repoQuizz;
+        readonly ComplexiteRepository repoComplex = new ComplexiteRepository();
+        readonly QuestionRepository repoQuest = new QuestionRepository();
+        readonly QuizzRepository repoQuizz = new QuizzRepository();
 
         public QuizzService () { }
 

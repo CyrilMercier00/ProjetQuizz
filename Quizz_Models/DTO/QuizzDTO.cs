@@ -8,10 +8,10 @@ namespace Quizz_Models.DTO
 {
     public class QuizzDTO
     {
-        int nbQuestions { get; set; } 
-        TimeSpan chrono { get; set; }
-        String theme { get; set; }
-        String complexite { get; set; }
+        int NbQuestions { get; set; } 
+        TimeSpan Chrono { get; set; }
+        String Theme { get; set; }
+        String Complexite { get; set; }
 
     }
 }
