@@ -207,7 +207,11 @@
     <Compile Include="reponse_candidat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\ComplexiteService.cs" />
     <Compile Include="Services\CompteService.cs" />
+    <Compile Include="Services\QuestionService.cs" />
+    <Compile Include="Services\QuizzService.cs" />
+    <Compile Include="Services\ThemeService.cs" />
     <Compile Include="taux_complexite.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
