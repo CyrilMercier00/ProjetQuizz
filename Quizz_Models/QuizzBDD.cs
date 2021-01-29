@@ -58,17 +58,6 @@ namespace Quizz_Models
         
 
 
-        /* Theme */
-        /// <summary>
-        /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
-        /// </summary>
-        /// <param name="prmNomComplexite"></param>
-        /// <returns></returns>
-        private int GetIDThemeByNom ( String prmNomComplexite )
-        {
-            return bdd_entities.theme
-            .Where (x => x.nom_theme == prmNomComplexite)
-            .Single ().pk_theme;
-        }        
+       
     }
 }
