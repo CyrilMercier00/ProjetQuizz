@@ -39,12 +39,12 @@ namespace Quizz_Models
             bdd_entities.question.Add (prmQuestion);
         }
         /// <summary>
-        /// Selectionne des questions au hasard et les ajoute a liste passée.
+        /// Selectionne des questions au hasard dans la base et les ajoute a liste passée.
         /// </summary>
-        /// <param name="prmListQuestion"></param>
-        /// <param name="prmListNBQuestions"></param>
-        /// <param name="prmIDTheme"></param>
-        /// <param name="prmComplex"></param>
+        /// <param name="prmListQuestion">Lite dans laquelle les questions doivent être ajoutées</param>
+        /// <param name="prmNBQuestions">Nombre de question a generer pour ces parametres</param>
+        /// <param name="prmTheme">Nom du theme des questions (Sensible a la casse)</param>
+        /// <param name="prmComplex">Nom du niveau de complexité. (Sensible a la casse)</param>
         private void GenererQuestions ( List<question> prmListQuestion, int prmNBQuestions, String prmTheme, String prmComplex )
         {
             int idTheme = GetIDThemeByNom (prmTheme);
@@ -68,6 +68,7 @@ namespace Quizz_Models
                 prmListQuestion.Add (q);
             }
         }
+
 
         /// <summary>
         /// Prend fait la liaison entre la table quizz et les questions rentrées
@@ -117,7 +118,6 @@ namespace Quizz_Models
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-
         private List<int?> GetComplexiteByNom ( String prmNomComplexite )
         {
             List<int?> ListeRetour = new List<int?> ();
@@ -142,6 +142,8 @@ namespace Quizz_Models
 
             return ListeRetour;
         }
+
+
         /// <summary>
         /// Retourne une liste avec tout les niveau de complexité trouvés
         /// </summary>
@@ -152,6 +154,8 @@ namespace Quizz_Models
                 .Select (x => x.niveau)
                 .ToList ();
         }
+
+
         /* Theme */
         /// <summary>
         /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
@@ -165,9 +169,19 @@ namespace Quizz_Models
             .Single ().pk_theme;
         }
 
+
         /* Quizz */
-        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        ///        /// <summary>
+        /// La methode va generer un quizz avec un nombre de question donné et associé au theme.
+        /// </summary>
+        /// <param name="prmNBQuestion">Nombre de questions total a generer</param>
+        /// <param name="prmComplex">Nom du niveau de complexité du quizz. Utilisé pour savoir combiens de questions doivent etre generer pour chaques diffucltés</param>
+        /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
+        /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
+        /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
+        public quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
+            quizz valRet = null;
             try
             {
                 quizz quizzCreation = new quizz ();         // Le nouveau quizz
@@ -178,12 +192,13 @@ namespace Quizz_Models
                 listTauxComplex = GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
 
 
-                // Ajouter quizz dans la base puis recuperer un nombre de questions au hasard
+                // Ajouter quizz dans la base
                 bdd_entities.quizz.Add (quizzCreation);
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
                 listComplexite = GetAllNomComplexite ();                             // Recuperer tout les niveau de complexité possibles 
 
+                // Generer 
                 for ( int i = 0; i < listComplexite.Count (); i++ )
                 {   // Calcul du nombre de question necessaire pour ce niveau de complexité
                     int nbQuest = (int) Math.Round (
@@ -191,17 +206,18 @@ namespace Quizz_Models
                         float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en % (70 => 0.70)
                         );
 
-                    GenererQuestions (listQuestionCreation, nbQuest, prmTheme, prmComplex);
+                    GenererQuestions (listQuestionCreation, nbQuest, prmTheme, listComplexite[i]);
+                    Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listComplexite[i]}");
                 }
 
-
                 MAJManyToManyQuest (listQuestionCreation, quizzCreation);           // Relier les questions a la table quizz
+                valRet = quizzCreation;
             }
             catch ( Exception e )
             {
                 Console.WriteLine (e.Message);
             }
-
+            return valRet;
         }
 
         /// <summary>
