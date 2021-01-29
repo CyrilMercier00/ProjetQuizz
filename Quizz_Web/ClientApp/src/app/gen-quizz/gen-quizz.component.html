@@ -1,0 +1,30 @@
+<div id="container-quizz">
+
+  <form class="flex flex-vertical flex-center">
+
+    <div class="container-input flex flex-vertical">
+      <label>Nombre de questions</label><br/>
+      <input type="text" name="input1" [(ngModel)]="inputNbQuestion" />
+    </div>
+
+    <div class="container-input .flex-align-i-center flex flex-vertical">
+      <label>Theme</label><br/>
+      <select>
+        <option value="C#">C#</option>
+        <option value="JS">JS</option>s
+      </select>
+    </div>
+
+    <div class="container-input .flex-align-i-center flex flex-vertical">
+      <label>Niveau</label><br/>
+      <select>
+        <option value="debutant">Debutant</option>
+        <option value="confirme">Confirmé</option>s
+      </select>
+    </div>
+
+    <button (click)="CreerQuizz()">Valider</button>
+
+  </form>
+
+</div>

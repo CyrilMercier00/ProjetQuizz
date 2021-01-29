@@ -10,13 +10,20 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
+import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
+import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
+import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
+
 @NgModule({
   declarations: [
+    QuizzQuestionComponent,
     AppComponent,
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    GenQuizzComponent,
+    GestQuizzComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -26,6 +33,9 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'quizz-question', component: QuizzQuestionComponent },
+      { path: 'gen-quizz', component: GenQuizzComponent },
+      { path: 'gest-quizz', component: GestQuizzComponent },
     ])
   ],
   providers: [],

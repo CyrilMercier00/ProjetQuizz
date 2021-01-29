@@ -1,0 +1,28 @@
+#quizz-question-container {
+  min-height: 100%;
+  margin-top: 2rem;
+}
+
+#quizz-question-container button {
+  min-width: 20rem;
+  margin: 2rem 3rem 1rem 3rem;
+  padding: 1rem;
+	background-color:#415a77;
+	border-radius:10px;
+	border:0;
+  color:inherit;
+  font-size: 18px;
+	text-decoration:none;
+}
+#quizz-question-container button:hover {
+	background-color:#4b688a ;
+}
+
+#quizz-question-container button:active {
+	position:relative;
+	top:1px;
+}
+
+#container-button {
+margin-top: 2rem;
+}
