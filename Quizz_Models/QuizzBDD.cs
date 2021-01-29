@@ -212,6 +212,7 @@ namespace Quizz_Models
 
                 MAJManyToManyQuest (listQuestionCreation, quizzCreation);           // Relier les questions a la table quizz
                 valRet = quizzCreation;
+                //
             }
             catch ( Exception e )
             {
