@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Quizz_Models.DTO;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Models.Services
 {
     public class CompteService
     {
+        PermissionRepository repoPermission = new PermissionRepository();
+        CompteRepository repoCompte = new CompteRepository();
+
         public CompteService() { }
 
         /// <summary>
@@ -23,12 +27,12 @@ namespace Quizz_Models.Services
 
             try
             {
-                permissionID = QuizzBDD.bdd_instance.FindPermissionByValues(p).pk_permission;
+                permissionID = repoPermission.FindPermissionByValues(p).pk_permission;
             } 
             catch(ArgumentNullException)
             {
-                QuizzBDD.bdd_instance.InsertPermission(p);
-                permissionID = QuizzBDD.bdd_instance.FindPermissionByValues(p).pk_permission;
+                repoPermission.InsertPermission(p);
+                permissionID = repoPermission.FindPermissionByValues(p).pk_permission;
             }
 
             AjoutCompte(compteDTO, permissionID);
@@ -43,7 +47,7 @@ namespace Quizz_Models.Services
         {
             compte c = TransformCompteDTOToCompteEntity(compteDTO);
             c.fk_permission = permissionID;
-            QuizzBDD.bdd_instance.InsertCompte(c);
+            repoCompte.InsertCompte(c);
         }
 
 
@@ -60,7 +64,7 @@ namespace Quizz_Models.Services
 
         public CompteDTO GetCompte(int compteID)
         {
-            compte c = QuizzBDD.bdd_instance.GetCompteByID(compteID);
+            compte c = repoCompte.GetCompteByID(compteID);
             CompteDTO compteDTO = TransformCompteEntityToCompteDTO(c);
             return compteDTO;
         }

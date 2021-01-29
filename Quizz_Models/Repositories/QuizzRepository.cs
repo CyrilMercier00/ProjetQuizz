@@ -1,7 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Quizz_Models.Services
 {
     public class QuizzRepository
     {
+        bdd_quizzEntities bdd_entities;
+        ComplexiteRepository repoComplex;
+        QuestionRepository repoQuest;
 
         public QuizzRepository ()
         {
@@ -27,14 +34,14 @@ namespace Quizz_Models.Services
                 List<String> listComplexite;                // Contient tout les nom des taux de compléxité
                 List<int?> listTauxComplex;                 // Contient les taux de complexité pour le niveau demandé
 
-                listTauxComplex = GetComplexiteByNom(prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
+                listTauxComplex = repoComplex.GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
 
 
                 // Ajouter quizz dans la base
                 bdd_entities.quizz.Add(quizzCreation);
                 Console.WriteLine($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.taux_complexite.niveau} et theme= {quizzCreation.theme.nom_theme}");
 
-                listComplexite = GetAllNomComplexite();                             // Recuperer tout les niveau de complexité possibles 
+                listComplexite = repoComplex.GetAllNomComplexite();                             // Recuperer tout les niveau de complexité possibles 
 
                 // Generer 
                 for (int i = 0; i < listComplexite.Count(); i++)
@@ -44,11 +51,11 @@ namespace Quizz_Models.Services
                         float.Parse("0." + listTauxComplex[i].ToString())          // Transformation du int en % (70 => 0.70)
                         );
 
-                    GenererQuestions(listQuestionCreation, nbQuest, prmTheme, listComplexite[i]);
+                    repoQuest.GenererQuestions (listQuestionCreation, nbQuest, prmTheme, listComplexite[i]);
                     Console.WriteLine($"{nbQuest} ont été générées pour la difficultée {listComplexite[i]}");
                 }
 
-                MAJManyToManyQuest(listQuestionCreation, quizzCreation);           // Relier les questions a la table quizz
+                repoQuest.MAJManyToManyQuest (listQuestionCreation, quizzCreation);           // Relier les questions a la table quizz
                 valRet = quizzCreation;
                 //
             }

@@ -1,9 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Quizz_Models.Services
 {
     public class ComplexiteRepository
     {
+        bdd_quizzEntities bdd_entities;
 
-        public ComplexiteRepository ()
+        public ComplexiteRepository()
         {
 
         }
@@ -14,7 +19,7 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        private List<int?> GetComplexiteByNom(String prmNomComplexite)
+        public List<int?> GetComplexiteByNom(String prmNomComplexite)
         {
             List<int?> ListeRetour = new List<int?>();
 
@@ -44,7 +49,7 @@ namespace Quizz_Models.Services
         /// Retourne une liste avec tout les niveau de complexité trouvés
         /// </summary>
         /// <returns></returns>
-        private List<String> GetAllNomComplexite()
+        public List<String> GetAllNomComplexite()
         {
             return bdd_entities.taux_complexite
                 .Select(x => x.niveau)

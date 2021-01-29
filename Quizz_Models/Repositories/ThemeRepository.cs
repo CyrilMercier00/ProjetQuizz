@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Quizz_Models.DTO;
+
 
 namespace Quizz_Models.Services
 {
-    public class ThemeRepository    {
+    public class ThemeRepository
+    {
+        bdd_quizzEntities bdd_entities;
+
         public ThemeRepository () { }
 
         /* Theme */
@@ -16,11 +16,11 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        private int GetIDThemeByNom(String prmNomComplexite)
+        public int GetIDThemeByNom ( String prmNomComplexite )
         {
             return bdd_entities.theme
-            .Where(x => x.nom_theme == prmNomComplexite)
-            .Single().pk_theme;
+            .Where (x => x.nom_theme == prmNomComplexite)
+            .Single ().pk_theme;
         }
     }
 }
