@@ -13,18 +13,26 @@ namespace Quizz_Web.Controllers
     [ApiController]
     public class ControllerComplexite : ControllerBase
     {
+        Quizz_Models.Services.ComplexiteService complexiteService;
+
+        public ControllerComplexite()
+        {
+            this.complexiteService = new Quizz_Models.Services.ComplexiteService();
+        }
+
+
         // GET: api/<ControllerComplexite>
         [HttpGet]
         public List<Taux_complexiteDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return complexiteService.GetComplexites();
         }
 
         // GET api/<ControllerComplexite>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Taux_complexiteDTO Get(string nomcomplex)
         {
-            return "value";
+            return complexiteService.GetComplexite(nomcomplex);
         }
 
         // POST api/<ControllerComplexite>
