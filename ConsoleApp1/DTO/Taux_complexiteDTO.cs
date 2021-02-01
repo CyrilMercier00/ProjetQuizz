@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Quizz_Models.DTO
 {
-    class Taux_complexiteDTO
+   public class Taux_complexiteDTO
     {
         public int pk_complexite { get; set; }
         public string niveau { get; set; }
