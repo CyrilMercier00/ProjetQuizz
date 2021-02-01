@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-COMMENT = 'La table quizz est en fait un tableau de question. Elle met en lien une question (et donc ca réponse enregistrée) et l\'utilisateur.';
+COMMENT = 'La table quizz est en fait un tableau de question. Elle met en lien une question (et donc ca rï¿½ponse enregistrï¿½e) et l\'utilisateur.';
 
 
 -- -----------------------------------------------------
@@ -209,39 +209,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz_question` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `bdd_quizz`.`personnage`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdd_quizz`.`personnage` (
-  `pk_personnage` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(45) NULL,
-  `vie` FLOAT NULL,
-  `degat` FLOAT NULL,
-  `defense` FLOAT NULL,
-  `nb_round` INT NULL,
-  `id_groupe` INT NULL,
-  PRIMARY KEY (`pk_personnage`))
-ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `bdd_quizz`.`skill`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bdd_quizz`.`skill` (
-  `pk_skill` INT NOT NULL AUTO_INCREMENT,
-  `frequence` FLOAT NULL,
-  `degat` INT NULL,
-  `nom` VARCHAR(45) NULL,
-  `type` INT NULL,
-  `personnage_idpersonnage` INT NOT NULL,
-  PRIMARY KEY (`pk_skill`),
-  INDEX `fk_skill_personnage1_idx` (`personnage_idpersonnage` ASC) VISIBLE,
-  CONSTRAINT `fk_skill_personnage1`
-    FOREIGN KEY (`personnage_idpersonnage`)
-    REFERENCES `bdd_quizz`.`personnage` (`pk_personnage`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

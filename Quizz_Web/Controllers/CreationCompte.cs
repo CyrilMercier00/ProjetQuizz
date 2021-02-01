@@ -1,18 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
+using System;
 
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/compte")]
     public class CreationCompte : Controller
     {
-        CompteService compteService;
+        readonly CompteService compteService;
 
         public CreationCompte()
         {
@@ -26,9 +23,10 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] CompteDTO compteDTO, PermissionDTO permissionDTO)
+        public void Post([FromBody] CompteDTO compteDTO)
         {
-            this.compteService.AjoutCompte(compteDTO, permissionDTO);
+            Console.WriteLine(compteDTO.Nom);
+            this.compteService.AjoutCompte(compteDTO);
         }
     }
 }
