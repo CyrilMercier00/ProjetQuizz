@@ -37,8 +37,9 @@ namespace Quizz_Web.Controllers
 
         // POST api/<ControllerComplexite>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Taux_complexiteDTO noveautxcomplexitéDTO)
         {
+            complexiteService.AjouterTauxComplexite(noveautxcomplexitéDTO);
         }
 
         // PUT api/<ControllerComplexite>/5
