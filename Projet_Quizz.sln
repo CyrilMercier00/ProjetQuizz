@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quizz_Models", "Quizz_Models\Quizz_Models.csproj", "{139F8F18-3C52-4CF2-9120-D0EA56F459A3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quizz_Web", "Quizz_Web\Quizz_Web.csproj", "{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}"
 	ProjectSection(ProjectDependencies) = postProject
-		{139F8F18-3C52-4CF2-9120-D0EA56F459A3} = {139F8F18-3C52-4CF2-9120-D0EA56F459A3}
+		{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125} = {6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autres", "Autres", "{91D50CD0-6B1A-4FB5-9240-9369AE9A198D}"
@@ -16,20 +14,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Autres", "Autres", "{91D50C
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quizz_Models", "ConsoleApp1\Quizz_Models.csproj", "{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{139F8F18-3C52-4CF2-9120-D0EA56F459A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{139F8F18-3C52-4CF2-9120-D0EA56F459A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{139F8F18-3C52-4CF2-9120-D0EA56F459A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{139F8F18-3C52-4CF2-9120-D0EA56F459A3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF9AECC3-1E23-4CA1-9237-ACA19E9EB0CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BB28466-F3F4-4F8A-9AB0-AC6977AD1125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

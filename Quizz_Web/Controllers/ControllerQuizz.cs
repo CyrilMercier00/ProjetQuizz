@@ -1,10 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Quizz_Models.DTO;
-using Quizz_Models.Services;
 
 namespace Quizz_Web.Controllers
 {
@@ -16,7 +11,7 @@ namespace Quizz_Web.Controllers
         [HttpPost]
         public void Post([FromBody] QuizzDTO prmQuizzDTO)
         {
-           
+
         }
     }
 }
