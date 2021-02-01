@@ -48,6 +48,10 @@ namespace Quizz_Models.Services
             //repoCompte.InsertCompte(c);
         }
 
+        /// <summary>
+        /// Ajout d'un compte sans Permission. Destinée uniquement pour les tests.
+        /// </summary>
+        /// <param name="CompteDTO">Compte à ajouter.</param>
         public void AjoutCompte(CompteDTO CompteDTO)
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
@@ -69,16 +73,28 @@ namespace Quizz_Models.Services
 
         }
 
+        /// <summary>
+        /// Retourne la liste des comptes en DTO.
+        /// </summary>
         public List<CompteDTO> GetCompte()
         {
             return TransferListCompteDTOToEntity(repoCompte.GetAllComptes());
         }
 
+        /// <summary>
+        /// Transforme une entité compte au DTO correspondant.
+        /// </summary>
+        /// <param name="CompteID">Entité à transformer.</param>
+        /// <returns>DTO correspondant.</returns>
         public CompteDTO GetCompte(int CompteID)
         {
             return TransformCompteEntityToCompteDTO(repoCompte.GetCompteByID(CompteID));
         }
 
+        /// <summary>
+        /// Méthode qui supprime un compte en donnant l'ID correspondant.
+        /// </summary>
+        /// <param name="CompteID">ID du compte.</param>
         public void DeleteCompte(int CompteID)
         {
             repoCompte.DeleteCompte(CompteID);
@@ -105,7 +121,7 @@ namespace Quizz_Models.Services
         /// <summary>
         /// Transforme un PermissionDTO en entité Permission.
         /// </summary>
-        /// <param name="PermissionDTO"></param>
+        /// <param name="PermissionDTO">DTO de la permission.</param>
         /// <returns>Retourne l'entité correspondante.</returns>
         private Permission TransformPermissionDTOToPermissionEntity(PermissionDTO PermissionDTO)
         {
@@ -120,6 +136,11 @@ namespace Quizz_Models.Services
             return p;
         }
 
+        /// <summary>
+        /// Cette méthode transforme une entité Compte en DTO Compte.
+        /// </summary>
+        /// <param name="cpt">Entité du compte à transformer.</param>
+        /// <returns>DTO correspondant.</returns>
         private CompteDTO TransformCompteEntityToCompteDTO(Compte cpt)
         {
             CompteDTO CompteDTO = new CompteDTO
@@ -132,6 +153,11 @@ namespace Quizz_Models.Services
             return CompteDTO;
         }
 
+        /// <summary>
+        /// Transforme une liste de Compte entité en liste de Compte DTO.
+        /// </summary>
+        /// <param name="comptes">Liste d'entités Compte.</param>
+        /// <returns>Liste de DTO Compte correspondante.</returns>
         private List<CompteDTO> TransferListCompteDTOToEntity(List<Compte> comptes)
         {
             List<CompteDTO> compteDTOs = new List<CompteDTO>();
