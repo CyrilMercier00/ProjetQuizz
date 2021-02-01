@@ -33,7 +33,6 @@ namespace Quizz_Models.Services
 
                 listTauxComplex = repoComplex.GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
 
-
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz (quizzCreation);
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau} et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
@@ -51,7 +50,7 @@ namespace Quizz_Models.Services
                     repoQuest.GenererQuestions (listQuestionCreation, nbQuest, prmTheme, listComplexite[i]);
                     Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listComplexite[i]}");
 
-                    foreach ( Question q in listQuestionCreation )        // Pour chaques questions
+                    foreach ( Question q in listQuestionCreation )      // Pour chaques questions
                     {
                         QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
                         {
