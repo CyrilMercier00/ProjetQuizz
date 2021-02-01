@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
-using System;
+using System.Net;
 using System.Collections.Generic;
 
 namespace Quizz_Web.Controllers
@@ -20,13 +20,29 @@ namespace Quizz_Web.Controllers
         [HttpGet("{id}")]
         public CompteDTO Get(int id)
         {
-            return this.compteService.GetCompte(id);
+            CompteDTO compte =  this.compteService.GetCompte(id);
+
+            if (compte == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            return compte;
         }
 
         [HttpGet]
         public List<CompteDTO> Get()
         {
-            return this.compteService.GetCompte();
+            List<CompteDTO> comptes = this.compteService.GetCompte();
+
+            if(comptes == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            return comptes;
         }
 
         [HttpDelete("{id}")]
@@ -38,7 +54,16 @@ namespace Quizz_Web.Controllers
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
         {
-            this.compteService.AjoutCompte(compteDTO);
+            int lignes = this.compteService.AjoutCompte(compteDTO);
+
+            if(lignes < 2)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotAcceptable;
+            }
+            else if(lignes == 2)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
+            }
         }
     }
 }

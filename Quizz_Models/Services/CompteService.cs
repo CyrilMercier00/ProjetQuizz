@@ -52,13 +52,14 @@ namespace Quizz_Models.Services
         /// Ajout d'un compte sans Permission. Destinée uniquement pour les tests.
         /// </summary>
         /// <param name="CompteDTO">Compte à ajouter.</param>
-        public void AjoutCompte(CompteDTO CompteDTO)
+        /// <returns>Nombre de lignes insérées.</returns>
+        public int AjoutCompte(CompteDTO CompteDTO)
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
             c.FkPermissionNavigation = new Permission();
             repoCompte.InsertCompte(c);
 
-            repoCompte.Sauvegarder();
+            return repoCompte.Sauvegarder();
         }
 
 
@@ -78,7 +79,10 @@ namespace Quizz_Models.Services
         /// </summary>
         public List<CompteDTO> GetCompte()
         {
-            return TransferListCompteDTOToEntity(repoCompte.GetAllComptes());
+            List<Compte> comptes = repoCompte.GetAllComptes();
+
+            if (comptes.Count == 0) return null;
+            else return TransferListCompteDTOToEntity(comptes);
         }
 
         /// <summary>
@@ -88,7 +92,10 @@ namespace Quizz_Models.Services
         /// <returns>DTO correspondant.</returns>
         public CompteDTO GetCompte(int CompteID)
         {
-            return TransformCompteEntityToCompteDTO(repoCompte.GetCompteByID(CompteID));
+            Compte compte = repoCompte.GetCompteByID(CompteID);
+
+            if (compte == null) return null;
+            return TransformCompteEntityToCompteDTO(compte);
         }
 
         /// <summary>
