@@ -20,29 +20,13 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        public List<int?> GetComplexiteByNom(String prmNomComplexite)
+        public TauxComplexite GetComplexiteByNom(String prmNomComplexite)
         {
-            List<int?> ListeRetour = new List<int?>();
 
-            var data = bdd_entities.TauxComplexite
-                    .Where(x => x.Niveau == prmNomComplexite)
-                    .Select(x => new
-                    {
-                        x.QuestionJunior,
-                        x.QuestConfirme,
-                        x.QuestionExperimente
-                    })
-                    .ToList();
 
-            foreach (var v in data)
-            {
-                ListeRetour.Add(v.QuestionJunior);
-                ListeRetour.Add(v.QuestConfirme);
-                ListeRetour.Add(v.QuestionExperimente);
-                Console.WriteLine("GetComplexiteByNom fin foreach atteint");
-            }
-
-            return ListeRetour;
+            return bdd_entities.TauxComplexite
+                .Where(x => x.Niveau.Equals( prmNomComplexite)).Single();
+         
         }
 
 
@@ -57,5 +41,10 @@ namespace Quizz_Models.Services
                 .ToList();
         }
 
+        public List<TauxComplexite> GetAllComplexite()
+        {
+            return bdd_entities.TauxComplexite.ToList();
+               
+        }
     }
 }
