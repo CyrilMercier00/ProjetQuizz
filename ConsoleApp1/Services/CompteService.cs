@@ -44,12 +44,13 @@ namespace Quizz_Models.Services
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
             c.FkPermission = PermissionID;
-            repoCompte.InsertCompte(c);
+            //repoCompte.InsertCompte(c);
         }
 
         public void AjoutCompte(CompteDTO CompteDTO)
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
+            c.FkPermissionNavigation = new Permission();
             repoCompte.InsertCompte(c);
         }
 

@@ -16,6 +16,7 @@ namespace Quizz_Models.Services
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
+            bdd_entities.SaveChanges();
         }
 
         public void DeleteCompte(int CompteID)
