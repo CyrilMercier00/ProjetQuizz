@@ -74,9 +74,7 @@ namespace Quizz_Models.Services
 
         public CompteDTO GetCompte(int CompteID)
         {
-            Compte c = repoCompte.GetCompteByID(CompteID);
-            CompteDTO CompteDTO = TransformCompteEntityToCompteDTO(c);
-            return CompteDTO;
+            return TransformCompteEntityToCompteDTO(repoCompte.GetCompteByID(CompteID));
         }
 
         /// <summary>

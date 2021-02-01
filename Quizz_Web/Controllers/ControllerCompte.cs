@@ -8,19 +8,19 @@ namespace Quizz_Web.Controllers
 {
     [ApiController]
     [Route("api/compte")]
-    public class CreationCompte : Controller
+    public class ControllerCompte : Controller
     {
         readonly CompteService compteService;
 
-        public CreationCompte()
+        public ControllerCompte()
         {
             this.compteService = new CompteService();
         }
 
         [HttpGet("{id}")]
-        public void Get(int id)
+        public CompteDTO Get(int id)
         {
-            this.compteService.GetCompte(id);
+            return this.compteService.GetCompte(id);
         }
 
         [HttpGet]
