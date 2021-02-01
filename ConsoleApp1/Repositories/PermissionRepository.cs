@@ -15,6 +15,8 @@ namespace Quizz_Models.Repositories
         public void InsertPermission(Permission PermissionEntity)
         {
             bdd_entities.Permission.Add(PermissionEntity);
+            bdd_entities.SaveChanges ();
+
         }
 
         /// <summary>
