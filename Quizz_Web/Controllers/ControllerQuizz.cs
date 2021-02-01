@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
+using System;
 
 namespace Quizz_Web.Controllers
 {
@@ -8,17 +9,16 @@ namespace Quizz_Web.Controllers
     [Route ("[controller]")]
     public class ControllerQuizz : Controller
     {
-        QuizzService servQuizz = new QuizzService ();
+        readonly QuizzService servQuizz = new QuizzService ();
 
         [HttpPost]
         public void Post ( [FromBody] QuizzDTO prmQuizzDTO )
-        {
-
+        { 
             servQuizz.GenererQuizz (
                 prmQuizzDTO.NbQuestions,
-                prmQuizzDTO.Complexite, 
-                prmQuizzDTO.Theme, 
-                prmQuizzDTO.Chrono
+                prmQuizzDTO.Complexite,
+                prmQuizzDTO.Theme,
+                TimeSpan.Parse(prmQuizzDTO.Chrono)
                 );
         }
     }
