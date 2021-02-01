@@ -29,6 +29,12 @@ namespace Quizz_Web.Controllers
             return this.compteService.GetCompte();
         }
 
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            this.compteService.DeleteCompte(id);
+        }
+
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
         {

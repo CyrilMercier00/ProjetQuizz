@@ -53,6 +53,8 @@ namespace Quizz_Models.Services
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
             c.FkPermissionNavigation = new Permission();
             repoCompte.InsertCompte(c);
+
+            repoCompte.Sauvegarder();
         }
 
 
@@ -75,6 +77,12 @@ namespace Quizz_Models.Services
         public CompteDTO GetCompte(int CompteID)
         {
             return TransformCompteEntityToCompteDTO(repoCompte.GetCompteByID(CompteID));
+        }
+
+        public void DeleteCompte(int CompteID)
+        {
+            repoCompte.DeleteCompte(CompteID);
+            repoCompte.Sauvegarder();
         }
 
         /// <summary>

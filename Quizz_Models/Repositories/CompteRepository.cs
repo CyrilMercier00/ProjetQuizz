@@ -22,13 +22,17 @@ namespace Quizz_Models.Services
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
-            bdd_entities.SaveChanges();
         }
 
         public void DeleteCompte(int CompteID)
         {
             Compte CompteEntity = bdd_entities.Compte.Find(CompteID);
             bdd_entities.Compte.Remove(CompteEntity);
+        }
+
+        public void Sauvegarder()
+        {
+            bdd_entities.SaveChanges();
         }
     }
 }
