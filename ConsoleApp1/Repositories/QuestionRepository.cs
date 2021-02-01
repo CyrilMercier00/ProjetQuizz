@@ -33,7 +33,6 @@ namespace Quizz_Models.Services
         {
             int idTheme = repoTheme.GetIDThemeByNom(prmTheme);
 
-            int i = 0;
             // Recuperer le nombre de questions total pour ce theme & niv de complexite
             int nbQuestTotal = bdd_entities.Question
                 .Where(x => x.FkTheme == idTheme && x.NvComplexite == prmComplex)
@@ -44,8 +43,6 @@ namespace Quizz_Models.Services
                 .Where(x => x.FkTheme == idTheme && x.NvComplexite == prmComplex)
                 .OrderBy(x => Guid.NewGuid())
                 .Take(prmNBQuestions);
-
-            i++;
 
             foreach (Question q in data)
             {
