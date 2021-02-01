@@ -2,6 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System;
+using System.Collections.Generic;
 
 namespace Quizz_Web.Controllers
 {
@@ -22,10 +23,15 @@ namespace Quizz_Web.Controllers
             this.compteService.GetCompte(id);
         }
 
+        [HttpGet]
+        public List<CompteDTO> Get()
+        {
+            return this.compteService.GetCompte();
+        }
+
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
         {
-            Console.WriteLine(compteDTO.Nom);
             this.compteService.AjoutCompte(compteDTO);
         }
     }

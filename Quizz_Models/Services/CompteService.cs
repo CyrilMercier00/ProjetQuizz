@@ -2,6 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.Services
 {
@@ -66,6 +67,11 @@ namespace Quizz_Models.Services
 
         }
 
+        public List<CompteDTO> GetCompte()
+        {
+            return TransferListCompteDTOToEntity(repoCompte.GetAllComptes());
+        }
+
         public CompteDTO GetCompte(int CompteID)
         {
             Compte c = repoCompte.GetCompteByID(CompteID);
@@ -118,6 +124,16 @@ namespace Quizz_Models.Services
             };
 
             return CompteDTO;
+        }
+
+        private List<CompteDTO> TransferListCompteDTOToEntity(List<Compte> comptes)
+        {
+            List<CompteDTO> compteDTOs = new List<CompteDTO>();
+            foreach (Compte compte in comptes)
+            {
+                compteDTOs.Add(TransformCompteEntityToCompteDTO(compte));
+            }
+            return compteDTOs;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Quizz_Models.bdd_quizz;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Quizz_Models.Services
 {
@@ -7,6 +8,11 @@ namespace Quizz_Models.Services
     {
         private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
         public CompteRepository() { }
+
+        public List<Compte> GetAllComptes()
+        {
+            return bdd_entities.Compte.ToList();
+        }
 
         public Compte GetCompteByID(int prmID)
         {
