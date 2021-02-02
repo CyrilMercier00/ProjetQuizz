@@ -26,40 +26,39 @@ namespace Quizz_Models.Services
             Quizz valRet = null;
             try
             {
-                Quizz quizzCreation = new Quizz ();         // Le nouveau quizz
+                Quizz quizzCreation = new Quizz ();                             // Le nouveau quizz
                 List<Question> listQuestionCreation = new List<Question> ();    // La liste des questions choisies
-                List<String> listComplexite;                // Contient tout les nom des taux de compléxité
-                List<int?> listTauxComplex;                 // Contient les taux de complexité pour le niveau demandé
-
-                listTauxComplex = repoComplex.GetComplexiteByNom (prmComplex);                  // Recuperer une liste avec les 3 taux de complexité
+                TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
 
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz (quizzCreation);
-                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau} et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
+                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
+                    $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
-                listComplexite = repoComplex.GetAllNomComplexite ();                             // Recuperer tout les niveau de complexité possibles 
+                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer les valeures pour les taux de complexité
 
-                // Generer 
-                for ( int i = 0; i < listComplexite.Count (); i++ )
+                // Generer les questions
+                for ( int i = 0; i < 3; i++ )
                 {   // Calcul du nombre de question necessaire pour ce niveau de complexité
                     int nbQuest = (int) Math.Round (
-                        prmNBQuestion /                                              // Nb question / % question
-                        float.Parse ("0." + listTauxComplex[i].ToString ())          // Transformation du int en % (70 => 0.70)
+                        prmNBQuestion /                                               // Nb question / % question
+                        float.Parse ("0." + TauxComplexite.QuestionJunior.ToString ())          // Transformation du int en % (70 => 0.70)
                         );
+                    CalculerNombreQuestion (niveau);
 
-                    repoQuest.GenererQuestions (listQuestionCreation, nbQuest, prmTheme, listComplexite[i]);
-                    Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listComplexite[i]}");
+                    //repoQuest.GenererQuestions (listQuestionCreation, nbQuest, prmTheme, );
+                    //Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listTauxComplexite[i]}");
 
-                    foreach ( Question q in listQuestionCreation )      // Pour chaques questions
-                    {
-                        QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
-                        {
-                            FkQuestion = q.PkQuestion,                  // PK de cette question
-                            FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
-                        };
+                    //foreach ( Question q in listQuestionCreation )      // Pour chaques questions
+                    //{
+                    //    QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
+                    //    {
+                    //        FkQuestion = q.PkQuestion,                  // PK de cette question
+                    //        FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
+                    //    };
 
-                        q.QuizzQuestion.Add (qq);                        // Ajouter a la liste des liaisons
-                    }
+                    //    q.QuizzQuestion.Add (qq);                        // Ajouter a la liste des liaisons
+                    //}
 
                 }
                 valRet = quizzCreation;                                 // Retourner le quizz créer
@@ -70,6 +69,19 @@ namespace Quizz_Models.Services
             }
             return valRet;
         }
+       /// <summary>
+       /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
+       /// </summary>
+       /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
+       /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
+       /// <returns></returns>
+        public int CalculerNombreQuestionJunior ( int prmNBQuestion, TauxComplexite prmTauxComplexiteQuizz )
+        {
+            int nbQuest;
 
+            nbQuest = (int) Math.Round (prmNBQuestion /                                               // Nb question / % question
+                   float.Parse ("0." + prmTauxComplexiteQuizz.QuestionJunior.ToString ()));          // Transformation du int en % (70 => 0.70)
+            return nbQuest;
+        }
     }
 }

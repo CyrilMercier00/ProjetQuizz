@@ -11,11 +11,11 @@ namespace Quizz_Models.Services
         private readonly ThemeRepository repoTheme = new ThemeRepository ();
         public QuestionRepository () { }
 
-
         /*  Questions  */
         public Question GetQuestionByID ( int prmID )
         {
             return bdd_entities.Question.Find (prmID);
+            
         }
 
         public void InsertNouvelleQuestion ( Question prmQuestion )
