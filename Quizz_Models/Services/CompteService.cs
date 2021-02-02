@@ -11,6 +11,10 @@ namespace Quizz_Models.Services
         readonly PermissionRepository repoPermission = new PermissionRepository();
         readonly CompteRepository repoCompte = new CompteRepository();
 
+        const int ADMIN_PERMISSION_ID = 1;
+        const int RECRUTEUR_PERMISSION_ID = 2;
+        const int CANDIDAT_PERMISSION_ID = 3;
+
         public CompteService() { }
 
         /// <summary>
@@ -44,8 +48,14 @@ namespace Quizz_Models.Services
         public void AjoutCompte(CompteDTO CompteDTO, int PermissionID)
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
-            c.FkPermission = PermissionID;
-            //repoCompte.InsertCompte(c);
+
+            if(PermissionID >= ADMIN_PERMISSION_ID && PermissionID <= CANDIDAT_PERMISSION_ID)
+            {
+                c.Role = PermissionID;
+                c.FkPermission = PermissionID;
+            }
+
+            repoCompte.InsertCompte(c);
         }
 
         /// <summary>
