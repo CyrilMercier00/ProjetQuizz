@@ -1,0 +1,609 @@
+{
+	"info": {
+		"_postman_id": "f0e15f9c-0c0c-459d-bbaa-3b5bd794015c",
+		"name": "Compte",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Ajout de comptes",
+			"item": [
+				{
+					"name": "Ajout1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Graaffe\",\r\n    \"prenom\" : \"Joris\",\r\n    \"mail\" : \"joris@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Mercier\",\r\n    \"prenom\" : \"Cyril\",\r\n    \"mail\" : \"cyril@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Ettakhchi\",\r\n    \"prenom\" : \"Amine\",\r\n    \"mail\" : \"amine@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Arif\",\r\n    \"prenom\" : \"Sabrina\",\r\n    \"mail\" : \"sabrina@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout mauvais mail1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(406);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Toto\",\r\n    \"prenom\" : \"titi\",\r\n    \"mail\" : \"jefaisunmail\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajout mauvais mail2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(406);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Momo\",\r\n    \"prenom\" : \"mimi\",\r\n    \"mail\" : \"a@a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Voir les comptes",
+			"item": [
+				{
+					"name": "Tout les comptes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test valeur\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.nom).to.eql(\"Graaffe\");\r",
+									"  pm.expect(responseJson.prenom).to.eql(\"Joris\");\r",
+									"  pm.expect(responseJson.mail).to.eql(\"joris@gmail.com\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test valeur\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.nom).to.eql(\"Mercier\");\r",
+									"  pm.expect(responseJson.prenom).to.eql(\"Cyril\");\r",
+									"  pm.expect(responseJson.mail).to.eql(\"cyril@gmail.com\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test valeur\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.nom).to.eql(\"Ettakhchi\");\r",
+									"  pm.expect(responseJson.prenom).to.eql(\"Amine\");\r",
+									"  pm.expect(responseJson.mail).to.eql(\"amine@gmail.com\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test valeur\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.nom).to.eql(\"Arif\");\r",
+									"  pm.expect(responseJson.prenom).to.eql(\"Sabrina\");\r",
+									"  pm.expect(responseJson.mail).to.eql(\"sabrina@gmail.com\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compte 6",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Suppression de comptes",
+			"item": [
+				{
+					"name": "Suppression compte 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Voir compte 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:44398/api/compte/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"compte",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

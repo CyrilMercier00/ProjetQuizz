@@ -30,9 +30,9 @@ namespace Quizz_Models.Services
             bdd_entities.Compte.Remove(CompteEntity);
         }
 
-        public void Sauvegarder()
+        public int Sauvegarder()
         {
-            bdd_entities.SaveChanges();
+            return bdd_entities.SaveChanges();
         }
     }
 }
