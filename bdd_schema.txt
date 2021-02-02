@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
+  `mot_de_passe` VARCHAR(45) NOT NULL;
   `role` INT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
@@ -65,7 +66,7 @@ ENGINE = InnoDB;
 -- Table `bdd_quizz`.`theme`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`theme` (
-  `pk_theme` INT NOT NULL,
+  `pk_theme` INT NOT NULL AUTO_INCREMENT,
   `nom_theme` VARCHAR(45) NULL,
   PRIMARY KEY (`pk_theme`))
 ENGINE = InnoDB;
@@ -208,17 +209,17 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz_question` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- ---------------   Insertions test    ----------------
+-- -----------------------------------------------------
 
-ALTER TABLE compte ADD COLUMN mot_de_passe varchar(20) NOT NULL;
+-- Insert permissions : 
 
 insert into permission(generer_quizz, ajouter_quest, modifier_quest, suppr_question)
 	values (true, true, true, true), (true, false, false, false), (false, false, false, false);
 
-SET FOREIGN_KEY_CHECKS = 0;
-
-ALTER TABLE theme modify pk_theme int AUTO_INCREMENT;
-
-SET FOREIGN_KEY_CHECKS = 1;
+-- Insert themes :
+    Insert into question (nom_theme) values ("C#");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
