@@ -8,11 +8,14 @@ import { VariableGlobales } from '../globales';
 })
 export class GenQuizzComponent implements OnInit {
 
-  urlGetTheme = VariableGlobales.apiURL + "/themes";
-  urlGetComplexite = VariableGlobales.apiURL + "/niveau";
+  urlGetTheme = VariableGlobales.apiURL + "theme";
+  urlGetComplexite = VariableGlobales.apiURL + "niveau";
+  urlPostQuizz = VariableGlobales.apiURL + "quizz"
+
   inputNbQuestion = 0;
   inputTheme = "c#";
   inputComplexite = "Débutant";
+  inputTemps = "Débutant";
 
   constructor() { }
 
