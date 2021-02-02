@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -17,7 +16,6 @@ namespace Quizz_Models.bdd_quizz
         public string Mail { get; set; }
         public int? Role { get; set; }
         public int FkPermission { get; set; }
-        public string MotDePasse { get; set; }
 
         public virtual Permission FkPermissionNavigation { get; set; }
         public virtual ICollection<CompteQuizz> CompteQuizz { get; set; }

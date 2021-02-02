@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Quizz_Models.bdd_quizz
+﻿namespace Quizz_Models.bdd_quizz
 {
     public partial class PropositionReponse
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -44,27 +42,22 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasKey(e => e.PkCompte)
                     .HasName("PRIMARY");
 
-                entity.ToTable("compte");
+                entity.ToTable("Compte");
 
                 entity.HasIndex(e => e.FkPermission)
-                    .HasName("fk_compte_Permission1_idx");
+                    .HasName("fk_Compte_Permission1_idx");
 
                 entity.HasIndex(e => e.Mail)
                     .HasName("mail_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.PkCompte).HasColumnName("pk_compte");
+                entity.Property(e => e.PkCompte).HasColumnName("pk_Compte");
 
-                entity.Property(e => e.FkPermission).HasColumnName("fk_permission");
+                entity.Property(e => e.FkPermission).HasColumnName("fk_Permission");
 
                 entity.Property(e => e.Mail)
                     .HasColumnName("mail")
                     .HasMaxLength(45);
-
-                entity.Property(e => e.MotDePasse)
-                    .IsRequired()
-                    .HasColumnName("mot_de_passe")
-                    .HasMaxLength(20);
 
                 entity.Property(e => e.Nom)
                     .HasColumnName("nom")
@@ -80,7 +73,7 @@ namespace Quizz_Models.bdd_quizz
                     .WithMany(p => p.Compte)
                     .HasForeignKey(d => d.FkPermission)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_compte_Permission1");
+                    .HasConstraintName("fk_Compte_Permission1");
             });
 
             modelBuilder.Entity<CompteQuizz>(entity =>
@@ -88,15 +81,15 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasKey(e => new { e.FkCompte, e.FkQuizz })
                     .HasName("PRIMARY");
 
-                entity.ToTable("compte_quizz");
+                entity.ToTable("Compte_quizz");
 
                 entity.HasIndex(e => e.FkCompte)
-                    .HasName("fk_compte_has_quizz_compte1_idx");
+                    .HasName("fk_Compte_has_quizz_Compte1_idx");
 
                 entity.HasIndex(e => e.FkQuizz)
-                    .HasName("fk_compte_has_quizz_quizz1_idx");
+                    .HasName("fk_Compte_has_quizz_quizz1_idx");
 
-                entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
+                entity.Property(e => e.FkCompte).HasColumnName("fk_Compte");
 
                 entity.Property(e => e.FkQuizz).HasColumnName("fk_quizz");
 
@@ -104,13 +97,13 @@ namespace Quizz_Models.bdd_quizz
                     .WithMany(p => p.CompteQuizz)
                     .HasForeignKey(d => d.FkCompte)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_compte_has_quizz_compte1");
+                    .HasConstraintName("fk_Compte_has_quizz_Compte1");
 
                 entity.HasOne(d => d.FkQuizzNavigation)
                     .WithMany(p => p.CompteQuizz)
                     .HasForeignKey(d => d.FkQuizz)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_compte_has_quizz_quizz1");
+                    .HasConstraintName("fk_Compte_has_quizz_quizz1");
             });
 
             modelBuilder.Entity<Permission>(entity =>
@@ -118,9 +111,9 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasKey(e => e.PkPermission)
                     .HasName("PRIMARY");
 
-                entity.ToTable("permission");
+                entity.ToTable("Permission");
 
-                entity.Property(e => e.PkPermission).HasColumnName("pk_permission");
+                entity.Property(e => e.PkPermission).HasColumnName("pk_Permission");
 
                 entity.Property(e => e.AjouterQuest).HasColumnName("ajouter_quest");
 
@@ -298,7 +291,7 @@ namespace Quizz_Models.bdd_quizz
                 entity.ToTable("reponse_candidat");
 
                 entity.HasIndex(e => e.FkCompte)
-                    .HasName("fk_reponse_candidat_compte1_idx");
+                    .HasName("fk_reponse_candidat_Compte1_idx");
 
                 entity.HasIndex(e => e.FkQuestion)
                     .HasName("fk_reponse_candidat_question1_idx");
@@ -309,7 +302,7 @@ namespace Quizz_Models.bdd_quizz
                     .HasColumnName("commentaire")
                     .HasMaxLength(45);
 
-                entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
+                entity.Property(e => e.FkCompte).HasColumnName("fk_Compte");
 
                 entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
 
@@ -321,7 +314,7 @@ namespace Quizz_Models.bdd_quizz
                     .WithMany(p => p.ReponseCandidat)
                     .HasForeignKey(d => d.FkCompte)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("fk_reponse_candidat_compte1");
+                    .HasConstraintName("fk_reponse_candidat_Compte1");
 
                 entity.HasOne(d => d.FkQuestionNavigation)
                     .WithMany(p => p.ReponseCandidat)

@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace Quizz_Models
 {
-    class MailUtils
+    class MailUtisl
     {
         /// <summary>
         /// Méthode qui vérifie si un mail est valide.
@@ -22,14 +22,6 @@ namespace Quizz_Models
             {
                 return false;
             }
-
-            return true;
-        }
-
-        public static bool VerifyMotDePasse(string mdp)
-        {
-            if (mdp == null) return false;
-            if (mdp.Length <= 0 || mdp.Length > 20) return false;
 
             return true;
         }
