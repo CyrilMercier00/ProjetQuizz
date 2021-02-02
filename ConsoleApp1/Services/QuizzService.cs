@@ -21,11 +21,11 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public Quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public Quizz GenererQuizz ( int prmNBQuestion, string prmComplex, String prmTheme, TimeSpan prmChrono )
         {
             Quizz valRet = null;
-            try
-            {
+            //try
+            //{
                 Quizz quizzCreation = new Quizz ();                             // Le nouveau quizz
                 List<Question> listQuestionCreation = new List<Question> ();    // La liste des questions choisies
                 TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
@@ -35,47 +35,44 @@ namespace Quizz_Models.Services
                 Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
                     $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
-                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer les valeures pour les taux de complexité
+                TauxComplexite = repoComplex.GetComplexiteByNom(prmComplex);                    // Recuperer les valeures pour les taux de complexité
 
-                // Generer les questions
-                for ( int i = 0; i < 3; i++ )
-                {   // Calcul du nombre de question necessaire pour ce niveau de complexité
-                    int nbQuest = (int) Math.Round (
-                        prmNBQuestion /                                               // Nb question / % question
-                        float.Parse ("0." + TauxComplexite.QuestionJunior.ToString ())          // Transformation du int en % (70 => 0.70)
-                        );
-                    CalculerNombreQuestion (niveau);
+            // Generer les questions
 
-                    //repoQuest.GenererQuestions (listQuestionCreation, nbQuest, prmTheme, );
-                    //Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listTauxComplexite[i]}");
+            int nbQuestJnr = CalculerNombreQuestionJunior(prmNBQuestion, TauxComplexite);
+            int nbQuestConf = CalculerNombreQuestionConfirme(prmNBQuestion, TauxComplexite);
+            int nbQuestExp = CalculerNombreQuestionExperimente(prmNBQuestion, TauxComplexite);
 
-                    //foreach ( Question q in listQuestionCreation )      // Pour chaques questions
-                    //{
-                    //    QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
-                    //    {
-                    //        FkQuestion = q.PkQuestion,                  // PK de cette question
-                    //        FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
-                    //    };
+            //            repoQuest.GenererQuestions(listQuestionCreation, prmNBQuestion, prmTheme, TauxComplexite );
+            //            Console.WriteLine($"{nbQuest} ont été générées pour la difficultée {listTauxComplexite[i]}");
 
-                    //    q.QuizzQuestion.Add (qq);                        // Ajouter a la liste des liaisons
-                    //}
+            //            foreach (Question q in listQuestionCreation)      // Pour chaques questions
+            //            {
+            //                QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
+            //                {
+            //                    FkQuestion = q.PkQuestion,                  // PK de cette question
+            //                    FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
+            //                };
 
-                }
-                valRet = quizzCreation;                                 // Retourner le quizz créer
-            }
-            catch ( Exception e )
-            {
-                Console.WriteLine (e.Message);
-            }
-            return valRet;
-        }
-       /// <summary>
-       /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
-       /// </summary>
-       /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
-       /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
-       /// <returns></returns>
-        public int CalculerNombreQuestionJunior ( int prmNBQuestion, TauxComplexite prmTauxComplexiteQuizz )
+            //                q.QuizzQuestion.Add(qq);                        // Ajouter a la liste des liaisons
+            //            }
+
+            //        }
+            //        valRet = quizzCreation;                                 // Retourner le quizz créer
+            //                }
+            //                catch (Exception e )
+            //                {
+            //                    Console.WriteLine(e.Message);
+            //                }
+            //return valRet;
+            //        }
+            /// <summary>
+            /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
+            /// </summary>
+            /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
+            /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
+            /// <returns></returns>
+            public int CalculerNombreQuestionJunior ( int prmNBQuestion, TauxComplexite prmTauxComplexiteQuizz )
         {
             int nbQuest;
 
@@ -83,5 +80,22 @@ namespace Quizz_Models.Services
                    float.Parse ("0." + prmTauxComplexiteQuizz.QuestionJunior.ToString ()));          // Transformation du int en % (70 => 0.70)
             return nbQuest;
         }
+        public int CalculerNombreQuestionConfirme(int prmNBQuestion, TauxComplexite prmTauxComplexiteQuizz)
+        {
+            int nbQuest;
+
+            nbQuest = (int)Math.Round(prmNBQuestion /                                               // Nb question / % question
+                   float.Parse("0." + prmTauxComplexiteQuizz.QuestConfirme.ToString()));          // Transformation du int en % (70 => 0.70)
+            return nbQuest;
+        }
+        public int CalculerNombreQuestionExperimente(int prmNBQuestion, TauxComplexite prmTauxComplexiteQuizz)
+        {
+            int nbQuest;
+
+            nbQuest = (int)Math.Round(prmNBQuestion /                                               // Nb question / % question
+                   float.Parse("0." + prmTauxComplexiteQuizz.QuestionExperimente.ToString()));          // Transformation du int en % (70 => 0.70)
+            return nbQuest;
+        }
+
     }
 }
