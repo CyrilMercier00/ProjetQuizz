@@ -24,8 +24,6 @@ namespace Quizz_Web.Controllers
                     prmQuizzDTO.Theme,
                     TimeSpan.Parse (prmQuizzDTO.Chrono)
                     );
-
-                valRetour = Ok ();
             }
             catch ( Exception e )
             {
@@ -34,5 +32,24 @@ namespace Quizz_Web.Controllers
             }
             return valRetour;
         }
+
+
+
+        [HttpDelete]
+        public ActionResult<QuizzDTO> Delete ( [FromBody] int prmIDQuizz )
+        {
+            valRetour = Ok ();
+            try
+            {
+                servQuizz.SupprimerQuizz (prmIDQuizz);
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine (e.Message);
+                valRetour = NotFound ();
+            }
+            return valRetour;
+        }
+
     }
 }

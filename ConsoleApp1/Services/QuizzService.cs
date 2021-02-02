@@ -73,7 +73,7 @@ namespace Quizz_Models.Services
 
                     q.QuizzQuestion.Add (qq);                       // Ajouter a la liste des liaisons
 
-                    valRet = quizzCreation;                                 // Retourner le quizz créer
+                    valRet = quizzCreation;                         // Retourner le quizz créer
                 }
             }
             catch ( Exception e )
@@ -82,6 +82,19 @@ namespace Quizz_Models.Services
             }
             return valRet;
         }
+
+        public void SupprimerQuizz ( int prmIDQuizz )
+        {
+            try
+            {
+                repoQuizz.SupprimerQuizz (repoQuizz.GetQuizzByID (prmIDQuizz));
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine (e.Message);
+            }
+        }
+
         /// <summary>
         /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
         /// </summary>

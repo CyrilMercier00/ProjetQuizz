@@ -8,7 +8,7 @@ namespace Quizz_Models.Services
 {
     public class ComplexiteService
     {
-        private readonly ComplexiteRepository _complexiteRepository;
+        private readonly ComplexiteRepository _complexiteRepository = new ComplexiteRepository();
 
         public void AjouterTauxComplexite ( Taux_complexiteDTO taux_Complexite )
         {
