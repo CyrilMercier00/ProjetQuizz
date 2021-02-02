@@ -10,16 +10,29 @@ namespace Quizz_Web.Controllers
     public class ControllerQuizz : Controller
     {
         readonly QuizzService servQuizz = new QuizzService ();
+        ActionResult<QuizzDTO> valRetour;
 
         [HttpPost]
-        public void Post ( [FromBody] QuizzDTO prmQuizzDTO )
+        public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
         {
-            servQuizz.GenererQuizz (
-                prmQuizzDTO.NbQuestions,
-                prmQuizzDTO.Complexite,
-                prmQuizzDTO.Theme,
-                TimeSpan.Parse (prmQuizzDTO.Chrono)
-                );
+            valRetour = Ok ();
+            try
+            {
+                servQuizz.GenererQuizz (
+                    prmQuizzDTO.NbQuestions,
+                    prmQuizzDTO.Complexite,
+                    prmQuizzDTO.Theme,
+                    TimeSpan.Parse (prmQuizzDTO.Chrono)
+                    );
+
+                valRetour = Ok ();
+            }
+            catch ( Exception e )
+            {
+                Console.WriteLine (e.Message);
+                valRetour = NotFound ();
+            }
+            return valRetour;
         }
     }
 }
