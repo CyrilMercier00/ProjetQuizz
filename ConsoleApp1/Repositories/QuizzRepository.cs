@@ -12,6 +12,7 @@ namespace Quizz_Models.Services
         public void InsertQuizz(Quizz prmQuizz)
         {
             bdd_entities.Quizz.Add(prmQuizz);
+            bdd_entities.SaveChanges ();
         }
 
     }
