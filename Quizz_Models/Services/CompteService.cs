@@ -57,8 +57,13 @@ namespace Quizz_Models.Services
         {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
             c.FkPermissionNavigation = new Permission();
-            repoCompte.InsertCompte(c);
 
+            if (!MailUtils.VerifyMail(c.Mail))
+            {
+                return 0;
+            }
+
+            repoCompte.InsertCompte(c);
             return repoCompte.Sauvegarder();
         }
 

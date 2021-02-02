@@ -3,7 +3,7 @@ using System.Net.Mail;
 
 namespace Quizz_Models
 {
-    class MailUtisl
+    class MailUtils
     {
         /// <summary>
         /// Méthode qui vérifie si un mail est valide.
