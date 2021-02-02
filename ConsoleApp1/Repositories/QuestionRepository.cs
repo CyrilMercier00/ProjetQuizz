@@ -15,7 +15,7 @@ namespace Quizz_Models.Services
         public Question GetQuestionByID ( int prmID )
         {
             return bdd_entities.Question.Find (prmID);
-            
+
         }
 
         public void InsertNouvelleQuestion ( Question prmQuestion )
@@ -29,18 +29,18 @@ namespace Quizz_Models.Services
         /// <param name="prmNBQuestions">Nombre de question a generer pour ces parametres</param>
         /// <param name="prmTheme">Nom du theme des questions (Sensible a la casse)</param>
         /// <param name="prmComplex">Nom du niveau de complexité. (Sensible a la casse)</param>
-        public void GenererQuestions ( List<Question> prmListQuestion, int prmNBQuestions, String prmTheme, String prmComplex )
+        public void GenererQuestions ( List<Question> prmListQuestion, int prmNBQuestions, Theme prmTheme, Enum prmEnumComplex )
         {
-            int idTheme = repoTheme.GetIDThemeByNom (prmTheme);
+            int idTheme = repoTheme.GetIDThemeByNom (prmEnumComplex.ToString ());
 
             // Recuperer le nombre de questions total pour ce theme & niv de complexite
             int nbQuestTotal = bdd_entities.Question
-                .Where (x => x.FkTheme == idTheme && x.NvComplexite == prmComplex)
+                .Where (x => x.FkTheme == idTheme && x.NvComplexite == prmEnumComplex.ToString ())
                 .Count ();
 
             // Recuper un certain nombre de question pour ce theme & niv de complexite
             var data = bdd_entities.Question
-                .Where (x => x.FkTheme == idTheme && x.NvComplexite == prmComplex)
+                .Where (x => x.FkTheme == idTheme && x.NvComplexite == prmEnumComplex.ToString ())
                 .OrderBy (x => Guid.NewGuid ())
                 .Take (prmNBQuestions);
 

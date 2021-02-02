@@ -23,5 +23,16 @@ namespace Quizz_Models.Services
             .Where(x => x.NomTheme == prmNomComplexite)
             .Single().PkTheme;
         }
+        /// <summary>
+        /// Retourne l'objet Teme en fonction du nom du theme passé
+        /// </summary>
+        /// <param name="prmNiveauComplex"></param>
+        /// <returns></returns>
+        public Theme GetThemeByNom ( String prmNiveauComplex )
+        {
+            return bdd_entities.Theme
+            .Where (x => x.NomTheme.Equals (prmNiveauComplex))
+            .Single ();
+        }
     }
 }

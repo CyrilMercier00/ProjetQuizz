@@ -6,7 +6,7 @@ namespace Quizz_Models
 {
     class Globales
     {
-        enum EnumNiveauxComplexiteDispo
+        public enum EnumNiveauxComplexiteDispo
         {
             Junior,
             Confirme,
