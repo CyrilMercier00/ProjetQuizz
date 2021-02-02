@@ -1,4 +1,7 @@
-﻿namespace Quizz_Models.bdd_quizz
+﻿using System;
+using System.Collections.Generic;
+
+namespace Quizz_Models.bdd_quizz
 {
     public partial class ReponseCandidat
     {

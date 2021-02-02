@@ -25,5 +25,13 @@ namespace Quizz_Models
 
             return true;
         }
+
+        public static bool VerifyMotDePasse(string mdp)
+        {
+            if (mdp == null) return false;
+            if (mdp.Length <= 0 || mdp.Length > 20) return false;
+
+            return true;
+        }
     }
 }

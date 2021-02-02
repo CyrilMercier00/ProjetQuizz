@@ -55,13 +55,13 @@ namespace Quizz_Models.Services
         /// <returns>Nombre de lignes insérées.</returns>
         public int AjoutCompte(CompteDTO CompteDTO)
         {
-            Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
-            c.FkPermissionNavigation = new Permission();
-
-            if (!MailUtils.VerifyMail(c.Mail))
+            if (!MailUtils.VerifyMail(CompteDTO.Mail) || !MailUtils.VerifyMotDePasse(CompteDTO.MDP))
             {
                 return 0;
             }
+
+            Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
+            c.FkPermissionNavigation = new Permission();
 
             repoCompte.InsertCompte(c);
             return repoCompte.Sauvegarder();
@@ -124,7 +124,8 @@ namespace Quizz_Models.Services
             {
                 Nom = CompteDTO.Nom,
                 Prenom = CompteDTO.Prenom,
-                Mail = CompteDTO.Mail
+                Mail = CompteDTO.Mail,
+                MotDePasse = CompteDTO.MDP
             };
 
             return c;
