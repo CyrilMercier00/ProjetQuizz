@@ -22,41 +22,23 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="CompteDTO">DTO pour la création d'un Compte</param>
         /// <param name="PermissionDTO">DTO pour la création d'une Permission</param>
-        public void AjoutCompte(CompteDTO CompteDTO, PermissionDTO PermissionDTO)
-        {
-            Permission p = TransformPermissionDTOToPermissionEntity(PermissionDTO);
-            int PermissionID;
-
-            try
-            {
-                PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
-            }
-            catch (ArgumentNullException)
-            {
-                repoPermission.InsertPermission(p);
-                PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
-            }
-
-            AjoutCompte(CompteDTO, PermissionID);
-        }
-
-        /// <summary>
-        /// Méthode qui crée un Compte et lui assigne une Permission.
-        /// </summary>
-        /// <param name="CompteDTO">DTO pour la création d'un Compte.</param>
-        /// <param name="PermissionID">ID de la Permission voulue.</param>
-        public void AjoutCompte(CompteDTO CompteDTO, int PermissionID)
-        {
-            Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
-
-            if(PermissionID >= ADMIN_PERMISSION_ID && PermissionID <= CANDIDAT_PERMISSION_ID)
-            {
-                c.Role = PermissionID;
-                c.FkPermission = PermissionID;
-            }
-
-            repoCompte.InsertCompte(c);
-        }
+        //public void AjoutCompte(CompteDTO CompteDTO, PermissionDTO PermissionDTO)
+        //{
+        //    Permission p = TransformPermissionDTOToPermissionEntity(PermissionDTO);
+        //    int PermissionID;
+        //
+        //    try
+        //    {
+        //        PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
+        //    }
+        //    catch (ArgumentNullException)
+        //    {
+        //        repoPermission.InsertPermission(p);
+        //        PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
+        //    }
+        //
+        //    AjoutCompte(CompteDTO, PermissionID);
+        //}
 
         /// <summary>
         /// Ajout d'un compte sans Permission. Destinée uniquement pour les tests.
@@ -71,7 +53,12 @@ namespace Quizz_Models.Services
             }
 
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
-            c.FkPermissionNavigation = new Permission();
+
+            if (CompteDTO.Role >= ADMIN_PERMISSION_ID && CompteDTO.Role <= CANDIDAT_PERMISSION_ID)
+            {
+                c.Role = CompteDTO.Role;
+                c.FkPermission = CompteDTO.Role;
+            }
 
             repoCompte.InsertCompte(c);
             return repoCompte.Sauvegarder();
@@ -170,7 +157,9 @@ namespace Quizz_Models.Services
             {
                 Nom = cpt.Nom,
                 Prenom = cpt.Prenom,
-                Mail = cpt.Mail
+                Mail = cpt.Mail,
+                MDP = cpt.MotDePasse,
+                Role = cpt.Role.GetValueOrDefault()
             };
 
             return CompteDTO;
