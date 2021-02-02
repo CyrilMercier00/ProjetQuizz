@@ -211,7 +211,14 @@ ENGINE = InnoDB;
 
 ALTER TABLE compte ADD COLUMN mot_de_passe varchar(20) NOT NULL;
 
+insert into permission(generer_quizz, ajouter_quest, modifier_quest, suppr_question)
+	values (true, true, true, true), (true, false, false, false), (false, false, false, false);
 
+SET FOREIGN_KEY_CHECKS = 0;
+
+ALTER TABLE theme modify pk_theme int AUTO_INCREMENT;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
