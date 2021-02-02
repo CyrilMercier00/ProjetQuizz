@@ -1,0 +1,2 @@
+dotnet ef dbcontext scaffold "server=localhost;port=3306;user=root;password=root;database=bdd_quizz" MySql.Data.EntityFrameworkCore -o ./bdd_quizz/ -f --no-build
+dotnet ef build
