@@ -30,9 +30,22 @@ namespace Quizz_Models.Services
             bdd_entities.Compte.Remove(CompteEntity);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public int Sauvegarder()
         {
-            return bdd_entities.SaveChanges();
+            int lignes;
+            try
+            {
+                lignes = bdd_entities.SaveChanges();
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                lignes = -1;
+            }
+            return lignes;
         }
     }
 }

@@ -56,8 +56,16 @@ namespace Quizz_Web.Controllers
         {
             int lignes = this.compteService.AjoutCompte(compteDTO);
 
+            if(lignes == -1)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
+            }
+            else if(lignes == 0)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+            }
             // Si aucune permission n'a été ajouté
-            if(lignes == 1)
+            else if(lignes == 1)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
             }
@@ -65,9 +73,6 @@ namespace Quizz_Web.Controllers
             else if(lignes == 2)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
-            } else
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotAcceptable;
             }
         }
     }

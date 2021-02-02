@@ -61,7 +61,18 @@ namespace Quizz_Models.Services
             }
 
             repoCompte.InsertCompte(c);
-            return repoCompte.Sauvegarder();
+
+            int lignes;
+            try
+            {
+                lignes = repoCompte.Sauvegarder();
+            } 
+            catch(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException)
+            {
+                lignes = -1;
+            }
+
+            return lignes;
         }
 
 
