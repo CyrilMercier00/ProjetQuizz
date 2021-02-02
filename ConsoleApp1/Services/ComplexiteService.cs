@@ -18,9 +18,9 @@ namespace Quizz_Models.Services
 
         public void ModifierVentilation () { }
 
-        public List<Taux_complexiteDTO> GetComplexites ()
+        public List<Taux_complexiteDTO> GetListComplexites ()
         {
-            List<bdd_quizz.TauxComplexite> tauxComplexites = _complexiteRepository.GetAllComplexite ();
+            List<TauxComplexite> tauxComplexites = _complexiteRepository.GetAllComplexite ();
             List<Taux_complexiteDTO> ttlestauxDTO = new List<Taux_complexiteDTO> ();
             tauxComplexites.ForEach (taux => { ttlestauxDTO.Add (TransferModelToDto (taux)); });
             return ttlestauxDTO;
@@ -28,12 +28,18 @@ namespace Quizz_Models.Services
 
         private Taux_complexiteDTO TransferModelToDto ( TauxComplexite taux )
         {
-            return new Taux_complexiteDTO (taux.Niveau, taux.QuestionJunior, taux.QuestConfirme, taux.QuestionExperimente);
-        }
+            return new Taux_complexiteDTO ()
+            {
+                niveau = taux.Niveau,
+                question_junior = taux.QuestionJunior,
+                quest_confirme = taux.QuestConfirme,
+                question_experimente = taux.QuestionExperimente
+            };
 
-        public Taux_complexiteDTO GetComplexite ( string nomcomplex )
+        }
+        public Taux_complexiteDTO GetComplexiteByNom ( string nomcomplex )
         {
-            bdd_quizz.TauxComplexite tauxComplexite = _complexiteRepository.GetComplexiteByNom (nomcomplex);
+            TauxComplexite tauxComplexite = _complexiteRepository.GetTauxComplexiteByNom (nomcomplex);
             return TransferModelToDto (tauxComplexite);
         }
 

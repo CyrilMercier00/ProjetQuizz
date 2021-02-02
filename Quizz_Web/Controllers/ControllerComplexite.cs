@@ -25,14 +25,14 @@ namespace Quizz_Web.Controllers
         [HttpGet]
         public List<Taux_complexiteDTO> Get()
         {
-            return complexiteService.GetComplexites();
+            return complexiteService.GetListComplexites();
         }
 
         // GET api/<ControllerComplexite>/5
         [HttpGet("{id}")]
         public Taux_complexiteDTO Get(string nomcomplex)
         {
-            return complexiteService.GetComplexite(nomcomplex);
+            return complexiteService.GetComplexiteByNom(nomcomplex);
         }
 
         // POST api/<ControllerComplexite>

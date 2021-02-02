@@ -31,14 +31,8 @@ namespace Quizz_Models.Services
                 List<Question> listQuestionCreation = new List<Question> ();    // La liste des questions choisies
                 TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
                 Theme ThemeChoisi = repoTheme.GetThemeByNom (prmTheme);
-                // Ajouter quizz dans la base
-                repoQuizz.InsertQuizz (quizzCreation);
-                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
-                    $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
-                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer les valeures pour les taux de complexité
-
-                // Generer les questions
+                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer l'objet taux de compelex pour avoir les taux
 
                 // Gen questions junior
                 repoQuest.GenererQuestions (
@@ -64,7 +58,10 @@ namespace Quizz_Models.Services
                     Globales.EnumNiveauxComplexiteDispo.Experimenté
                 );
 
-                Console.WriteLine ($"{nbQuest} ont été générées pour la difficultée {listTauxComplexite[i]}");
+                // Ajouter quizz dans la base
+                repoQuizz.InsertQuizz (quizzCreation);
+                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
+                    $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
                 foreach ( Question q in listQuestionCreation )      // Pour chaques questions
                 {
@@ -75,10 +72,9 @@ namespace Quizz_Models.Services
                     };
 
                     q.QuizzQuestion.Add (qq);                       // Ajouter a la liste des liaisons
+
+                    valRet = quizzCreation;                                 // Retourner le quizz créer
                 }
-
-
-                valRet = quizzCreation;                                 // Retourner le quizz créer
             }
             catch ( Exception e )
             {

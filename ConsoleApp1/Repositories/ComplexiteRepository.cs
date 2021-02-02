@@ -33,7 +33,7 @@ namespace Quizz_Models.Services
         /// Retourne une liste avec tout les niveau de complexité trouvés
         /// </summary>
         /// <returns></returns>
-        public List<TauxComplexite> GetAllNomComplexite ()
+        public List<TauxComplexite> GetAllComplexite ()
         {
             return bdd_entities.TauxComplexite
                 .ToList ();
