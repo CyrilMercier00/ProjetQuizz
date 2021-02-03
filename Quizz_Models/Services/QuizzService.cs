@@ -37,15 +37,15 @@ namespace Quizz_Models.Services
                 // Gen questions junior
                 repoQuest.GenererQuestions (
                     listQuestionCreation,
-                    CalculerNombreQuestionJunior (prmNBQuestion, TauxComplexite),
+                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.junior),
                     ThemeChoisi,
                     Globales.EnumNiveauxComplexiteDispo.junior
                 );
 
                 // Gen questions confirmé
                 repoQuest.GenererQuestions (
-                     listQuestionCreation,
-                    CalculerNombreQuestionConfirme (prmNBQuestion, TauxComplexite),
+                    listQuestionCreation,
+                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.confirme),
                     ThemeChoisi,
                     Globales.EnumNiveauxComplexiteDispo.confirme
                 );
@@ -53,7 +53,7 @@ namespace Quizz_Models.Services
                 // Gen questions experimenté
                 repoQuest.GenererQuestions (
                     listQuestionCreation,
-                    CalculerNombreQuestionExperimente (prmNBQuestion, TauxComplexite),
+                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.experimenté),
                     ThemeChoisi,
                     Globales.EnumNiveauxComplexiteDispo.experimenté
                 );
@@ -104,9 +104,9 @@ namespace Quizz_Models.Services
 
         public int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
         {
-            int taux = repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ());
-
-            return (int) Math.Round (prmNBQuestionTotal / float.Parse ("0." + prmTaux.ToString ()));
+            //int taux = repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ());
+            return 0;
+            //return (int) Math.Round (prmNBQuestionTotal / float.Parse ("0." + prmTaux.ToString ()));
         }
 
     }
