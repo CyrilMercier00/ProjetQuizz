@@ -107,6 +107,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `nv_complexite` VARCHAR(45) NULL,
   `enonce` LONGTEXT NULL,
   `a_repondu` TINYINT NULL,
+  `rep_libre` TINYINT NOT NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
   PRIMARY KEY (`pk_question`),
