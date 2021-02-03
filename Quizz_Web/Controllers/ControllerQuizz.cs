@@ -13,14 +13,13 @@ namespace Quizz_Web.Controllers
         ActionResult<QuizzDTO> valRetour;
 
         [HttpPost]
-        [Route("{Urlcode}")]
-      
+           
         public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
         {
             valRetour = Ok ();
             try
             {
-                servQuizz.GenererQuizz (
+                    servQuizz.GenererQuizz (
                     prmQuizzDTO.NbQuestions,
                     prmQuizzDTO.Complexite,
                     prmQuizzDTO.Theme,

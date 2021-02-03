@@ -8,16 +8,16 @@ using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-
+using System.Web;
 
 namespace Quizz_Models.Utils
 {
     class PdfUtils
-    {//C:\Users\IB\Desktop\Test
-        //"C:\\Test_Competence.pdf"
-        public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
+    {
+        // public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
+        public static PdfWriter writer = new PdfWriter("C:\\*\\*\\*\\Downloads\\Test.pdf");
         public static PdfDocument pdf = new PdfDocument(writer);
-        iText.Layout.Document document = new iText.Layout.Document(pdf);
+        public static iText.Layout.Document document = new iText.Layout.Document(pdf);
    
 
 
@@ -28,7 +28,7 @@ namespace Quizz_Models.Utils
 
         }
 
-        public void ContentPdf()
+        public static void ContentPdf()
         {
             PdfHeader();
             PdfSubHeader();
@@ -38,7 +38,7 @@ namespace Quizz_Models.Utils
             document.Close();
 
         }
-        public void PdfLogo()
+        public static void PdfLogo()
         {
             // Add image
             Image img = new Image(ImageDataFactory
@@ -48,7 +48,7 @@ namespace Quizz_Models.Utils
         
 
         }
-        public void PdfHeader()
+        public static void PdfHeader()
         {
             Paragraph recruter = new Paragraph(" Recruteur : ")
                 .SetTextAlignment(TextAlignment.LEFT)
@@ -68,7 +68,7 @@ namespace Quizz_Models.Utils
           
 
         }
-        public void PdfBody() 
+        public static void PdfBody() 
         {
             Paragraph question = new Paragraph(" Question ")
                .SetTextAlignment(TextAlignment.LEFT)
@@ -94,7 +94,7 @@ namespace Quizz_Models.Utils
             document.Add(ls);
             
         }
-        public void PdfSubHeader()
+        public static void PdfSubHeader()
         {
 
             Paragraph subheader = new Paragraph(" Technologie : C# ")
@@ -107,7 +107,7 @@ namespace Quizz_Models.Utils
             document.Add(ls);
 
         }
-        public void PdfPageNumber() 
+        public static void PdfPageNumber() 
         {
             // Page numbers
             int n = pdf.GetNumberOfPages();
@@ -120,7 +120,7 @@ namespace Quizz_Models.Utils
             }
         }
 
-        public void ScoreTable ()
+        public static void ScoreTable ()
         {
             // Table
             Table scoreTable = new Table(2, false);
