@@ -22,65 +22,62 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public Quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
-            Quizz valRet = null;
             try
             {
                 Quizz quizzCreation = new Quizz ();                             // Le nouveau quizz
                 List<Question> listQuestionCreation = new List<Question> ();    // La liste des questions choisies
-                TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
-                Theme ThemeChoisi = repoTheme.GetThemeByNom (prmTheme);
 
-                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer l'objet taux de compelex pour avoir les taux
-
-                // Gen questions junior
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.junior),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.junior
-                );
-
-                // Gen questions confirmé
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.confirme),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.confirme
-                );
-
-                // Gen questions experimenté
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.experimenté),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.experimenté
-                );
+                // Ajouter des questions dans la liste des questions
+                GenererQuestions (listQuestionCreation, prmNBQuestion, repoTheme.GetThemeByNom (prmTheme));
 
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz (quizzCreation);
-                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
-                    $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
+                // Liaisons quiestion -> quizz
                 foreach ( Question q in listQuestionCreation )      // Pour chaques questions
                 {
-                    QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
+                    QuizzQuestion qq = new QuizzQuestion            // Nouvel objet liaison
                     {
                         FkQuestion = q.PkQuestion,                  // PK de cette question
                         FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
                     };
 
-                    q.QuizzQuestion.Add (qq);                       // Ajouter a la liste des liaisons
-
-                    valRet = quizzCreation;                         // Retourner le quizz créer
+                    q.QuizzQuestion.Add (qq);                       // Ajouter a la liste d'objet de liaisons
                 }
             }
             catch ( Exception e )
             {
                 Console.WriteLine (e.Message);
             }
-            return valRet;
+        }
+
+        private void GenererQuestions ( List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions )
+        {
+            // Gen questions junior
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.junior),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.junior
+            );
+
+            // Gen questions confirmé
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.confirme),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.confirme
+            );
+
+            // Gen questions experimenté
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.experimenté),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.experimenté
+            );
         }
 
         public void SupprimerQuizz ( int prmIDQuizz )
