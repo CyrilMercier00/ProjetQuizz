@@ -9,7 +9,8 @@ using Quizz_Models.DTO;
 
 namespace Quizz_Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/complexite")]
+
     [ApiController]
     public class ControllerComplexite : ControllerBase
     {
@@ -30,9 +31,9 @@ namespace Quizz_Web.Controllers
 
         // GET api/<ControllerComplexite>/5
         [HttpGet("{id}")]
-        public Taux_complexiteDTO Get(string nomcomplex)
+        public Taux_complexiteDTO Get(int id)
         {
-            return complexiteService.GetComplexite(nomcomplex);
+            return complexiteService.GetComplexite(id);
         }
 
         // POST api/<ControllerComplexite>

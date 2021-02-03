@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using System;
@@ -15,7 +16,7 @@ namespace Quizz_Models.Services
 
         }
 
-        internal TauxComplexite Create(TauxComplexite taux_Complexite)
+        public  TauxComplexite Create(TauxComplexite taux_Complexite)
         {
             bdd_entities.TauxComplexite.Add(taux_Complexite);
             bdd_entities.SaveChanges();
@@ -26,21 +27,20 @@ namespace Quizz_Models.Services
         {
             //return bdd_entities.TauxComplexite.Where(x => x.PkComplexite.Equals(id)).Single();
 
-            TauxComplexite ancientxcomplexite= bdd_entities.TauxComplexite.Find(id);
-            ancientxcomplexite = nouveautxcomplexite;
+            //TauxComplexite ancientxcomplexite= bdd_entities.TauxComplexite.Find(id);
+            //ancientxcomplexite = nouveautxcomplexite;
+            //TauxComplexite taux = bdd_entities.TauxComplexite.Find(id);
+            nouveautxcomplexite.PkComplexite = id;
+            bdd_entities.Entry(nouveautxcomplexite).State = EntityState.Modified;
             bdd_entities.SaveChanges();
-            //if (nouveautxcomplexite == null)
-            //{
-            //    throw new ArgumentNullException("nouveautxcomplexite");
-            //}
-            //int index = nouveautxcomplexite.PkComplexite;
-            //if (index == -1)
-            //{
-            //    return false;
-            //}
-            //bdd_entities.TauxComplexite.Remove(index);
-            //bdd_entities.TauxComplexite.Add(nouveautxcomplexite);
-            //return true;
+            //bdd_entities.
+            //bdd_entities.SaveChanges();
+           
+        }
+
+        internal TauxComplexite Find(int id)
+        {
+            return bdd_entities.TauxComplexite.Find(id);
         }
 
 
