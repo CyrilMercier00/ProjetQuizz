@@ -26,7 +26,7 @@ namespace Quizz_Web.Controllers
         [HttpGet]
         public List<Taux_complexiteDTO> Get()
         {
-            return complexiteService.GetListComplexites();
+            return complexiteService.GetComplexites();
         }
 
         // GET api/<ControllerComplexite>/5

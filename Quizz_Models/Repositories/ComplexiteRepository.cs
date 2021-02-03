@@ -87,11 +87,5 @@ namespace Quizz_Models.Services
             return bdd_entities.TauxComplexite
                 .ToList ();
         }
-
-        public List<TauxComplexite> GetAllComplexite()
-        {
-            return bdd_entities.TauxComplexite.ToList();
-
-        }
     }
 }
