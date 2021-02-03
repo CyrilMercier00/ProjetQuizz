@@ -44,5 +44,9 @@ namespace Quizz_Models.Services
             return TransferModelToDto(this._complexiteRepository.Find(id));
         }
 
+        public void Delete(int id)
+        {
+            this._complexiteRepository.Delete(id);
+        }
     }
 }

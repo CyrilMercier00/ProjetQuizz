@@ -54,6 +54,7 @@ namespace Quizz_Web.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            complexiteService.Delete(id);
         }
     }
 }

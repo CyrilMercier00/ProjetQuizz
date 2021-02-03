@@ -43,6 +43,13 @@ namespace Quizz_Models.Services
             return bdd_entities.TauxComplexite.Find(id);
         }
 
+        internal void Delete(int id)
+        {
+            TauxComplexite Taux= bdd_entities.TauxComplexite.Find(id);
+            bdd_entities.TauxComplexite.Remove(Taux);
+            bdd_entities.SaveChanges();
+        }
+
 
         /// <summary>
         /// La methode un objet de type TauxComplexite la ou le nom correspond au champ niveau dans la base
