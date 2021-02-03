@@ -1,4 +1,7 @@
 ﻿using Quizz_Models.bdd_quizz;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Quizz_Models.Services
@@ -8,6 +11,11 @@ namespace Quizz_Models.Services
         private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
         public CompteRepository() { }
 
+        public List<Compte> GetAllComptes()
+        {
+            return bdd_entities.Compte.ToList();
+        }
+
         public Compte GetCompteByID(int prmID)
         {
             return bdd_entities.Compte.Find(prmID);
@@ -16,13 +24,35 @@ namespace Quizz_Models.Services
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
-            bdd_entities.SaveChanges();
+        }
+
+        public void ModifyCompte(Compte compte)
+        {
+            bdd_entities.Entry(compte).State = EntityState.Modified;
         }
 
         public void DeleteCompte(int CompteID)
         {
             Compte CompteEntity = bdd_entities.Compte.Find(CompteID);
             bdd_entities.Compte.Remove(CompteEntity);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int Sauvegarder()
+        {
+            int lignes;
+            try
+            {
+                lignes = bdd_entities.SaveChanges();
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException)
+            {
+                lignes = -1;
+            }
+            return lignes;
         }
     }
 }
