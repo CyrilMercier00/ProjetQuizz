@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
 
-namespace Quizz_Models
+namespace Quizz_Models.Utils
 {
     class MailUtisl
     {

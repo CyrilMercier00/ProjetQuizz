@@ -1,4 +1,5 @@
 ﻿using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Quizz_Models.Services
 
         public QuizzService () { }
 
+       
+
         /// <summary>
         /// La methode va generer un quizz avec un nombre de question donné et associé au theme.
         /// </summary>
@@ -21,8 +24,9 @@ namespace Quizz_Models.Services
         /// <param name="prmComplex">Nom du niveau de complexité du quizz. Utilisé pour savoir combiens de questions doivent etre generer pour chaques diffucltés</param>
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
+        /// <param name="prmCodeUrl">Un code unique pour l'url</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public Quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public Quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono, string prmCodeUrl )
         {
             Quizz valRet = null;
             try
@@ -32,7 +36,10 @@ namespace Quizz_Models.Services
                 TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
                 Theme ThemeChoisi = repoTheme.GetThemeByNom (prmTheme);
 
-                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer l'objet taux de compelex pour avoir les taux
+                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex); // Recuperer l'objet taux de compelex pour avoir les taux
+                //Gen Code Url Unique
+                prmCodeUrl = Utils.GenerateUrl.GenerateCodeUrl();
+             
 
                 // Gen questions junior
                 repoQuest.GenererQuestions (
@@ -94,6 +101,11 @@ namespace Quizz_Models.Services
                 Console.WriteLine (e.Message);
             }
         }
+        //public QuizzDTO GetQuizzbyId(int prmIDQuizz)
+        //{
+        //    repoQuizz.AfficherQuizz(repoQuizz.GetQuizzByID(prmIDQuizz));
+
+        //}
 
         /// <summary>
         /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini

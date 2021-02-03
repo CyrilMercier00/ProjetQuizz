@@ -13,6 +13,8 @@ namespace Quizz_Web.Controllers
         ActionResult<QuizzDTO> valRetour;
 
         [HttpPost]
+        [Route("{Urlcode}")]
+      
         public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
         {
             valRetour = Ok ();
@@ -22,7 +24,8 @@ namespace Quizz_Web.Controllers
                     prmQuizzDTO.NbQuestions,
                     prmQuizzDTO.Complexite,
                     prmQuizzDTO.Theme,
-                    TimeSpan.Parse (prmQuizzDTO.Chrono)
+                    TimeSpan.Parse (prmQuizzDTO.Chrono),
+                    prmQuizzDTO.Urlcode
                     );
             }
             catch ( Exception e )
@@ -33,7 +36,13 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
+        //[HttpGet]
+        //[Route("{Urlcode}")]
+        //public QuizzDTO GetQuizzDTO([FromBody] int prmIDQuizz)
+        //{
 
+        //    // return servQuizz.GetQuizzbyId(prmIDQuizz);
+        //}
 
         [HttpDelete]
         public ActionResult<QuizzDTO> Delete ( [FromBody] int prmIDQuizz )
