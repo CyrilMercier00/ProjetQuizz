@@ -28,6 +28,18 @@ namespace Quizz_Models.Services
                     .Single ();
         }
 
+        /// <summary>
+        /// La methode un objet de type TauxComplexite la ou le nom correspond au champ niveau dans la base
+        /// </summary>
+        /// <param name="prmNomComplexite"></param>
+        /// <returns></returns>
+        public TauxComplexite GetValTauxComplexiteByNom ( String prmNomComplexite )
+        {
+
+            return bdd_entities.TauxComplexite
+                    .Where (x => x.Niveau == prmNomComplexite)
+                    .Single ();
+        }
 
         /// <summary>
         /// Retourne une liste avec tout les niveau de complexité trouvés

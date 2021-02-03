@@ -8,9 +8,9 @@ namespace Quizz_Models
     {
         public enum EnumNiveauxComplexiteDispo
         {
-            Junior,
-            Confirme,
-            Experimenté
+            junior,
+            confirme,
+            experimente
         }
 
 

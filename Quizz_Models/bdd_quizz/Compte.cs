@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -14,6 +15,7 @@ namespace Quizz_Models.bdd_quizz
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Mail { get; set; }
+        public string MotDePasse { get; set; }
         public int? Role { get; set; }
         public int FkPermission { get; set; }
 

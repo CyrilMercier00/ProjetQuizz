@@ -22,7 +22,9 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
+  `modifier_compte` TINYINT NULL,
   `suppr_question` TINYINT NULL,
+  `supprimer_compte` TINYINT NULL,
   PRIMARY KEY (`pk_permission`))
 ENGINE = InnoDB;
 
@@ -35,12 +37,12 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
-  `mot_de_passe` VARCHAR(45) NOT NULL;
+  `mot_de_passe` VARCHAR(45) NOT NULL,
   `role` INT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
-  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE,
-  INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) VISIBLE,
+  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
+  INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
   CONSTRAINT `fk_compte_Permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
@@ -56,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`taux_complexite` (
   `pk_complexite` INT NOT NULL AUTO_INCREMENT,
   `niveau` VARCHAR(45) NULL,
   `question_junior` INT NULL,
-  `quest_confirme` INT NULL,
+  `question_confirme` INT NULL,
   `question_experimente` INT NULL,
   PRIMARY KEY (`pk_complexite`))
 ENGINE = InnoDB;
@@ -78,11 +80,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
   `pk_quizz` INT NOT NULL AUTO_INCREMENT,
   `chrono` TIME NULL,
+  `urlcode` VARCHAR(45) NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
   PRIMARY KEY (`pk_quizz`),
-  INDEX `fk_quizz_taux complexite1_idx` (`fk_complexite` ASC) VISIBLE,
-  INDEX `fk_quizz_theme1_idx` (`fk_theme` ASC) VISIBLE,
+  INDEX `fk_quizz_taux complexite1_idx` (`fk_complexite` ASC)  ,
+  INDEX `fk_quizz_theme1_idx` (`fk_theme` ASC) ,
   CONSTRAINT `fk_quizz_taux complexite1`
     FOREIGN KEY (`fk_complexite`)
     REFERENCES `bdd_quizz`.`taux_complexite` (`pk_complexite`)
@@ -93,8 +96,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
     REFERENCES `bdd_quizz`.`theme` (`pk_theme`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'La table quizz est en fait un tableau de question. Elle met en lien une question (et donc ca r�ponse enregistr�e) et l\'utilisateur.';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -108,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
   PRIMARY KEY (`pk_question`),
-  INDEX `fk_question_theme1_idx` (`fk_theme` ASC) VISIBLE,
-  INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) VISIBLE,
+  INDEX `fk_question_theme1_idx` (`fk_theme` ASC)  ,
+  INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) ,
   CONSTRAINT `fk_question_theme1`
     FOREIGN KEY (`fk_theme`)
     REFERENCES `bdd_quizz`.`theme` (`pk_theme`)
@@ -133,8 +135,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
   `fk_compte` INT NOT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
-  INDEX `fk_reponse_candidat_compte1_idx` (`fk_compte` ASC) VISIBLE,
-  INDEX `fk_reponse_candidat_question1_idx` (`fk_question` ASC) VISIBLE,
+  INDEX `fk_reponse_candidat_compte1_idx` (`fk_compte` ASC) ,
+  INDEX `fk_reponse_candidat_question1_idx` (`fk_question` ASC)  ,
   CONSTRAINT `fk_reponse_candidat_compte1`
     FOREIGN KEY (`fk_compte`)
     REFERENCES `bdd_quizz`.`compte` (`pk_compte`)
@@ -157,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`proposition_reponse` (
   `est_bonne` TINYINT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
-  INDEX `fk_reponse_question1_idx` (`fk_question` ASC) VISIBLE,
+  INDEX `fk_reponse_question1_idx` (`fk_question` ASC)  ,
   CONSTRAINT `fk_reponse_question1`
     FOREIGN KEY (`fk_question`)
     REFERENCES `bdd_quizz`.`question` (`pk_question`)
@@ -173,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte_quizz` (
   `fk_compte` INT NOT NULL,
   `fk_quizz` INT NOT NULL,
   PRIMARY KEY (`fk_compte`, `fk_quizz`),
-  INDEX `fk_compte_has_quizz_quizz1_idx` (`fk_quizz` ASC) VISIBLE,
-  INDEX `fk_compte_has_quizz_compte1_idx` (`fk_compte` ASC) VISIBLE,
+  INDEX `fk_compte_has_quizz_quizz1_idx` (`fk_quizz` ASC)  ,
+  INDEX `fk_compte_has_quizz_compte1_idx` (`fk_compte` ASC)  ,
   CONSTRAINT `fk_compte_has_quizz_compte1`
     FOREIGN KEY (`fk_compte`)
     REFERENCES `bdd_quizz`.`compte` (`pk_compte`)
@@ -195,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz_question` (
   `fk_quizz` INT NOT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`fk_quizz`, `fk_question`),
-  INDEX `fk_quizz_has_question_question1_idx` (`fk_question` ASC) VISIBLE,
-  INDEX `fk_quizz_has_question_quizz1_idx` (`fk_quizz` ASC) VISIBLE,
+  INDEX `fk_quizz_has_question_question1_idx` (`fk_question` ASC)  ,
+  INDEX `fk_quizz_has_question_quizz1_idx` (`fk_quizz` ASC)  ,
   CONSTRAINT `fk_quizz_has_question_quizz1`
     FOREIGN KEY (`fk_quizz`)
     REFERENCES `bdd_quizz`.`quizz` (`pk_quizz`)
@@ -214,12 +216,35 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 -- Insert permissions : 
-
 insert into permission(generer_quizz, ajouter_quest, modifier_quest, suppr_question)
 	values (true, true, true, true), (true, false, false, false), (false, false, false, false);
 
 -- Insert themes :
-    Insert into question (nom_theme) values ("C#");
+    Insert into theme (nom_theme) values 
+    ("C#"), 
+    ("SQL"),
+    ("Les animaux  de la foret");
+
+-- Insert complextite :
+Insert into taux_complexite (niveau, question_junior, question_confirme, question_experimente) values 
+("junior", 70, 20, 10),
+("confirme", 25, 50, 25),
+("experimente", 10, 40, 50);
+
+-- Insert question :
+Insert into question (nv_complexite, enonce, a_repondu, fk_theme ,fk_complexite) values 
+("junior", "qui, quoi, quand ?", 0, 1, 1),
+("junior", "oui ou non ?", 0, 1, 1),
+("junior", "petit ecureils", 0, 1, 1),
+("junior", "oulalalalla", 0, 1, 1),
+("junior", "davidlafargepokemon", 0, 1, 1),
+("junior", " :)", 0, 1, 1),
+("junior", "singe", 0, 1, 1),
+("confirme", "pitié monsieur", 0, 1, 1),
+("confirme", "maité", 0, 1, 1),
+("experimente", "des orlotans ", 0, 1, 1);
+
+select * from question;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

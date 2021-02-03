@@ -32,7 +32,7 @@ namespace Quizz_Models.Services
             {
                 niveau = taux.Niveau,
                 question_junior = taux.QuestionJunior,
-                quest_confirme = taux.QuestConfirme,
+                quest_confirme = taux.QuestionConfirme,
                 question_experimente = taux.QuestionExperimente
             };
 

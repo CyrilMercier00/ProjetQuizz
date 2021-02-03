@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -13,7 +14,7 @@ namespace Quizz_Models.bdd_quizz
         public int PkComplexite { get; set; }
         public string Niveau { get; set; }
         public int? QuestionJunior { get; set; }
-        public int? QuestConfirme { get; set; }
+        public int? QuestionConfirme { get; set; }
         public int? QuestionExperimente { get; set; }
 
         public virtual ICollection<Question> Question { get; set; }
