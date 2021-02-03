@@ -10,7 +10,7 @@ namespace Quizz_Models
         {
             junior,
             confirme,
-            experimenté
+            experimente
         }
 
 
