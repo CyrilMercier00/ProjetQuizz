@@ -2,6 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.Services
 {
@@ -51,16 +52,6 @@ namespace Quizz_Models.Services
                 return 0;
             }
 
-            AjoutCompte(CompteDTO, PermissionID);
-        }
-
-        /// <summary>
-        /// Méthode qui crée un Compte et lui assigne une Permission.
-        /// </summary>
-        /// <param name="CompteDTO">DTO pour la création d'un Compte.</param>
-        /// <param name="PermissionID">ID de la Permission voulue.</param>
-        public void AjoutCompte(CompteDTO CompteDTO, int PermissionID)
-        {
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
 
             if (CompteDTO.Role >= ADMIN_PERMISSION_ID && CompteDTO.Role <= CANDIDAT_PERMISSION_ID)
@@ -75,8 +66,8 @@ namespace Quizz_Models.Services
             try
             {
                 lignes = repoCompte.Sauvegarder();
-            } 
-            catch(Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException)
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException)
             {
                 lignes = -1;
             }
@@ -202,7 +193,7 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="comptes">Liste d'entités Compte.</param>
         /// <returns>Liste de DTO Compte correspondante.</returns>
-        private List<CompteDTO> TransferListCompteDTOToEntity(List<Compte> comptes)
+        private List<CompteDTO> TransformListCompteDTOToEntity(List<Compte> comptes)
         {
             List<CompteDTO> compteDTOs = new List<CompteDTO>();
             foreach (Compte compte in comptes)

@@ -21,7 +21,7 @@ namespace Quizz_Web.Controllers
         [HttpGet("{id}")]
         public CompteDTO Get(int id)
         {
-            CompteDTO compte =  this.compteService.GetCompte(id);
+            CompteDTO compte = this.compteService.GetCompte(id);
 
             if (compte == null)
             {
@@ -37,7 +37,7 @@ namespace Quizz_Web.Controllers
         {
             List<CompteDTO> comptes = this.compteService.GetCompte();
 
-            if(comptes == null)
+            if (comptes == null)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
                 return null;
@@ -57,21 +57,21 @@ namespace Quizz_Web.Controllers
         {
             int lignes = this.compteService.AjoutCompte(compteDTO);
 
-            if(lignes == -1)
+            if (lignes == -1)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Forbidden;
             }
-            else if(lignes == 0)
+            else if (lignes == 0)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
             }
             // Si aucune permission n'a été ajouté
-            else if(lignes == 1)
+            else if (lignes == 1)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
             }
             // Si permission ajoutée
-            else if(lignes == 2)
+            else if (lignes == 2)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
             }
@@ -80,7 +80,7 @@ namespace Quizz_Web.Controllers
         [HttpPut]
         public void Put([FromBody] ModifyCompteDTO modifyCompteDTO)
         {
-            if(modifyCompteDTO.PkCompte < 1)
+            if (modifyCompteDTO.PkCompte < 1)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
             }
