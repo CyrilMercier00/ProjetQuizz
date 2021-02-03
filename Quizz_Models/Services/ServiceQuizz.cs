@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Quizz_Models.Services
 {
-    public class QuizzService
+    public class ServiceQuizz
     {
         readonly ComplexiteRepository repoComplex = new ComplexiteRepository ();
         readonly QuestionRepository repoQuest = new QuestionRepository ();
         readonly QuizzRepository repoQuizz = new QuizzRepository ();
         readonly ThemeRepository repoTheme = new ThemeRepository ();
 
-        public QuizzService () { }
+        public ServiceQuizz () { }
 
         /// <summary>
         /// La methode va generer un quizz avec un nombre de question donné et associé au theme.
