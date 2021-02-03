@@ -64,8 +64,8 @@ namespace Quizz_Models.Services
             //                {
             //                    Console.WriteLine(e.Message);
             //                }
-            //return valRet;
-            //        }
+           return valRet;
+                  }
             /// <summary>
             /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
             /// </summary>

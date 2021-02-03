@@ -37,15 +37,16 @@ namespace Quizz_Web.Controllers
 
         // POST api/<ControllerComplexite>
         [HttpPost]
-        public void Post([FromBody] Taux_complexiteDTO noveautxcomplexitéDTO)
+        public Quizz_Models.bdd_quizz.TauxComplexite Post([FromBody] Quizz_Models.bdd_quizz.TauxComplexite noveautxcomplexite)
         {
-            complexiteService.AjouterTauxComplexite(noveautxcomplexitéDTO);
+           return  complexiteService.AjouterTauxComplexite(noveautxcomplexite);
         }
 
         // PUT api/<ControllerComplexite>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Quizz_Models.bdd_quizz.TauxComplexite noveautxcomplexite)
         {
+             complexiteService.ModifierVentilation(id, noveautxcomplexite);
         }
 
         // DELETE api/<ControllerComplexite>/5

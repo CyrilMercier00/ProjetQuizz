@@ -10,13 +10,19 @@ namespace Quizz_Models.Services
     {
         private readonly ComplexiteRepository _complexiteRepository;
 
-        public void AjouterTauxComplexite ( Taux_complexiteDTO taux_Complexite )
+        public TauxComplexite AjouterTauxComplexite ( TauxComplexite taux_Complexite )
         {
 
 
+            return this._complexiteRepository.Create(taux_Complexite);
+
         }
 
-        public void ModifierVentilation () { }
+        public TauxComplexite ModifierVentilation (int id, TauxComplexite noveautxcomplexite) 
+        {
+            noveautxcomplexite.PkComplexite = id;
+            return this._complexiteRepository.Update( id, noveautxcomplexite);
+        }
 
         public List<Taux_complexiteDTO> GetComplexites ()
         {
