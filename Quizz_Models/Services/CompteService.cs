@@ -211,5 +211,7 @@ namespace Quizz_Models.Services
             }
             return compteDTOs;
         }
+
+        // Commentaire
     }
 }
