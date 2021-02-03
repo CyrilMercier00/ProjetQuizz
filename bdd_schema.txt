@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
-  `mot_de_passe` VARCHAR(45) NOT NULL;
+  `mot_de_passe` VARCHAR(45) NOT NULL,
   `role` INT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`taux_complexite` (
   `pk_complexite` INT NOT NULL AUTO_INCREMENT,
   `niveau` VARCHAR(45) NULL,
   `question_junior` INT NULL,
-  `quest_confirme` INT NULL,
+  `question_confirme` INT NULL,
   `question_experimente` INT NULL,
   PRIMARY KEY (`pk_complexite`))
 ENGINE = InnoDB;
@@ -93,8 +93,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
     REFERENCES `bdd_quizz`.`theme` (`pk_theme`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-COMMENT = 'La table quizz est en fait un tableau de question. Elle met en lien une question (et donc ca r�ponse enregistr�e) et l\'utilisateur.';
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -214,12 +213,35 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 -- Insert permissions : 
-
 insert into permission(generer_quizz, ajouter_quest, modifier_quest, suppr_question)
 	values (true, true, true, true), (true, false, false, false), (false, false, false, false);
 
 -- Insert themes :
-    Insert into question (nom_theme) values ("C#");
+    Insert into theme (nom_theme) values 
+    ("C#"), 
+    ("SQL"),
+    ("Les animaux  de la foret");
+
+-- Insert complextite :
+Insert into taux_complexite (niveau, question_junior, question_confirme, question_experimente) values 
+("junior", 70, 20, 10),
+("confirme", 25, 50, 25),
+("experimente", 10, 40, 50);
+
+-- Insert question :
+Insert into question (nv_complexite, enonce, a_repondu, fk_theme ,fk_complexite) values 
+("junior", "qui, quoi, quand ?", 0, 1, 1),
+("junior", "oui ou non ?", 0, 1, 1),
+("junior", "petit ecureils", 0, 1, 1),
+("junior", "oulalalalla", 0, 1, 1),
+("junior", "davidlafargepokemon", 0, 1, 1),
+("junior", " :)", 0, 1, 1),
+("junior", "singe", 0, 1, 1),
+("confirme", "pitié monsieur", 0, 1, 1),
+("confirme", "maité", 0, 1, 1),
+("experimente", "des orlotans ", 0, 1, 1);
+
+select * from question;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
