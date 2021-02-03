@@ -41,8 +41,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `role` INT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
-  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC) VISIBLE,
-  INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) VISIBLE,
+  UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
+  INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
   CONSTRAINT `fk_compte_Permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
@@ -80,11 +80,12 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
   `pk_quizz` INT NOT NULL AUTO_INCREMENT,
   `chrono` TIME NULL,
+  `urlcode` VARCHAR(45) NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
   PRIMARY KEY (`pk_quizz`),
-  INDEX `fk_quizz_taux complexite1_idx` (`fk_complexite` ASC) VISIBLE,
-  INDEX `fk_quizz_theme1_idx` (`fk_theme` ASC) VISIBLE,
+  INDEX `fk_quizz_taux complexite1_idx` (`fk_complexite` ASC)  ,
+  INDEX `fk_quizz_theme1_idx` (`fk_theme` ASC) ,
   CONSTRAINT `fk_quizz_taux complexite1`
     FOREIGN KEY (`fk_complexite`)
     REFERENCES `bdd_quizz`.`taux_complexite` (`pk_complexite`)
@@ -109,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
   PRIMARY KEY (`pk_question`),
-  INDEX `fk_question_theme1_idx` (`fk_theme` ASC) VISIBLE,
-  INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) VISIBLE,
+  INDEX `fk_question_theme1_idx` (`fk_theme` ASC)  ,
+  INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) ,
   CONSTRAINT `fk_question_theme1`
     FOREIGN KEY (`fk_theme`)
     REFERENCES `bdd_quizz`.`theme` (`pk_theme`)
@@ -134,8 +135,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
   `fk_compte` INT NOT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
-  INDEX `fk_reponse_candidat_compte1_idx` (`fk_compte` ASC) VISIBLE,
-  INDEX `fk_reponse_candidat_question1_idx` (`fk_question` ASC) VISIBLE,
+  INDEX `fk_reponse_candidat_compte1_idx` (`fk_compte` ASC) ,
+  INDEX `fk_reponse_candidat_question1_idx` (`fk_question` ASC)  ,
   CONSTRAINT `fk_reponse_candidat_compte1`
     FOREIGN KEY (`fk_compte`)
     REFERENCES `bdd_quizz`.`compte` (`pk_compte`)
@@ -158,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`proposition_reponse` (
   `est_bonne` TINYINT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
-  INDEX `fk_reponse_question1_idx` (`fk_question` ASC) VISIBLE,
+  INDEX `fk_reponse_question1_idx` (`fk_question` ASC)  ,
   CONSTRAINT `fk_reponse_question1`
     FOREIGN KEY (`fk_question`)
     REFERENCES `bdd_quizz`.`question` (`pk_question`)
@@ -174,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte_quizz` (
   `fk_compte` INT NOT NULL,
   `fk_quizz` INT NOT NULL,
   PRIMARY KEY (`fk_compte`, `fk_quizz`),
-  INDEX `fk_compte_has_quizz_quizz1_idx` (`fk_quizz` ASC) VISIBLE,
-  INDEX `fk_compte_has_quizz_compte1_idx` (`fk_compte` ASC) VISIBLE,
+  INDEX `fk_compte_has_quizz_quizz1_idx` (`fk_quizz` ASC)  ,
+  INDEX `fk_compte_has_quizz_compte1_idx` (`fk_compte` ASC)  ,
   CONSTRAINT `fk_compte_has_quizz_compte1`
     FOREIGN KEY (`fk_compte`)
     REFERENCES `bdd_quizz`.`compte` (`pk_compte`)
@@ -196,8 +197,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz_question` (
   `fk_quizz` INT NOT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`fk_quizz`, `fk_question`),
-  INDEX `fk_quizz_has_question_question1_idx` (`fk_question` ASC) VISIBLE,
-  INDEX `fk_quizz_has_question_quizz1_idx` (`fk_quizz` ASC) VISIBLE,
+  INDEX `fk_quizz_has_question_question1_idx` (`fk_question` ASC)  ,
+  INDEX `fk_quizz_has_question_quizz1_idx` (`fk_quizz` ASC)  ,
   CONSTRAINT `fk_quizz_has_question_quizz1`
     FOREIGN KEY (`fk_quizz`)
     REFERENCES `bdd_quizz`.`quizz` (`pk_quizz`)
