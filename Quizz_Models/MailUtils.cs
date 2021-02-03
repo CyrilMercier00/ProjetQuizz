@@ -36,6 +36,11 @@ namespace Quizz_Models
             return true;
         }
 
+        /// <summary>
+        /// Modification des champs du compte passé en paramètre.
+        /// </summary>
+        /// <param name="c1">Compte à modifier.</param>
+        /// <param name="c2">Valeur à affecter.</param>
         public static void ModifyCompte(ref Compte c1, ModifyCompteDTO c2)
         {
             c1.Nom = c2.Nom;

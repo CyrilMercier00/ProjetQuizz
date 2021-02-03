@@ -121,6 +121,10 @@ namespace Quizz_Models.Services
             repoCompte.Sauvegarder();
         }
 
+        /// <summary>
+        /// Modification d'un compte.
+        /// </summary>
+        /// <param name="modifyCompteDTO">Valeur de modification.</param>
         public void ModifyCompte(ModifyCompteDTO modifyCompteDTO)
         {
             Compte compteAModifier = this.repoCompte.GetCompteByID(modifyCompteDTO.PkCompte);
@@ -197,20 +201,6 @@ namespace Quizz_Models.Services
                 compteDTOs.Add(TransformCompteEntityToCompteDTO(compte));
             }
             return compteDTOs;
-        }
-
-        private Compte TransformModifyCompteDTOToEntity(ModifyCompteDTO modifyCompteDTO)
-        {
-            Compte c = new Compte
-            {
-                PkCompte = modifyCompteDTO.PkCompte,
-                Nom = modifyCompteDTO.Nom,
-                Prenom = modifyCompteDTO.Prenom,
-                Mail = modifyCompteDTO.Mail,
-                MotDePasse = modifyCompteDTO.MDP
-            };
-
-            return c;
         }
     }
 }
