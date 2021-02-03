@@ -109,7 +109,7 @@ namespace Quizz_Models.Services
         /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
         /// <returns></returns>
 
-        public int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
+        private int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
         {
 
             String complex = prmNomComplex.ToString ().ToLower ();
