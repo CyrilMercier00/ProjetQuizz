@@ -11,16 +11,16 @@ namespace Quizz_Web.Controllers
     {
         readonly CompteService compteService;
 
-        public ControllerReponseCandidat ()
-        {
-            this.compteService = new CompteService();
-        }
-
         [HttpGet("{id}")]
         public void Get(int id)
         {
             this.compteService.GetCompte(id);
         }
 
+        [HttpPost ("{id}")]
+        public void Post([FromBody] ReponseCandidatDTO prmDTO)
+        {
+
+        }
     }
 }

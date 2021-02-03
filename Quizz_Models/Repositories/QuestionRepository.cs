@@ -21,6 +21,7 @@ namespace Quizz_Models.Services
         public void InsertNouvelleQuestion ( Question prmQuestion )
         {
             bdd_entities.Question.Add (prmQuestion);
+            bdd_entities.SaveChanges ();
         }
         /// <summary>
         /// Selectionne des questions au hasard dans la base et les ajoute a liste passée.

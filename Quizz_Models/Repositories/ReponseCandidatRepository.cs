@@ -1,0 +1,18 @@
+using Quizz_Models.bdd_quizz;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Quizz_Models.Services
+{
+    public class ReponseCandidatRepository
+    {
+        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext ();
+        public ReponseCandidatRepository () { }
+
+        public void InsertReponseCandidat ( ReponseCandidat prmReponseCandidat )
+        {
+            bdd_entities.ReponseCandidat.Add (prmReponseCandidat);
+        }
+    }
+}
