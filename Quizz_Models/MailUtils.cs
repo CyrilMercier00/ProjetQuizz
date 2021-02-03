@@ -43,10 +43,22 @@ namespace Quizz_Models
         /// <param name="c2">Valeur à affecter.</param>
         public static void ModifyCompte(ref Compte c1, ModifyCompteDTO c2)
         {
-            c1.Nom = c2.Nom;
-            c1.Prenom = c2.Prenom;
-            c1.Mail = c2.Mail;
-            c1.MotDePasse = c2.MDP;
+            for(int i = 0; i < c2.GetType().GetProperties().Length; i++)
+            {
+                var propc2 = c2.GetType().GetProperties()[i];
+                var propc1 = c1.GetType().GetProperty(propc2.Name);
+                var valc2 = propc2.GetValue(c2);
+
+                if(propc1 != null && propc1.Name.CompareTo("Mail") == 0)
+                {
+                    if (!VerifyMail((string)valc2)) continue;
+                }
+
+                if(propc1 != null && valc2 != null)
+                {
+                    propc1.SetValue(c1, valc2);
+                }
+            }
         }
     }
 }

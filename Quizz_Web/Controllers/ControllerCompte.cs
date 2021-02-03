@@ -79,7 +79,14 @@ namespace Quizz_Web.Controllers
         [HttpPut]
         public void Put([FromBody] ModifyCompteDTO modifyCompteDTO)
         {
-            this.compteService.ModifyCompte(modifyCompteDTO);
+            if(modifyCompteDTO.PkCompte < 1)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+            }
+            else
+            {
+                this.compteService.ModifyCompte(modifyCompteDTO);
+            }
         }
     }
 }

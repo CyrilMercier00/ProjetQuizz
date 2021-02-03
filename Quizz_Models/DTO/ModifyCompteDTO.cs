@@ -10,6 +10,6 @@ namespace Quizz_Models.DTO
         public string Nom { get; set; }
         public string Prenom { get; set; }
         public string Mail { get; set; }
-        public string MDP { get; set; }
+        public string MotDePasse { get; set; }
     }
 }
