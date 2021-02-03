@@ -39,23 +39,23 @@ namespace Quizz_Models.Services
                     listQuestionCreation,
                     CalculerNombreQuestionJunior (prmNBQuestion, TauxComplexite),
                     ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.Junior
+                    Globales.EnumNiveauxComplexiteDispo.junior
                 );
 
                 // Gen questions confirmé
                 repoQuest.GenererQuestions (
                      listQuestionCreation,
-                    CalculerNombreQuestionJunior (prmNBQuestion, TauxComplexite),
+                    CalculerNombreQuestionConfirme (prmNBQuestion, TauxComplexite),
                     ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.Confirme
+                    Globales.EnumNiveauxComplexiteDispo.confirme
                 );
 
                 // Gen questions experimenté
                 repoQuest.GenererQuestions (
                     listQuestionCreation,
-                    CalculerNombreQuestionJunior (prmNBQuestion, TauxComplexite),
+                    CalculerNombreQuestionExperimente (prmNBQuestion, TauxComplexite),
                     ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.Experimenté
+                    Globales.EnumNiveauxComplexiteDispo.experimenté
                 );
 
                 // Ajouter quizz dans la base
@@ -101,22 +101,12 @@ namespace Quizz_Models.Services
         /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
         /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
         /// <returns></returns>
-        public int CalculerNombreQuestionJunior ( int prmNBQuestionTotal, TauxComplexite prmTauxComplexiteQuizz )
+
+        public int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
         {
-            int nbQuest;
+            int taux = repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ());
 
-            nbQuest = (int) Math.Round (prmNBQuestionTotal /                                         // Nb question / % question
-                   float.Parse ("0." + prmTauxComplexiteQuizz.QuestionJunior.ToString ()));          // Transformation du int en % (70 => 0.70)
-            return nbQuest;
-        }
-
-        public int CalculerNombreQuestion ( int prmNBQuestionTotal, int prmTaux )
-        {
-            int nbQuest;
-
-            nbQuest = (int) Math.Round (prmNBQuestionTotal /                                        // Nb question / % question
-                   float.Parse ("0." + prmTaux.ToString ()));                                       // Transformation du int en % (70 => 0.70)
-            return nbQuest;
+            return (int) Math.Round (prmNBQuestionTotal / float.Parse ("0." + prmTaux.ToString ()));
         }
 
     }
