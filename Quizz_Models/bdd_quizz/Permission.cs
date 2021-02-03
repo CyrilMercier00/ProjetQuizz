@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -13,7 +14,9 @@ namespace Quizz_Models.bdd_quizz
         public byte? GenererQuizz { get; set; }
         public byte? AjouterQuest { get; set; }
         public byte? ModifierQuest { get; set; }
+        public byte? ModifierCompte { get; set; }
         public byte? SupprQuestion { get; set; }
+        public byte? SupprimerCompte { get; set; }
 
         public virtual ICollection<Compte> Compte { get; set; }
     }

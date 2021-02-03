@@ -22,7 +22,9 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
+  `modifier_compte` TINYINT NULL,
   `suppr_question` TINYINT NULL,
+  `supprimer_compte` TINYINT NULL,
   PRIMARY KEY (`pk_permission`))
 ENGINE = InnoDB;
 

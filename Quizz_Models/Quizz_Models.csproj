@@ -16,4 +16,8 @@
     <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.19" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="bdd_quizz\" />
+  </ItemGroup>
+
 </Project>
