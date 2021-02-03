@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net.Mail;
+using Quizz_Models.DTO;
+using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Models
 {
@@ -32,6 +34,14 @@ namespace Quizz_Models
             if (mdp.Length <= 0 || mdp.Length > 20) return false;
 
             return true;
+        }
+
+        public static void ModifyCompte(ref Compte c1, ModifyCompteDTO c2)
+        {
+            c1.Nom = c2.Nom;
+            c1.Prenom = c2.Prenom;
+            c1.Mail = c2.Mail;
+            c1.MotDePasse = c2.MDP;
         }
     }
 }

@@ -75,5 +75,11 @@ namespace Quizz_Web.Controllers
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
             }
         }
+
+        [HttpPut]
+        public void Put([FromBody] ModifyCompteDTO modifyCompteDTO)
+        {
+            this.compteService.ModifyCompte(modifyCompteDTO);
+        }
     }
 }

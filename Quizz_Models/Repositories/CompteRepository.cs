@@ -1,6 +1,7 @@
 ﻿using Quizz_Models.bdd_quizz;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Quizz_Models.Services
 {
@@ -22,6 +23,11 @@ namespace Quizz_Models.Services
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
+        }
+
+        public void ModifyCompte(Compte compte)
+        {
+            bdd_entities.Entry(compte).State = EntityState.Modified;
         }
 
         public void DeleteCompte(int CompteID)

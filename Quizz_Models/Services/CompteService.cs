@@ -95,7 +95,7 @@ namespace Quizz_Models.Services
             List<Compte> comptes = repoCompte.GetAllComptes();
 
             if (comptes.Count == 0) return null;
-            else return TransferListCompteDTOToEntity(comptes);
+            else return TransformListCompteDTOToEntity(comptes);
         }
 
         /// <summary>
@@ -119,6 +119,14 @@ namespace Quizz_Models.Services
         {
             repoCompte.DeleteCompte(CompteID);
             repoCompte.Sauvegarder();
+        }
+
+        public void ModifyCompte(ModifyCompteDTO modifyCompteDTO)
+        {
+            Compte compteAModifier = this.repoCompte.GetCompteByID(modifyCompteDTO.PkCompte);
+            this.repoCompte.ModifyCompte(compteAModifier);
+            MailUtils.ModifyCompte(ref compteAModifier, modifyCompteDTO);
+            this.repoCompte.Sauvegarder();
         }
 
         /// <summary>
@@ -181,7 +189,7 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="comptes">Liste d'entités Compte.</param>
         /// <returns>Liste de DTO Compte correspondante.</returns>
-        private List<CompteDTO> TransferListCompteDTOToEntity(List<Compte> comptes)
+        private List<CompteDTO> TransformListCompteDTOToEntity(List<Compte> comptes)
         {
             List<CompteDTO> compteDTOs = new List<CompteDTO>();
             foreach (Compte compte in comptes)
@@ -189,6 +197,20 @@ namespace Quizz_Models.Services
                 compteDTOs.Add(TransformCompteEntityToCompteDTO(compte));
             }
             return compteDTOs;
+        }
+
+        private Compte TransformModifyCompteDTOToEntity(ModifyCompteDTO modifyCompteDTO)
+        {
+            Compte c = new Compte
+            {
+                PkCompte = modifyCompteDTO.PkCompte,
+                Nom = modifyCompteDTO.Nom,
+                Prenom = modifyCompteDTO.Prenom,
+                Mail = modifyCompteDTO.Mail,
+                MotDePasse = modifyCompteDTO.MDP
+            };
+
+            return c;
         }
     }
 }
