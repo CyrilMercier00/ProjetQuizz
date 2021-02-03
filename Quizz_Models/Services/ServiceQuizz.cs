@@ -1,4 +1,5 @@
 ﻿using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,24 +23,24 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void GenererQuizz ( QuizzDTO prmDTO )
         {
             try
             {
-                Theme leTheme = repoTheme.GetThemeByNom (prmTheme);                          // Objet theme pour ce param
-                TauxComplexite leTaux = repoComplex.GetTauxComplexiteByNom (prmComplex);     // Objet taux de complexite pour ce param
-                List<Question> listQuestionCreation = new List<Question> ();                 // La liste des questions choisies
+                Theme leTheme = repoTheme.GetThemeByNom (prmDTO.Theme);                             // Objet theme pour ce param
+                TauxComplexite leTaux = repoComplex.GetTauxComplexiteByNom (prmDTO.Complexite);     // Objet taux de complexite pour ce param
+                List<Question> listQuestionCreation = new List<Question> ();                        // La liste des questions choisies
 
                 // Le nouveau quizz
                 Quizz quizzCreation = new Quizz ()
                 {
                     FkTheme = leTheme.PkTheme,
                     FkComplexite = leTaux.PkComplexite,
-                    Chrono = prmChrono
+                    Chrono = TimeSpan.Parse (prmDTO.Chrono)
                 };
 
                 // Ajouter des questions dans la liste des questions
-                GenererQuestions (listQuestionCreation, prmNBQuestion, leTheme);
+                GenererQuestions (listQuestionCreation, prmDTO.NbQuestions, leTheme);
 
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz (quizzCreation);
