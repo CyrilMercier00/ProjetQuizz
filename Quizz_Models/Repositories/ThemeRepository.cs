@@ -17,10 +17,10 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="prmNomComplexite"></param>
         /// <returns></returns>
-        public int GetIDThemeByNom(String prmNomComplexite)
+        public int GetIDThemeByNom(String prmNomTheme)
         {
             return bdd_entities.Theme
-            .Where(x => x.NomTheme == prmNomComplexite)
+            .Where(x => x.NomTheme == prmNomTheme)
             .Single().PkTheme;
         }
         /// <summary>

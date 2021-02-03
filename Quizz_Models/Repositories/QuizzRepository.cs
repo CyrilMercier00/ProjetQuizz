@@ -25,6 +25,7 @@ namespace Quizz_Models.Services
         public void SupprimerQuizz ( Quizz prmQuizz )
         {
             bdd_entities.Quizz.Remove (prmQuizz);
+            bdd_entities.SaveChanges ();
         }
     }
 }

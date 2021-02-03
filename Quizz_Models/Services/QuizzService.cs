@@ -22,65 +22,71 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public Quizz GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
         {
-            Quizz valRet = null;
             try
             {
-                Quizz quizzCreation = new Quizz ();                             // Le nouveau quizz
-                List<Question> listQuestionCreation = new List<Question> ();    // La liste des questions choisies
-                TauxComplexite TauxComplexite;                                  // Contient le TauxComplexité recuperer en fonction du nom
-                Theme ThemeChoisi = repoTheme.GetThemeByNom (prmTheme);
+                Theme leTheme = repoTheme.GetThemeByNom (prmTheme);                          // Objet theme pour ce param
+                TauxComplexite leTaux = repoComplex.GetTauxComplexiteByNom (prmComplex);     // Objet taux de complexite pour ce param
+                List<Question> listQuestionCreation = new List<Question> ();                 // La liste des questions choisies
 
-                TauxComplexite = repoComplex.GetTauxComplexiteByNom (prmComplex);                    // Recuperer l'objet taux de compelex pour avoir les taux
+                // Le nouveau quizz
+                Quizz quizzCreation = new Quizz ()
+                {
+                    FkTheme = leTheme.PkTheme,
+                    FkComplexite = leTaux.PkComplexite,
+                    Chrono = prmChrono
+                };
 
-                // Gen questions junior
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.junior),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.junior
-                );
-
-                // Gen questions confirmé
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.confirme),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.confirme
-                );
-
-                // Gen questions experimenté
-                repoQuest.GenererQuestions (
-                    listQuestionCreation,
-                    CalculerNombreQuestion (prmNBQuestion, Globales.EnumNiveauxComplexiteDispo.experimenté),
-                    ThemeChoisi,
-                    Globales.EnumNiveauxComplexiteDispo.experimenté
-                );
+                // Ajouter des questions dans la liste des questions
+                GenererQuestions (listQuestionCreation, prmNBQuestion, leTheme);
 
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz (quizzCreation);
-                Console.WriteLine ($"L'objet a été inséré avec les parametres: complexite = {quizzCreation.FkComplexiteNavigation.Niveau}" +
-                    $" et theme= {quizzCreation.FkThemeNavigation.NomTheme}");
 
+                // Liaisons question -> quizz
                 foreach ( Question q in listQuestionCreation )      // Pour chaques questions
                 {
-                    QuizzQuestion qq = new QuizzQuestion            // Nouvel liaison
+                    QuizzQuestion qq = new QuizzQuestion            // Nouvel objet liaison
                     {
-                        FkQuestion = q.PkQuestion,                  // PK de cette question
-                        FkQuizz = quizzCreation.PkQuizz             // PK du quizz généré
+                        FkQuestionNavigation = q,                   // PK de cette question
+                        FkQuizzNavigation = quizzCreation           // PK du quizz généré
                     };
 
-                    q.QuizzQuestion.Add (qq);                       // Ajouter a la liste des liaisons
-
-                    valRet = quizzCreation;                         // Retourner le quizz créer
+                    q.QuizzQuestion.Add (qq);                       // Ajouter a la liste d'objet de liaisons
                 }
             }
             catch ( Exception e )
             {
                 Console.WriteLine (e.Message);
             }
-            return valRet;
+        }
+
+        private void GenererQuestions ( List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions )
+        {
+            // Gen questions junior
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.junior),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.junior
+            );
+
+            // Gen questions confirmé
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.confirme),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.confirme
+            );
+
+            // Gen questions experimenté
+            repoQuest.GenererQuestions (
+                prmListQuestions,
+                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.experimente),
+                prmThemeQuestions,
+                Globales.EnumNiveauxComplexiteDispo.experimente
+            );
         }
 
         public void SupprimerQuizz ( int prmIDQuizz )
@@ -104,9 +110,23 @@ namespace Quizz_Models.Services
 
         public int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
         {
-            //int taux = repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ());
-            return 0;
-            //return (int) Math.Round (prmNBQuestionTotal / float.Parse ("0." + prmTaux.ToString ()));
+
+            String complex = prmNomComplex.ToString ().ToLower ();
+
+
+            var valRet = complex switch
+            {
+                "junior" => repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ()).QuestionJunior.GetValueOrDefault (),
+                "confirme" => repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ()).QuestionConfirme.GetValueOrDefault (),
+                "experimente" => repoComplex.GetTauxComplexiteByNom (prmNomComplex.ToString ()).QuestionExperimente.GetValueOrDefault (),
+                _ => throw new Exception ("Le taux de complexitée n'existe pas"),
+            };
+
+            String s1 = prmNBQuestionTotal.ToString ();
+            String s2 = "0." + valRet.ToString ();
+            float n1 = float.Parse (s1);
+            float n2 = float.Parse (s2.Replace (".", ","));
+            return (int) Math.Round (n1 * n2);
         }
 
     }

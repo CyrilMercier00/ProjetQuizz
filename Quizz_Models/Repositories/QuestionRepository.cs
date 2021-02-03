@@ -31,7 +31,7 @@ namespace Quizz_Models.Services
         /// <param name="prmComplex">Nom du niveau de complexité. (Sensible a la casse)</param>
         public void GenererQuestions ( List<Question> prmListQuestion, int prmNBQuestions, Theme prmTheme, Enum prmEnumComplex )
         {
-            int idTheme = repoTheme.GetIDThemeByNom (prmEnumComplex.ToString ());
+            int idTheme = repoTheme.GetIDThemeByNom (prmTheme.NomTheme.ToString());
 
             // Recuperer le nombre de questions total pour ce theme & niv de complexite
             int nbQuestTotal = bdd_entities.Question
