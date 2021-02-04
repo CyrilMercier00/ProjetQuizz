@@ -14,7 +14,6 @@ namespace Quizz_Web.Controllers
 
         public ControllerCompte()
         {
-            //Commit vide
             this.compteService = new CompteService();
         }
 
