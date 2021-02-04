@@ -1,5 +1,6 @@
 ﻿using Quizz_Models.bdd_quizz;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Quizz_Models.Repositories
 {
@@ -16,7 +17,16 @@ namespace Quizz_Models.Repositories
         {
             bdd_entities.Permission.Add(PermissionEntity);
             bdd_entities.SaveChanges ();
+        }
 
+        /// <summary>
+        /// Méthode qui retourne une permission de la bdd par ID.
+        /// </summary>
+        /// <param name="permID">ID de la permission.</param>
+        /// <returns>Permission voulue.</returns>
+        public Permission GetPermissionById(int permID)
+        {
+            return bdd_entities.Permission.Find(permID);
         }
 
         /// <summary>
@@ -32,6 +42,16 @@ namespace Quizz_Models.Repositories
                         && x.ModifierQuest == PermissionEntity.ModifierQuest
                         && x.SupprQuestion == PermissionEntity.SupprQuestion)
                     .Single();
+        }
+
+        public void ModifyPermission(Permission permission)
+        {
+            bdd_entities.Entry(permission).State = EntityState.Modified;
+        }
+
+        public void Sauvegarder()
+        {
+            bdd_entities.SaveChanges();
         }
     }
 }
