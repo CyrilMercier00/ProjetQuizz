@@ -1,6 +1,8 @@
 ﻿using Quizz_Models.bdd_quizz;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System;
 
 namespace Quizz_Models.Repositories
 {
@@ -17,6 +19,11 @@ namespace Quizz_Models.Repositories
         {
             bdd_entities.Permission.Add(PermissionEntity);
             bdd_entities.SaveChanges ();
+        }
+
+        public List<Permission> GetAllPermissions()
+        {
+            return bdd_entities.Permission.ToList();
         }
 
         /// <summary>
