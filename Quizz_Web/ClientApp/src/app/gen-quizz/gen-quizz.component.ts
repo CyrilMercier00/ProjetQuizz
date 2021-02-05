@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VariableGlobales } from '../globales';
+import { Quizz } from "../DTO/quizzDTO"
 
 @Component({
   selector: 'app-gen-quizz',
@@ -12,24 +13,42 @@ export class GenQuizzComponent implements OnInit {
   urlGetComplexite = VariableGlobales.apiURL + "niveau";
   urlPostQuizz = VariableGlobales.apiURL + "quizz"
 
-  inputNbQuestion = 0;
-  inputTheme = "c#";
-  inputComplexite = "Débutant";
-  inputTemps = "Débutant";
+  idCompte = this.getCompteID();    // ID du compte utilisateur
+  inputNbQuestion = 0;              // Nombre de questions affiché dans l'input
+  inputTheme = "c#";                //
+  inputComplexite = "Débutant";     //
+  quizz = new Quizz();              // Le DTO du quizz qui va etre envoyé a l'api
+  valRetourRequete;                 // Contiens le retour des requetes
 
-  constructor() { }
+  constructor() {
+    this.setValeursAFfichage();
+  }
 
   ngOnInit() {
   }
 
+
+  setValeursAFfichage() {
+
+    this.valRetourRequete = this.getAllTheme();
+    this.valRetourRequete = this.getAllComplexite();
+
+
+
+  }
+
+  getCompteID() {
+    return 1;
+  }
+
+  /* --- Fonctions acces api --- */
   getAllTheme() {
 
     let reponse = fetch(this.urlGetTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        return json;
       });
-
   }
 
   getAllComplexite() {
@@ -37,9 +56,8 @@ export class GenQuizzComponent implements OnInit {
     let reponse = fetch(this.urlGetComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) => {
-        console.log(json);
+        return json;
       });
-
   }
 
   CreerQuizz() {
