@@ -18,5 +18,10 @@ namespace Quizz_Models.Services
         {
             return RepoTheme.GetAllTheme();
         }
+
+        public Theme GetThemeByNom(String prmNomTheme)
+        {
+            return RepoTheme.GetThemeByNom(prmNomTheme);
+        }
     }
 }

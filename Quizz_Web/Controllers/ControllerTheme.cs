@@ -6,10 +6,10 @@ using System;
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route("api/compte")]
+    [Route("api/theme")]
     public class ControllerTheme : Controller
     {
-        readonly ServiceTheme servTheme ;
+        readonly ServiceTheme servTheme;
 
         public ControllerTheme()
         {
@@ -17,10 +17,37 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpGet]
-        public void Get()
+        public IActionResult Get()
         {
-            this.servTheme.GetAllThemes();
+            try
+            {
+                return Ok(this.servTheme.GetAllThemes());
+            }
+            catch (Exception e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
+
+
+        [HttpGet("{id}")]
+        public IActionResult Get(String prmNomTheme)
+        {
+            if (float.TryParse(prmNomTheme, out float n))
+            {
+                try
+                {
+                    return Ok(this.servTheme.GetThemeByNom(prmNomTheme));
+                }
+                catch (Exception e)
+                {
+                    return NotFound(e.Message);
+                }
+            } else
+            {
+                return BadRequest("Le parametre n'est pas un nom");
+            }
+        }
     }
 }
