@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { VariableGlobales } from '../globales';
+import { VariableGlobales } from '../url_api';
 import { Quizz } from "../DTO/quizzDTO"
 import { JsonpClientBackend } from '@angular/common/http';
 import { isNull } from '@angular/compiler/src/output/output_ast';
@@ -11,11 +11,7 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
 })
 export class GenQuizzComponent implements OnInit
 {
-
-  urlGetTheme = VariableGlobales.apiURL + "theme";
-  urlGetComplexite = VariableGlobales.apiURL + "niveau";
-  urlPostQuizz = VariableGlobales.apiURL + "quizz"
-
+  /* ------ Declaration des variables ------ */
   idCompte = this.getCompteID();    // ID du compte utilisateur
   inputNbQuestion = 0;              // Nombre de questions affiché dans l'input
   inputTheme = "c#";                //
@@ -24,24 +20,22 @@ export class GenQuizzComponent implements OnInit
   valRetourRequeteTheme;            // Contiens le retour de la requete theme
   valRetourRequeteComplex;          // Contiens le retour de la requete complexite
 
-  constructor()
-  {
-    console.log(this.urlGetComplexite);
-    console.log(this.urlGetTheme);
-    this.setValeursAFfichage();
-  }
+
+
+
+  /* ------ Constructeur ------ */
+  constructor() { }
 
   ngOnInit()
   {
+    this.setValeursAFfichage();
   }
 
+  /* --- Insertion des valeurs dans les balises select --- */
   setValeursAFfichage()
   {
-
     try
     {
-
-      // Insertion des valeurs dans les select
       this.valRetourRequeteTheme = this.getAllTheme();
       this.valRetourRequeteComplex = this.getAllComplexite();
 
@@ -50,25 +44,30 @@ export class GenQuizzComponent implements OnInit
         {
           if (this.valRetourRequeteComplex != null)
           {
-
-
-
+            // Pour chaque niveau dans le data de la requete
+            for (var niveau in this.valRetourRequeteComplex)
+            {
+              // Creation & configuration d'une balise html
+              var element = document.createElement("option");                         // Element vide
+              element.setAttribute("value", this.valRetourRequeteComplex[ niveau ]);  // Ajouter attribut
+              document.getElementById("").appendChild(element);                       // Ajouter a la liste
+            }
           } else
           {
-            throw new Error('Probleme lors de la recuperation du niveau de complextité')
+            throw new Error('Probleme lors de la récuperation du niveau de complextité')
           }
         }
-
       } else
       {
-        throw new Error('Probleme de de la recuperation des themes ')
+        throw new Error('Probleme de de la récuperation des themes ')
       }
-
     } catch (e)
     {
       alert("Debug: " + e.message)
     }
   }
+
+
 
   // Retourne l'id du compte qui a créer le quizz
   getCompteID()
@@ -76,26 +75,35 @@ export class GenQuizzComponent implements OnInit
     return 1;
   }
 
-  /* --- Fonctions acces api --- */
-  // Envoie le dto a l'api
+
+
+
+  /* ------ Fonctions acces api ------ */
+  /* --- Envoie du DTO local a l'api pour insertion du quizz ---*/
   CreerQuizz()
   {
     console.log("Creer quizz");
   }
-  // Retourne le json des themes disponibles
+
+
+
+  /* --- Retourne le json des themes disponibles--- */
   getAllTheme()
   {
-    let reponse = fetch(this.urlGetTheme, { method: "GET" })
+    let reponse = fetch(VariableGlobales.apiURLTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
         return json;
       });
   }
-  // Retourne le json des complexites disponibles
+
+
+
+  /* -- Retourne le json des complexites disponibles --- */
   getAllComplexite()
   {
-    let reponse = fetch(this.urlGetComplexite, { method: "GET" })
+    let reponse = fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
