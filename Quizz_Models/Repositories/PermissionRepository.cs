@@ -56,9 +56,9 @@ namespace Quizz_Models.Repositories
             bdd_entities.Entry(permission).State = EntityState.Modified;
         }
 
-        public void Sauvegarder()
+        public int Sauvegarder()
         {
-            bdd_entities.SaveChanges();
+            return bdd_entities.SaveChanges();
         }
     }
 }

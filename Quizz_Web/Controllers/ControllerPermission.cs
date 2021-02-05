@@ -32,5 +32,16 @@ namespace Quizz_Web.Controllers
 
             return permissionDTOs;
         }
+
+        [HttpPut("{id}")]
+        public void Put(PermissionDTO permissionDTO)
+        {
+            int lignesmodifiees = permissionService.ModifyPermission(permissionDTO);
+
+            if(lignesmodifiees == 0)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+            }
+        }
     }
 }

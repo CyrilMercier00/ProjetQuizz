@@ -38,21 +38,24 @@ namespace Quizz_Models.Services
         {
             return new PermissionDTO
             {
-                Ajouter_quest = (p.AjouterQuest != 0),
-                Generer_quizz = (p.GenererQuizz != 0),
-                Modifier_quest = (p.ModifierQuest != 0),
-                Suppr_question = (p.SupprQuestion != 0),
-                supprimer_compte = (p.SupprimerCompte != 0),
-                modifier_compte = (p.ModifierCompte != 0)
+                PkPermission = p.PkPermission,
+                AjouterQuest = (p.AjouterQuest != 0),
+                GenererQuizz = (p.GenererQuizz != 0),
+                ModifierQuest = (p.ModifierQuest != 0),
+                SupprQuestion = (p.SupprQuestion != 0),
+                SupprimerCompte = (p.SupprimerCompte != 0),
+                ModifierCompte = (p.ModifierCompte != 0)
             };
         }
 
-        public void ModifyPermission(PermissionDTO permissionDTO)
+        public int ModifyPermission(PermissionDTO permissionDTO)
         {
             Permission permissionAModifier = this.repoPermission.GetPermissionById(permissionDTO.PkPermission);
+            if (permissionAModifier == null) return 0;
+
             this.repoPermission.ModifyPermission(permissionAModifier);
             MailUtils.ModifyPermission(ref permissionAModifier, permissionDTO);
-            this.repoPermission.Sauvegarder();
+            return this.repoPermission.Sauvegarder();
         }
     }
 }

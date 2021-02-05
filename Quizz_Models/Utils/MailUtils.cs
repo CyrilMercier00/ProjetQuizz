@@ -68,9 +68,17 @@ namespace Quizz_Models
                 Tuple<PropertyInfo, PropertyInfo> tuple = GetCorrespondingProperty(p1, p2, i);
                 var valproperty2 = tuple.Item2.GetValue(p2);
 
+                // Si propriété = PkPermission, on ignore
+                if (tuple.Item2.Name.CompareTo("PkPermission") == 0)
+                {
+                    continue;
+                }
+
+                // Sinon conversion à faire (bool => byte)
                 if (tuple.Item1 != null && valproperty2 != null)
                 {
-                    tuple.Item1.SetValue(p1, valproperty2);
+                    byte x = (bool)valproperty2 ? (byte)1 : (byte)0;
+                    tuple.Item1.SetValue(p1, x);
                 }
             }
         }
@@ -84,7 +92,8 @@ namespace Quizz_Models
         private static Tuple<PropertyInfo, PropertyInfo> GetCorrespondingProperty(Object c1, Object c2, int i)
         {
             var property2 = c2.GetType().GetProperties()[i];
-            return Tuple.Create(c1.GetType().GetProperty(property2.Name), property2);
+            var property1 = c1.GetType().GetProperty(property2.Name);
+            return Tuple.Create(property1, property2);
         }
     }
 }

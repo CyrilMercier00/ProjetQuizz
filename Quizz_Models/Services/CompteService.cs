@@ -160,10 +160,10 @@ namespace Quizz_Models.Services
         {
             Permission p = new Permission
             {
-                AjouterQuest = Convert.ToByte(PermissionDTO.Ajouter_quest),
-                GenererQuizz = Convert.ToByte(PermissionDTO.Generer_quizz),
-                ModifierQuest = Convert.ToByte(PermissionDTO.Modifier_quest),
-                SupprQuestion = Convert.ToByte(PermissionDTO.Suppr_question)
+                AjouterQuest = Convert.ToByte(PermissionDTO.AjouterQuest),
+                GenererQuizz = Convert.ToByte(PermissionDTO.GenererQuizz),
+                ModifierQuest = Convert.ToByte(PermissionDTO.ModifierQuest),
+                SupprQuestion = Convert.ToByte(PermissionDTO.SupprQuestion)
             };
 
             return p;
