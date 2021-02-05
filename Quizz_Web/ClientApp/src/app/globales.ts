@@ -1,3 +1,3 @@
 export class VariableGlobales {
-  public static apiURL: string = "https://localhost:5001.com/api/";
+  public static apiURL: string = window.location.origin + "/api/";
 }
