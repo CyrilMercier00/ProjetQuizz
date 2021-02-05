@@ -28,7 +28,7 @@ namespace Quizz_Models.Services
             try
             {
                 Theme leTheme = repoTheme.GetThemeByNom (prmDTO.Theme);                             // Objet theme pour ce param
-                TauxComplexite leTaux = repoComplex.GetTauxComplexiteByNom (prmDTO.Complexite);     // Objet taux de complexite pour ce param
+                TauxComplexite leTaux = repoComplex.GetComplexiteByNom (prmDTO.Complexite);         // Objet taux de complexite pour ce param
                 List<Question> listQuestionCreation = new List<Question> ();                        // La liste des questions choisies
 
                 // Le nouveau quizz
@@ -124,10 +124,10 @@ namespace Quizz_Models.Services
 
             var valRet = complex switch
             {
-                "junior" => repoComplex.GetTauxComplexiteByNom(prmNomComplex.ToString()).QuestionJunior.GetValueOrDefault(),
-                "confirme" => repoComplex.GetTauxComplexiteByNom(prmNomComplex.ToString()).QuestionConfirme.GetValueOrDefault(),
-                "experimente" => repoComplex.GetTauxComplexiteByNom(prmNomComplex.ToString()).QuestionExperimente.GetValueOrDefault(),
-                _ => throw new Exception("Le taux de complexitée n'existe pas"),
+                "junior" => repoComplex.GetComplexiteByNom (prmNomComplex.ToString ()).QuestionJunior.GetValueOrDefault (),
+                "confirme" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString ()).QuestionConfirme.GetValueOrDefault (),
+                "experimente" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString ()).QuestionExperimente.GetValueOrDefault (),
+                _ => throw new Exception ("Le taux de complexitée n'existe pas"),
             };
 
             String s1 = prmNBQuestionTotal.ToString();
