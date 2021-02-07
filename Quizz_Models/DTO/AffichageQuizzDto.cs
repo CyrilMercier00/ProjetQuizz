@@ -6,17 +6,16 @@ namespace Quizz_Models.DTO
 {
     class AffichageQuizzDto
     {
-      
+
 
         CompteDTO Candidat { get; set; }
         CompteDTO recruteur { get; set; }
-
+        QuizzDTO QuestionCandidat { get; set; }
+        List<ReponseCandidatDTO> repCandidat { get; set; }
+        List<ReponseCandidatDTO> repQuestion { get; set; }
+        List<ReponseCandidatDTO> CommentaireCandidat{ get; set; }
         string Theme { get; set; }
 
-        public AffichageQuizzDto()
-        {
-
-        }
 
 
     }
