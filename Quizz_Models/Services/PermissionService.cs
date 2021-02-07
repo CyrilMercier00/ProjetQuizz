@@ -12,6 +12,10 @@ namespace Quizz_Models.Services
         readonly PermissionRepository repoPermission = new PermissionRepository();
         public PermissionService() { }
 
+        /// <summary>
+        /// Retourne toutes les permissions de la bdd.
+        /// </summary>
+        /// <returns>Liste de toute les permissions sous format PermissionDTO.</returns>
         public List<PermissionDTO> GetPermissions()
         {
             List<Permission> permissions = this.repoPermission.GetAllPermissions();
@@ -19,6 +23,11 @@ namespace Quizz_Models.Services
             return TransformListPermissionToListPermissionDTO(permissions);
         }
 
+        /// <summary>
+        /// Transforme une liste de permission (entité) en liste de PermissionDTO.
+        /// </summary>
+        /// <param name="permissions">Liste de permission(entité).</param>
+        /// <returns>Liste de PermissionDTO correspondant.</returns>
         private List<PermissionDTO> TransformListPermissionToListPermissionDTO(List<Permission> permissions)
         {
             List<PermissionDTO> permissionDTOs = new List<PermissionDTO>();
@@ -34,6 +43,11 @@ namespace Quizz_Models.Services
             return permissionDTOs;
         }
 
+        /// <summary>
+        /// Transforme une permission(entité) en PermissionDTO.
+        /// </summary>
+        /// <param name="p">Permission(entité) à transformer.</param>
+        /// <returns>PermissionDTO correspondant.</returns>
         private PermissionDTO TransformPermissionToPermissionDTO(Permission p)
         {
             return new PermissionDTO
@@ -48,6 +62,43 @@ namespace Quizz_Models.Services
             };
         }
 
+        /// <summary>
+        /// Transforme un PermissionDTO en entité Permission.
+        /// </summary>
+        /// <param name="p">PermissionDTO à transformer.</param>
+        /// <returns>Permission(entité) correspondante.</returns>
+        private Permission TransformPermissionDTOToPermission(PermissionDTO p)
+        {
+            return new Permission
+            {
+                PkPermission = p.PkPermission,
+                AjouterQuest = Convert.ToByte(p.AjouterQuest),
+                GenererQuizz = Convert.ToByte(p.GenererQuizz),
+                ModifierQuest = Convert.ToByte(p.ModifierQuest),
+                SupprQuestion = Convert.ToByte(p.SupprQuestion),
+                SupprimerCompte = Convert.ToByte(p.SupprimerCompte),
+                ModifierCompte = Convert.ToByte(p.ModifierCompte)
+            };
+        }
+
+        /// <summary>
+        /// Ajoute une permission à la bdd.
+        /// </summary>
+        /// <param name="permissionDTO">PermissioDTO à ajouter.</param>
+        /// <returns>Nombre de lignes ajoutées.</returns>
+        public int AddPermission(PermissionDTO permissionDTO)
+        {
+            Permission p = TransformPermissionDTOToPermission(permissionDTO);
+            this.repoPermission.AddPermission(p);
+
+            return this.repoPermission.Sauvegarder();
+        }
+
+        /// <summary>
+        /// Modifie une permission dans la bdd grâce au PermissionDTO correspondant.
+        /// </summary>
+        /// <param name="permissionDTO">PermissionDTO correspondant.</param>
+        /// <returns>Nombre de lignes modifiées.</returns>
         public int ModifyPermission(PermissionDTO permissionDTO)
         {
             Permission permissionAModifier = this.repoPermission.GetPermissionById(permissionDTO.PkPermission);

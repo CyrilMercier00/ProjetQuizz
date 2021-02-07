@@ -51,7 +51,9 @@ namespace Quizz_Models.Repositories
                     .Where(x => x.AjouterQuest == PermissionEntity.AjouterQuest
                         && x.GenererQuizz == PermissionEntity.GenererQuizz
                         && x.ModifierQuest == PermissionEntity.ModifierQuest
-                        && x.SupprQuestion == PermissionEntity.SupprQuestion)
+                        && x.SupprQuestion == PermissionEntity.SupprQuestion
+                        && x.ModifierCompte == PermissionEntity.ModifierCompte
+                        && x.SupprimerCompte == PermissionEntity.SupprimerCompte)
                     .Single();
         }
 

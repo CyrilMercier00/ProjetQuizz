@@ -88,11 +88,5 @@ namespace Quizz_Web.Controllers
                 this.compteService.ModifyCompte(modifyCompteDTO);
             }
         }
-
-        [HttpPut("{id}")]
-        public void ModifierPermission([FromBody] PermissionDTO permissionDTO)
-        {
-
-        }
     }
 }

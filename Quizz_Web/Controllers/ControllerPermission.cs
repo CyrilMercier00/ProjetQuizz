@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.Services;
 using Quizz_Models.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Quizz_Web.Controllers
 {
@@ -31,6 +27,21 @@ namespace Quizz_Web.Controllers
             }
 
             return permissionDTOs;
+        }
+
+        [HttpPost]
+        public void Post(PermissionDTO permissionDTO)
+        {
+            int lignes = permissionService.AddPermission(permissionDTO);
+
+            if(lignes != 1)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
+            }
         }
 
         [HttpPut("{id}")]
