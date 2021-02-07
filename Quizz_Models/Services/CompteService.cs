@@ -1,6 +1,7 @@
 ﻿using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
+using Quizz_Models.Utils;
 using System;
 using System.Collections.Generic;
 

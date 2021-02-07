@@ -1,4 +1,5 @@
 ﻿using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono )
+        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono, string urlcode)
         {
             try
             {
@@ -60,6 +61,11 @@ namespace Quizz_Models.Services
             {
                 Console.WriteLine (e.Message);
             }
+        }
+
+        public QuizzDTO FindByID(int prmIDQuizz)
+        {
+            throw new NotImplementedException();
         }
 
         private void GenererQuestions ( List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions )

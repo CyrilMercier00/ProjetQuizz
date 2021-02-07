@@ -19,7 +19,7 @@ namespace Quizz_Web.Controllers
             valRetour = Ok ();
             try
             {
-                    servQuizz.GenererQuizz (
+                servQuizz.GenererQuizz(
                     prmQuizzDTO.NbQuestions,
                     prmQuizzDTO.Complexite,
                     prmQuizzDTO.Theme,
@@ -35,14 +35,27 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
-        //[HttpGet]
-        //[Route("{Urlcode}")]
-        //public QuizzDTO GetQuizzDTO([FromBody] int prmIDQuizz)
-        //{
+        [HttpGet]
+        [Route("{Urlcode}")]
+        public ActionResult<QuizzDTO> GetQuizzUrlCodeById(int prmIDQuizz)
+        {
+            valRetour = Ok();
+            try
+            {
+                QuizzDTO quizz = new QuizzDTO();
+                quizz = this.servQuizz.FindByID(prmIDQuizz);
+                return Ok(quizz.Urlcode);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                valRetour = NotFound();
+            }
+            return valRetour;
 
-        //    // return servQuizz.GetQuizzbyId(prmIDQuizz);
-        //}
-
+        }
+         
+        
         [HttpDelete]
         public ActionResult<QuizzDTO> Delete ( [FromBody] int prmIDQuizz )
         {

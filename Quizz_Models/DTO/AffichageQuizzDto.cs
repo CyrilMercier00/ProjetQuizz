@@ -14,7 +14,7 @@ namespace Quizz_Models.DTO
         List<ReponseCandidatDTO> repCandidat { get; set; }
         List<ReponseCandidatDTO> repQuestion { get; set; }
         List<ReponseCandidatDTO> CommentaireCandidat{ get; set; }
-        string Theme { get; set; }
+        
 
 
 
