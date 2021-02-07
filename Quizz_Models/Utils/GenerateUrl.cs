@@ -46,7 +46,7 @@ namespace Quizz_Models.Utils
         {
             string UrlCode = GenerateGuid();
             UrlCode = RemoveSpecialCharacters(UrlCode);
-            // MessageBox.Show(RemoveSpecialCharacters(rString));
+            RemoveSpecialCharacters(UrlCode);
             return UrlCode;
          
         }
