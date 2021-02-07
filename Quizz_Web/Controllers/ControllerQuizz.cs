@@ -9,7 +9,7 @@ namespace Quizz_Web.Controllers
     [Route ("api/quizz")]
     public class ControllerQuizz : Controller
     {
-        readonly QuizzService servQuizz = new QuizzService ();
+        readonly ServiceQuizz servQuizz = new ServiceQuizz ();
         ActionResult<QuizzDTO> valRetour;
 
         [HttpPost]

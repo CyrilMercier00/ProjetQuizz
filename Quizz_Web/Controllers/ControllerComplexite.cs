@@ -9,7 +9,8 @@ using Quizz_Models.DTO;
 
 namespace Quizz_Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/complexite")]
+
     [ApiController]
     public class ControllerComplexite : ControllerBase
     {
@@ -25,32 +26,35 @@ namespace Quizz_Web.Controllers
         [HttpGet]
         public List<Taux_complexiteDTO> Get()
         {
-            return complexiteService.GetListComplexites();
+            return complexiteService.GetComplexites();
         }
 
         // GET api/<ControllerComplexite>/5
         [HttpGet("{id}")]
-        public Taux_complexiteDTO Get(string nomcomplex)
+        public Taux_complexiteDTO Get(int id)
         {
-            return complexiteService.GetComplexiteByNom(nomcomplex);
+            return complexiteService.GetComplexite(id);
         }
 
         // POST api/<ControllerComplexite>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Quizz_Models.bdd_quizz.TauxComplexite Post([FromBody] Quizz_Models.bdd_quizz.TauxComplexite noveautxcomplexite)
         {
+           return  complexiteService.AjouterTauxComplexite(noveautxcomplexite);
         }
 
         // PUT api/<ControllerComplexite>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Quizz_Models.bdd_quizz.TauxComplexite noveautxcomplexite)
         {
+             complexiteService.ModifierVentilation(id, noveautxcomplexite);
         }
 
         // DELETE api/<ControllerComplexite>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            complexiteService.Delete(id);
         }
     }
 }
