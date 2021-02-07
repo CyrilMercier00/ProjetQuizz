@@ -15,7 +15,7 @@ namespace Quizz_Models.Utils
     class PdfUtils
     {
         // public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
-        public static PdfWriter writer = new PdfWriter("C:\\*\\*\\*\\Downloads\\Test.pdf");
+        public static PdfWriter writer = new PdfWriter("C:\\Users\\Public\\Downloads\\Test.pdf");
         public static PdfDocument pdf = new PdfDocument(writer);
         public static iText.Layout.Document document = new iText.Layout.Document(pdf);
    
@@ -24,6 +24,7 @@ namespace Quizz_Models.Utils
 
         public void SavePdf()
         {
+
            
 
         }
