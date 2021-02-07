@@ -21,6 +21,10 @@ namespace Quizz_Models.Repositories
             bdd_entities.SaveChanges ();
         }
 
+        /// <summary>
+        /// Méthode qui renvoie la liste de toutes les permissions.
+        /// </summary>
+        /// <returns>La liste de toutes les permissions.</returns>
         public List<Permission> GetAllPermissions()
         {
             return bdd_entities.Permission.ToList();
@@ -51,11 +55,29 @@ namespace Quizz_Models.Repositories
                     .Single();
         }
 
+        /// <summary>
+        /// Méthode qui ajoute de nouvelles permissions à la base..
+        /// </summary>
+        /// <param name="permission">Permission à ajouter.</param>
+        /// <returns>Nombre de lignes ajoutées.</returns>
+        public void AddPermission(Permission permission)
+        {
+            bdd_entities.Permission.Add(permission);
+        }
+
+        /// <summary>
+        /// Méthode qui prépare la bdd à une modification de permission.
+        /// </summary>
+        /// <param name="permission">Entité de la permission à modifier.</param>
         public void ModifyPermission(Permission permission)
         {
             bdd_entities.Entry(permission).State = EntityState.Modified;
         }
 
+        /// <summary>
+        /// Sauvegarde qui enregistre les éléments du contexte dans la bdd.
+        /// </summary>
+        /// <returns>Nombre de lignes ajoutées dans la bdd.</returns>
         public int Sauvegarder()
         {
             return bdd_entities.SaveChanges();
