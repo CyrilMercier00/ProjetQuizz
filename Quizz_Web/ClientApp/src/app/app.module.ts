@@ -12,7 +12,6 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
-import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
 
@@ -25,7 +24,6 @@ import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
     CounterComponent,
     FetchDataComponent,
     GenQuizzComponent,
-    GestQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
   ],
@@ -44,6 +42,6 @@ import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
