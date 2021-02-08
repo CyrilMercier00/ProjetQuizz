@@ -3,7 +3,7 @@ using System.Net.Mail;
 using Quizz_Models.DTO;
 using Quizz_Models.bdd_quizz;
 
-namespace Quizz_Models
+namespace Quizz_Models.Utils
 {
     class MailUtils
     {
