@@ -13,6 +13,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
+import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
+import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
     FetchDataComponent,
     GenQuizzComponent,
     GestQuizzComponent,
+    AssignationQuizzComponent,
+    GestionQuizzComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
