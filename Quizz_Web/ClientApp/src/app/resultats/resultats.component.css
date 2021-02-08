@@ -2,3 +2,9 @@ body{
     background-color:azure
 }
 
+.candidat{
+
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction : column;
+}
