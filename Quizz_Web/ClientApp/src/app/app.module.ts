@@ -16,6 +16,8 @@ import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
+import { PermissionComponent } from './permission/permission.component';
+import { ChronometreComponent } from './chronometre/chronometre.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ResultatsComponent } from './resultats/resultats.component';
     AssignationQuizzComponent,
     GestionQuizzComponent,
     ResultatsComponent,
+    PermissionComponent,
+    ChronometreComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,7 +46,11 @@ import { ResultatsComponent } from './resultats/resultats.component';
       { path: 'quizz-question', component: QuizzQuestionComponent },
       { path: 'gen-quizz', component: GenQuizzComponent },
       { path: 'gest-quizz', component: GestQuizzComponent },
-      { path: 'Resultats', component: ResultatsComponent },
+      { path: 'resultats', component: ResultatsComponent },
+      { path: 'permission', component: PermissionComponent },
+      { path: 'chronometre', component: ChronometreComponent }
+     
+      
     ])
   ],
   providers: [],
