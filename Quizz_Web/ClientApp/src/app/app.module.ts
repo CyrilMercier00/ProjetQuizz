@@ -14,6 +14,7 @@ import { QuizzQuestionComponent } from './quizz-question/quizz-question.componen
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
+import { ResultatsComponent } from './resultats/resultats.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
     GenQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
+    ResultatsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,6 +41,7 @@ import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
       { path: 'gen-quizz', component: GenQuizzComponent },
       { path: 'gest-quizz', component: GestionQuizzComponent },
       { path: 'assign-quizz', component: AssignationQuizzComponent },
+      { path: 'Resultats', component: ResultatsComponent },
     ])
   ],
   providers: [],
