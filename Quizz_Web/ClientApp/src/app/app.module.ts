@@ -39,7 +39,8 @@ import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'quizz-question', component: QuizzQuestionComponent },
       { path: 'gen-quizz', component: GenQuizzComponent },
-      { path: 'gest-quizz', component: GestQuizzComponent },
+      { path: 'gest-quizz', component: GestionQuizzComponent },
+      { path: 'assign-quizz', component: AssignationQuizzComponent },
     ])
   ],
   providers: [],
