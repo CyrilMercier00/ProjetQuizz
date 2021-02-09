@@ -14,6 +14,9 @@ import { QuizzQuestionComponent } from './quizz-question/quizz-question.componen
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { InputComponent } from './input/input.component';
+import { BoutonValidationComponent } from './bouton-validation/bouton-validation.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 
 @NgModule({
@@ -27,6 +30,9 @@ import { ResultatsComponent } from './resultats/resultats.component';
     GenQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
+    ConnexionComponent,
+    InputComponent,
+    BoutonValidationComponent,
     ResultatsComponent,
   ],
   imports: [
@@ -41,6 +47,7 @@ import { ResultatsComponent } from './resultats/resultats.component';
       { path: 'gen-quizz', component: GenQuizzComponent },
       { path: 'gest-quizz', component: GestionQuizzComponent },
       { path: 'assign-quizz', component: AssignationQuizzComponent },
+      { path: 'login', component: ConnexionComponent },
       { path: 'Resultats', component: ResultatsComponent },
     ])
   ],
