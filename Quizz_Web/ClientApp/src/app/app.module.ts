@@ -12,12 +12,12 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
-import { GestQuizzComponent } from './gest-quizz/gest-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InputComponent } from './input/input.component';
 import { BoutonValidationComponent } from './bouton-validation/bouton-validation.component';
+import { ResultatsComponent } from './resultats/resultats.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,12 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
     CounterComponent,
     FetchDataComponent,
     GenQuizzComponent,
-    GestQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
     ConnexionComponent,
     InputComponent,
     BoutonValidationComponent,
+    ResultatsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -48,9 +48,10 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
       { path: 'gest-quizz', component: GestionQuizzComponent },
       { path: 'assign-quizz', component: AssignationQuizzComponent },
       { path: 'login', component: ConnexionComponent },
+      { path: 'Resultats', component: ResultatsComponent },
     ])
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,19 @@
+.container-gestion-quizz {
+  margin: 1rem 0rem;
+  font-size: x-large;
+}
+
+.container-gestion-quizz label {
+  font-size :xx-large;
+}
+
+.container-gestion-quizz label, .container-gestion-quizz select, .container-gestion-quizz input {
+  margin: 0.2rem 1rem;
+  width: 28rem;
+  height: 3rem;
+  text-align: center;
+}
+
+.container-item-gestion {
+  margin: 1rem 0rem;
+}
