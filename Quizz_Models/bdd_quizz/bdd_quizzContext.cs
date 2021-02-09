@@ -51,9 +51,13 @@ namespace Quizz_Models.bdd_quizz
                     .HasName("mail_UNIQUE")
                     .IsUnique();
 
-                entity.Property(e => e.PkCompte).HasColumnName("pk_compte");
+                entity.Property(e => e.PkCompte)
+                    .HasColumnName("pk_compte")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkPermission).HasColumnName("fk_permission");
+                entity.Property(e => e.FkPermission)
+                    .HasColumnName("fk_permission")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Mail)
                     .HasColumnName("mail")
@@ -72,7 +76,9 @@ namespace Quizz_Models.bdd_quizz
                     .HasColumnName("prenom")
                     .HasMaxLength(45);
 
-                entity.Property(e => e.Role).HasColumnName("role");
+                entity.Property(e => e.Role)
+                    .HasColumnName("role")
+                    .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.FkPermissionNavigation)
                     .WithMany(p => p.Compte)
@@ -94,9 +100,13 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkQuizz)
                     .HasName("fk_compte_has_quizz_quizz1_idx");
 
-                entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
+                entity.Property(e => e.FkCompte)
+                    .HasColumnName("fk_compte")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkQuizz).HasColumnName("fk_quizz");
+                entity.Property(e => e.FkQuizz)
+                    .HasColumnName("fk_quizz")
+                    .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.FkCompteNavigation)
                     .WithMany(p => p.CompteQuizz)
@@ -118,19 +128,33 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.ToTable("permission");
 
-                entity.Property(e => e.PkPermission).HasColumnName("pk_permission");
+                entity.Property(e => e.PkPermission)
+                    .HasColumnName("pk_permission")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.AjouterQuest).HasColumnName("ajouter_quest");
+                entity.Property(e => e.AjouterQuest)
+                    .HasColumnName("ajouter_quest")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.GenererQuizz).HasColumnName("generer_quizz");
+                entity.Property(e => e.GenererQuizz)
+                    .HasColumnName("generer_quizz")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.ModifierCompte).HasColumnName("modifier_compte");
+                entity.Property(e => e.ModifierCompte)
+                    .HasColumnName("modifier_compte")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.ModifierQuest).HasColumnName("modifier_quest");
+                entity.Property(e => e.ModifierQuest)
+                    .HasColumnName("modifier_quest")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.SupprQuestion).HasColumnName("suppr_question");
+                entity.Property(e => e.SupprQuestion)
+                    .HasColumnName("suppr_question")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.SupprimerCompte).HasColumnName("supprimer_compte");
+                entity.Property(e => e.SupprimerCompte)
+                    .HasColumnName("supprimer_compte")
+                    .HasColumnType("tinyint(4)");
             });
 
             modelBuilder.Entity<PropositionReponse>(entity =>
@@ -143,11 +167,17 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkQuestion)
                     .HasName("fk_reponse_question1_idx");
 
-                entity.Property(e => e.PkReponse).HasColumnName("pk_reponse");
+                entity.Property(e => e.PkReponse)
+                    .HasColumnName("pk_reponse")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.EstBonne).HasColumnName("est_bonne");
+                entity.Property(e => e.EstBonne)
+                    .HasColumnName("est_bonne")
+                    .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
+                entity.Property(e => e.FkQuestion)
+                    .HasColumnName("fk_question")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Texte)
                     .HasColumnName("texte")
@@ -173,17 +203,25 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkTheme)
                     .HasName("fk_question_theme1_idx");
 
-                entity.Property(e => e.PkQuestion).HasColumnName("pk_question");
+                entity.Property(e => e.PkQuestion)
+                    .HasColumnName("pk_question")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.ARepondu).HasColumnName("a_repondu");
+                entity.Property(e => e.ARepondu)
+                    .HasColumnName("a_repondu")
+                    .HasColumnType("tinyint(4)");
 
                 entity.Property(e => e.Enonce)
                     .HasColumnName("enonce")
                     .HasColumnType("longtext");
 
-                entity.Property(e => e.FkComplexite).HasColumnName("fk_complexite");
+                entity.Property(e => e.FkComplexite)
+                    .HasColumnName("fk_complexite")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkTheme).HasColumnName("fk_theme");
+                entity.Property(e => e.FkTheme)
+                    .HasColumnName("fk_theme")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.NvComplexite)
                     .HasColumnName("nv_complexite")
@@ -215,13 +253,23 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkTheme)
                     .HasName("fk_quizz_theme1_idx");
 
-                entity.Property(e => e.PkQuizz).HasColumnName("pk_quizz");
+                entity.Property(e => e.PkQuizz)
+                    .HasColumnName("pk_quizz")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Chrono).HasColumnName("chrono");
 
-                entity.Property(e => e.FkComplexite).HasColumnName("fk_complexite");
+                entity.Property(e => e.FkComplexite)
+                    .HasColumnName("fk_complexite")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkTheme).HasColumnName("fk_theme");
+                entity.Property(e => e.FkTheme)
+                    .HasColumnName("fk_theme")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Urlcode)
+                    .HasColumnName("urlcode")
+                    .HasMaxLength(45);
 
                 entity.HasOne(d => d.FkComplexiteNavigation)
                     .WithMany(p => p.Quizz)
@@ -249,9 +297,13 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkQuizz)
                     .HasName("fk_quizz_has_question_quizz1_idx");
 
-                entity.Property(e => e.FkQuizz).HasColumnName("fk_quizz");
+                entity.Property(e => e.FkQuizz)
+                    .HasColumnName("fk_quizz")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
+                entity.Property(e => e.FkQuestion)
+                    .HasColumnName("fk_question")
+                    .HasColumnType("int(11)");
 
                 entity.HasOne(d => d.FkQuestionNavigation)
                     .WithMany(p => p.QuizzQuestion)
@@ -279,15 +331,21 @@ namespace Quizz_Models.bdd_quizz
                 entity.HasIndex(e => e.FkQuestion)
                     .HasName("fk_reponse_candidat_question1_idx");
 
-                entity.Property(e => e.PkReponse).HasColumnName("pk_reponse");
+                entity.Property(e => e.PkReponse)
+                    .HasColumnName("pk_reponse")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Commentaire)
                     .HasColumnName("commentaire")
                     .HasMaxLength(45);
 
-                entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
+                entity.Property(e => e.FkCompte)
+                    .HasColumnName("fk_compte")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
+                entity.Property(e => e.FkQuestion)
+                    .HasColumnName("fk_question")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Reponse)
                     .HasColumnName("reponse")
@@ -313,17 +371,25 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.ToTable("taux_complexite");
 
-                entity.Property(e => e.PkComplexite).HasColumnName("pk_complexite");
+                entity.Property(e => e.PkComplexite)
+                    .HasColumnName("pk_complexite")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.Niveau)
                     .HasColumnName("niveau")
                     .HasMaxLength(45);
 
-                entity.Property(e => e.QuestionConfirme).HasColumnName("question_confirme");
+                entity.Property(e => e.QuestionConfirme)
+                    .HasColumnName("question_confirme")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.QuestionExperimente).HasColumnName("question_experimente");
+                entity.Property(e => e.QuestionExperimente)
+                    .HasColumnName("question_experimente")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.QuestionJunior).HasColumnName("question_junior");
+                entity.Property(e => e.QuestionJunior)
+                    .HasColumnName("question_junior")
+                    .HasColumnType("int(11)");
             });
 
             modelBuilder.Entity<Theme>(entity =>
@@ -333,7 +399,9 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.ToTable("theme");
 
-                entity.Property(e => e.PkTheme).HasColumnName("pk_theme");
+                entity.Property(e => e.PkTheme)
+                    .HasColumnName("pk_theme")
+                    .HasColumnType("int(11)");
 
                 entity.Property(e => e.NomTheme)
                     .HasColumnName("nom_theme")

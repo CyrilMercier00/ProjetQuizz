@@ -1,5 +1,6 @@
 ﻿using Quizz_Models.bdd_quizz;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -33,6 +34,16 @@ namespace Quizz_Models.Services
             return bdd_entities.Theme
             .Where (x => x.NomTheme.Equals (prmNiveauComplex))
             .Single ();
+        }
+        /// <summary>
+        /// Retourne tout ojets theme
+        /// </summary>
+        /// <param name="prmNiveauComplex"></param>
+        /// <returns></returns>
+        public List<Theme> GetAllTheme()
+        {
+            return bdd_entities.Theme
+                .ToList();
         }
     }
 }

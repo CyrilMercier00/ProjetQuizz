@@ -10,37 +10,43 @@ namespace Quizz_Models.Services
     {
         private readonly ComplexiteRepository _complexiteRepository = new ComplexiteRepository();
 
-        public void AjouterTauxComplexite ( Taux_complexiteDTO taux_Complexite )
+        public TauxComplexite AjouterTauxComplexite(TauxComplexite taux_Complexite)
         {
 
+
+            return this._complexiteRepository.Create(taux_Complexite);
 
         }
 
-        public void ModifierVentilation () { }
-
-        public List<Taux_complexiteDTO> GetListComplexites ()
+        public void ModifierVentilation(int id, TauxComplexite noveautxcomplexite)
         {
-            List<TauxComplexite> tauxComplexites = _complexiteRepository.GetAllComplexite ();
-            List<Taux_complexiteDTO> ttlestauxDTO = new List<Taux_complexiteDTO> ();
-            tauxComplexites.ForEach (taux => { ttlestauxDTO.Add (TransferModelToDto (taux)); });
+
+            this._complexiteRepository.Update(id, noveautxcomplexite);
+        }
+
+        public List<Taux_complexiteDTO> GetComplexites()
+        {
+            List<bdd_quizz.TauxComplexite> tauxComplexites = new List<bdd_quizz.TauxComplexite>();
+            tauxComplexites = _complexiteRepository.GetAllComplexite();
+            List<Taux_complexiteDTO> ttlestauxDTO = new List<Taux_complexiteDTO>();
+            tauxComplexites.ForEach(taux => { ttlestauxDTO.Add(TransferModelToDto(taux)); });
             return ttlestauxDTO;
         }
 
-        private Taux_complexiteDTO TransferModelToDto ( TauxComplexite taux )
+        private Taux_complexiteDTO TransferModelToDto(TauxComplexite taux)
         {
-            return new Taux_complexiteDTO ()
-            {
-                niveau = taux.Niveau,
-                question_junior = taux.QuestionJunior,
-                quest_confirme = taux.QuestionConfirme,
-                question_experimente = taux.QuestionExperimente
-            };
-
+            return new Taux_complexiteDTO(taux.Niveau, taux.QuestionJunior, taux.QuestionConfirme, taux.QuestionExperimente);
         }
-        public Taux_complexiteDTO GetComplexiteByNom ( string nomcomplex )
+
+        public Taux_complexiteDTO GetComplexite(int id)
         {
-            TauxComplexite tauxComplexite = _complexiteRepository.GetTauxComplexiteByNom (nomcomplex);
-            return TransferModelToDto (tauxComplexite);
+
+            return TransferModelToDto(this._complexiteRepository.Find(id));
+        }
+
+        public void Delete(int id)
+        {
+            this._complexiteRepository.Delete(id);
         }
 
     }

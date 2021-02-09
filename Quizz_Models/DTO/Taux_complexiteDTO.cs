@@ -8,7 +8,16 @@ namespace Quizz_Models.DTO
 {
    public class Taux_complexiteDTO
     {
-        public int pk_complexite { get; set; }
+        public Taux_complexiteDTO(string niveau, int? question_junior, int? quest_confirme, int? question_experimente)
+        {
+         
+            this.niveau = niveau;
+            this.question_junior = question_junior;
+            this.quest_confirme = quest_confirme;
+            this.question_experimente = question_experimente;
+        }
+
+     
         public string niveau { get; set; }
         public Nullable<int> question_junior { get; set; }
         public Nullable<int> quest_confirme { get; set; }

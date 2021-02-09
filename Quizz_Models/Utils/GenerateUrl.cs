@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 //using System.Windows.Forms;
 
-namespace ProjQuizz
+namespace Quizz_Models.Utils
 {
     class GenerateUrl
     {
@@ -18,7 +18,7 @@ namespace ProjQuizz
         /// Genere un code Alphanuerique unique 
         /// </summary>
         /// <returns></returns>
-        public string GenerateGuid() 
+        public static string GenerateGuid() 
         {
             Guid guid = Guid.NewGuid();
             string rString = Convert.ToBase64String(guid.ToByteArray());
@@ -42,11 +42,11 @@ namespace ProjQuizz
         /// Genere url 
         /// </summary>
         /// <returns>retourne un code unique pour Url du Quizz</returns>
-        public string GenerateCodeUrl()
+        public static string GenerateCodeUrl()
         {
             string UrlCode = GenerateGuid();
             UrlCode = RemoveSpecialCharacters(UrlCode);
-            // MessageBox.Show(RemoveSpecialCharacters(rString));
+            RemoveSpecialCharacters(UrlCode);
             return UrlCode;
          
         }

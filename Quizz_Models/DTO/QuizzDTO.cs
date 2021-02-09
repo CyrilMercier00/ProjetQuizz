@@ -9,5 +9,7 @@ namespace Quizz_Models.DTO
         public String Theme { get; set; }
         public String Complexite { get; set; }
 
+        public string Urlcode { get; set; }
+
     }
 }

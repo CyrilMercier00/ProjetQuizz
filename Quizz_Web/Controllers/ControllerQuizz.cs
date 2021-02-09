@@ -13,16 +13,18 @@ namespace Quizz_Web.Controllers
         ActionResult<QuizzDTO> valRetour;
 
         [HttpPost]
+           
         public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
         {
             valRetour = Ok ();
             try
             {
-                servQuizz.GenererQuizz (
+                servQuizz.GenererQuizz(
                     prmQuizzDTO.NbQuestions,
                     prmQuizzDTO.Complexite,
                     prmQuizzDTO.Theme,
-                    TimeSpan.Parse (prmQuizzDTO.Chrono)
+                    TimeSpan.Parse (prmQuizzDTO.Chrono),
+                    prmQuizzDTO.Urlcode
                     );
             }
             catch ( Exception e )
@@ -33,8 +35,27 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
+        [HttpGet]
+        [Route("{Urlcode}")]
+        public ActionResult<QuizzDTO> GetQuizzUrlCodeById(int prmIDQuizz)
+        {
+            valRetour = Ok();
+            try
+            {
+                QuizzDTO quizz = new QuizzDTO();
+                quizz = this.servQuizz.FindByID(prmIDQuizz);
+                return Ok(quizz.Urlcode);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                valRetour = NotFound();
+            }
+            return valRetour;
 
-
+        }
+         
+        
         [HttpDelete]
         public ActionResult<QuizzDTO> Delete ( [FromBody] int prmIDQuizz )
         {

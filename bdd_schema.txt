@@ -247,6 +247,12 @@ Insert into question (nv_complexite, enonce, a_repondu, fk_theme ,fk_complexite)
 ("confirme", "maité", 0, 1, 1),
 ("experimente", "des orlotans ", 0, 1, 1);
 
+-- INsert Quizz:
+INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES 
+(NULL, NULL, 'JqWeBiSlQ0mcJQqYXLqD5Q', '1', '1'),
+(NULL, NULL, 'TsMlAjEtNEWaZxTYZwk83w', '2', '3'),
+(NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2')
+
 select * from question;
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -6,7 +6,7 @@ namespace Quizz_Models
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
