@@ -1,0 +1,24 @@
+#btn-retour {
+  position: absolute;
+  float: left;
+}
+
+.container-component-assign {
+  font-size :xx-large;
+  align-items: center;
+}
+
+.container-assign {
+  width: 28rem;
+  margin: 2rem;
+}
+
+.container-assign select {
+  margin: 0.5rem 1rem;
+  width: 28rem;
+}
+
+.container-assign button {
+  width: 10rem;
+  font-size :x-large;
+}

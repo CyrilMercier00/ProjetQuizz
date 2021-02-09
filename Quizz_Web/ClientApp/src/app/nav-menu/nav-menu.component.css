@@ -1,12 +1,18 @@
+nav {
+  background-color: rgba(0, 0, 0, 0.50);
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: rgb(220, 220, 220);
 }
 
 html {
   font-size: 14px;
 }
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -15,4 +21,9 @@ html {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar li a {
+  color: rgb(220, 220, 220);
+  text-decoration: none;
 }
