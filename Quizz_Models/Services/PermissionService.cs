@@ -4,6 +4,7 @@ using System.Text;
 using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
+using Quizz_Models.Utils;
 
 namespace Quizz_Models.Services
 {
