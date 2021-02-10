@@ -3,24 +3,18 @@
   <form class="flex flex-vertical flex-center">
 
     <div class="container-input flex flex-vertical">
-      <label>Nombre de questions</label><br/>
+      <label>Nombre de questions</label><br />
       <input id="input-quest" type="text" name="input1" [(ngModel)]="inputNbQuestion" />
     </div>
 
     <div class="container-input .flex-align-i-center flex flex-vertical">
-      <label>Theme</label><br/>
-      <select>
-        <option value="C#">C#</option>
-        <option value="JS">JS</option>s
-      </select>
+      <label>Theme</label><br />
+      <select *ngFor="let theme of valRetourRequeteTheme">{{theme.nomTheme}}</select>
     </div>
 
     <div class="container-input .flex-align-i-center flex flex-vertical">
-      <label>Niveau</label><br/>
-      <select id="select-niveau">
-        <option value="debutant">Debutant</option>
-        <option value="confirme">Confirmé</option>s
-      </select>
+      <label>Niveau</label><br />
+      <select *ngFor="let complexite of valRetourRequeteComplex">{{complexite.niveau}}</select>
     </div>
 
     <button (click)="CreerQuizz()">Valider</button>

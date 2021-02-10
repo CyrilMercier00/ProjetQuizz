@@ -36,37 +36,13 @@ export class GenQuizzComponent implements OnInit
   {
     try
     {
-      this.valRetourRequeteTheme = this.getAllTheme();
-      this.valRetourRequeteComplex = this.getAllComplexite();
-
-      if (this.valRetourRequeteTheme != null)
-      {
-        {
-          if (this.valRetourRequeteComplex != null)
-          {
-            // Pour chaque niveau dans le data de la requete
-            for (var niveau in this.valRetourRequeteComplex)
-            {
-              // Creation & configuration d'une balise html
-              var element = document.createElement("option");                         // Element vide
-              element.setAttribute("value", this.valRetourRequeteComplex[ niveau ]);  // Ajouter attribut
-              document.getElementById("").appendChild(element);                       // Ajouter a la liste
-            }
-          } else
-          {
-            throw new Error('Probleme lors de la récuperation du niveau de complextité')
-          }
-        }
-      } else
-      {
-        throw new Error('Probleme de de la récuperation des themes ')
-      }
+      this.getAllTheme();
+      this.getAllComplexite();
     } catch (e)
     {
-      alert("Debug: " + e.message)
+      console.log(e.message);
     }
   }
-
 
 
   // Retourne l'id du compte qui a créer le quizz
@@ -88,26 +64,27 @@ export class GenQuizzComponent implements OnInit
 
 
   /* --- Retourne le json des themes disponibles--- */
-  getAllTheme()
+  async getAllTheme()
   {
-    let reponse = fetch(VariableGlobales.apiURLTheme, { method: "GET" })
+    let reponse = await fetch(VariableGlobales.apiURLTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        return json;
+        this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
       });
+    return reponse;
   }
 
 
 
   /* -- Retourne le json des complexites disponibles --- */
-  getAllComplexite()
+  async getAllComplexite()
   {
-    let reponse = fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    let reponse = await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        return JSON.parse(json);
+        this.valRetourRequeteComplex = JSON.parse(JSON.stringify(json));
       });
   }
 
