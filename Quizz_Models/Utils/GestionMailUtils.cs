@@ -100,10 +100,11 @@ namespace Quizz_Models.Utils
         {
             NomRecruteur = "nom recruteur";
             NomCandidat = "nom Candidat";
+            String Url = "https:localhost/5001/Api/Quizz/xxxxxxxxx";
 
             string htmlBody = "<html><body> Bonjour, <br><br>" + NomCandidat +
-                "<h1>Suivez le lien Suivant pour réaliser le test de compétence : </h1>" +
-                "<b>Pour information :</b><br><br>" +
+                "<h3>Suivez le lien Suivant pour réaliser le test de compétence :" + "<a href = \" " + Url + " \" >" + Url + "</ a ></h3>" +
+                "<b>Pour information :</b><br>" +
                 "<li>Le Test est à réliser sans limite de temps," +
                     "<br> un chronométre vous indiqueras le temps passer sur le test <br> " +
                     "et seras envoyer à votre recruteur. " +
@@ -118,6 +119,8 @@ namespace Quizz_Models.Utils
                 "</html></body> ";
 
             return htmlBody;
+
+
 
         }
         public static string contentMailRecruteur()
