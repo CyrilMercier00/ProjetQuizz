@@ -1,15 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
@@ -26,9 +22,6 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
     QuizzQuestionComponent,
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     GenQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
@@ -43,6 +36,7 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz

@@ -1,24 +1,28 @@
 #container-quizz .container-input {
   margin: 1rem;
-  min-width: 12rem;
+  min-width: 16rem;
   box-sizing: border-box;
 }
 
+/*
 #container-quizz form button {
   min-width: 10rem;
   margin-top: 3rem;
   padding: 0.5rem;
-  background-color: #415a77;
+  background-color: #21db4f;
   border-radius: 10px;
   border: 0;
   color: inherit;
   font-size: 18px;
   text-decoration: none;
 }
+*/
 
+/*
 #container-quizz .container-input button:hover {
-  background-color: #4b688a;
+  background-color: #1ceb4f;
 }
+*/
 
 #container-quizz .container-input button:active {
   position: relative;

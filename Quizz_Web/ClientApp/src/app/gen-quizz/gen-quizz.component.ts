@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VariableGlobales } from '../url_api';
-import { Quizz } from "../DTO/quizzDTO"
-import { JsonpClientBackend } from '@angular/common/http';
-import { isNull } from '@angular/compiler/src/output/output_ast';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-gen-quizz',
@@ -13,23 +11,46 @@ export class GenQuizzComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
   idCompte = this.getCompteID();    // ID du compte utilisateur
-  inputNbQuestion = 0;              // Nombre de questions affiché dans l'input
-  inputTheme = "c#";                //
-  inputComplexite = "Débutant";     //
-  quizz = new Quizz();              // Le DTO du quizz qui va etre envoyé a l'api
+  resultatForm: FormGroup;          // Contiens les valeurs du formulaire de creation
   valRetourRequeteTheme;            // Contiens le retour de la requete theme
   valRetourRequeteComplex;          // Contiens le retour de la requete complexite
 
 
 
-
   /* ------ Constructeur ------ */
-  constructor() { }
+  constructor(private builder: FormBuilder)
+  {
+    this.resultatForm = this.builder.group
+      ({
+        nbQuestions: [ '', Validators.required ],
+        theme: [ '', Validators.required ],
+        complexite: [ '', Validators.required ]
+      })
+  }
+
+
 
   ngOnInit()
   {
     this.setValeursAFfichage();
   }
+
+
+
+  /* --- Maj manuelle necessaire pour utiliser un select --- */
+  themeUpdate(prmEvent)
+  {
+    this.resultatForm.patchValue({ "theme": prmEvent.target.value });
+  }
+
+
+
+  complexUpdate(prmEvent)
+  {
+    this.resultatForm.patchValue({ "complexite": prmEvent.target.value });
+  }
+
+
 
   /* --- Insertion des valeurs dans les balises select --- */
   setValeursAFfichage()
@@ -45,6 +66,7 @@ export class GenQuizzComponent implements OnInit
   }
 
 
+
   // Retourne l'id du compte qui a créer le quizz
   getCompteID()
   {
@@ -53,34 +75,67 @@ export class GenQuizzComponent implements OnInit
 
 
 
+  onSubmit()
+  {
+    this.creerQuizz(this.resultatForm.value)
+  }
+
+
+
+  // Insertion du quizz & gestion erreur
+  creerQuizz(prmDataQuizz: string)
+  {
+    try
+    {
+
+      this.insertQuizz(prmDataQuizz);
+
+    } catch (e)
+    {
+      console.log(e);
+    }
+  }
+
+
 
   /* ------ Fonctions acces api ------ */
-  /* --- Envoie du DTO local a l'api pour insertion du quizz ---*/
-  CreerQuizz()
+  /* --- Envoie a l'api pour insertion du quizz ---*/
+  async insertQuizz(data: string)
   {
-    console.log("Creer quizz");
+    console.log("InsertQuizz: " + data);
+    let reponse = await fetch(VariableGlobales.apiURLQuizz,
+      {
+        method: "POST",
+        headers:
+        {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }
+    )
+    await reponse;
   }
 
 
 
   /* --- Retourne le json des themes disponibles--- */
-  async getAllTheme()
+  getAllTheme()
   {
-    let reponse = await fetch(VariableGlobales.apiURLTheme, { method: "GET" })
+    fetch(VariableGlobales.apiURLTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
         this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
       });
-    return reponse;
   }
 
 
 
   /* -- Retourne le json des complexites disponibles --- */
-  async getAllComplexite()
+  getAllComplexite()
   {
-    let reponse = await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    let reponse = fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
