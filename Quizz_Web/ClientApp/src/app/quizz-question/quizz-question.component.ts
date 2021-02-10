@@ -10,6 +10,12 @@ export class QuizzQuestionComponent implements OnInit {
 
   constructor() { }
 
+
+
+
+
+
+
   ngOnInit() {
   }
 

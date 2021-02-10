@@ -12,7 +12,8 @@
 	border:0;
   color:inherit;
   font-size: 18px;
-	text-decoration:none;
+  text-decoration:none;
+  max-width: 80%;
 }
 #quizz-question-container button:hover {
 	background-color:#4b688a ;
@@ -26,3 +27,8 @@
 #container-button {
 margin-top: 2rem;
 }
+
+#btn-validation {
+align-self: center;
+}
+

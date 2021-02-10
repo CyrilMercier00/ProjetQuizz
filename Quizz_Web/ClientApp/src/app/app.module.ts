@@ -14,9 +14,10 @@ import { QuizzQuestionComponent } from './quizz-question/quizz-question.componen
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
-import { InputComponent } from './generale/input/input.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { CompteFeatureModule } from './compte-feature/compte-feature.module';
+import { PermissionComponent } from './permission/permission.component';
+import { ChronometreComponent } from './chronometre/chronometre.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { CompteFeatureModule } from './compte-feature/compte-feature.module';
     AssignationQuizzComponent,
     GestionQuizzComponent,
     ResultatsComponent,
+    PermissionComponent,
+    ChronometreComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -37,14 +40,15 @@ import { CompteFeatureModule } from './compte-feature/compte-feature.module';
     FormsModule,
     CompteFeatureModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'quizz-question', component: QuizzQuestionComponent },
-      { path: 'gen-quizz', component: GenQuizzComponent },
-      { path: 'gest-quizz', component: GestionQuizzComponent },
-      { path: 'assign-quizz', component: AssignationQuizzComponent },
-      { path: 'Resultats', component: ResultatsComponent },
+      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
+      { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
+      { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
+      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },             // Page de
+      { path: 'chronometre', component: ChronometreComponent }            // Page de
+
+
     ])
   ],
   exports: [],

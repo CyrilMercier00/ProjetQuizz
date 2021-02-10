@@ -13,6 +13,7 @@ namespace Quizz_Models.Services
         public void InsertReponseCandidat ( ReponseCandidat prmReponseCandidat )
         {
             bdd_entities.ReponseCandidat.Add (prmReponseCandidat);
+            bdd_entities.SaveChanges ();
         }
     }
 }
