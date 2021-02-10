@@ -71,6 +71,7 @@ export class GenQuizzComponent implements OnInit
       .then((json) =>
       {
         this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
+        console.log(this.valRetourRequeteTheme);
       });
     return reponse;
   }
