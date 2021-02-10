@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System;
@@ -36,7 +37,7 @@ namespace Quizz_Web.Controllers
             valRetour = Ok();
             try
             {
-                QuizzDTO quizz = new QuizzDTO();
+                Quizz quizz = new Quizz();
                 quizz = this.servQuizz.FindByID(prmIDQuizz);
                 return Ok(quizz.Urlcode);
             }

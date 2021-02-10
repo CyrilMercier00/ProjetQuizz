@@ -15,6 +15,11 @@ namespace Quizz_Models.Services
 
         public ServiceQuizz() { }
 
+        public Quizz FindByID(int prmIDQuizz)
+        {
+            return repoQuizz.GetQuizzByID(prmIDQuizz);
+        }
+
         /// <summary>
         /// La methode va generer un quizz avec un nombre de question donné et associé au theme.
         /// </summary>
