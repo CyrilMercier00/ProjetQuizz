@@ -8,12 +8,12 @@ namespace Quizz_Models.Services
 {
     public class ServiceQuizz
     {
-        readonly ComplexiteRepository repoComplex = new ComplexiteRepository ();
-        readonly QuestionRepository repoQuest = new QuestionRepository ();
-        readonly QuizzRepository repoQuizz = new QuizzRepository ();
-        readonly ThemeRepository repoTheme = new ThemeRepository ();
+        readonly ComplexiteRepository repoComplex = new ComplexiteRepository();
+        readonly QuestionRepository repoQuest = new QuestionRepository();
+        readonly QuizzRepository repoQuizz = new QuizzRepository();
+        readonly ThemeRepository repoTheme = new ThemeRepository();
 
-        public ServiceQuizz () { }
+        public ServiceQuizz() { }
 
         /// <summary>
         /// La methode va generer un quizz avec un nombre de question donné et associé au theme.
@@ -23,30 +23,37 @@ namespace Quizz_Models.Services
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public void GenererQuizz ( int prmNBQuestion, String prmComplex, String prmTheme, TimeSpan prmChrono, string urlcode)
+        public void GenererQuizz ( QuizzDTO prmDTO )
         {
             try
             {
-                Theme leTheme = repoTheme.GetThemeByNom (prmTheme);                          // Objet theme pour ce param
-                TauxComplexite leTaux = repoComplex.GetComplexiteByNom(prmComplex);          // Objet taux de complexite pour ce param
-                List<Question> listQuestionCreation = new List<Question> ();                 // La liste des questions choisies
+                Theme leTheme = repoTheme.GetThemeByNom (prmDTO.Theme);                             // Objet theme pour ce param
+                TauxComplexite leTaux = repoComplex.GetComplexiteByNom (prmDTO.Complexite);         // Objet taux de complexite pour ce param
+                List<Question> listQuestionCreation = new List<Question> ();                        // La liste des questions choisies
 
                 // Le nouveau quizz
-                Quizz quizzCreation = new Quizz ()
+                Quizz quizzCreation = new Quizz()
                 {
                     FkTheme = leTheme.PkTheme,
                     FkComplexite = leTaux.PkComplexite,
-                    Chrono = prmChrono
+                    Chrono = TimeSpan.Parse (prmDTO.Chrono)
                 };
 
                 // Ajouter des questions dans la liste des questions
-                GenererQuestions (listQuestionCreation, prmNBQuestion, leTheme);
+                GenererQuestions (listQuestionCreation, prmDTO.NbQuestions, leTheme);
 
                 // Ajouter quizz dans la base
-                repoQuizz.InsertQuizz (quizzCreation);
+                repoQuizz.InsertQuizz(quizzCreation);
+
+                // Liaisons compte -> quizz
+                new CompteQuizz
+                {
+                    FkCompte = prmDTO.PKCompte,
+                    FkQuizz = quizzCreation.PkQuizz
+                };
 
                 // Liaisons question -> quizz
-                foreach ( Question q in listQuestionCreation )      // Pour chaques questions
+            foreach (Question q in listQuestionCreation)      // Pour chaques questions
                 {
                     QuizzQuestion qq = new QuizzQuestion            // Nouvel objet liaison
                     {
@@ -54,56 +61,52 @@ namespace Quizz_Models.Services
                         FkQuizzNavigation = quizzCreation           // PK du quizz généré
                     };
 
-                    q.QuizzQuestion.Add (qq);                       // Ajouter a la liste d'objet de liaisons
+                    q.QuizzQuestion.Add(qq);                       // Ajouter a la liste d'objet de liaisons
                 }
+                repoQuest.updateLiaison(listQuestionCreation);
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
-                Console.WriteLine (e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
-        public QuizzDTO FindByID(int prmIDQuizz)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void GenererQuestions ( List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions )
+        private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions)
         {
             // Gen questions junior
-            repoQuest.GenererQuestions (
+            repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.junior),
+                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.junior),
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.junior
             );
 
             // Gen questions confirmé
-            repoQuest.GenererQuestions (
+            repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.confirme),
+                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.confirme),
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.confirme
             );
 
             // Gen questions experimenté
-            repoQuest.GenererQuestions (
+            repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion (prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.experimente),
+                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.experimente),
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.experimente
             );
         }
 
-        public void SupprimerQuizz ( int prmIDQuizz )
+        public void SupprimerQuizz(int prmIDQuizz)
         {
             try
             {
-                repoQuizz.SupprimerQuizz (repoQuizz.GetQuizzByID (prmIDQuizz));
+                repoQuizz.SupprimerQuizz(repoQuizz.GetQuizzByID(prmIDQuizz));
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
-                Console.WriteLine (e.Message);
+                Console.WriteLine(e.Message);
             }
         }
 
@@ -114,10 +117,10 @@ namespace Quizz_Models.Services
         /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
         /// <returns></returns>
 
-        public int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
+        private int CalculerNombreQuestion ( int prmNBQuestionTotal, Enum prmNomComplex )
         {
 
-            String complex = prmNomComplex.ToString ().ToLower ();
+            String complex = prmNomComplex.ToString().ToLower();
 
 
             var valRet = complex switch
@@ -128,11 +131,11 @@ namespace Quizz_Models.Services
                 _ => throw new Exception ("Le taux de complexitée n'existe pas"),
             };
 
-            String s1 = prmNBQuestionTotal.ToString ();
-            String s2 = "0." + valRet.ToString ();
-            float n1 = float.Parse (s1);
-            float n2 = float.Parse (s2.Replace (".", ","));
-            return (int) Math.Round (n1 * n2);
+            String s1 = prmNBQuestionTotal.ToString();
+            String s2 = "0." + valRet.ToString();
+            float n1 = float.Parse(s1);
+            float n2 = float.Parse(s2.Replace(".", ","));
+            return (int)Math.Round(n1 * n2);
         }
 
     }

@@ -19,13 +19,7 @@ namespace Quizz_Web.Controllers
             valRetour = Ok ();
             try
             {
-                servQuizz.GenererQuizz(
-                    prmQuizzDTO.NbQuestions,
-                    prmQuizzDTO.Complexite,
-                    prmQuizzDTO.Theme,
-                    TimeSpan.Parse (prmQuizzDTO.Chrono),
-                    prmQuizzDTO.Urlcode
-                    );
+                servQuizz.GenererQuizz (prmQuizzDTO);
             }
             catch ( Exception e )
             {

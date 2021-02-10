@@ -18,6 +18,15 @@ namespace Quizz_Models.Services
 
         }
 
+        public void UpdateListQuestion (List<Question> prmListQuestion)
+        {
+            foreach (Question q in prmListQuestion)
+            {
+                bdd_entities.Update(q);
+            }
+            bdd_entities.SaveChanges();
+        }
+
         public void InsertNouvelleQuestion ( Question prmQuestion )
         {
             bdd_entities.Question.Add (prmQuestion);
