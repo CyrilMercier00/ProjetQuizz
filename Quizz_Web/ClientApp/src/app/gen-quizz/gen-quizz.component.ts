@@ -4,9 +4,10 @@ import { VariableGlobales } from '../globales';
 @Component({
   selector: 'app-gen-quizz',
   templateUrl: './gen-quizz.component.html',
-  styleUrls: ['./gen-quizz.component.css', '../app.flex-util.css']
+  styleUrls: [ './gen-quizz.component.css', '../app.flex-util.css' ]
 })
-export class GenQuizzComponent implements OnInit {
+export class GenQuizzComponent implements OnInit
+{
 
   urlGetTheme = VariableGlobales.apiURL + "theme";
   urlGetComplexite = VariableGlobales.apiURL + "niveau";
@@ -19,30 +20,41 @@ export class GenQuizzComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
+    this.getAllTheme();
+    this.getAllComplexite();
+
+
+
   }
 
-  getAllTheme() {
+  async getAllTheme()
+  {
 
-    let reponse = fetch(this.urlGetTheme, { method: "GET" })
+    let reponse = await fetch(this.urlGetTheme, { method: "GET" })
       .then((response) => response.json())
-      .then((json) => {
+      .then((json) =>
+      {
         console.log(json);
       });
 
   }
 
-  getAllComplexite() {
+  async getAllComplexite()
+  {
 
-    let reponse = fetch(this.urlGetComplexite, { method: "GET" })
+    let reponse = await fetch(this.urlGetComplexite, { method: "GET" })
       .then((response) => response.json())
-      .then((json) => {
+      .then((json) =>
+      {
         console.log(json);
       });
 
   }
 
-  CreerQuizz() {
+  CreerQuizz()
+  {
     console.log("Creer quizz");
   }
 
