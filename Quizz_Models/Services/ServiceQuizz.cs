@@ -63,6 +63,7 @@ namespace Quizz_Models.Services
 
                     q.QuizzQuestion.Add(qq);                       // Ajouter a la liste d'objet de liaisons
                 }
+                repoQuest.updateLiaison(listQuestionCreation);
             }
             catch (Exception e)
             {

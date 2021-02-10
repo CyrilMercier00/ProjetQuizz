@@ -27,5 +27,6 @@ namespace Quizz_Models.Services
             bdd_entities.Quizz.Remove (prmQuizz);
             bdd_entities.SaveChanges ();
         }
+
     }
 }
