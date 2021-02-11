@@ -1,17 +1,21 @@
-<div class="container-component-assign">
-  <button class="btn-retour" [routerLink]="['/gest-quizz']">Retour</button>
+<div class="container-component-assign flex flex-vertical">
+  <button id="btn-retour" [routerLink]="['/gen-quizz']">Retour</button>
 
   <div class="container-assign flex flex-vertical flex-align-i-center">
 
-    <label id="nom-candidat">Johnny Label</label>
+    <label id="nom-candidat">A qui assigner ce quizz {{dataQuizz.formValue.theme | titlecase }}
+      {{dataQuizz.formValue.complexite |
+      titlecase}}</label>
 
-    <select id="select-candidat">
-      <option>Snoopy</option>
-      <option>Un chien aven un joli polo bleu</option>
-      <option>Le géant vert (celui des boites de conserve la)</option>
-    </select>
+    <div class="mybox">
+      <span class="myarrow"></span>
+      <select id="select-candidat">
+        <option *ngFor="let candidat of valRetourRequeteCompteAssigne">{{candidat.nom | titlecase}}, {{candidat.mail}}
+        </option>
+      </select>
+    </div>
 
-    <button id="btn-valider">Valider</button>
+    <button id="btn-valider" class="btn-valid">Valider</button>
 
   </div>
 </div>
