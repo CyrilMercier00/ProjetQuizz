@@ -17,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
 import { CompteComponent } from './compte-feature/compte/compte.component';
+import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
     CompteComponent,
     ComptesComponent,
     FormulaireConnexionComponent,
+    FormulaireCreationCompteComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

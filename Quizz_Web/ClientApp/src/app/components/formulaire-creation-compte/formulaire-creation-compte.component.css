@@ -1,11 +1,4 @@
-.ligneDelimitation{
-    width: 330px;
-    height: 0.08em;
-    background-color: grey;
-    margin-left: 1em;
-}
-
-.home-form{
+.creation-compte{
     background-color: white;
     display: table;
     border-radius: 8px;
@@ -14,12 +7,12 @@
     margin-top: 4em;
 }
 
-.home-input{
+.creationcompte-input{
     display: table-row;
     border-radius: 8px;
 }
 
-.home-input input{
+.creationcompte-input input{
     width: 350px;
     height: 45px;
     margin: 7px;
@@ -29,7 +22,7 @@
     border-radius: 10px;
 }
 
-.home-input input:focus{
+.creationcompte-input input:focus{
     outline-width: 0;
     border-radius: 10px;
     border-color: rgb(83, 138, 248);
