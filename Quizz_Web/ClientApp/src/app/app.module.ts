@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { HomeComponent } from './home/home.component'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
@@ -31,6 +31,7 @@ import { CompteFeatureModule } from './compte-feature/compte-feature.module';
     PermissionComponent,
     ChronometreComponent,
     PageNotFoundComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -49,8 +50,10 @@ import { CompteFeatureModule } from './compte-feature/compte-feature.module';
       { path: 'chronometre', component: ChronometreComponent },           // Page de
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },             // Page de
+      { path: 'chronometre', component: ChronometreComponent },           // Page de
+      { path: '', component: HomeComponent },                             // Page de
       { path: '**', component: PageNotFoundComponent },                   // Wildcard route for a 404 page
-
     ]),
   ],
   exports: [
