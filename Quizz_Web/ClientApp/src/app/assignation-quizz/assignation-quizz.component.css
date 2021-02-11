@@ -1,16 +1,23 @@
 #btn-retour {
   position: absolute;
   float: left;
+  border-radius: 10px;
+  background-color: #EEB728;
+  border: 0px;
+  color: white;
+  padding: 0.5rem 2rem;
+  font-size: large;
 }
 
 .container-component-assign {
-  font-size :xx-large;
-  align-items: center;
+  font-size: x-large;
 }
 
 .container-assign {
   width: 28rem;
   margin: 2rem;
+  margin-top: 10%;
+  align-self: center;
 }
 
 .container-assign select {
@@ -19,6 +26,28 @@
 }
 
 .container-assign button {
-  width: 10rem;
-  font-size :x-large;
+  font-size: x-large;
+}
+
+.container-assign select {
+  background-color: rgba(0, 0, 0, 0.33);
+  border: unset;
+  appearance: none;
+  border-radius: 4px;
+}
+
+.container-assign .mybox {
+  position: relative;
+  display: inline-block;
+}
+
+.container-assign .mybox .myarrow {
+  width: 26px;
+  height: 36px;
+  position: absolute;
+  display: inline-block;
+  top: 8px;
+  right: 16px;
+  background: url(../../assets/Images/arrow-down.svg) center / 90% no-repeat;
+  pointer-events: none;
 }
