@@ -4,7 +4,7 @@
 ------------------------------------------------------------
 */
 import { Component, OnInit } from '@angular/core';
-import { VariableGlobales } from '../url_api';
+import { VariableGlobales } from '../../url_api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Router } from "@angular/router"
@@ -14,7 +14,7 @@ import { Router } from "@angular/router"
 @Component({
   selector: 'app-gen-quizz',
   templateUrl: './gen-quizz.component.html',
-  styleUrls: [ './gen-quizz.component.css', '../app.flex-util.css' ]
+  styleUrls: [ './gen-quizz.component.css', '../../app.flex-util.css' ]
 })
 
 

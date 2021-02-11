@@ -7,7 +7,10 @@
       <input type="number" formControlName="nbQuestions" placeholder="Nombre de questions" />
     </div>
 
+    <app-select-niveau></app-select-niveau>
+    <app-select-theme (newItemEvent)="valChoisie($event)"></app-select-theme>
 
+    <!---
     <div class="container-input .flex-align-i-center flex flex-vertical">
       <label>Theme</label><br />
       <div class="mybox">
@@ -30,7 +33,7 @@
         </select>
       </div>
     </div>
-
+-->
     <button class='btn-valid'  type=submit [disabled]="resultatForm.invalid">Valider</button>
 
   </form>

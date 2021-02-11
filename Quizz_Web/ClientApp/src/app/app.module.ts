@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { QuizzQuestionComponent } from './quizz-question/quizz-question.component';
-import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
+import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
+import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
-import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
+import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
@@ -17,6 +17,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { CompteRoutingModule } from './compte-feature/compte-routing.module';
 import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
+import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
+import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { FormulaireConnexionComponent } from './components/formulaire-connexion/
     PageNotFoundComponent,
     HomeComponent,
     FormulaireConnexionComponent,
+    SelectThemeComponent,
+    SelectNiveauComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
