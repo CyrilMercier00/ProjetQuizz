@@ -31,6 +31,11 @@
   min-width: 16rem;
 }
 
+#container-quizz .container-input input {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
 #container-quizz .container-input select {
   padding-top: 11px !important;
 }
