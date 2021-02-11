@@ -31,9 +31,9 @@ import { FormulaireConnexionComponent } from './components/formulaire-connexion/
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
-        PageNotFoundComponent,
-        HomeComponent,
-        FormulaireConnexionComponent,
+    PageNotFoundComponent,
+    HomeComponent,
+    FormulaireConnexionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
