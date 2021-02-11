@@ -1,0 +1,68 @@
+.home-form{
+    background-color: white;
+    display: table;
+    border-radius: 8px;
+    box-shadow: 0 0 1em 0.1em white;
+
+    margin-top: 8em;
+}
+
+.home-input{
+    display: table-row;
+    border-radius: 8px;
+}
+
+.home-input input{
+    width: 350px;
+    height: 45px;
+    margin: 7px;
+    padding-left: 25px;
+    border-color: rgb(180, 180, 180);
+    border-width: 0.03em;
+    border-radius: 10px;
+}
+
+.home-input input:focus{
+    outline-width: 0;
+    border-radius: 10px;
+    border-color: rgb(83, 138, 248);
+    box-shadow: 0 0 0.1em 0.03em rgb(83, 138, 248);
+}
+
+.connexion-button{
+    background-color: rgb(66, 103, 178);
+    border-radius: 8px;
+    width: 350px;
+    height: 45px;
+    margin: 7px;
+    transition: background-color 1s;
+    color: white;
+}
+
+.connexion-button:hover{
+    background-color: rgb(41, 75, 143);
+}
+
+.rectangle-href{
+    display: flex;
+    background-color: rgb(4, 153, 4);
+    width: 350px;
+    height: 45px;
+    margin: 7px;
+    border-radius: 8px;
+    justify-content: center;
+    transition: background-color 1s;
+}
+
+.rectangle-href:hover{
+    background-color: rgb(6, 117, 6);
+}
+
+.button-href{
+    margin-top: 10px;
+    color: white;
+}
+
+.button-href:hover{
+    text-decoration: none;
+}
