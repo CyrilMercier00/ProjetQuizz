@@ -16,7 +16,7 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
-import { PageNotFoundComponent } from './page-not-found-component/page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
