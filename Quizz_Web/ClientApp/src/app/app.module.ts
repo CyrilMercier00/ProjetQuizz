@@ -10,13 +10,14 @@ import { QuizzQuestionComponent } from './quizz-question/quizz-question.componen
 import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { InputComponent } from './input/input.component';
-import { BoutonValidationComponent } from './bouton-validation/bouton-validation.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { InputComponent } from './compte-feature/input/input.component';
+import { BoutonValidationComponent } from 'src/app/compte-feature/bouton-validation/bouton-validation.component';
+import { CompteRoutingModule } from './compte-feature/compte-routing.molule';
+import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     GenQuizzComponent,
     AssignationQuizzComponent,
     GestionQuizzComponent,
-    ConnexionComponent,
-    InputComponent,
-    BoutonValidationComponent,
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
@@ -39,19 +37,23 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    CompteRoutingModule,
+    CompteFeatureModule,
     RouterModule.forRoot([
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz
-      { path: 'login', component: ConnexionComponent },                   // Page de connexion
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },             // Page de
       { path: 'chronometre', component: ChronometreComponent },           // Page de
-      { path: '**', component: PageNotFoundComponent }                    // Wildcard route for a 404 page            // Page de
+      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
+      { path: '**', component: PageNotFoundComponent },                   // Wildcard route for a 404 page
 
-
-    ])
+    ]),
+  ],
+  exports: [
   ],
   providers: [],
   bootstrap: [ AppComponent ]
