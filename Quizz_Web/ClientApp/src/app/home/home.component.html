@@ -1,20 +1,42 @@
 <h1>Bienvenue sur notre super site de quizz !</h1>
 
-<form class="home-form">
-  <div class="home-input">
-    <input type="text" id="home-loginInput" placeholder="Adresse e-mail">
-  </div>
-  <div class="home-input">
-    <input type="text" id="home-passwordInput" placeholder="Mot de passe">
-  </div>
-  <div>
-    <button class="connexion-button" type="submit">Connexion</button>
-  </div>
-  
-  <div class="rectangle-href" (click)="redirectToHome()">
-    <a class="button-href" role="button" [routerLink]="['/']">Créer un compte</a>
-  </div>
-</form>
+<div>
+  <form class="login-form">
+    <div class="home-form">
+      <div class="home-input">
+        <input type="text" id="home-loginInput" placeholder="Adresse e-mail">
+      </div>
+      <div class="home-input">
+        <input type="text" id="home-passwordInput" placeholder="Mot de passe">
+      </div>
+      <div>
+        <button class="connexion-button" type="submit">Connexion</button>
+      </div>
+      <div class="ligneDelimitation"></div>
+      <div class="rectangle-href" (click)="redirectToHome()">
+        <a class="button-href" role="button" [routerLink]="['/']">Créer un compte</a>
+      </div>
+    </div>  
+  </form>
+  <!--  
+  <form class="newAccountForm">
+    <div class="home-form">
+      <div class="home-input">
+        <input type="text" id="home-loginInput" placeholder="Adresse e-mail">
+      </div>
+      <div class="home-input">
+        <input type="text" id="home-passwordInput" placeholder="Mot de passe">
+      </div>
+      <div>
+        <button class="connexion-button" type="submit">Connexion</button>
+      </div>
+      <div class="ligneDelimitation"></div>
+      <div class="rectangle-href" (click)="redirectToHome()">
+        <a class="button-href" role="button" [routerLink]="['/']">Créer un compte</a>
+      </div>
+    </div>
+  </form>-->
+</div>
 
 
 <!--
