@@ -7,20 +7,28 @@
       <input type="text" formControlName="nbQuestions" placeholder="Nombre de questions" />
     </div>
 
+
     <div class="container-input .flex-align-i-center flex flex-vertical">
       <label>Theme</label><br />
-      <select formControlName="theme" (change)="themeUpdate($event)">
-        <option disabled selected value class="hidden"> Theme du quizz </option>
-        <option *ngFor="let theme of valRetourRequeteTheme$">{{theme.nomTheme| titlecase}}</option>
-      </select>
+      <div class="mybox">
+        <span class="myarrow"></span>
+        <select formControlName="theme" (change)="themeUpdate($event)">
+          <option disabled selected value class="hidden"> Theme du quizz </option>
+          <option *ngFor="let theme of valRetourRequeteTheme$">{{theme.nomTheme| titlecase}}</option>
+        </select>
+      </div>
     </div>
+
 
     <div class="container-input .flex-align-i-center flex flex-vertical">
       <label>Niveau</label><br />
-      <select formControlName="complexite" (change)="complexUpdate($event)">
-        <option disabled selected value class="hidden"> Niveau de difficulté </option>
-        <option *ngFor="let complexite of valRetourRequeteComplex$">{{complexite.niveau | titlecase }}</option>
-      </select>
+      <div class="mybox">
+        <span class="myarrow"></span>
+        <select formControlName="complexite" (change)="complexUpdate($event)">
+          <option disabled selected value class="hidden"> Niveau de difficulté </option>
+          <option *ngFor="let complexite of valRetourRequeteComplex$">{{complexite.niveau | titlecase }}</option>
+        </select>
+      </div>
     </div>
 
     <button class='btn-valid'  type=submit [disabled]="resultatForm.invalid">Valider</button>
