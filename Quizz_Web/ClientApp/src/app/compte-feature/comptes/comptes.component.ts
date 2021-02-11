@@ -14,10 +14,8 @@ export class ComptesComponent implements OnInit {
   constructor(private compteService : CompteService) { }
 
   ngOnInit(): void {
-    console.log('coucou');
     this.compteService.getAll().subscribe(response => {
       this.comptes = response;
-      console.log(this.comptes);
     });
   }
 }
