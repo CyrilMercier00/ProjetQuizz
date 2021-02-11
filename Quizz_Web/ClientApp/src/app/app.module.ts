@@ -14,11 +14,11 @@ import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CompteRoutingModule } from './compte-feature/compte-routing.module';
-import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
+import { ComptesComponent } from './compte-feature/comptes/comptes.component';
+import { CompteComponent } from './compte-feature/compte/compte.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,8 @@ import { SelectNiveauComponent } from './components/select/select-niveau/select-
     ChronometreComponent,
     PageNotFoundComponent,
     HomeComponent,
+    CompteComponent,
+    ComptesComponent,
     FormulaireConnexionComponent,
     SelectThemeComponent,
     SelectNiveauComponent,
@@ -42,8 +44,6 @@ import { SelectNiveauComponent } from './components/select/select-niveau/select-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    CompteRoutingModule,
-    CompteFeatureModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },                             // Page d'accueil
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
@@ -53,6 +53,7 @@ import { SelectNiveauComponent } from './components/select/select-niveau/select-
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
       { path: 'permission', component: PermissionComponent },             //
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
+      { path: 'comptes', component: ComptesComponent },
       { path: '**', component: PageNotFoundComponent },                   // Wildcard route for a 404 page
     ]),
   ],
