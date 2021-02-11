@@ -1,29 +1,24 @@
-nav {
+.navbar-container {
   background-color: rgba(0, 0, 0, 0.50);
+  font-size: x-large;
+  overflow: visible;
 }
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  color: rgb(220, 220, 220);
+.navbar-inner-container {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-.navbar li a {
-  color: rgb(220, 220, 220);
+.navbar-container li a {
+  color: whitesmoke;
   text-decoration: none;
+  padding: 1rem;
+  margin: 0 0.5rem 0 0;
+}
+
+.navbar-container li a:hover {
+  color: white;
 }
