@@ -14,9 +14,7 @@ import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { InputComponent } from './compte-feature/input/input.component';
-import { BoutonValidationComponent } from 'src/app/compte-feature/bouton-validation/bouton-validation.component';
-import { CompteRoutingModule } from './compte-feature/compte-routing.molule';
+import { CompteRoutingModule } from './compte-feature/compte-routing.module';
 import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
 
@@ -31,9 +29,9 @@ import { FormulaireConnexionComponent } from './components/formulaire-connexion/
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
-        PageNotFoundComponent,
-        HomeComponent,
-        FormulaireConnexionComponent,
+    PageNotFoundComponent,
+    HomeComponent,
+    FormulaireConnexionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
