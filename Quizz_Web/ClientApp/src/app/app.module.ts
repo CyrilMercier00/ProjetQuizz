@@ -41,18 +41,14 @@ import { FormulaireConnexionComponent } from './components/formulaire-connexion/
     CompteRoutingModule,
     CompteFeatureModule,
     RouterModule.forRoot([
-      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
+      { path: '', component: HomeComponent },                             // Page d'accueil
+      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: 'chronometre', component: ChronometreComponent },           //
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
-      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
+      { path: 'permission', component: PermissionComponent },             //
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },             // Page de
-      { path: 'chronometre', component: ChronometreComponent },           // Page de
-      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
-      { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },             // Page de
-      { path: 'chronometre', component: ChronometreComponent },           // Page de
-      { path: '', component: HomeComponent },                             // Page de
       { path: '**', component: PageNotFoundComponent },                   // Wildcard route for a 404 page
     ]),
   ],
