@@ -16,7 +16,6 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
-import { CapitalizePipe } from './capitalize.pipe';
 import { PageNotFoundComponent } from './page-not-found-component/page-not-found.component';
 
 @NgModule({
@@ -33,7 +32,6 @@ import { PageNotFoundComponent } from './page-not-found-component/page-not-found
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
-    CapitalizePipe,
     PageNotFoundComponent,
   ],
   imports: [
