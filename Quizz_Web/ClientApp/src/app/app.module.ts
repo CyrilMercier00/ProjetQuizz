@@ -16,6 +16,8 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
+import { CapitalizePipe } from './capitalize.pipe';
+import { PageNotFoundComponent } from './page-not-found-component/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
+    CapitalizePipe,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,11 +45,12 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
-      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz
       { path: 'login', component: ConnexionComponent },                   // Page de connexion
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },             // Page de
-      { path: 'chronometre', component: ChronometreComponent }            // Page de
+      { path: 'chronometre', component: ChronometreComponent },           // Page de
+      { path: '**', component: PageNotFoundComponent }                    // Wildcard route for a 404 page            // Page de
 
 
     ])
