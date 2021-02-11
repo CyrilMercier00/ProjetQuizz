@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { ConnexionComponent } from './connexion/connexion.component';
-import { GeneraleModule } from '../generale/generale.module';
 import { ComptesComponent } from './comptes/comptes.component';
 import { CompteComponent } from './compte/compte.component';
+import { CompteRoutingModule } from './compte-routing.molule';
+import { InputComponent } from './input/input.component';
+import { BoutonValidationComponent } from './bouton-validation/bouton-validation.component';
 
 @NgModule({
   declarations: [
     ConnexionComponent,
     ComptesComponent,
-    CompteComponent
+    CompteComponent,
+    InputComponent,
+    BoutonValidationComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forRoot([
-      { path: 'login', component: ConnexionComponent },
-      { path: 'comptes', component: ComptesComponent }
-    ]),
-    GeneraleModule
+    CompteRoutingModule
   ],
   exports: [
   ]

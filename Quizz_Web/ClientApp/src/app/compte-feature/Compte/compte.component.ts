@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Compte } from './compte.model';
 
 @Component({
@@ -8,11 +8,10 @@ import { Compte } from './compte.model';
 })
 export class CompteComponent implements OnInit {
 
-  _compte : Compte;
+  @Input() compte : Compte;
 
-  constructor(private compte : Compte) {
-    this._compte = compte;
-   }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

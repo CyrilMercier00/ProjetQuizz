@@ -15,9 +15,12 @@ import { GenQuizzComponent } from './gen-quizz/gen-quizz.component';
 import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
-import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
+import { InputComponent } from './compte-feature/input/input.component';
+import { BoutonValidationComponent } from 'src/app/compte-feature/bouton-validation/bouton-validation.component';
+import { CompteRoutingModule } from './compte-feature/compte-routing.molule';
+import { CompteFeatureModule } from './compte-feature/compte-feature.module';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    CompteRoutingModule,
     CompteFeatureModule,
     RouterModule.forRoot([
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
@@ -47,11 +51,10 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },             // Page de
       { path: 'chronometre', component: ChronometreComponent }            // Page de
-
-
-    ])
+    ]),
   ],
-  exports: [],
+  exports: [
+  ],
   providers: [],
   bootstrap: [ AppComponent ]
 })
