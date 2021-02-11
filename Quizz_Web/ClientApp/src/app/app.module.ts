@@ -18,6 +18,7 @@ import { InputComponent } from './compte-feature/input/input.component';
 import { BoutonValidationComponent } from 'src/app/compte-feature/bouton-validation/bouton-validation.component';
 import { CompteRoutingModule } from './compte-feature/compte-routing.molule';
 import { CompteFeatureModule } from './compte-feature/compte-feature.module';
+import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +31,9 @@ import { CompteFeatureModule } from './compte-feature/compte-feature.module';
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
-    PageNotFoundComponent,
-    HomeComponent,
+        PageNotFoundComponent,
+        HomeComponent,
+        FormulaireConnexionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
