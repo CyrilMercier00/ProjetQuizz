@@ -1,24 +1,36 @@
+/*
+------------------------------------------------------------
+    TODO : Recup de l'id du compte & l'envoyer avec le quizz
+------------------------------------------------------------
+*/
 import { Component, OnInit } from '@angular/core';
 import { VariableGlobales } from '../url_api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Router } from "@angular/router"
+
+
 
 @Component({
   selector: 'app-gen-quizz',
   templateUrl: './gen-quizz.component.html',
   styleUrls: [ './gen-quizz.component.css', '../app.flex-util.css' ]
 })
+
+
+
 export class GenQuizzComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
-  idCompte = this.getCompteID();    // ID du compte utilisateur
-  resultatForm: FormGroup;          // Contiens les valeurs du formulaire de creation
-  valRetourRequeteTheme;            // Contiens le retour de la requete theme
-  valRetourRequeteComplex;          // Contiens le retour de la requete complexite
+  idCompte = this.getCompteID();                // ID du compte utilisateur
+  resultatForm: FormGroup;                      // Contiens le formulaire de creation de quizz
+  valRetourRequeteTheme$: Observable<any>;;     // Contiens le retour de la requete theme
+  valRetourRequeteComplex$: Observable<any>;    // Contiens le retour de la requete complexite
 
 
 
   /* ------ Constructeur ------ */
-  constructor(private builder: FormBuilder)
+  constructor(private builder: FormBuilder, private router: Router)
   {
     this.resultatForm = this.builder.group
       ({
@@ -30,14 +42,15 @@ export class GenQuizzComponent implements OnInit
 
 
 
+  /* --- Methodes Angular --- */
   ngOnInit()
   {
     this.setValeursAFfichage();
   }
 
 
-
-  /* --- Maj manuelle necessaire pour utiliser un select --- */
+  /* ------ Fonctions ------ */
+  /* --- Fonction maj form manuelle pour les select --- */
   themeUpdate(prmEvent)
   {
     this.resultatForm.patchValue({ "theme": prmEvent.target.value });
@@ -67,58 +80,23 @@ export class GenQuizzComponent implements OnInit
 
 
 
-  // Retourne l'id du compte qui a créer le quizz
+  /* ---  Retourne l'id du compte qui a créer le quizz --- */
   getCompteID()
-  {
+  { /* ---------- TODO ---------- */
     return 1;
   }
 
 
 
+  /* --- Envoie a la page suivante avec les données du formulaire --- */
   onSubmit()
   {
-    this.creerQuizz(this.resultatForm.value)
-  }
-
-
-
-  // Insertion du quizz & gestion erreur
-  creerQuizz(prmDataQuizz: string)
-  {
-    try
-    {
-
-      this.insertQuizz(prmDataQuizz);
-
-    } catch (e)
-    {
-      console.log(e);
-    }
+    this.router.navigate([ '/assign-quizz' ], this.resultatForm.value)
   }
 
 
 
   /* ------ Fonctions acces api ------ */
-  /* --- Envoie a l'api pour insertion du quizz ---*/
-  async insertQuizz(data: string)
-  {
-    console.log("InsertQuizz: " + data);
-    let reponse = await fetch(VariableGlobales.apiURLQuizz,
-      {
-        method: "POST",
-        headers:
-        {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }
-    )
-    await reponse;
-  }
-
-
-
   /* --- Retourne le json des themes disponibles--- */
   getAllTheme()
   {
@@ -126,7 +104,7 @@ export class GenQuizzComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteTheme$ = JSON.parse(JSON.stringify(json));
       });
   }
 
@@ -139,8 +117,11 @@ export class GenQuizzComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteComplex = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteComplex$ = JSON.parse(JSON.stringify(json));
       });
   }
+
+
+
 
 }
