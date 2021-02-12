@@ -24,8 +24,6 @@ export class GenQuizzComponent implements OnInit
   /* ------ Declaration des variables ------ */
   idCompte = this.getCompteID();                // ID du compte utilisateur
   resultatForm: FormGroup;                      // Contiens le formulaire de creation de quizz
-  valRetourRequeteTheme$: Observable<any>;;     // Contiens le retour de la requete theme
-  valRetourRequeteComplex$: Observable<any>;    // Contiens le retour de la requete complexite
 
 
 
@@ -45,38 +43,22 @@ export class GenQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    this.setValeursAFfichage();
   }
 
 
   /* ------ Fonctions ------ */
   /* --- Change la valeur du formulaire local avec la valeur passée par l'enfant --- */
-  setValeurFormTheme(prmEvent)
+  setValeurFormTheme(prmValue: string)
   {
-    this.resultatForm.patchValue({ "theme": prmEvent.target.value });
+    this.resultatForm.patchValue({ "theme": prmValue });
   }
 
 
 
   /* --- Change la valeur du formulaire local avec la valeur passée par l'enfant --- */
-  setValeurFormComplex(prmEvent)
+  setValeurFormNiveau(prmValue: string)
   {
-    this.resultatForm.patchValue({ "complexite": prmEvent.target.value });
-  }
-
-
-
-  /* --- Insertion des valeurs dans les balises select --- */
-  setValeursAFfichage()
-  {
-    try
-    {
-      this.getAllTheme();
-      this.getAllComplexite();
-    } catch (e)
-    {
-      console.log(e.message);
-    }
+    this.resultatForm.patchValue({ "complexite": prmValue });
   }
 
 
@@ -94,35 +76,4 @@ export class GenQuizzComponent implements OnInit
   {
     this.router.navigate(['/assign-quizz'], { state: { formValue: this.resultatForm.value, idCompte: this.idCompte } });
   }
-
-
-
-  /* ------ Fonctions acces api ------ */
-  /* --- Retourne le json des themes disponibles--- */
-  getAllTheme()
-  {
-    fetch(VariableGlobales.apiURLTheme, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.valRetourRequeteTheme$ = JSON.parse(JSON.stringify(json));
-      });
-  }
-
-
-
-  /* -- Retourne le json des complexites disponibles --- */
-  getAllComplexite()
-  {
-    let reponse = fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.valRetourRequeteComplex$ = JSON.parse(JSON.stringify(json));
-      });
-  }
-
-
-
-
 }

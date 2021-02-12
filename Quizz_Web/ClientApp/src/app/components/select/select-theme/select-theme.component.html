@@ -1,8 +1,12 @@
-<label>Theme</label><br />
-<div class="mybox">
-  <span class="myarrow"></span>
-  <select formControlName="theme" (change)="themeUpdate($event)">
-    <option disabled selected value class="hidden"> Theme du quizz </option>
-    <option *ngFor="let theme of valRetourRequeteTheme$">{{theme.nomTheme| titlecase}}</option>
-  </select>
+<div class="container">
+  <div class="title">Theme</div>
+  <div class="mybox">
+    <span class="myarrow"></span>
+    <select (change)="themeUpdate($event)">
+      <option disabled selected value class="hidden">Niveau de difficulté</option>
+      <option *ngFor="let themes of valRetourRequeteTheme">
+        {{ themes.nomTheme | titlecase }}
+      </option>
+    </select>
+  </div>
 </div>

@@ -1,8 +1,12 @@
-<label>Niveau</label>
-<div class="mybox">
-  <span class="myarrow"></span>
-  <select formControlName="complexite" (change)="complexUpdate($event)">
-    <option disabled selected value class="hidden"> Niveau de difficulté </option>
-    <option *ngFor="let complexite of valRetourRequeteComplex$">{{complexite.niveau | titlecase }}</option>
-  </select>
+<div class="container">
+  <div class="title">Niveau</div>
+  <div class="mybox">
+    <span class="myarrow"></span>
+    <select (change)="complexUpdate($event)">
+      <option disabled selected value class="hidden">Niveau de difficulté</option>
+      <option *ngFor="let complexite of valRetourRequeteComplex">
+        {{ complexite.niveau | titlecase }}
+      </option>
+    </select>
+  </div>
 </div>
