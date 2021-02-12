@@ -7,23 +7,3 @@ html, body {
 .hidden {
   display: none;
 }
-
-button[disabled] {
-  opacity: 50%;
-}
-
-.btn-valid {
-  min-width: 10rem;
-  margin-top: 3rem;
-  padding: 0.5rem;
-  background-color: #21db4f;
-  border-radius: 10px;
-  border: 0;
-  color: inherit;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.btn-valid:hover:enabled {
-  background-color: #1ceb4f;
-}

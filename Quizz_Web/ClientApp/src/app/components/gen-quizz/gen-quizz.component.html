@@ -5,8 +5,7 @@
     <app-input-number (NumberChangeEvent)="setValeurFormNbQ($event)"></app-input-number>
     <app-select-theme (ChoixEvent)="setValeurFormTheme($event)"></app-select-theme>
     <app-select-niveau (ChoixEvent)="setValeurFormNiveau($event)"></app-select-niveau>
-
-    <button class='btn-valid'  type=submit [disabled]="resultatForm.invalid">Valider</button>
+    <app-button-valid type=submit [(isDisabled)]="resultatForm.invalid"></app-button-valid>
 
   </form>
 

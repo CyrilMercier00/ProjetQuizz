@@ -1,0 +1,19 @@
+button[disabled] {
+    opacity: 50%;
+}
+
+button {
+    min-width       : 10rem;
+    margin-top      : 3rem;
+    padding         : 0.5rem;
+    background-color: #21db4f;
+    border-radius   : 10px;
+    border          : 0;
+    color           : inherit;
+    font-size       : 18px;
+    text-decoration : none;
+}
+
+buttons:hover:enabled {
+    background-color: #1ceb4f;
+}

@@ -1,16 +1,15 @@
 #container-quizz .container-input {
-  margin: 1rem;
+  margin    : 1rem;
   box-sizing: border-box;
 }
 
-#container-quizz .container-input button:active {
-  position: relative;
-  top: 1px;
-}
 
-#container-quizz form select, #container-quizz form option, #container-quizz form input {
+
+#container-quizz form select,
+#container-quizz form option,
+#container-quizz form input {
   min-height: 3rem;
-  min-width: 4rem;
+  min-width : 4rem;
   text-align: center;
 }
 
@@ -18,40 +17,23 @@
   text-align: center;
 }
 
-#input-quest {
-  width: 93%;
-  align-self: center;
-}
-
-#container-quizz .container-input select, #container-quizz .container-input input {
-  background-color: white;
-  border: unset;
-  appearance: none;
-  border-radius: 4px;
-  min-width: 16rem;
-}
-
-#container-quizz .container-input input {
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-}
-
 #container-quizz .container-input select {
-  padding-top: 11px !important;
+  
 }
 
 #container-quizz .container-input .mybox {
   position: relative;
-  display: inline-block;
+  display : inline-block;
 }
 
+
 #container-quizz .container-input .mybox .myarrow {
-  width: 26px;
-  height: 36px;
-  position: absolute;
-  display: inline-block;
-  top: 7px;
-  right: 6px;
-  background: url(../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
+  width         : 26px;
+  height        : 36px;
+  position      : absolute;
+  display       : inline-block;
+  top           : 7px;
+  right         : 6px;
+  background    : url(../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
   pointer-events: none;
 }
