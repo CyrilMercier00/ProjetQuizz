@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  
   public constructor(private router : Router){}
 
   redirectToHome(){
     this.router.navigate(['/']);
+  }
+
+  isOpen = false;
+
+  onClick(click: boolean){
+    this.isOpen = click;
   }
 }

@@ -1,3 +1,8 @@
+.creation-compte-form{
+    display: inline-block;
+    margin-left: 8em;
+}
+
 .creation-compte{
     background-color: white;
     display: table;
@@ -29,7 +34,7 @@
     box-shadow: 0 0 0.1em 0.03em rgb(83, 138, 248);
 }
 
-.connexion-button{
+.creation-button{
     background-color: rgb(66, 103, 178);
     border-radius: 8px;
     width: 350px;
@@ -39,31 +44,6 @@
     color: white;
 }
 
-.connexion-button:hover{
+.creation-button:hover{
     background-color: rgb(41, 75, 143);
-}
-
-.rectangle-href{
-    display: flex;
-    background-color: rgb(4, 153, 4);
-    width: 350px;
-    height: 45px;
-    margin: 7px;
-    border-radius: 8px;
-    justify-content: center;
-    transition: background-color 1s;
-}
-
-.rectangle-href:hover{
-    background-color: rgb(6, 117, 6);
-    cursor: pointer;
-}
-
-.button-href{
-    margin-top: 10px;
-    color: white;
-}
-
-.button-href:hover{
-    text-decoration: none;
 }

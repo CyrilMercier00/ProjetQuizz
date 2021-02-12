@@ -10,8 +10,8 @@
         <button class="connexion-button" type="submit">Connexion</button>
       </div>
       <div class="ligneDelimitation"></div>
-      <div class="rectangle-href" (click)="redirectToHome()">
-        <a class="button-href" role="button" [routerLink]="['/']">Créer un compte</a>
+      <div class="rectangle-href" (click)="changeBoolean()">
+        <a class="button-href" role="button" (click)="changeBoolean()">Créer un compte</a>
       </div>
     </span>  
 </form>

@@ -1,3 +1,7 @@
+.login-form{
+    display: inline-block;
+}
+
 .ligneDelimitation{
     width: 330px;
     height: 0.08em;
