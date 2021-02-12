@@ -18,7 +18,7 @@ export class FormulaireConnexionComponent implements OnInit {
 
   changeBoolean(){
     this.isOpen = !this.isOpen;
-    console.log(this.isOpen);
     this.clickToSend.emit(this.isOpen);
+    console.log(this.isOpen);
   }
 }

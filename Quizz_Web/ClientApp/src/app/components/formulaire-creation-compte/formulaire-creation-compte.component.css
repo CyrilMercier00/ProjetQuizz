@@ -1,6 +1,16 @@
+@keyframes slideInFromBottom{
+    0% {
+        transform: translateX(80%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+
 .creation-compte-form{
     display: inline-block;
     margin-left: 8em;
+    animation: 1s 1 slideInFromBottom;
 }
 
 .creation-compte{

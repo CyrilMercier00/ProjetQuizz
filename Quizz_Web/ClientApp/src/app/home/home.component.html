@@ -1,4 +1,4 @@
 <h1>Bienvenue sur notre super site de quizz !</h1>
 
 <app-formulaire-connexion (clickToSend)="onClick($event)"></app-formulaire-connexion>
-<app-formulaire-creation-compte *ngIf="isOpen"></app-formulaire-creation-compte>
+<app-formulaire-creation-compte *ngIf="isOpen" (compteToSend)="recupCompte($event)"></app-formulaire-creation-compte>
