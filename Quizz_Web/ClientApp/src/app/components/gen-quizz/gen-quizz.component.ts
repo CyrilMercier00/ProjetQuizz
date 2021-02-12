@@ -14,7 +14,7 @@ import { Router } from "@angular/router"
 @Component({
   selector: 'app-gen-quizz',
   templateUrl: './gen-quizz.component.html',
-  styleUrls: [ './gen-quizz.component.css', '../../app.flex-util.css' ]
+  styleUrls: ['./gen-quizz.component.css', '../../app.flex-util.css']
 })
 
 
@@ -34,9 +34,9 @@ export class GenQuizzComponent implements OnInit
   {
     this.resultatForm = this.builder.group
       ({
-        nbQuestions: [ '', Validators.required ],
-        theme: [ '', Validators.required ],
-        complexite: [ '', Validators.required ]
+        nbQuestions: ['', Validators.required],
+        theme: ['', Validators.required],
+        complexite: ['', Validators.required]
       })
   }
 
@@ -50,15 +50,16 @@ export class GenQuizzComponent implements OnInit
 
 
   /* ------ Fonctions ------ */
-  /* --- Fonction maj form manuelle pour les select --- */
-  themeUpdate(prmEvent)
+  /* --- Change la valeur du formulaire local avec la valeur passée par l'enfant --- */
+  setValeurFormTheme(prmEvent)
   {
     this.resultatForm.patchValue({ "theme": prmEvent.target.value });
   }
 
 
 
-  complexUpdate(prmEvent)
+  /* --- Change la valeur du formulaire local avec la valeur passée par l'enfant --- */
+  setValeurFormComplex(prmEvent)
   {
     this.resultatForm.patchValue({ "complexite": prmEvent.target.value });
   }
@@ -91,7 +92,7 @@ export class GenQuizzComponent implements OnInit
   /* --- Envoie a la page suivante avec les données du formulaire --- */
   onSubmit()
   {
-    this.router.navigate([ '/assign-quizz' ], { state: { formValue : this.resultatForm.value, idCompte: this.idCompte } });
+    this.router.navigate(['/assign-quizz'], { state: { formValue: this.resultatForm.value, idCompte: this.idCompte } });
   }
 
 

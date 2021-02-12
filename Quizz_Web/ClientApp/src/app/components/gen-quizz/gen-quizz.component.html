@@ -7,8 +7,8 @@
       <input type="number" formControlName="nbQuestions" placeholder="Nombre de questions" />
     </div>
 
-    <app-select-niveau></app-select-niveau>
-    <app-select-theme (newItemEvent)="valChoisie($event)"></app-select-theme>
+    <app-select-niveau (ChoixEvent)="setValeurFormComplex($event)"></app-select-niveau>
+    <app-select-theme (ChoixEvent)="setValeurFormTheme($event)"></app-select-theme>
 
     <!---
     <div class="container-input .flex-align-i-center flex flex-vertical">
