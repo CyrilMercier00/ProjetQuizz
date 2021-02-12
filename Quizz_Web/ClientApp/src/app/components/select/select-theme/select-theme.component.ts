@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { VariableGlobales } from 'src/app/url_api';
 
@@ -33,10 +32,10 @@ export class SelectThemeComponent implements OnInit
 
 
   /* ------ Fonctions ------ */
-/* --- Emit si (onChange) est trigger --- */
+  /* --- Emit si (onChange) est trigger --- */
   themeUpdate(prmEvent)
   {
-    this.ChoixEvent.emit(stringify(prmEvent.target.value));
+    this.ChoixEvent.emit(prmEvent.target.value);
   }
 
 

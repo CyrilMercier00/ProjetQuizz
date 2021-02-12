@@ -2,11 +2,7 @@
 
   <form (ngSubmit)="onSubmit()" [formGroup]="resultatForm" class="flex flex-vertical flex-center">
 
-    <div class="container-input flex flex-vertical">
-      <label>Nombre de questions</label><br />
-      <input type="number" formControlName="nbQuestions" placeholder="Nombre de questions" />
-    </div>
-
+    <app-input-number (NumberChangeEvent)="setValeurFormNbQ($event)"></app-input-number>
     <app-select-theme (ChoixEvent)="setValeurFormTheme($event)"></app-select-theme>
     <app-select-niveau (ChoixEvent)="setValeurFormNiveau($event)"></app-select-niveau>
 

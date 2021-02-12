@@ -55,10 +55,15 @@ export class GenQuizzComponent implements OnInit
 
 
 
-  /* --- Change la valeur du formulaire local avec la valeur passée par l'enfant --- */
   setValeurFormNiveau(prmValue: string)
   {
     this.resultatForm.patchValue({ "complexite": prmValue });
+  }
+
+
+  setValeurFormNbQ(prmValue: number) 
+  {
+    this.resultatForm.patchValue({ "nbQuestions": prmValue });
   }
 
 

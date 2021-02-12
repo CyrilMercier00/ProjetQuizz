@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { VariableGlobales } from 'src/app/url_api';
 
@@ -36,7 +35,7 @@ export class SelectNiveauComponent implements OnInit
   /* --- Emit si (onChange) est trigger --- */
   complexUpdate(prmEvent)
   {
-    this.ChoixEvent.emit(stringify(prmEvent.target.value));
+    this.ChoixEvent.emit(prmEvent.target.value);
   }
 
 

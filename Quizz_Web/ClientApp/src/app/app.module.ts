@@ -19,6 +19,8 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
 import { CompteComponent } from './compte-feature/compte/compte.component';
+import { InputNumberComponent } from './components/input/input-number/input-number.component';
+import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
     FormulaireConnexionComponent,
     SelectThemeComponent,
     SelectNiveauComponent,
+    InputNumberComponent,
+    ButtonValidComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
