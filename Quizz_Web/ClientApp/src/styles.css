@@ -1,9 +1,22 @@
 /* --- Modif CSS Globales --- */
-html, body {
-  color: white;
+html,
+body {
+  color           : white;
   background-color: #5952B4;
 }
 
 .hidden {
   display: none;
+}
+
+.margin-1 {
+  margin-top: 1rem;
+}
+
+.margin-2 {
+  margin-top: 2rem;
+}
+
+.margin-3 {
+  margin-top: 3rem;
 }

@@ -1,8 +1,3 @@
-/*
-------------------------------------------------------------
-    TODO : Recup de l'id du compte & l'envoyer avec le quizz
-------------------------------------------------------------
-*/
 import { Component, OnInit } from '@angular/core';
 import { VariableGlobales } from '../../url_api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +17,6 @@ import { Router } from "@angular/router"
 export class GenQuizzComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
-  idCompte = this.getCompteID();                // ID du compte utilisateur
   resultatForm: FormGroup;                      // Contiens le formulaire de creation de quizz
 
 
@@ -68,17 +62,9 @@ export class GenQuizzComponent implements OnInit
 
 
 
-  /* ---  Retourne l'id du compte qui a créer le quizz --- */
-  getCompteID()
-  { /* ---------- TODO ---------- */
-    return 1;
-  }
-
-
-
   /* --- Envoie a la page suivante avec les données du formulaire --- */
   onSubmit()
   {
-    this.router.navigate(['/assign-quizz'], { state: { formValue: this.resultatForm.value, idCompte: this.idCompte } });
+    this.router.navigate(['/assign-quizz'], { state: { c: this.resultatForm.value} });
   }
 }

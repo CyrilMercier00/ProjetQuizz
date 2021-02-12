@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
-import { AssignationQuizzComponent } from './assignation-quizz/assignation-quizz.component';
+import { AssignationQuizzComponent } from './components/gen-quizz/assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
@@ -21,6 +21,7 @@ import { ComptesComponent } from './compte-feature/comptes/comptes.component';
 import { CompteComponent } from './compte-feature/compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
+import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ButtonValidComponent } from './components/buttons/button-valid/button-v
     SelectNiveauComponent,
     InputNumberComponent,
     ButtonValidComponent,
+    SelectCompteCandidatComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
