@@ -1,0 +1,28 @@
+select {
+    margin: 0.5rem 1rem;
+    min-width : 28rem;
+}
+
+
+select {
+    background-color: white;
+    border          : unset;
+    appearance      : none;
+    border-radius   : 4px;
+}
+
+.mybox {
+    position: relative;
+    display : inline-block;
+}
+
+.mybox .myarrow {
+    width         : 26px;
+    height        : 36px;
+    position      : absolute;
+    display       : inline-block;
+    top           : 8px;
+    right         : 16px;
+    background    : url(../../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
+    pointer-events: none;
+}

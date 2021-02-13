@@ -1,35 +1,21 @@
 <header>
 
-  <nav class="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
+  <nav class="navbar-container">
 
-    <div class="container">
+    <!-- Elements de navigation -->
+    <ul class="navbar-inner-container">
 
-      <a class="navbar-brand" [routerLink]="['/']">Super site de Quizz</a>
+      <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+        <a class="nav-link " [routerLink]="['/']">Acceuil</a>
+      </li>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/gen-quizz']">Generation de quizz</a>
+      </li>
 
-      <!-- Elements de navigation -->
-      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
-        <ul class="navbar-nav flex-grow">
-
-          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link " [routerLink]="['/']">Acceuil</a>
-          </li>
-
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/gen-quizz']">Generation de quizz</a>
-          </li>
-
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/gest-quizz']">Gestion de quizz</a>
-          </li>
-
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/login']">Login</a>
-          </li>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/gest-quizz']">Gestion de quizz</a>
+      </li>
 
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link " [routerLink]="['/assign-quizz']">Assignation de quizz</a>
@@ -39,12 +25,16 @@
             <a class="nav-link " [routerLink]="['/permission']">Permisisons</a>
           </li>
 
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link " [routerLink]="['/resultats']">Resultats</a>
-          </li>
-        </ul>
-      </div>
 
-    </div>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/comptes']">Comptes</a>
+      </li>
+
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/resultats']">Resultats</a>
+      </li>
+
+    </ul>
+
   </nav>
 </header>
