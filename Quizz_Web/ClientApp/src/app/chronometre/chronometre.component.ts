@@ -10,6 +10,10 @@ export class ChronometreComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    var date = new Date;
+    var startHours =date.getHours();
+    var startMinutes = date.getMinutes();
+    var startSeconds = date.getSeconds();
     chronometre();
   }
 
@@ -31,7 +35,7 @@ var digitSegments = [
 
 
 
-var setNumber = function (digit, number, on) {
+  var setNumber = function (digit, number, on) {
   var segments = digit.querySelectorAll(".segment");
   var current = parseInt(digit.getAttribute("data-value"));
 
@@ -68,6 +72,8 @@ function chronometre() {
       var hours = date.getHours(),
         minutes = date.getMinutes(),
         seconds = date.getSeconds();
+
+      
 
       setNumber(_hours[0], Math.floor(hours / 10), 1);
       setNumber(_hours[1], hours % 10, 1);
