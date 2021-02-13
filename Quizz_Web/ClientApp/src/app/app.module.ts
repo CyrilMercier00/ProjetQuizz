@@ -58,7 +58,7 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },             //
+      { path: 'permission', component: PermissionComponent },             // page permission pour joris
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },             // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
