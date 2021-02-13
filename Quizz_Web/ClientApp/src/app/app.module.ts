@@ -55,7 +55,6 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
     RouterModule.forRoot([
       { path: '', component: HomeComponent },                             // Page d'accueil
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
-      { path: 'chronometre', component: ChronometreComponent },           //
       { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
