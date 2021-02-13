@@ -1,6 +1,7 @@
 ﻿using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
+using Quizz_Models.Utils;
 using System;
 using System.Collections.Generic;
 
@@ -160,10 +161,10 @@ namespace Quizz_Models.Services
         {
             Permission p = new Permission
             {
-                AjouterQuest = Convert.ToByte(PermissionDTO.Ajouter_quest),
-                GenererQuizz = Convert.ToByte(PermissionDTO.Generer_quizz),
-                ModifierQuest = Convert.ToByte(PermissionDTO.Modifier_quest),
-                SupprQuestion = Convert.ToByte(PermissionDTO.Suppr_question)
+                AjouterQuest = Convert.ToByte(PermissionDTO.AjouterQuest),
+                GenererQuizz = Convert.ToByte(PermissionDTO.GenererQuizz),
+                ModifierQuest = Convert.ToByte(PermissionDTO.ModifierQuest),
+                SupprQuestion = Convert.ToByte(PermissionDTO.SupprQuestion)
             };
 
             return p;
@@ -202,7 +203,5 @@ namespace Quizz_Models.Services
             }
             return compteDTOs;
         }
-
-        // Commentaire
     }
 }
