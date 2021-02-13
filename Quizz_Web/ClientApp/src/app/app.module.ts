@@ -20,6 +20,7 @@ import { BoutonValidationComponent } from './bouton-validation/bouton-validation
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
     ResultatsComponent,
     PermissionComponent,
     ChronometreComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -50,8 +52,8 @@ import { ChronometreComponent } from './chronometre/chronometre.component';
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
       { path: 'login', component: ConnexionComponent },                   // Page de connexion
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },             // Page de
-      { path: 'chronometre', component: ChronometreComponent }            // Page de
+      { path: 'permission', component: PermissionComponent }             // Page de permission admin pour Joris
+      
 
 
     ])

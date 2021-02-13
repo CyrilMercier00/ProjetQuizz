@@ -1,34 +1,26 @@
-html, body {
-    margin:0;
-    padding:0;
-    background:#000;
-    width:100%;
-    height:100%;
-    position:absolute;
-    min-width:900px;
-  }
+
   
   .clock {
-    height:200px;
+    height:100px;
     position:absolute;
-    top:50%;
-    left:50%;
-    width:900px;
+    top:30%;
+    left:70%;
+    width:450px;
     margin-left:-450px;
     margin-top:-100px;
     text-align:center;
   }
   
   .digit {
-    width:120px;
-    height:200px;
+    width:60px;
+    height:100px;
     margin:0 5px;
     position:relative;
     display:inline-block;
   }
   
   .digit .segment {
-    background:#c00;
+    background:#acaaeb;
     border-radius:5px;
     position:absolute;
     opacity:0.15;
@@ -41,7 +33,7 @@ html, body {
   
   .digit .segment.on, .separator {
     opacity:1;
-    box-shadow:0 0 50px rgba(255,0,0,0.7);
+    box-shadow:0 0 50px rgba(66, 20, 139, 0.7);
     transition:opacity 0s;
     -webkit-transition:opacity 0s;
     -ms-transition:opacity 0s;
@@ -50,9 +42,9 @@ html, body {
   }
   
   .separator {
-    width:20px;
-    height:20px;
-    background:#c00;
+    width:10px;
+    height:10px;
+    background:#5952B4;
     border-radius:50%;
     display:inline-block;
     position:relative;
@@ -63,45 +55,45 @@ html, body {
     top:10px;
     left:20px;
     right:20px;
-    height:10px;
+    height:5px;
   }
   
   .digit .segment:nth-child(2) {
     top:20px;
     right:10px;
-    width:10px;
-    height:75px;
+    width:5px;
+    height:37px;
     height:calc(50% - 25px);
   }
   
   .digit .segment:nth-child(3) {
     bottom:20px;
     right:10px;
-    width:10px;
-    height:75px;
+    width:5px;
+    height:37px;
     height:calc(50% - 25px);
   }
   
   .digit .segment:nth-child(4) {
     bottom:10px;
     right:20px;
-    height:10px;
+    height:5px;
     left:20px;
   }
   
   .digit .segment:nth-child(5) {
     bottom:20px;
     left:10px;
-    width:10px;
-    height:75px;
+    width:5px;
+    height:37px;
     height:calc(50% - 25px);
   }
   
   .digit .segment:nth-child(6) {
     top:20px;
     left:10px;
-    width:10px;
-    height:75px;
+    width:5px;
+    height:37px;
     height:calc(50% - 25px);
   }
   
@@ -110,5 +102,5 @@ html, body {
     bottom:calc(50% - 5px);
     right:20px;
     left:20px;
-    height:10px;
+    height:5px;
   }
