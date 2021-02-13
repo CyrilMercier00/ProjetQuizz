@@ -18,7 +18,7 @@ export class FormulaireCreationCompteComponent implements OnInit {
       prenom: ['', Validators.required],
       mail: ['', Validators.required],
       mdp: ['', Validators.required],
-      role: [0, Validators.required]
+      role: [0]
     });
    }
 
@@ -26,6 +26,7 @@ export class FormulaireCreationCompteComponent implements OnInit {
   }
 
   onSubmit(): void{
+    this.compteProfile.patchValue({role: 3});
     this.compteToSend.emit(this.compteProfile.value);
   }
 
