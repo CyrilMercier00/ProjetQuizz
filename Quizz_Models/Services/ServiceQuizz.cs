@@ -27,6 +27,7 @@ namespace Quizz_Models.Services
         /// <param name="prmComplex">Nom du niveau de complexité du quizz. Utilisé pour savoir combiens de questions doivent etre generer pour chaques diffucltés</param>
         /// <param name="prmTheme">Nom du theme du quizz et des questions</param>
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
+        /// /// <param name="prmUrlCode">Le code unique associer au quizz dans l'url</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
         public void GenererQuizz ( QuizzDTO prmDTO )
         {
@@ -35,6 +36,7 @@ namespace Quizz_Models.Services
                 Theme leTheme = repoTheme.GetThemeByNom (prmDTO.Theme);                             // Objet theme pour ce param
                 TauxComplexite leTaux = repoComplex.GetComplexiteByNom (prmDTO.Complexite);         // Objet taux de complexite pour ce param
                 List<Question> listQuestionCreation = new List<Question> ();                        // La liste des questions choisies
+                String leCodeUrl = Utils.GenerateUrl.GenerateCodeUrl();                             // genere un code unique pour l'url
 
                 // Le nouveau quizz
                 Quizz quizzCreation = new Quizz()
@@ -45,9 +47,11 @@ namespace Quizz_Models.Services
                     Urlcode = prmDTO.Urlcode
                 };
 
+                //Ajouter code Unique pour l'url du Quizz
+                prmDTO.Urlcode = leCodeUrl;
                 // Ajouter des questions dans la liste des questions
                 GenererQuestions (listQuestionCreation, prmDTO.NbQuestions, leTheme);
-
+               
                 // Ajouter quizz dans la base
                 repoQuizz.InsertQuizz(quizzCreation);
 
@@ -144,5 +148,29 @@ namespace Quizz_Models.Services
             return (int)Math.Round(n1 * n2);
         }
 
+        /// <summary>
+        /// Retourne toutes les permissions de la bdd.
+        /// </summary>
+        /// <returns>Liste de toute les permissions sous format PermissionDTO.</returns>
+        public QuizzDTO GetQuizz(int prmIDQuizz)
+        {
+            Quizz quizz  = this.repoQuizz.GetQuizzByID(prmIDQuizz);
+
+            return TransformQuizzToQuizzDTO(quizz);
+        }
+
+        private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)
+        {
+            return new QuizzDTO
+            {
+               
+                NbQuestions = quizz.PkQuizz,
+                Chrono = Convert.ToString(quizz.Chrono),
+                Theme = Convert.ToString(quizz.FkTheme),
+                Complexite = Convert.ToString(quizz.FkComplexite),
+                Urlcode = quizz.Urlcode
+
+            };
+         }
     }
 }
