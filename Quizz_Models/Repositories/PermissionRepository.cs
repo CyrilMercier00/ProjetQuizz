@@ -21,6 +21,13 @@ namespace Quizz_Models.Repositories
             bdd_entities.SaveChanges ();
         }
 
+        public Permission GetPermissionByNom(string prmNomPerm)
+        {
+            return bdd_entities.Permission
+                .Where(x => x.Nom == prmNomPerm)
+                .Single();
+        }
+
         /// <summary>
         /// Méthode qui renvoie la liste de toutes les permissions.
         /// </summary>
