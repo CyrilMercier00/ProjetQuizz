@@ -27,6 +27,9 @@ import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.compo
 import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
 import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
 import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
+import { FormulaireAjoutQuestionBddComponent } from './components/formulaire-creation-question/formulaire-creation-question.component';
+import { DragabbleTextInputComponent } from './components/input/dragabble-text-input/dragabble-text-input.component';
+import { PageCreationQuestionComponent } from './components/page-creation-question/page-creation-question.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { FormulaireCreationCandidatComponent } from './components/formulaire-cre
     FormulaireCreationCompteComponent,
     ButtonAjouterNouveauCandidatComponent,
     FormulaireCreationCandidatComponent,
+    FormulaireAjoutQuestionBddComponent,
+    DragabbleTextInputComponent,
+    PageCreationQuestionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -61,29 +67,26 @@ import { FormulaireCreationCandidatComponent } from './components/formulaire-cre
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                             // Page d'accueil
-      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: '', component: HomeComponent },                                           // Page d'accueil
+      { path: 'assign-quizz', component: AssignationQuizzComponent },      // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },           //
-      { path: 'gen-quizz', component: GenQuizzComponent}  ,              // Page pour créer un quizz
-      
-     
-        {path:'gen-niveau', component: GenerateNiveauComponent} ,           //page pour creer un nouveau niveau
-      
-      { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },             //
-      { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },             // Page de permission admin pour Joris
-      { path: 'comptes', component: ComptesComponent },                  
-    
-      { path: '**', component: PageNotFoundComponent }                   // Wildcard route for a 404 page
+      { path: 'gen-quizz', component: GenQuizzComponent },                     // Page pour créer un quizz
+      { path: 'gen-niveau', component: GenerateNiveauComponent },         // Page pour creer un nouveau niveau
+      { path: 'gest-quizz', component: GestionQuizzComponent },              // Page pour modifier un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },     // Page pour repondre aux questons
+      { path: 'permission', component: PermissionComponent },                 //
+      { path: 'resultats', component: ResultatsComponent },                       // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },                 // Page de permission admin pour Joris
+      { path: 'comptes', component: ComptesComponent },
+      { path: 'crea-quest', component: PageCreationQuestionComponent },  // Page de creation des questions
+      { path: '**', component: PageNotFoundComponent }                         // Wildcard route for a 404 page
     ]),
 
-     
+
   ],
   exports: [
   ],
   providers: [],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
