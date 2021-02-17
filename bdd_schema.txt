@@ -110,8 +110,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `rep_libre` TINYINT NOT NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
-  'commentaire' LONGTEXT NULL,
-  'reponse_libre_text' LONGTEXT NULL
+  `commentaire` LONGTEXT NULL,
+  `reponse_libre_text` LONGTEXT NULL,
   PRIMARY KEY (`pk_question`),
   INDEX `fk_question_theme1_idx` (`fk_theme` ASC)  ,
   INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) ,
