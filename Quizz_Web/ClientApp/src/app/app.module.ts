@@ -24,6 +24,8 @@ import { InputNumberComponent } from './components/input/input-number/input-numb
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
 import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
+import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
+import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { FormulaireCreationCompteComponent } from './components/formulaire-creat
     ButtonValidComponent,
     SelectCompteCandidatComponent,
     FormulaireCreationCompteComponent,
+    ButtonAjouterNouveauCandidatComponent,
+    FormulaireCreationCandidatComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
