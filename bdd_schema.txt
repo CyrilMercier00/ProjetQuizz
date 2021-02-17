@@ -37,8 +37,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
-  `mot_de_passe` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NULL,
+  `mot_de_passe` VARCHAR(45) NOT NULL
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
@@ -257,7 +256,7 @@ INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite
 (NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2');
 
 -- Insert compte:
-Insert into compte( nom, prenom, mail, mot_de_passe ,role, fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123", "admin" ,  1) ;
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123" ,  1) ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
