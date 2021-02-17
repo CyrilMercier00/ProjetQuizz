@@ -19,7 +19,7 @@ USE `bdd_quizz` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `pk_permission` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(45) NULL,
+  `nom` VARCHAR(45) UNIQUE NULL,
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
