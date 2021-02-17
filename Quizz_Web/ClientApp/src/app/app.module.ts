@@ -23,7 +23,13 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
+import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.component';
 import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
+import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
+import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
+import { FormulaireAjoutQuestionBddComponent } from './components/formulaire-creation-question/formulaire-creation-question.component';
+import { DragabbleTextInputComponent } from './components/input/dragabble-text-input/dragabble-text-input.component';
+import { PageCreationQuestionComponent } from './components/page-creation-question/page-creation-question.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,13 @@ import { FormulaireCreationCompteComponent } from './components/formulaire-creat
     InputNumberComponent,
     ButtonValidComponent,
     SelectCompteCandidatComponent,
+    GenerateNiveauComponent,
     FormulaireCreationCompteComponent,
+    ButtonAjouterNouveauCandidatComponent,
+    FormulaireCreationCandidatComponent,
+    FormulaireAjoutQuestionBddComponent,
+    DragabbleTextInputComponent,
+    PageCreationQuestionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -55,24 +67,26 @@ import { FormulaireCreationCompteComponent } from './components/formulaire-creat
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                             // Page d'accueil
-      { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
+      { path: '', component: HomeComponent },                                           // Page d'accueil
+      { path: 'assign-quizz', component: AssignationQuizzComponent },      // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },           //
-      { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
-      { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },             //
-      { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },             // Page de permission admin pour Joris
+      { path: 'gen-quizz', component: GenQuizzComponent },                     // Page pour créer un quizz
+      { path: 'gen-niveau', component: GenerateNiveauComponent },         // Page pour creer un nouveau niveau
+      { path: 'gest-quizz', component: GestionQuizzComponent },              // Page pour modifier un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },     // Page pour repondre aux questons
+      { path: 'permission', component: PermissionComponent },                 //
+      { path: 'resultats', component: ResultatsComponent },                       // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },                 // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
-      { path: '**', component: PageNotFoundComponent }                   // Wildcard route for a 404 page
+      { path: 'crea-quest', component: PageCreationQuestionComponent },  // Page de creation des questions
+      { path: '**', component: PageNotFoundComponent }                         // Wildcard route for a 404 page
     ]),
 
-     
+
   ],
   exports: [
   ],
   providers: [],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

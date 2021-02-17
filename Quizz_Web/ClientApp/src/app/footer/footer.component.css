@@ -1,11 +1,14 @@
+
+
 .footer-dark {
     padding:50px 0;
     color:#f0f9ff;
     background-color: rgba(0, 0, 0, 0.50);
-    left:0px;
-    bottom:0%;
+    position: relative;
+    left:0;
+    bottom:0;
     width:100%;
-    display:flex;
+    
    }
   
   .footer-dark h3 {
@@ -44,7 +47,7 @@
     margin-bottom:36px;
   }
   
-  @media (max-width:767px) {
+  @media (max-width:700px) {
     .footer-dark .item.text {
       margin-bottom:0;
     }

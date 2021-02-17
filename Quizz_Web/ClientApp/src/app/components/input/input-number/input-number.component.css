@@ -1,9 +1,9 @@
-.container {
-    margin-top: 1rem;
+.wrapper-input-number {
+    margin : 1rem;
 }
 
 .title {
-    text-align: center;
+    text-align   : center;
     margin-bottom: 0.5rem;
 }
 
