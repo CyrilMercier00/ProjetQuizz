@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
-import { AssignationQuizzComponent } from './components/gen-quizz/assignation-quizz/assignation-quizz.component';
+import { AssignationQuizzComponent } from './components/assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
