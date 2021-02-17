@@ -18,6 +18,12 @@ namespace Quizz_Models.Services
 
         public CompteService() { }
 
+        public List<Compte> GetCompteByNomPerm(string prmNom)
+        {
+            int IDPerm = repoPermission.GetPermissionByNom(prmNom).PkPermission;
+            return repoCompte.GetCompteByNomPerm(IDPerm);
+        }
+
         /// <summary>
         /// Méthode qui crée un Compte avec un CompteDTO et une PermissionDTO.
         /// </summary>
@@ -57,7 +63,6 @@ namespace Quizz_Models.Services
 
             if (CompteDTO.Role >= ADMIN_PERMISSION_ID && CompteDTO.Role <= CANDIDAT_PERMISSION_ID)
             {
-                c.Role = CompteDTO.Role;
                 c.FkPermission = CompteDTO.Role;
             }
 
@@ -182,8 +187,7 @@ namespace Quizz_Models.Services
                 Nom = cpt.Nom,
                 Prenom = cpt.Prenom,
                 Mail = cpt.Mail,
-                MDP = cpt.MotDePasse,
-                Role = cpt.Role.GetValueOrDefault()
+                MDP = cpt.MotDePasse
             };
 
             return CompteDTO;

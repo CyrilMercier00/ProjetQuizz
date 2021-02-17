@@ -5,6 +5,7 @@ namespace Quizz_Models.DTO
     public class PermissionDTO
     {
         public int PkPermission { get; set; }
+        public string Nom { get; set; }
         public Nullable<bool> GenererQuizz { get; set; }
         public Nullable<bool> AjouterQuest { get; set; }
         public Nullable<bool> ModifierQuest { get; set; }
