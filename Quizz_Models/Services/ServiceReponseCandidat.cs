@@ -8,14 +8,20 @@ namespace Quizz_Models.Services
 {
     public class ServiceReponseCandidat
     {
-        
-        public ServiceReponseCandidat (){}
 
-        public void InsertReponseCandidat(ReponseCandidat prmRep, Question prmQuest, Compte prmCompteCandidat)
+        ReponseCandidatRepository RepoRepC = new ReponseCandidatRepository ();
+
+        public ServiceReponseCandidat () { }
+
+        public void InsertReponseCandidat ( ReponseCandidatDTO prmRepC )
         {
-            prmRep.FkCompte = prmCompteCandidat.PkCompte;
-            prmRep.FkQuestion = prmQuest.PkQuestion;
-
+            RepoRepC.InsertReponseCandidat (new ReponseCandidat ()
+            {
+                Reponse = prmRepC.Reponse,
+                Commentaire = prmRepC.Commentaire,
+                FkCompte = prmRepC.FkCompte,
+                FkQuestion = prmRepC.FkQuestion
+            });
         }
     }
 }

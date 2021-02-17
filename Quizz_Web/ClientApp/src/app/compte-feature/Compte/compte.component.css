@@ -1,0 +1,25 @@
+.rectangle{
+    display: flex;
+    flex-direction: column;
+
+    height : 100px;
+    width : 250px;
+    background-color: #50536f;
+    opacity: 1;
+    margin: 10px;
+    border-radius: 25px;
+    justify-content: center;
+    transition: background-color 1s, color 1s;
+}
+
+.rectangle:hover{
+    background-color: rgb(250, 248, 242);
+}
+
+.rectangle:hover p{
+    color: rgb(252, 1, 1);
+}
+
+.rectangle p{
+    align-self: center;
+}

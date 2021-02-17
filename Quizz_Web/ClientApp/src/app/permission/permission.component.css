@@ -1,0 +1,33 @@
+
+.container {
+    margin: 1rem 0rem;
+    font-size: x-large;
+  }
+  .admin{
+
+    display: flex;
+    flex-direction : column;
+    
+}
+
+h1 {
+  text-align: center;
+ 
+}
+.bouttonPermission{
+  height: 600px;
+  display: flex;
+  flex-direction : column;
+  justify-content: space-between;
+  justify-content: space-around;
+  
+  
+  }
+ input{
+    height: 60px;
+    width: 300px;
+    align-self: center;
+    
+  }
+  
+  

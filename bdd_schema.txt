@@ -19,6 +19,7 @@ USE `bdd_quizz` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `pk_permission` INT NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(45) UNIQUE NULL,
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
@@ -38,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
   `mot_de_passe` VARCHAR(45) NOT NULL,
-  `role` INT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
@@ -107,8 +107,11 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `nv_complexite` VARCHAR(45) NULL,
   `enonce` LONGTEXT NULL,
   `a_repondu` TINYINT NULL,
+  `rep_libre` TINYINT NOT NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
+  `commentaire` LONGTEXT NULL,
+  `reponse_libre_text` LONGTEXT NULL,
   PRIMARY KEY (`pk_question`),
   INDEX `fk_question_theme1_idx` (`fk_theme` ASC)  ,
   INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) ,
@@ -144,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reponse_candidat_question1`
     FOREIGN KEY (`fk_question`)
+
     REFERENCES `bdd_quizz`.`question` (`pk_question`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -216,8 +220,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 -- Insert permissions : 
-insert into permission(generer_quizz, ajouter_quest, modifier_quest, suppr_question)
-	values (true, true, true, true), (true, false, false, false), (false, false, false, false);
+insert into permission(nom, generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
+	values 
+("Administrateur", true, true, true, true, true, true), 
+("Recruteur", true, true, true, false, true, false),
+("Candidat", false, false, false, false, false, false);
 
 -- Insert themes :
     Insert into theme (nom_theme) values 
@@ -232,25 +239,26 @@ Insert into taux_complexite (niveau, question_junior, question_confirme, questio
 ("experimente", 10, 40, 50);
 
 -- Insert question :
-Insert into question (nv_complexite, enonce, a_repondu, fk_theme ,fk_complexite) values 
-("junior", "qui, quoi, quand ?", 0, 1, 1),
-("junior", "oui ou non ?", 0, 1, 1),
-("junior", "petit ecureils", 0, 1, 1),
-("junior", "oulalalalla", 0, 1, 1),
-("junior", "davidlafargepokemon", 0, 1, 1),
-("junior", " :)", 0, 1, 1),
-("junior", "singe", 0, 1, 1),
-("confirme", "pitié monsieur", 0, 1, 1),
-("confirme", "maité", 0, 1, 1),
-("experimente", "des orlotans ", 0, 1, 1);
+Insert into question (nv_complexite, enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) values 
+("junior", "qui, quoi, quand ?", 0, 1, 1, 1),
+("junior", "oui ou non ?", 0, 1, 1, 0),
+("junior", "petit ecureils", 0, 1, 1, 0),
+("junior", "oulalalalla", 0, 1, 1, 0),
+("junior", "davidlafargepokemon", 0, 1, 1, 0),
+("junior", " :)", 0, 1, 1, 0),
+("junior", "singe", 0, 1, 1, 0),
+("confirme", "pitié monsieur", 0, 1, 1, 0),
+("confirme", "maité", 0, 1, 1, 0),
+("experimente", "des orlotans ", 0, 1, 1, 0);
 
--- INsert Quizz:
+-- Insert Quizz:
 INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES 
 (NULL, NULL, 'JqWeBiSlQ0mcJQqYXLqD5Q', '1', '1'),
 (NULL, NULL, 'TsMlAjEtNEWaZxTYZwk83w', '2', '3'),
-(NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2')
+(NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2');
 
-select * from question;
+-- Insert compte:
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123" ,  1) ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

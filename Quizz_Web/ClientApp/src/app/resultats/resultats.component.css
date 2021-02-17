@@ -1,0 +1,20 @@
+
+.candidat{
+
+    display: flex;
+    flex-wrap:wrap;
+    flex-direction : column;
+}
+.chrono
+{
+    height: 300;
+    width: 70;
+}
+.p{
+    font-size:32px;
+}
+.Bravo{
+    display: flex;
+    align-self :flex-end;
+    
+} 
