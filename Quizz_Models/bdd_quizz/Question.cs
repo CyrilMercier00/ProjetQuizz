@@ -16,8 +16,11 @@ namespace Quizz_Models.bdd_quizz
         public string NvComplexite { get; set; }
         public string Enonce { get; set; }
         public byte? ARepondu { get; set; }
+        public byte RepLibre { get; set; }
         public int FkTheme { get; set; }
         public int FkComplexite { get; set; }
+        public string Commentaire { get; set; }
+        public string ReponseLibreText { get; set; }
 
         public virtual TauxComplexite FkComplexiteNavigation { get; set; }
         public virtual Theme FkThemeNavigation { get; set; }

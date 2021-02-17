@@ -16,7 +16,6 @@ namespace Quizz_Models.bdd_quizz
         public string Prenom { get; set; }
         public string Mail { get; set; }
         public string MotDePasse { get; set; }
-        public int? Role { get; set; }
         public int FkPermission { get; set; }
 
         public virtual Permission FkPermissionNavigation { get; set; }

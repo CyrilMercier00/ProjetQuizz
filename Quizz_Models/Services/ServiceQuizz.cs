@@ -41,7 +41,8 @@ namespace Quizz_Models.Services
                 {
                     FkTheme = leTheme.PkTheme,
                     FkComplexite = leTaux.PkComplexite,
-                    Chrono = TimeSpan.Parse (prmDTO.Chrono)
+                    Chrono = TimeSpan.Parse(prmDTO.Chrono),
+                    Urlcode = prmDTO.Urlcode
                 };
 
                 // Ajouter des questions dans la liste des questions
