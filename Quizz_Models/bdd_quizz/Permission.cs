@@ -11,6 +11,7 @@ namespace Quizz_Models.bdd_quizz
         }
 
         public int PkPermission { get; set; }
+        public string Nom { get; set; }
         public byte? GenererQuizz { get; set; }
         public byte? AjouterQuest { get; set; }
         public byte? ModifierQuest { get; set; }

@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VariableGlobales } from 'src/app/url_api';
-import { environment } from 'src/environments/environment';
-import { getBaseUrl } from 'src/main';
 import { Compte } from './compte.model';
 
 @Injectable({
@@ -15,5 +13,9 @@ export class CompteService {
 
   getAll(): Observable<Compte[]>{
     return this.httpClient.get<Compte[]>(VariableGlobales.apiURLCompte);
+  }
+
+  create(compte : Compte) : Observable<Compte>{
+    return this.httpClient.post<Compte>(VariableGlobales.apiURLCompte, compte);
   }
 }

@@ -20,6 +20,14 @@ namespace Quizz_Models.Services
             return bdd_entities.Compte.ToList();
         }
 
+        public List<Compte> GetCompteByNomPerm(int prmidPerm)
+        {
+            return bdd_entities.Compte
+                .Where(x => x.FkPermission == prmidPerm)
+                .ToList();
+                
+        }
+
         /// <summary>
         /// Méthode qui retourne un compte par son ID.
         /// </summary>

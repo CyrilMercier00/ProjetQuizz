@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
-import { AssignationQuizzComponent } from './components/gen-quizz/assignation-quizz/assignation-quizz.component';
+import { AssignationQuizzComponent } from './components/assignation-quizz/assignation-quizz.component';
 import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
@@ -24,6 +24,9 @@ import { InputNumberComponent } from './components/input/input-number/input-numb
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
 import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.component';
+import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
+import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
+import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.compo
     ButtonValidComponent,
     SelectCompteCandidatComponent,
     GenerateNiveauComponent,
+    FormulaireCreationCompteComponent,
+    ButtonAjouterNouveauCandidatComponent,
+    FormulaireCreationCandidatComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

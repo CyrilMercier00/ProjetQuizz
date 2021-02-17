@@ -19,6 +19,7 @@ USE `bdd_quizz` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `pk_permission` INT NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(45) UNIQUE NULL,
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
@@ -38,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
   `mot_de_passe` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
@@ -110,6 +110,8 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`question` (
   `rep_libre` TINYINT NOT NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
+  `commentaire` LONGTEXT NULL,
+  `reponse_libre_text` LONGTEXT NULL,
   PRIMARY KEY (`pk_question`),
   INDEX `fk_question_theme1_idx` (`fk_theme` ASC)  ,
   INDEX `fk_question_taux complexite1_idx` (`fk_complexite` ASC) ,
@@ -145,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reponse_candidat_question1`
     FOREIGN KEY (`fk_question`)
+
     REFERENCES `bdd_quizz`.`question` (`pk_question`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -217,11 +220,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 -- Insert permissions : 
-insert into permission(generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
+insert into permission(nom, generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
 	values 
-(true, true, true, true, true, true), 
-(true, true, true, false, true, false),
-(false, false, false, false, false, false);
+("Administrateur", true, true, true, true, true, true), 
+("Recruteur", true, true, true, false, true, false),
+("Candidat", false, false, false, false, false, false);
 
 -- Insert themes :
     Insert into theme (nom_theme) values 
@@ -255,7 +258,7 @@ INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite
 (NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2');
 
 -- Insert compte:
-Insert into compte( nom, prenom, mail, mot_de_passe ,role, fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123", "admin" ,  1) ;
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123" ,  1) ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
