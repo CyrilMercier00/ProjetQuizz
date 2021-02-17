@@ -5,16 +5,16 @@
 */
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VariableGlobales } from '../../../url_api';
+import { VariableGlobales } from '../../url_api';
 import { Router } from "@angular/router";
-import { DTOQuizz } from '../DTO/dto-quizz';
+import { DTOQuizz } from '../gen-quizz/DTO/dto-quizz';
 
 
 
 @Component({
   selector: 'app-assignation-quizz',
   templateUrl: './assignation-quizz.component.html',
-  styleUrls: ['./assignation-quizz.component.css', '../../../app.flex-util.css']
+  styleUrls: ['./assignation-quizz.component.css', '../../app.flex-util.css']
 })
 
 
@@ -82,11 +82,11 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Requete GET a l'api pour le candidat avec ce nom --- */
   async getCompteCandidatID()
   {
-    const reponse = await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    const reponse = await fetch(VariableGlobales.apiURLCompte + "/0/Candidat", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        return JSON.parse(JSON.stringify(json.pk_compte));
+        return JSON.parse(JSON.stringify(json.mail));
       });
     return reponse
   }
