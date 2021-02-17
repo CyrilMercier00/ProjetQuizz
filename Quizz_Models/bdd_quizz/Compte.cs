@@ -11,6 +11,16 @@ namespace Quizz_Models.bdd_quizz
             ReponseCandidat = new HashSet<ReponseCandidat>();
         }
 
+        public Compte(String prmNom, String prmPrenom, String  prmMail, String  prmMotDePasse)
+        {
+            CompteQuizz = new HashSet<CompteQuizz>();
+            ReponseCandidat = new HashSet<ReponseCandidat>();
+            Nom = prmNom;
+            Prenom = prmPrenom;
+            Mail = prmMail;
+            MotDePasse = prmMotDePasse;
+        }
+
         public int PkCompte { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }

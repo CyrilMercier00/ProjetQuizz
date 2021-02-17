@@ -1,4 +1,6 @@
-﻿namespace Quizz_Models.DTO
+﻿using Quizz_Models.bdd_quizz;
+
+namespace Quizz_Models.DTO
 {
     public class CompteDTO
     {
@@ -7,5 +9,7 @@
         public string Mail { get; set; }
         public string MDP { get; set; }
         public int Role { get; set; }
+
     }
+
 }
