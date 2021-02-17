@@ -19,6 +19,7 @@ USE `bdd_quizz` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`Permission` (
   `pk_permission` INT NOT NULL AUTO_INCREMENT,
+  `nom` VARCHAR(45) NULL,
   `generer_quizz` TINYINT NULL,
   `ajouter_quest` TINYINT NULL,
   `modifier_quest` TINYINT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
-  `mot_de_passe` VARCHAR(45) NOT NULL
+  `mot_de_passe` VARCHAR(45) NOT NULL,
   `fk_permission` INT NOT NULL,
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
@@ -146,6 +147,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reponse_candidat_question1`
     FOREIGN KEY (`fk_question`)
+
     REFERENCES `bdd_quizz`.`question` (`pk_question`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
