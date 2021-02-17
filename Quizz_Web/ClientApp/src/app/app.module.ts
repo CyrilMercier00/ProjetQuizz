@@ -23,6 +23,7 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
+import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
     InputNumberComponent,
     ButtonValidComponent,
     SelectCompteCandidatComponent,
+    GenerateNiveauComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,13 +58,18 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
       { path: '', component: HomeComponent },                             // Page d'accueil
       { path: 'assign-quizz', component: AssignationQuizzComponent },     // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },           //
-      { path: 'gen-quizz', component: GenQuizzComponent },                // Page pour créer un quizz
+      { path: 'gen-quizz', component: GenQuizzComponent}  ,              // Page pour créer un quizz
+      
+     
+        {path:'gen-niveau', component: GenerateNiveauComponent} ,           //page pour creer un nouveau niveau
+      
       { path: 'gest-quizz', component: GestionQuizzComponent },           // Page pour modifier un quizz
       { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
       { path: 'permission', component: PermissionComponent },             //
       { path: 'resultats', component: ResultatsComponent },               // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },             // Page de permission admin pour Joris
-      { path: 'comptes', component: ComptesComponent },
+      { path: 'comptes', component: ComptesComponent },                  
+    
       { path: '**', component: PageNotFoundComponent }                   // Wildcard route for a 404 page
     ]),
 
