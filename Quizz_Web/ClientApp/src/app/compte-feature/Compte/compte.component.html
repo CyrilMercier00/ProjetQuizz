@@ -1,4 +1,13 @@
 <div class="rectangle">
-    <p>{{this.compte.nom}} {{this.compte.prenom}}</p>
-    <p>{{this.compte.mail}}</p>
+    <div class="container">
+        <p>{{this.compte.nom}} {{this.compte.prenom}}</p>
+        <div class="textDiv">
+            <p>{{this.compte.mail}}</p>
+        </div>
+    </div>
+    
+    <div>
+        <app-button-valid class="modifiedButton" Message="Modifier"></app-button-valid>
+        <app-button-valid Message="Supprimer"></app-button-valid>
+    </div>
 </div>

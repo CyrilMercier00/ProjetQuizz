@@ -3,7 +3,6 @@ button[disabled] {
 }
 
 button {
-    min-width       : 10rem;
     padding         : 0.5rem;
     background-color: #21db4f;
     border-radius   : 10px;

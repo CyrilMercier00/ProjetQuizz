@@ -36,6 +36,8 @@ namespace Quizz_Models.Services
         /// <param name="prmCompte">Entité du compte.</param>
         public void InsertCompte(Compte prmCompte)
         {
+            Permission p = bdd_entities.Permission.First(p => p.PkPermission == 3);
+            prmCompte.FkPermissionNavigation = p;
             bdd_entities.Compte.Add(prmCompte);
         }
 

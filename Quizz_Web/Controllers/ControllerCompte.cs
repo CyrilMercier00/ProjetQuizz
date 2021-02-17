@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
-using System.Net;
 using System.Collections.Generic;
 
 namespace Quizz_Web.Controllers
@@ -18,9 +17,9 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpGet("{id}")]
-        public CompteDTO Get(int id)
+        public CompteDTOAdmin Get(int id)
         {
-            CompteDTO compte = this.compteService.GetCompte(id);
+            CompteDTOAdmin compte = this.compteService.GetCompte(id);
 
             if (compte == null)
             {
@@ -32,9 +31,9 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpGet]
-        public List<CompteDTO> Get()
+        public List<CompteDTOAdmin> Get()
         {
-            List<CompteDTO> comptes = this.compteService.GetCompte();
+            List<CompteDTOAdmin> comptes = this.compteService.GetCompte();
 
             if (comptes == null)
             {
