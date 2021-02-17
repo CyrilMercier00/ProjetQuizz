@@ -220,11 +220,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 
 -- Insert permissions : 
-insert into permission(generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
+insert into permission(nom, generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
 	values 
-(true, true, true, true, true, true), 
-(true, true, true, false, true, false),
-(false, false, false, false, false, false);
+("Administrateur", true, true, true, true, true, true), 
+("Recruteur", true, true, true, false, true, false),
+("Candidat", false, false, false, false, false, false);
 
 -- Insert themes :
     Insert into theme (nom_theme) values 

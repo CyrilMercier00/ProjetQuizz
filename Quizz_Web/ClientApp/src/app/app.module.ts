@@ -23,6 +23,7 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
+import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
     InputNumberComponent,
     ButtonValidComponent,
     SelectCompteCandidatComponent,
+    FormulaireCreationCompteComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
