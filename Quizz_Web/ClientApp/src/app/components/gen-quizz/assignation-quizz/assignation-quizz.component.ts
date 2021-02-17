@@ -1,13 +1,20 @@
+/*
+------------------------------------------------------------
+    TODO : Recup de l'id du compte & l'envoyer avec le quizz
+------------------------------------------------------------
+*/
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VariableGlobales } from '../url_api';
+import { VariableGlobales } from '../../../url_api';
 import { Router } from "@angular/router";
+import { DTOQuizz } from '../DTO/dto-quizz';
+
 
 
 @Component({
   selector: 'app-assignation-quizz',
   templateUrl: './assignation-quizz.component.html',
-  styleUrls: [ './assignation-quizz.component.css', '../app.flex-util.css' ]
+  styleUrls: ['./assignation-quizz.component.css', '../../../app.flex-util.css']
 })
 
 
@@ -15,7 +22,7 @@ import { Router } from "@angular/router";
 export class AssignationQuizzComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
-  valRetourRequeteCompteAssigne: any;    // Contiens le retour de la requete get all compte assigne au recruteur
+
   resultatForm: FormGroup;               // Contiens les valeurs du formulaire d'assignation de quizz
   dataQuizz: any;                        // Contiens le quizz passé de la page generation de quizz
   concatForms: any;                      // Contiens les valeur des deux formulaires pour l'envoi a l'api
@@ -29,7 +36,7 @@ export class AssignationQuizzComponent implements OnInit
     console.log(this.dataQuizz);
     this.resultatForm = this.builder.group
       ({
-        compte: [ '', Validators.required ]
+        compte: ['', Validators.required]
       })
   }
 
@@ -38,22 +45,23 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit() { }
 
-  onSubmit()
-  {
-    //this.concatForms = this.resultatForm + this.inputQuizz;
-    console.log(this.concatForms);
-    this.creerQuizz(this.concatForms);
-  }
-
 
 
   /* ------ Fonctions ------ */
   /* --- Insertion du quizz & gestion erreur --- */
-  creerQuizz(prmDataQuizz: string)
+  onSubmit()
   {
     try
     {
-      this.insertQuizz(prmDataQuizz);
+      let quizzGen: DTOQuizz = new DTOQuizz;
+
+      quizzGen.nbQuestions = this.dataQuizz.nbQuestions;
+      quizzGen.theme = this.dataQuizz.theme;
+      quizzGen.complexite = this.dataQuizz.complexites;
+      this.getCompteCandidatID().then(valID => { quizzGen.idCompteCandidat = valID });
+      quizzGen.idCompteRecruteur = this.getCompteRecruteurID();
+
+      this.insertQuizz(quizzGen);
     } catch (e)
     {
       console.log(e);
@@ -62,12 +70,34 @@ export class AssignationQuizzComponent implements OnInit
 
 
 
+  /* ---  Retourne l'id du compte qui a créer le quizz --- */
+  getCompteRecruteurID()
+  { /* ---------- TODO ---------- */
+    return 1;
+  }
+
+
+
+  /* --- Refacto, id stocké en local ? --- */
+  /* --- Requete GET a l'api pour le candidat avec ce nom --- */
+  async getCompteCandidatID()
+  {
+    const reponse = await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        return JSON.parse(JSON.stringify(json.pk_compte));
+      });
+    return reponse
+  }
+
+
+
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
-  async insertQuizz(data: string)
+  insertQuizz(data: DTOQuizz)
   {
-    console.log("InsertQuizz: " + data);
-    let reponse = await fetch(
+    fetch(
       VariableGlobales.apiURLQuizz,
       {
         method: "POST",
@@ -79,20 +109,6 @@ export class AssignationQuizzComponent implements OnInit
         body: JSON.stringify(data)
       }
     )
-    reponse;
   }
-
-
-
-  async getCandidatAsigne()
-  {
-    fetch(VariableGlobales.apiURLCompte, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.valRetourRequeteCompteAssigne = JSON.parse(JSON.stringify(json));
-      });
-  }
-
 
 }

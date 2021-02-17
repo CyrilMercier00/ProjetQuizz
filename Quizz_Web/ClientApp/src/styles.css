@@ -1,6 +1,7 @@
 /* --- Modif CSS Globales --- */
-html, body {
-  color: white;
+html,
+body {
+  color           : white;
   background-color: #5952B4;
 }
 
@@ -8,22 +9,14 @@ html, body {
   display: none;
 }
 
-button[disabled] {
-  opacity: 50%;
+.margin-1 {
+  margin-top: 1rem;
 }
 
-.btn-valid {
-  min-width: 10rem;
+.margin-2 {
+  margin-top: 2rem;
+}
+
+.margin-3 {
   margin-top: 3rem;
-  padding: 0.5rem;
-  background-color: #21db4f;
-  border-radius: 10px;
-  border: 0;
-  color: inherit;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.btn-valid:hover:enabled {
-  background-color: #1ceb4f;
 }
