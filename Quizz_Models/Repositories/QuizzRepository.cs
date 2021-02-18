@@ -1,5 +1,6 @@
 using Quizz_Models.bdd_quizz;
 using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.Services
 {
@@ -28,5 +29,12 @@ namespace Quizz_Models.Services
             bdd_entities.SaveChanges ();
         }
 
+        /// <summary>
+        /// Méthode qui recupére un quizz via son ID
+        /// </summary>
+        /// <param name="PermissionEntity">Entité de la Permission</param>
+        /// <returns>Retourne la Permission trouvée ou lance une exception si aucune n'a été trouvée.</returns>
+
+       
     }
 }
