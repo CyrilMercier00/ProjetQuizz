@@ -14,7 +14,7 @@ import { DTOQuizz } from '../../gen-quizz/DTO/dto-quizz';
 @Component({
   selector: 'app-assignation-quizz',
   templateUrl: './assignation-quizz.component.html',
-  styleUrls: ['./assignation-quizz.component.css', '../../app.flex-util.css']
+  styleUrls: ['./assignation-quizz.component.css', '../../../app.flex-util.css']
 })
 
 
