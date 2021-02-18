@@ -1,8 +1,8 @@
 import { Component, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventEmitter } from 'events';
-import { Compte } from '../compte-feature/Compte/compte.model';
-import { CompteService } from '../compte-feature/Compte/compte.service';
+import { Compte } from '../../../compte-feature/Compte/compte.model';
+import { CompteService } from '../../../compte-feature/Compte/compte.service';
 
 @Component({
   selector: 'app-home',
