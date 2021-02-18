@@ -8,7 +8,7 @@ namespace Quizz_Models.Services
 {
     public class CompteRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
+        private readonly bdd_quizzContext bdd_entities ;
         public CompteRepository() { }
 
         /// <summary>

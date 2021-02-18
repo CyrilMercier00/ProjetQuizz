@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Web
 {
@@ -27,6 +28,9 @@ namespace Quizz_Web
             });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
+            services.AddDbContext< bdd_quizzContext>();
+            services.AddScoped<bdd_quizzContext, bdd_quizzContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

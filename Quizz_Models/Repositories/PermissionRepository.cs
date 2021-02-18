@@ -8,7 +8,7 @@ namespace Quizz_Models.Repositories
 {
     class PermissionRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
+        private readonly bdd_quizzContext bdd_entities ;
         public PermissionRepository() { }
 
         /// <summary>
