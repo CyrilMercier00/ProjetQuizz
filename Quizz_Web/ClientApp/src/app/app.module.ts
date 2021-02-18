@@ -6,16 +6,16 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
+import { QuizzQuestionComponent } from './components/pages/quizz-question/quizz-question.component';
 import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
-import { AssignationQuizzComponent } from './components/assignation-quizz/assignation-quizz.component';
-import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
+import { AssignationQuizzComponent } from './components/pages/assignation-quizz/assignation-quizz.component';
+import { GestionQuizzComponent } from './components/pages/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './resultats/resultats.component';
 import { PermissionComponent } from './permission/permission.component';
 import { ChronometreComponent } from './chronometre/chronometre.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
+import { FormulaireConnexionComponent } from './components/formulaire/formulaire-connexion/formulaire-connexion.component';
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
@@ -24,12 +24,16 @@ import { InputNumberComponent } from './components/input/input-number/input-numb
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
 import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.component';
-import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
+import { FormulaireCreationCompteComponent } from './components/formulaire/formulaire-creation-compte/formulaire-creation-compte.component';
 import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
-import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
-import { FormulaireAjoutQuestionBddComponent } from './components/formulaire-creation-question/formulaire-creation-question.component';
+import { FormulaireCreationCandidatComponent } from './components/formulaire/formulaire-creation-candidat/formulaire-creation-candidat.component';
+import { FormulaireAjoutQuestionBddComponent } from './components/formulaire/formulaire-creation-question/formulaire-creation-question.component';
 import { DragabbleTextInputComponent } from './components/input/dragabble-text-input/dragabble-text-input.component';
-import { PageCreationQuestionComponent } from './components/page-creation-question/page-creation-question.component';
+import { PageCreationQuestionComponent } from './components/pages/page-creation-question/page-creation-question.component';
+import { PageReponseLibreComponent } from './components/pages/page-reponse-libre/page-reponse-libre.component';
+import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/page-reponse-qcm.component';
+import { BoutonReponseQcmComponent } from './bouton-reponse-qcm/bouton-reponse-qcm.component';
+import { EnonceComponent } from './components/text/enonce/enonce.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +64,10 @@ import { PageCreationQuestionComponent } from './components/page-creation-questi
     FormulaireAjoutQuestionBddComponent,
     DragabbleTextInputComponent,
     PageCreationQuestionComponent,
+    PageReponseLibreComponent,
+    PageReponseQcmComponent,
+    BoutonReponseQcmComponent,
+    EnonceComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

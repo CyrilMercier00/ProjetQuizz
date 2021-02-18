@@ -5,9 +5,9 @@
 */
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VariableGlobales } from '../../url_api';
+import { VariableGlobales } from '../../../url_api';
 import { Router } from "@angular/router";
-import { DTOQuizz } from '../gen-quizz/DTO/dto-quizz';
+import { DTOQuizz } from '../../gen-quizz/DTO/dto-quizz';
 
 
 
