@@ -3,13 +3,15 @@ button[disabled] {
 }
 
 button {
-    padding         : 0.5rem;
+
     background-color: #21db4f;
     border-radius   : 10px;
     border          : 0;
     color           : inherit;
-    font-size       : 18px;
+    font-size       : large;
+    padding         : 0.5em 3em;
     text-decoration : none;
+
 }
 
 buttons:hover:enabled {

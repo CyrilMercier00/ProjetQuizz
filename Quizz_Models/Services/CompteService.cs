@@ -18,6 +18,12 @@ namespace Quizz_Models.Services
 
         public CompteService() { }
 
+        public List<Compte> GetCompteByNomPerm(string prmNom)
+        {
+            int IDPerm = repoPermission.GetPermissionByNom(prmNom).PkPermission;
+            return repoCompte.GetCompteByNomPerm(IDPerm);
+        }
+
         /// <summary>
         /// Ajout d'un compte sans Permission. Destinée uniquement pour les tests.
         /// </summary>

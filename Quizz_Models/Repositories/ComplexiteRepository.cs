@@ -9,7 +9,7 @@ namespace Quizz_Models.Services
 {
     public class ComplexiteRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext ();
+        private readonly bdd_quizzContext bdd_entities ;
 
         public ComplexiteRepository ()
         {

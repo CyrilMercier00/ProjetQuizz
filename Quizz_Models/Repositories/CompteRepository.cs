@@ -8,7 +8,7 @@ namespace Quizz_Models.Services
 {
     public class CompteRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
+        private readonly bdd_quizzContext bdd_entities ;
         public CompteRepository() { }
 
         /// <summary>
@@ -18,6 +18,14 @@ namespace Quizz_Models.Services
         public List<Compte> GetAllComptes()
         {
             return bdd_entities.Compte.Include("FkPermissionNavigation").ToList();
+        }
+
+        public List<Compte> GetCompteByNomPerm(int prmidPerm)
+        {
+            return bdd_entities.Compte
+                .Where(x => x.FkPermission == prmidPerm)
+                .ToList();
+                
         }
 
         /// <summary>

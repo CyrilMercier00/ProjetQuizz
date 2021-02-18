@@ -2,6 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
+using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Web.Controllers
 {
@@ -15,6 +16,35 @@ namespace Quizz_Web.Controllers
         {
             this.compteService = new CompteService();
         }
+
+
+
+        [HttpGet("{vide}/{nomPerm}")]
+        public List<CompteDTO> Get(string nomPerm)
+        {
+            List<Compte> listCompte = this.compteService.GetCompteByNomPerm(nomPerm);
+            List<CompteDTO> listDTO = new List<CompteDTO>();
+
+            if (listCompte == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            foreach (Compte c in listCompte)
+            {
+                listDTO.Add(new CompteDTO() { 
+                    Nom = c.Nom, 
+                    Prenom = c.Prenom, 
+                    Mail = c.Mail, 
+                    MDP = c.MotDePasse 
+                });
+
+            }
+
+            return listDTO;
+        }
+
 
         [HttpGet("{id}")]
         public CompteDTOAdmin Get(int id)

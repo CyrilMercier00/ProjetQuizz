@@ -15,28 +15,36 @@ namespace Quizz_Models.Utils
     class PdfUtils
     {
         // public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
-        public static PdfWriter writer = new PdfWriter("C:\\Users\\Public\\Downloads\\Test.pdf");
+        //public static PdfWriter writer = new PdfWriter(@"C:\\Users\\Public\\Downloads\\Test.pdf");
+        public static string pdfPath = @"C:\\Users\\Public\\Downloads\\Test.pdf";
+        public static PdfWriter writer = new PdfWriter(pdfPath);
         public static PdfDocument pdf = new PdfDocument(writer);
         public static iText.Layout.Document document = new iText.Layout.Document(pdf);
    
 
-
-
-        public void SavePdf()
-        {
-
-           
-
-        }
-
+        //Methode qui la creation du pdf avec son contenue le contenu du pdf 
         public static void ContentPdf()
         {
-            PdfHeader();
-            PdfSubHeader();
-            ScoreTable();
-            PdfPageNumber();
-            PdfBody();
-            document.Close();
+            try
+            {
+
+                PdfHeader();
+                PdfSubHeader();
+                ScoreTable();
+                PdfPageNumber();
+                PdfBody();
+                
+                //trouver solution envoi mail sans enregistrer
+
+                document.Close();
+                GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath);
+
+                Console.WriteLine("pdf + mail 2 ok");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("pb mail + pdf" + e);
+            }
 
         }
         public static void PdfLogo()

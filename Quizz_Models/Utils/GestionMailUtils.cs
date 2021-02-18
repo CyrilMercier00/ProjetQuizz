@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
+using System.Net.Mime;
+
 
 namespace Quizz_Models.Utils
 {
@@ -11,35 +11,7 @@ namespace Quizz_Models.Utils
 
 
 
-        //public void CreateMail()
-        //{
-        //    try
-        //    {
-        //        string mailFrom = "test@gmail.com";
-        //        string nomFrom = "Recruteur";
-        //        string mailTo = "sabrina.arif@outlook.fr";
-
-
-
-        //        msg.From = new MailAddress(mailFrom, nomFrom);
-        //        msg.To.Add(new MailAddress(mailTo));
-        //        msg.Subject = "Test de Compétende ";
-        //        msg.Body = "test";
-        //msg.IsBodyHtml = true; 
-        //        // Creat SMTP.  
-        //        SmtpClient smtp = new SmtpClient("smtp.outlook.com", 587);
-
-        //        // Send the message.  
-        //        smtp.Send(msg);
-        //        MessageBox.Show("Mail envoyer");
-        //    }
-        //    catch (Exception message)
-        //    {
-        //        MessageBox.Show("probleme envoi" + message.Message + "");
-
-        //    }
-
-        //}
+        //fonction qui gere l'envoi des mail 
         public static void SendMail(string mailFrom, string nameFrom, string mailTo, string nomCandidat, string bodyMail)
         {
             try
@@ -60,47 +32,49 @@ namespace Quizz_Models.Utils
                 smtp.Host = "smtp.gmail.com";
                 smtp.Port = 587;
 
-
-
-
+                //send message
                 smtp.Send(msg);
                 Console.WriteLine("Mail envoyer");
             }
             catch (Exception message)
             {
-                Console.WriteLine("probleme envoi" + message.Message + "");
+                Console.WriteLine("Mail non envoyé" + message.Message + "");
 
             }
         }
-        public static void SendMailRecruteur()
+
+        //methode gerent l'envoi du mail recruteur (utilise SendMail)
+        public static void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach)
         {
             string mailAutomatique = "comptequizztechnique@gmail.com";
-            string NomRecruteur = "Recruteur";
-            string NomCandidat = "Candidat";
+            NomRecruteur = "Recruteur";
+            NomCandidat = "Candidat";
             string mailToRecruteur = "comptequizztechnique@gmail.com";
-
+            // string PdfToAttach = "C:/dev/Dev Projet Quizz/28_01_2021/ProjQuizz_oldold/ProjQuizz/Resources/Test.pdf";
+            attachmentpdf(PdfToAttach);
             msg.Subject = "Test de Compétense " + NomCandidat;
-            SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, NomCandidat, contentMailCandidat(NomRecruteur, NomCandidat));
+            SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, NomCandidat, contentMailRecruteur(NomRecruteur, NomCandidat));
 
         }
-        public static void SendMailCandidat()
+        //methode sui gerent l'envoi du mail candidat (utilise SendMail)
+        public static void SendMailCandidat(string NomRecruteur, string NomCandidat)
         {
             string mailFRomRecruteur = "comptequizztechnique@gmail.com";
-            string NomCandidat = "Candidat";
-            string NomRecruteur = "recruteur";
+            NomCandidat = "Candidat";
+            NomRecruteur = "recruteur";
             string mailToCandidat = "comptequizztechnique@gmail.com";
 
             msg.Subject = " Test de Compétense ";
             SendMail(mailFRomRecruteur, NomRecruteur, mailToCandidat, NomCandidat, contentMailCandidat(NomRecruteur, NomCandidat));
 
-
         }
-
+        //methode sui gerent le contenu du mail candidat
         public static string contentMailCandidat(string NomRecruteur, string NomCandidat)
         {
             NomRecruteur = "nom recruteur";
             NomCandidat = "nom Candidat";
             String Url = "https:localhost/5001/Api/Quizz/xxxxxxxxx";
+           // String UrlCode = "xxxxxxxxx";
 
             string htmlBody = "<html><body> Bonjour, <br><br>" + NomCandidat +
                 "<h3>Suivez le lien Suivant pour réaliser le test de compétence :" + "<a href = \" " + Url + " \" >" + Url + "</ a ></h3>" +
@@ -123,10 +97,12 @@ namespace Quizz_Models.Utils
 
 
         }
-        public static string contentMailRecruteur()
+        //methode sui gerent le contenu du mail recruteur
+        public static string contentMailRecruteur(string NomRecruteur, string NomCandidat)
         {
-            string NomRecruteur = "nom recruteur";
-            string NomCandidat = "nom Candidat";
+            
+           NomRecruteur = "nom recruteur";
+           NomCandidat = "nom Candidat";
 
             string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur +
                 "ceci est un mail automatique <br> " +
@@ -135,6 +111,15 @@ namespace Quizz_Models.Utils
                 "</html></body> ";
             return htmlBody;
 
+        }
+
+        //methhode ajout piece joint au mail
+        public static void attachmentpdf(string PdfToAttach)
+        {
+            // Create  the file attachment for this e-mail message.
+            Attachment PdfAttachement = new Attachment(PdfToAttach, MediaTypeNames.Application.Pdf);
+
+            msg.Attachments.Add(PdfAttachement);
         }
     }
 }
