@@ -12,11 +12,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class FormulaireAjoutQuestionBddComponent implements OnInit
 {
 
+  /* ------ Declaration des variables ------ */
   resultatForm: FormGroup;
 
 
 
-
+  /* ------ Constructeur ------ */
   constructor(private builder: FormBuilder) 
   {
     this.resultatForm = this.builder.group
@@ -30,9 +31,21 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
 
 
 
-
+  /* ------ Methodes Angular --- */
   ngOnInit()
   {
   }
 
+
+
+  /* ------ Methodes ------ */
+  setValeurEnonce(prmValue: string)
+  {
+    this.resultatForm.patchValue({ "texteQuestion": prmValue });
+  }
+
+
 }
+
+
+
