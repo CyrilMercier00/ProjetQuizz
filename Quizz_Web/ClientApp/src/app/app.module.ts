@@ -75,19 +75,21 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                                           // Page d'accueil
-      { path: 'assign-quizz', component: AssignationQuizzComponent },      // Page pour assigner un quizz une fois crée
-      { path: 'chronometre', component: ChronometreComponent },           //
-      { path: 'gen-quizz', component: GenQuizzComponent },                     // Page pour créer un quizz
-      { path: 'gen-niveau', component: GenerateNiveauComponent },         // Page pour creer un nouveau niveau
-      { path: 'gest-quizz', component: GestionQuizzComponent },              // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },     // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },                 //
-      { path: 'resultats', component: ResultatsComponent },                       // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },                 // Page de permission admin pour Joris
+      { path: '', component: HomeComponent },                                             // Page d'accueil
+      { path: 'assign-quizz', component: AssignationQuizzComponent },       // Page pour assigner un quizz une fois crée
+      { path: 'chronometre', component: ChronometreComponent },             
+      { path: 'gen-quizz', component: GenQuizzComponent },                      // Page pour créer un quizz
+      { path: 'gen-niveau', component: GenerateNiveauComponent },           // Page pour creer un nouveau niveau
+      { path: 'gest-quizz', component: GestionQuizzComponent },                // Page pour modifier un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },      // Page pour repondre aux questons
+      { path: 'permission', component: PermissionComponent },                  
+      { path: 'resultats', component: ResultatsComponent },                         // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },                   // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
       { path: 'crea-quest', component: PageCreationQuestionComponent },  // Page de creation des questions
-      { path: '**', component: PageNotFoundComponent }                         // Wildcard route for a 404 page
+      { path: 'qcm', component: PageReponseQcmComponent },         // Page de réponse pour les questions qcm
+      { path: 'qcm-libre', component: PageReponseLibreComponent },        // Page de réponse pour les questions libres
+      { path: '**', component: PageNotFoundComponent }                           // Wildcard route for a 404 page
     ]),
 
 

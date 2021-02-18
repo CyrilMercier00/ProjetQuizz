@@ -1,11 +1,12 @@
 
+<app-enonce></app-enonce>
 
 <div class="flex flex-column">
-<app-bouton-reponse-qcm></app-bouton-reponse-qcm>
-<app-bouton-reponse-qcm></app-bouton-reponse-qcm>
+<app-bouton-reponse-qcm  [text-bouton]="rep1"></app-bouton-reponse-qcm>
+<app-bouton-reponse-qcm  [text-bouton]="rep2"></app-bouton-reponse-qcm>
 </div>
 
-<div class="flex flex-column"></div>
-<app-bouton-reponse-qcm></app-bouton-reponse-qcm>
-<app-bouton-reponse-qcm></app-bouton-reponse-qcm>
+<div class="flex flex-column">
+<app-bouton-reponse-qcm [text-bouton]="rep3" ></app-bouton-reponse-qcm>
+<app-bouton-reponse-qcm [text-bouton]="rep4"></app-bouton-reponse-qcm>
 </div>

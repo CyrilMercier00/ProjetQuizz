@@ -5,11 +5,18 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './page-reponse-qcm.component.html',
   styleUrls: ['./page-reponse-qcm.component.css']
 })
-export class PageReponseQcmComponent implements OnInit {
+export class PageReponseQcmComponent implements OnInit
+{
+
+  rep1: string ;
+  rep2: string;
+  rep3: string;
+  rep4: string ;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
   }
 
 }
