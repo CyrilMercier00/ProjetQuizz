@@ -2,7 +2,7 @@ using Quizz_Models.bdd_quizz;
 using System;
 using System.Collections.Generic;
 
-namespace Quizz_Models.Services
+namespace Quizz_Models.Repositories
 {
     public class QuizzRepository
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Quizz_Models.Services
+namespace Quizz_Models.Repositories
 {
     public class CompteRepository
     {

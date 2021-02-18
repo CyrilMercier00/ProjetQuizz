@@ -12,9 +12,9 @@ namespace Quizz_Web.Controllers
     {
         readonly CompteService compteService;
 
-        public ControllerCompte()
+        public ControllerCompte(CompteService compteService)
         {
-            this.compteService = new CompteService();
+            this.compteService = compteService;
         }
 
 
