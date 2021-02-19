@@ -31,9 +31,9 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* ------ Fonctions ------ */
-  getCandidatAsigne()
+  async getCandidatAsigne()
   {
-    fetch(VariableGlobales.apiURLCompte, { method: "GET" })
+    await fetch(VariableGlobales.apiURLCompte, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {

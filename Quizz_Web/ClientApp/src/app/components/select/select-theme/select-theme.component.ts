@@ -41,9 +41,9 @@ export class SelectThemeComponent implements OnInit
 
 
   /* --- Retourne le json des themes disponibles--- */
-  getAllTheme()
+  async getAllTheme()
   {
-    fetch(VariableGlobales.apiURLTheme, { method: "GET" })
+    await fetch(VariableGlobales.apiURLTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
