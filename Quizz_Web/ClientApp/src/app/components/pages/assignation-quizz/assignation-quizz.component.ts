@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VariableGlobales } from '../../../url_api';
 import { Router } from "@angular/router";
-import { DTOQuizz } from '../../gen-quizz/DTO/dto-quizz';
+import { DTOQuizz } from '../../../DTO/dto-quizz';
 
 
 
@@ -33,7 +33,6 @@ export class AssignationQuizzComponent implements OnInit
   constructor(private builder: FormBuilder, private router: Router)
   {
     this.dataQuizz = this.router.getCurrentNavigation().extras.state;
-    console.log(this.dataQuizz);
     this.resultatForm = this.builder.group
       ({
         compte: ['', Validators.required]
