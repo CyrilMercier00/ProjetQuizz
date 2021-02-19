@@ -78,7 +78,7 @@ export class AssignationQuizzComponent implements OnInit
 
 
   /* --- Refacto, id stocké en local ? --- */
-  /* --- Requete GET a l'api pour le candidat avec ce nom --- */
+  /* --- Requete GET a l'api pour tout les candidats assignés au recruteur --- */
   async getCompteCandidatID()
   {
     const reponse = await fetch(VariableGlobales.apiURLCompte + "/0/Candidat", { method: "GET" })
