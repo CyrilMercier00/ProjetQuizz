@@ -10,8 +10,12 @@ namespace Quizz_Models.Services
 {
     public class PermissionService
     {
-        readonly PermissionRepository repoPermission = new PermissionRepository();
-        public PermissionService() { }
+        readonly PermissionRepository repoPermission;
+        public PermissionService(PermissionRepository prmRepoPerm) 
+        {
+            repoPermission = prmRepoPerm;
+        }
+
 
         /// <summary>
         /// Retourne toutes les permissions de la bdd.

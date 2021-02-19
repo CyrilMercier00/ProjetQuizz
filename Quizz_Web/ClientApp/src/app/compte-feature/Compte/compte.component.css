@@ -1,15 +1,22 @@
 .rectangle{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 
     height : 100px;
-    width : 250px;
+    width : 400px;
     background-color: #50536f;
-    opacity: 1;
     margin: 10px;
     border-radius: 25px;
     justify-content: center;
     transition: background-color 1s, color 1s;
+}
+
+.container{
+    margin-top: 13px;
+}
+
+.textDiv p{
+    margin-top: 23px !important;
 }
 
 .rectangle:hover{
@@ -21,5 +28,18 @@
 }
 
 .rectangle p{
-    align-self: center;
+    padding-left: 20px;
+}
+
+::ng-deep button{
+    background-color: red !important;
+    font-size: 12px !important;
+    opacity: 0.8 !important;
+    margin: 10px 20px !important;
+    padding: 6px 55px !important;
+}
+
+::ng-deep .modifiedButton > button{
+    padding: 6px 60px !important;
+    background-color: orange !important;
 }

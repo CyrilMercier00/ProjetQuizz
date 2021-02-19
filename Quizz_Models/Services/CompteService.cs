@@ -25,29 +25,6 @@ namespace Quizz_Models.Services
         }
 
         /// <summary>
-        /// Méthode qui crée un Compte avec un CompteDTO et une PermissionDTO.
-        /// </summary>
-        /// <param name="CompteDTO">DTO pour la création d'un Compte</param>
-        /// <param name="PermissionDTO">DTO pour la création d'une Permission</param>
-        //public void AjoutCompte(CompteDTO CompteDTO, PermissionDTO PermissionDTO)
-        //{
-        //    Permission p = TransformPermissionDTOToPermissionEntity(PermissionDTO);
-        //    int PermissionID;
-        //
-        //    try
-        //    {
-        //        PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
-        //    }
-        //    catch (ArgumentNullException)
-        //    {
-        //        repoPermission.InsertPermission(p);
-        //        PermissionID = repoPermission.FindPermissionByValues(p).PkPermission;
-        //    }
-        //
-        //    AjoutCompte(CompteDTO, PermissionID);
-        //}
-
-        /// <summary>
         /// Ajout d'un compte sans Permission. Destinée uniquement pour les tests.
         /// </summary>
         /// <param name="CompteDTO">Compte à ajouter.</param>
@@ -60,11 +37,6 @@ namespace Quizz_Models.Services
             }
 
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
-
-            if (CompteDTO.Role >= ADMIN_PERMISSION_ID && CompteDTO.Role <= CANDIDAT_PERMISSION_ID)
-            {
-                c.FkPermission = CompteDTO.Role;
-            }
 
             repoCompte.InsertCompte(c);
 
@@ -96,12 +68,12 @@ namespace Quizz_Models.Services
         /// <summary>
         /// Retourne la liste des comptes en DTO.
         /// </summary>
-        public List<CompteDTO> GetCompte()
+        public List<CompteDTOAdmin> GetCompte()
         {
             List<Compte> comptes = repoCompte.GetAllComptes();
 
             if (comptes.Count == 0) return null;
-            else return TransformListCompteDTOToEntity(comptes);
+            else return TransformListCompteEntityToCompteDTOAdmin(comptes);
         }
 
         /// <summary>
@@ -109,12 +81,12 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="CompteID">Entité à transformer.</param>
         /// <returns>DTO correspondant.</returns>
-        public CompteDTO GetCompte(int CompteID)
+        public CompteDTOAdmin GetCompte(int CompteID)
         {
             Compte compte = repoCompte.GetCompteByID(CompteID);
 
             if (compte == null) return null;
-            return TransformCompteEntityToCompteDTO(compte);
+            return TransformCompteEntityToCompteDTOAdmin(compte);
         }
 
         /// <summary>
@@ -151,7 +123,8 @@ namespace Quizz_Models.Services
                 Nom = CompteDTO.Nom,
                 Prenom = CompteDTO.Prenom,
                 Mail = CompteDTO.Mail,
-                MotDePasse = CompteDTO.MDP
+                MotDePasse = CompteDTO.MDP,
+                FkPermission = 3
             };
 
             return c;
@@ -176,34 +149,36 @@ namespace Quizz_Models.Services
         }
 
         /// <summary>
-        /// Cette méthode transforme une entité Compte en DTO Compte.
+        /// Cette méthode transforme une entité Compte en DTO Compte admin.
         /// </summary>
         /// <param name="cpt">Entité du compte à transformer.</param>
         /// <returns>DTO correspondant.</returns>
-        private CompteDTO TransformCompteEntityToCompteDTO(Compte cpt)
+        private CompteDTOAdmin TransformCompteEntityToCompteDTOAdmin(Compte cpt)
         {
-            CompteDTO CompteDTO = new CompteDTO
+            CompteDTOAdmin compteDTOAdmin = new CompteDTOAdmin
             {
+                Id = cpt.PkCompte,
                 Nom = cpt.Nom,
                 Prenom = cpt.Prenom,
                 Mail = cpt.Mail,
-                MDP = cpt.MotDePasse
+                MDP = cpt.MotDePasse,
+                Role = cpt.FkPermissionNavigation.Nom
             };
 
-            return CompteDTO;
+            return compteDTOAdmin;
         }
 
         /// <summary>
-        /// Transforme une liste de Compte entité en liste de Compte DTO.
+        /// Transforme une liste de Compte entité en liste de Compte DTO admin.
         /// </summary>
         /// <param name="comptes">Liste d'entités Compte.</param>
         /// <returns>Liste de DTO Compte correspondante.</returns>
-        private List<CompteDTO> TransformListCompteDTOToEntity(List<Compte> comptes)
+        private List<CompteDTOAdmin> TransformListCompteEntityToCompteDTOAdmin(List<Compte> comptes)
         {
-            List<CompteDTO> compteDTOs = new List<CompteDTO>();
+            List<CompteDTOAdmin> compteDTOs = new List<CompteDTOAdmin>();
             foreach (Compte compte in comptes)
             {
-                compteDTOs.Add(TransformCompteEntityToCompteDTO(compte));
+                compteDTOs.Add(TransformCompteEntityToCompteDTOAdmin(compte));
             }
             return compteDTOs;
         }

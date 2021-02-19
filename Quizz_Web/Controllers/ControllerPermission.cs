@@ -11,9 +11,9 @@ namespace Quizz_Web.Controllers
     {
         readonly PermissionService permissionService;
 
-        public ControllerPermission()
+        public ControllerPermission(PermissionService prmServicePerm)
         {
-            permissionService = new PermissionService();
+            permissionService = prmServicePerm;
         }
 
         [HttpGet]

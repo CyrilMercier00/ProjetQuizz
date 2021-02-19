@@ -9,7 +9,7 @@ import { Compte } from './compte.model';
 export class CompteComponent implements OnInit {
 
   @Input() compte : Compte;
-
+  
   constructor() {
   }
 

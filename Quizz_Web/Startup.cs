@@ -5,6 +5,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quizz_Models.bdd_quizz;
+using Quizz_Models.Services;
+using Quizz_Models.Repositories;
+using Quizz_Web.Controllers;
 
 namespace Quizz_Web
 {
@@ -30,6 +33,13 @@ namespace Quizz_Web
             services.AddSwaggerGen();
             services.AddDbContext< bdd_quizzContext>();
             services.AddScoped<bdd_quizzContext, bdd_quizzContext>();
+
+            services.AddScoped<CompteService, CompteService>();
+            services.AddScoped<ServiceTheme, ServiceTheme>();
+            services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
+
+            services.AddScoped<PermissionRepository, PermissionRepository>();
+            services.AddScoped<ReponseCandidatRepository, ReponseCandidatRepository>();
 
         }
 
