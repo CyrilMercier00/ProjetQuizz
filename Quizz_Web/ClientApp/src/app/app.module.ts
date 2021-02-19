@@ -34,6 +34,7 @@ import { PageReponseLibreComponent } from './components/pages/page-reponse-libre
 import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/page-reponse-qcm.component';
 import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
 import { EnonceComponent } from './components/text/enonce/enonce.component';
+import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
     PageReponseQcmComponent,
     BoutonReponseQcmComponent,
     EnonceComponent,
+    PageDebutQuizzComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -75,21 +77,21 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                                             // Page d'accueil
-      { path: 'assign-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
+      { path: '', component: HomeComponent },                                                     // Page d'accueil
+      { path: 'assingation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },             
-      { path: 'gen-quizz', component: GenQuizzComponent },                       // Page pour créer un quizz
-      { path: 'gen-niveau', component: GenerateNiveauComponent },           // Page pour creer un nouveau niveau
-      { path: 'gest-quizz', component: GestionQuizzComponent },                 // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },        // Page pour repondre aux questons
+      { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
+      { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
+      { path: 'gestion-quizz', component: GestionQuizzComponent },                   // Page pour modifier un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },              // Page pour repondre aux questons
       { path: 'permission', component: PermissionComponent },                  
-      { path: 'resultats', component: ResultatsComponent },                           // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },                    // Page de permission admin pour Joris
+      { path: 'resultats', component: ResultatsComponent },                                 // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },                           // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
-      { path: 'crea-quest', component: PageCreationQuestionComponent },   // Page de creation des questions
-      { path: 'qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
-      { path: 'qcm-libre', component: PageReponseLibreComponent },          // Page de réponse pour les questions libres
-      { path: '**', component: PageNotFoundComponent }                            // Wildcard route for a 404 page
+      { path: 'creation-question', component: PageCreationQuestionComponent },      // Page de creation des questions
+      { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
+      { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
+      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
 
