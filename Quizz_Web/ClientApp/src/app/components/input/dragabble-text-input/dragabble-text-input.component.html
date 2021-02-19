@@ -1,1 +1,4 @@
-<textarea rows="3" cols="50" id="question"></textarea>
+<div class="wrapper">
+    <label class="title">{{title}}</label>
+    <textarea rows="3" cols="50" id="question"  (onChange)="valueChange($event)"></textarea>
+</div>

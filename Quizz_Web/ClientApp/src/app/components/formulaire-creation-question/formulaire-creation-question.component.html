@@ -1,8 +1,8 @@
 <div class=contaoner>
-    <form onSubmit="handleSubmit">
-        <app-select-niveau></app-select-niveau>
-        <app-select-theme></app-select-theme>
-        <app-dragabble-text-input></app-dragabble-text-input>
-        <app-button-valid [isDisabled]="form.valid"></app-button-valid>
+    <form  (ngSubmit)="handleSubmit()" [formGroup]='resultatForm'>
+        <app-select-niveau (ChoixEvent)="setValeurFormTheme($event)"></app-select-niveau>
+        <app-select-theme (ChoixEvent)="setValeurFormNiveau($event)" ></app-select-theme>
+        <app-dragabble-text-input title="Commentaire"></app-dragabble-text-input>
+        <app-button-valid [isDisabled]="resultatForm.invalid" (textValueChange)=(setValeurEnonce($event))></app-button-valid>
     </form>
 </div>
