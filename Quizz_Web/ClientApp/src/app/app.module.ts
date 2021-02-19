@@ -78,7 +78,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },                                                     // Page d'accueil
-      { path: 'assingation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
+      { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },             
       { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
       { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
