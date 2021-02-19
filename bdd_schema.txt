@@ -46,10 +46,10 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
     
     CONSTRAINT `fk_compte_compte1`
-    FOREIGN KEY (`fk_fk_compteReferent`)
+    FOREIGN KEY (`fk_compteReferent`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`),
-  CONSTRAINT `fk_compte_compte1`
-
+    
+	CONSTRAINT `fk_compte_permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
     ON DELETE NO ACTION
