@@ -35,25 +35,8 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
-        //[HttpGet]
-        //[Route("{Urlcode}")]
-        //public ActionResult<QuizzDTO> GetQuizzUrlCodeById(int prmIDQuizz)
-        //{
-        //    valRetour = Ok();
-        //    try
-        //    {
-        //        Quizz quizz = new Quizz();
-        //        quizz = this.servQuizz.FindByID(prmIDQuizz);
-        //        return Ok(quizz.Urlcode);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e.Message);
-        //        valRetour = NotFound();
-        //    }
-        //    return valRetour;
 
-        //}
+
 
         [HttpGet]
         [Route("{id}/{Urlcode}")]

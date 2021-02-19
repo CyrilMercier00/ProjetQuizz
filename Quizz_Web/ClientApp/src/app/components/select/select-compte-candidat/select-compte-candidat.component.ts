@@ -26,19 +26,22 @@ export class SelectCompteCandidatComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit(): void
   {
+    let ret = this.getCandidatAsigne();
+    console.log(ret);
   }
 
 
 
   /* ------ Fonctions ------ */
-  async getCandidatAsigne()
-  {
-    await fetch(VariableGlobales.apiURLCompte, { method: "GET" })
+  /* --- Get des candidats aassigné a ce recruteur --- */
+  async getCandidatAsigne() {
+    const reponse = await fetch(VariableGlobales.apiURLCompte +jwt +"/Candidat", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteCompteAssigne = JSON.parse(JSON.stringify(json));
+        return JSON.parse(JSON.stringify(json.mail));
       });
+    return reponse
   }
 
 }

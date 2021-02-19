@@ -42,7 +42,10 @@ export class AssignationQuizzComponent implements OnInit
 
 
   /* --- Methodes Angular --- */
-  ngOnInit() { }
+  ngOnInit() 
+  {
+    this.getCompteCandidatID();
+   }
 
 
 
@@ -76,22 +79,7 @@ export class AssignationQuizzComponent implements OnInit
   }
 
 
-
-  /* --- Refacto, id stocké en local ? --- */
-  /* --- Requete GET a l'api pour tout les candidats assignés au recruteur --- */
-  async getCompteCandidatID()
-  {
-    const reponse = await fetch(VariableGlobales.apiURLCompte + "/0/Candidat", { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        return JSON.parse(JSON.stringify(json.mail));
-      });
-    return reponse
-  }
-
-
-
+  
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
   insertQuizz(data: DTOQuizz)
