@@ -9,7 +9,10 @@ namespace Quizz_Models.Repositories
     public class CompteRepository
     {
         private readonly bdd_quizzContext bdd_entities ;
-        public CompteRepository() { }
+        public CompteRepository(bdd_quizzContext quizzContext) 
+        {
+            bdd_entities = quizzContext;
+        }
 
         /// <summary>
         /// Méthode qui retourne tout les comptes de la bdd.
@@ -17,7 +20,7 @@ namespace Quizz_Models.Repositories
         /// <returns>Liste de tout les comptes.</returns>
         public List<Compte> GetAllComptes()
         {
-            return bdd_entities.Compte.Include("FkPermissionNavigation").ToList();
+            return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
         }
 
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
@@ -35,7 +38,7 @@ namespace Quizz_Models.Repositories
         /// <returns>Le compte demandé.</returns>
         public Compte GetCompteByID(int prmID)
         {
-            return bdd_entities.Compte.Find(prmID);
+            return bdd_entities.Compte.Where(c => c.PkCompte == prmID).Include(c => c.FkPermissionNavigation).Single();
         }
 
         /// <summary>

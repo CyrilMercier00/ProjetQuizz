@@ -10,7 +10,10 @@ namespace Quizz_Models.Repositories
     {
         private readonly bdd_quizzContext bdd_entities ;
 
-        public ThemeRepository() { }
+        public ThemeRepository(bdd_quizzContext context) 
+        {
+            bdd_entities = context;
+        }
 
         /* Theme */
         /// <summary>

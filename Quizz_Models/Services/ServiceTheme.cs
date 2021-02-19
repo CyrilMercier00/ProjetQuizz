@@ -1,27 +1,26 @@
 ﻿using Quizz_Models.bdd_quizz;
-using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Models.Services
 {
     public class ServiceTheme
     {
-        readonly ThemeRepository RepoTheme ;
+        readonly ThemeRepository repoTheme ;
 
-        public ServiceTheme() {
-            RepoTheme = new ThemeRepository();
+        public ServiceTheme(ThemeRepository themeRepository) {
+            repoTheme = themeRepository;
         }
 
         public List<Theme> GetAllThemes ()
         {
-            return RepoTheme.GetAllTheme();
+            return repoTheme.GetAllTheme();
         }
 
         public Theme GetThemeByNom(String prmNomTheme)
         {
-            return RepoTheme.GetThemeByNom(prmNomTheme);
+            return repoTheme.GetThemeByNom(prmNomTheme);
         }
     }
 }

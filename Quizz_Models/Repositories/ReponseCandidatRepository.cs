@@ -8,7 +8,10 @@ namespace Quizz_Models.Repositories
     public class ReponseCandidatRepository
     {
         private readonly bdd_quizzContext bdd_entities ;
-        public ReponseCandidatRepository () { }
+        public ReponseCandidatRepository (bdd_quizzContext context) 
+        {
+            bdd_entities = context;
+        }
 
         public void InsertReponseCandidat ( ReponseCandidat prmReponseCandidat )
         {

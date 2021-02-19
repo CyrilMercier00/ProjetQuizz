@@ -11,9 +11,9 @@ namespace Quizz_Models.Repositories
     {
         private readonly bdd_quizzContext bdd_entities ;
 
-        public ComplexiteRepository ()
+        public ComplexiteRepository (bdd_quizzContext context)
         {
-
+            bdd_entities = context;
         }
 
         public  TauxComplexite Create(TauxComplexite taux_Complexite)
