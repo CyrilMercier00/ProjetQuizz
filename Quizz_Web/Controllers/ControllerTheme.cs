@@ -11,9 +11,9 @@ namespace Quizz_Web.Controllers
     {
         readonly ServiceTheme servTheme;
 
-        public ControllerTheme()
+        public ControllerTheme(ServiceTheme serviceTheme)
         {
-            this.servTheme = new ServiceTheme();
+            this.servTheme = serviceTheme;
         }
 
         [HttpGet]

@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Quizz_Models.bdd_quizz;
 using Quizz_Models.Services;
 using Quizz_Models.Repositories;
-using Quizz_Web.Controllers;
 
 namespace Quizz_Web
 {
@@ -31,14 +30,22 @@ namespace Quizz_Web
             });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
-            services.AddDbContext< bdd_quizzContext>();
+            services.AddDbContext<bdd_quizzContext>();
             services.AddScoped<bdd_quizzContext, bdd_quizzContext>();
 
             services.AddScoped<CompteService, CompteService>();
+            services.AddScoped<PermissionService, PermissionService>();
+            services.AddScoped<ComplexiteService, ComplexiteService>();
+            services.AddScoped<ServiceQuizz, ServiceQuizz>();
             services.AddScoped<ServiceTheme, ServiceTheme>();
             services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
 
+            services.AddScoped<ComplexiteRepository, ComplexiteRepository>();
             services.AddScoped<PermissionRepository, PermissionRepository>();
+            services.AddScoped<QuestionRepository, QuestionRepository>();
+            services.AddScoped<QuizzRepository, QuizzRepository>();
+            services.AddScoped<ThemeRepository, ThemeRepository>();
+            services.AddScoped<CompteRepository, CompteRepository>();
             services.AddScoped<ReponseCandidatRepository, ReponseCandidatRepository>();
 
         }

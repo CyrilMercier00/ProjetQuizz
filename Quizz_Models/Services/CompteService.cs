@@ -9,14 +9,18 @@ namespace Quizz_Models.Services
 {
     public class CompteService
     {
-        readonly PermissionRepository repoPermission = new PermissionRepository();
-        readonly CompteRepository repoCompte = new CompteRepository();
+        readonly PermissionRepository repoPermission;
+        readonly CompteRepository repoCompte;
 
         const int ADMIN_PERMISSION_ID = 1;
         const int RECRUTEUR_PERMISSION_ID = 2;
         const int CANDIDAT_PERMISSION_ID = 3;
 
-        public CompteService() { }
+        public CompteService(PermissionRepository repoPermission, CompteRepository repoCompte) 
+        {
+            this.repoPermission = repoPermission;
+            this.repoCompte = repoCompte;
+        }
 
         public List<Compte> GetCompteByNomPerm(string prmNom)
         {
@@ -38,6 +42,7 @@ namespace Quizz_Models.Services
 
             Compte c = TransformCompteDTOToCompteEntity(CompteDTO);
 
+            c.FkPermissionNavigation = this.repoPermission.GetPermissionById(c.FkPermission);
             repoCompte.InsertCompte(c);
 
             int lignes;

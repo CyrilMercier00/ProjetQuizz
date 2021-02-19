@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
-using System;
 
 namespace Quizz_Web.Controllers
 {
@@ -9,7 +8,12 @@ namespace Quizz_Web.Controllers
     [Route ("api/reponse-candidat")]
     public class ControllerReponseCandidat : Controller
     {
-        readonly ServiceReponseCandidat repService = new ServiceReponseCandidat ();
+        readonly ServiceReponseCandidat repService;
+
+        public ControllerReponseCandidat(ServiceReponseCandidat serviceReponseCandidat)
+        {
+            repService = serviceReponseCandidat;
+        }
 
         [HttpPost]
         public void Post ( [FromBody] ReponseCandidatDTO prmDTO )

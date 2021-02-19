@@ -2,18 +2,24 @@
 using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Models.Services
 {
     public class ServiceQuizz
     {
-        readonly ComplexiteRepository repoComplex = new ComplexiteRepository();
-        readonly QuestionRepository repoQuest = new QuestionRepository();
-        readonly QuizzRepository repoQuizz = new QuizzRepository();
-        readonly ThemeRepository repoTheme = new ThemeRepository();
+        readonly ComplexiteRepository repoComplex;
+        readonly QuestionRepository repoQuest;
+        readonly QuizzRepository repoQuizz;
+        readonly ThemeRepository repoTheme;
 
-        public ServiceQuizz() { }
+        public ServiceQuizz(ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository) 
+        {
+            repoComplex = complexiteRepository;
+            repoQuest = questionRepository;
+            repoQuizz = quizzRepository;
+            repoTheme = themeRepository;
+        }
 
         public Quizz FindByID(int prmIDQuizz)
         {

@@ -8,8 +8,12 @@ namespace Quizz_Models.Repositories
     public class QuestionRepository
     {
         private readonly bdd_quizzContext bdd_entities;
-        private readonly ThemeRepository repoTheme = new ThemeRepository ();
-        public QuestionRepository () { }
+        private readonly ThemeRepository repoTheme;
+        public QuestionRepository (bdd_quizzContext context, ThemeRepository repoTheme) 
+        {
+            bdd_entities = context;
+            this.repoTheme = repoTheme;
+        }
 
         /*  Questions  */
         public Question GetQuestionByID ( int prmID )
