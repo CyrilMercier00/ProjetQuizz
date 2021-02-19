@@ -87,8 +87,8 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
       { path: 'permission', component: PermissionComponent },                   // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
       { path: 'crea-quest', component: PageCreationQuestionComponent },  // Page de creation des questions
-      { path: 'qcm', component: PageReponseQcmComponent },         // Page de réponse pour les questions qcm
-      { path: 'qcm-libre', component: PageReponseLibreComponent },        // Page de réponse pour les questions libres
+      { path: 'qcm', component: PageReponseQcmComponent },                  // Page de réponse pour les questions qcm
+      { path: 'qcm-libre', component: PageReponseLibreComponent },         // Page de réponse pour les questions libres
       { path: '**', component: PageNotFoundComponent }                           // Wildcard route for a 404 page
     ]),
 
