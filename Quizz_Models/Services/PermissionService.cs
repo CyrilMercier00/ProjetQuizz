@@ -95,6 +95,11 @@ namespace Quizz_Models.Services
         /// <returns>Nombre de lignes ajoutées.</returns>
         public int AddPermission(PermissionDTO permissionDTO)
         {
+            if(IsAllValueNull(permissionDTO))
+            {
+                return -1;
+            }
+
             Permission p = TransformPermissionDTOToPermission(permissionDTO);
 
             Permission test = this.repoPermission.FindPermissionByValues(p);
@@ -122,6 +127,22 @@ namespace Quizz_Models.Services
             this.repoPermission.ModifyPermission(permissionAModifier);
             MailUtils.ModifyPermission(ref permissionAModifier, permissionDTO);
             return this.repoPermission.Sauvegarder();
+        }
+
+        /// <summary>
+        /// Check si toutes les valeurs sont à nuls (mauvaise requête).
+        /// </summary>
+        /// <param name="permissionDTO"></param>
+        /// <returns>True si toutes les valeurs du DTO sont à null.</returns>
+        private bool IsAllValueNull(PermissionDTO permissionDTO)
+        {
+            if(permissionDTO.AjouterQuest == null && permissionDTO.ModifierCompte == null && permissionDTO.ModifierQuest == null
+                && permissionDTO.SupprimerCompte == null && permissionDTO.SupprQuestion == null && permissionDTO.GenererQuizz == null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
