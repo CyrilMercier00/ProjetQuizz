@@ -1,6 +1,6 @@
 export class Compte {
-    private id: number;
-    private nom : string;
+    public id: number;
+    public nom : string;
     private prenom : string;
     private mail : string;
     private mdp : string;

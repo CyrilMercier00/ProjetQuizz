@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Compte } from './compte.model';
+import { CompteService } from './compte.service';
 
 @Component({
   selector: 'app-compte',
@@ -9,11 +10,19 @@ import { Compte } from './compte.model';
 export class CompteComponent implements OnInit {
 
   @Input() compte : Compte;
+  @Output() refreshEvent = new EventEmitter();
   
-  constructor() {
+  constructor(private compteService: CompteService) {
   }
 
   ngOnInit(): void {
+  }
+
+  supprimerCompte(): void{
+    this.compteService.delete(this.compte).subscribe(response => {
+      console.log('Le compte ' + this.compte.nom + ' a été supprimé.');
+      this.refreshEvent.emit();
+    });;
   }
 
 }
