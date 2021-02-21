@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: row;
 
-    height : 100px;
-    width : 400px;
+    height : 7rem;
+    width : 30rem;
     background-color: #50536f;
     margin: 10px;
     border-radius: 25px;
@@ -12,11 +12,7 @@
 }
 
 .container{
-    margin-top: 13px;
-}
-
-.textDiv p{
-    margin-top: 23px !important;
+    margin-top: 3px;
 }
 
 .rectangle:hover{
@@ -28,12 +24,12 @@
 }
 
 .rectangle p{
-    padding-left: 20px;
+    margin-left: 20px;
 }
 
 ::ng-deep button{
     background-color: red !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     opacity: 0.8 !important;
     margin: 10px 20px !important;
     padding: 6px 55px !important;

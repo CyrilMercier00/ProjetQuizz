@@ -4,7 +4,7 @@ export class Compte {
     private prenom : string;
     private mail : string;
     private mdp : string;
-    private role : string;
+    public role : string;
 
     constructor(id: number, nom: string, prenom: string, mail: string, mdp: string, role: string){
         this.id = id;
