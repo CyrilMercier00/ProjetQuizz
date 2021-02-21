@@ -35,13 +35,13 @@ export class SelectCompteCandidatComponent implements OnInit
   /* ------ Fonctions ------ */
   /* --- Get des candidats aassigné a ce recruteur --- */
   async getCandidatAsigne() {
-    const reponse = await fetch(VariableGlobales.apiURLCompte +jwt +"/Candidat", { method: "GET" })
+    /*const reponse = await fetch(VariableGlobales.apiURLCompte +jwt +"/Candidat", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
         return JSON.parse(JSON.stringify(json.mail));
       });
-    return reponse
+    return reponse*/
   }
 
 }

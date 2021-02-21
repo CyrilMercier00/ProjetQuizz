@@ -92,7 +92,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
       { path: 'page-demarrage', component: PageDebutQuizzComponent },                // Page de demarrage du quizz
-      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
+      //{ path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
 

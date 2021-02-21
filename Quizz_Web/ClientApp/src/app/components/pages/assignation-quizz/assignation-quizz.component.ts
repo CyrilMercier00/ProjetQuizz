@@ -44,7 +44,7 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit() 
   {
-    this.getCompteCandidatID();
+    /*this.getCompteCandidatID();*/
    }
 
 
@@ -60,7 +60,7 @@ export class AssignationQuizzComponent implements OnInit
       quizzGen.nbQuestions = this.dataQuizz.nbQuestions;
       quizzGen.theme = this.dataQuizz.theme;
       quizzGen.complexite = this.dataQuizz.complexites;
-      this.getCompteCandidatID().then(valID => { quizzGen.idCompteCandidat = valID });
+      /*this.getCompteCandidatID().then(valID => { quizzGen.idCompteCandidat = valID });*/
       quizzGen.idCompteRecruteur = this.getCompteRecruteurID();
 
       this.insertQuizz(quizzGen);
