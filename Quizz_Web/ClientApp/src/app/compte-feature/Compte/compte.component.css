@@ -8,11 +8,8 @@
     margin: 10px;
     border-radius: 25px;
     justify-content: center;
+    align-items: stretch;
     transition: background-color 1s, color 1s;
-}
-
-.container{
-    margin-top: 3px;
 }
 
 .rectangle:hover{
@@ -24,14 +21,14 @@
 }
 
 .rectangle p{
-    margin-left: 20px;
+    margin-left: 25px;
 }
 
 ::ng-deep button{
     background-color: red !important;
     font-size: 14px !important;
     opacity: 0.8 !important;
-    margin: 10px 20px !important;
+    margin: 10px 10px 10px 135px !important;
     padding: 6px 55px !important;
 }
 
