@@ -11,15 +11,34 @@ import { Router } from '@angular/router';
 
 
 
-export class PageDebutQuizzComponent implements OnInit {
+export class PageDebutQuizzComponent implements OnInit
+{
+  /* --- Variables --- */
 
+
+
+  /* --- Constructeur ---*/
   constructor(private router: Router) { }
 
-  ngOnInit() {
+
+
+  /* --- Methodes Angular --- */
+  ngOnInit()
+  {
   }
 
-  handleClick() {
+
+
+  /*--- Methodes ---*/
+  handleClick()
+  {
     this.router.navigate([''])
+  }
+
+
+  GetQuizz(prmID)
+  {
+    
   }
 
 }
