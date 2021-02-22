@@ -1,51 +1,52 @@
 export class questionDTO
 {
 
-     _text: string;
-     _estBonne: boolean;
-     _FKQuestion: number;
-     _FKCompte: number;
+     private _enonce: string;
+     private _repLibre : boolean;
+     private _FKComplexite: number;
+     private _FKTheme: number;
 
-    public get text(): string
-    {
-        return this._text;
+    public get enonce(): string
+ {
+        return this._enonce;
     }
 
-    public set text(text: string)
-    {
-        this._text = text;
+    public set enonce(enonce: string
+) {
+        this._enonce = enonce;
     }
 
-    public get estBonne(): boolean
-    {
-        return this._estBonne;
+    public get repLibre(): boolean {
+        return this._repLibre;
     }
 
-    public set estBonne(estBonne: boolean)
-    {
-        this._estBonne = estBonne;
+    public set repLibre(repLibre: boolean) {
+        this._repLibre = repLibre;
     }
 
-    public get FKQuestion(): number
-    {
-        return this._FKQuestion;
+    public get FKComplexite(): number
+ {
+        return this._FKComplexite;
     }
 
-    public set FKQuestion(FKQuestion: number
-    )
-    {
-        this._FKQuestion = FKQuestion;
+    public set FKComplexite(FKComplexite: number
+) {
+        this._FKComplexite = FKComplexite;
     }
 
-    public get FKCompte(): number
-    {
-        return this._FKCompte;
+    public get FKTheme(): number {
+        return this._FKTheme;
     }
 
-    public set FKCompte(FKCompte: number)
-    {
-        this._FKCompte = FKCompte;
+    public set FKTheme(FKTheme: number) {
+        this._FKTheme = FKTheme;
     }
+
+
+
+
+
+
 
 
 
