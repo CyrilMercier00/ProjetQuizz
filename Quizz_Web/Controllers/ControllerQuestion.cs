@@ -19,7 +19,7 @@ namespace Quizz_Web.Controllers
 
         [HttpPost]
         public void Post([FromBody] QuestionDTO prmDTO)
-        {
+        { 
             int lignes = this.questionService.Insert(prmDTO);
 
             if (lignes == -1)

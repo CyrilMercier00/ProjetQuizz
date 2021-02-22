@@ -6,8 +6,8 @@ namespace Quizz_Models.DTO
     {
         public String Enonce { get; set; }
         public bool RepLibre { get; set; }
-        public int FKComplexite { get; set; }
-        public int FKTheme { get; set; }
+        public String NomComplexite { get; set; }
+        public String NomTheme { get; set; }
 
     }
 }

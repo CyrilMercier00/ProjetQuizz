@@ -33,13 +33,16 @@ namespace Quizz_Web
             services.AddDbContext<bdd_quizzContext>();
             services.AddScoped<bdd_quizzContext, bdd_quizzContext>();
 
+            /* --- Services --- */
             services.AddScoped<CompteService, CompteService>();
             services.AddScoped<PermissionService, PermissionService>();
             services.AddScoped<ComplexiteService, ComplexiteService>();
             services.AddScoped<ServiceQuizz, ServiceQuizz>();
             services.AddScoped<ServiceTheme, ServiceTheme>();
             services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
+            services.AddScoped<QuestionService, QuestionService>();
 
+            /* --- Repo --- */
             services.AddScoped<ComplexiteRepository, ComplexiteRepository>();
             services.AddScoped<PermissionRepository, PermissionRepository>();
             services.AddScoped<QuestionRepository, QuestionRepository>();
@@ -47,6 +50,7 @@ namespace Quizz_Web
             services.AddScoped<ThemeRepository, ThemeRepository>();
             services.AddScoped<CompteRepository, CompteRepository>();
             services.AddScoped<ReponseCandidatRepository, ReponseCandidatRepository>();
+            services.AddScoped<QuestionRepository, QuestionRepository>();
 
         }
 

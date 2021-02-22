@@ -29,9 +29,6 @@ namespace Quizz_Models.Services
             int nbLigneInsert;
             Question q = DTOConvert(prmDTO);
 
-            q.FkComplexiteNavigation = repoComplex.GetComplexiteByID(q.FkComplexite);
-            q.FkThemeNavigation = repoTheme.GetThemeByID(q.FkTheme);
-
             repoQuestion.Insert(q);
 
             try
@@ -53,12 +50,17 @@ namespace Quizz_Models.Services
         /// <returns></returns>
         public Question DTOConvert(QuestionDTO prmDTO)
         {
+            TauxComplexite c = repoComplex.GetComplexiteByNom(prmDTO.NomComplexite);
+            Theme t = repoTheme.GetThemeByNom(prmDTO.NomTheme);
+
             return new Question()
             {
-                FkComplexite = prmDTO.FKComplexite,
-                FkTheme = prmDTO.FKTheme,
-                RepLibre = Convert.ToByte(prmDTO.RepLibre),
-                Enonce = prmDTO.Enonce
+                Enonce = prmDTO.Enonce,
+                FkComplexite = c.PkComplexite,
+                FkComplexiteNavigation = c,
+                FkTheme = t.PkTheme,
+                FkThemeNavigation = t,
+                RepLibre = Convert.ToByte(prmDTO.RepLibre)
             };
         }
     }

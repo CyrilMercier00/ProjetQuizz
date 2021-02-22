@@ -15,13 +15,21 @@ namespace Quizz_Models.Repositories
             this.repoTheme = repoTheme;
         }
 
-        /*  Questions  */
+        /// <summary>
+        /// Retourne une question avec la PK passée
+        /// </summary>
+        /// <param name="prmID"></param>
+        /// <returns></returns>
         public Question GetQuestionByID ( int prmID )
         {
             return bdd_entities.Question.Find (prmID);
 
         }
 
+        /// <summary>
+        ///  Update d'une ou plusieurs questions
+        /// </summary>
+        /// <param name="prmListQuestion"></param>
         public void UpdateListQuestion (List<Question> prmListQuestion)
         {
             foreach (Question q in prmListQuestion)
@@ -31,11 +39,19 @@ namespace Quizz_Models.Repositories
             bdd_entities.SaveChanges();
         }
 
+        /// <summary>
+        /// Insertion dans la base
+        /// </summary>
+        /// <param name="prmQuestion"></param>
         public void Insert( Question prmQuestion )
         {
             bdd_entities.Question.Add (prmQuestion);
         }
 
+        /// <summary>
+        /// Sauvegarder les changements effectués
+        /// </summary>
+        /// <returns></returns>
         public int Sauvegarder ()
         {
             return bdd_entities.SaveChanges();

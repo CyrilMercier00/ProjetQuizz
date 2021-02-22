@@ -1,7 +1,7 @@
 <div class=contaoner>
     <form (ngSubmit)="handleSubmit()" [formGroup]='resultatForm'>
-        <app-select-niveau (change)="setValeurFormTheme($event.target.value)"></app-select-niveau>
-        <app-select-theme (change)="setValeurFormNiveau($event.target.value)"></app-select-theme>
+        <app-select-niveau (change)="setValeurFormNiveau($event.target.value)"></app-select-niveau>
+        <app-select-theme (change)="setValeurFormTheme($event.target.value)"></app-select-theme>
         <app-check-box (change)="setValeurFormLibre($event.target.checked)"></app-check-box>
         <app-dragabble-text-input title="Enoncé :" (change)="setValeurEnonce($event.target.value)">
         </app-dragabble-text-input>

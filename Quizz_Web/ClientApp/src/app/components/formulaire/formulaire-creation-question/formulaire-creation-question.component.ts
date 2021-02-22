@@ -44,7 +44,7 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
   /* ------ Methodes ------ */
   handleSubmit()
   {
-    console.log(this.resultatForm)
+    this.InsertQuestion(this.resultatForm);
   }
 
 
@@ -87,9 +87,9 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
 
     let q = new questionDTO();
     q.enonce = data.value.texteQuestion;
-    q.repLibre = data.value.texteQuestion;
-    q.FKComplexite = data.value.texteQuestion;
-    q.FKTheme = data.value.texteQuestion;
+    q.repLibre = data.value.repLibre;
+    q.nomComplexite = data.value.complexite;
+    q.nomTheme = data.value.theme;
 
     fetch(
       VariableGlobales.apiURLQuestion,
