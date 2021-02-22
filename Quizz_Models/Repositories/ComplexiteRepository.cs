@@ -38,8 +38,8 @@ namespace Quizz_Models.Repositories
            
         }
 
-        internal TauxComplexite Find(int id)
-        {
+        internal TauxComplexite GetComplexiteByID(int id)
+        {   // Note : Remplacement de Find
             return bdd_entities.TauxComplexite.Find(id);
         }
 

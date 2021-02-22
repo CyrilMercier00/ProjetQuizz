@@ -31,11 +31,16 @@ namespace Quizz_Models.Repositories
             bdd_entities.SaveChanges();
         }
 
-        public void InsertNouvelleQuestion ( Question prmQuestion )
+        public void Insert( Question prmQuestion )
         {
             bdd_entities.Question.Add (prmQuestion);
-            bdd_entities.SaveChanges ();
         }
+
+        public int Sauvegarder ()
+        {
+            return bdd_entities.SaveChanges();
+        }
+
         /// <summary>
         /// Selectionne des questions au hasard dans la base et les ajoute a liste passée.
         /// </summary>

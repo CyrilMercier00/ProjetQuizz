@@ -15,7 +15,6 @@ namespace Quizz_Models.Repositories
             bdd_entities = context;
         }
 
-        /* Theme */
         /// <summary>
         /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
         /// </summary>
@@ -38,6 +37,16 @@ namespace Quizz_Models.Repositories
             .Where (x => x.NomTheme.Equals (prmNiveauComplex))
             .Single ();
         }
+        /// <summary>
+        /// Retourne le theme en fonction de l'id passée
+        /// </summary>
+        /// <param name="fkTheme"></param>
+        /// <returns></returns>
+        internal Theme GetThemeByID(int prmFKTheme)
+        {
+            return bdd_entities.Theme.Find(prmFKTheme;
+        }
+
         /// <summary>
         /// Retourne tout ojets theme
         /// </summary>
