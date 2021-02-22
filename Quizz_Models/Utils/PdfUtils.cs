@@ -20,7 +20,11 @@ namespace Quizz_Models.Utils
         public static PdfWriter writer = new PdfWriter(pdfPath);
         public static PdfDocument pdf = new PdfDocument(writer);
         public static iText.Layout.Document document = new iText.Layout.Document(pdf);
-   
+        String Recruteur ="";
+        // Candidat
+        //Question
+        //Reponse
+        //Technologie
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
         public static void ContentPdf()
@@ -106,7 +110,7 @@ namespace Quizz_Models.Utils
         public static void PdfSubHeader()
         {
 
-            Paragraph subheader = new Paragraph(" Technologie : C# ")
+            Paragraph subheader = new Paragraph(" Technologie : ")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetUnderline()
                 .SetFontSize(15);

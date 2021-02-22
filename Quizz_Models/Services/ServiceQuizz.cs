@@ -44,7 +44,8 @@ namespace Quizz_Models.Services
                     FkTheme = leTheme.PkTheme,
                     FkComplexite = leTaux.PkComplexite,
                     Chrono = TimeSpan.Parse(prmDTO.Chrono),
-                    Urlcode = prmDTO.Urlcode
+                    // Urlcode = prmDTO.Urlcode
+                    Urlcode = leCodeUrl
                 };
 
                 //Ajouter code Unique pour l'url du Quizz
