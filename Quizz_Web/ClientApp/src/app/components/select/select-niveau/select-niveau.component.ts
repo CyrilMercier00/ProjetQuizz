@@ -47,7 +47,7 @@ export class SelectNiveauComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteComplex = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteComplex = json;
       });
   }
 }

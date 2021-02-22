@@ -47,7 +47,7 @@ export class SelectThemeComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteTheme = json;
       });
   }
 }

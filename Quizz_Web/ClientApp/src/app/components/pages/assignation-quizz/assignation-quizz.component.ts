@@ -3,7 +3,7 @@
     TODO : Recup de l'id du compte & l'envoyer avec le quizz
 ------------------------------------------------------------
 */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VariableGlobales } from '../../../url_api';
 import { Router } from "@angular/router";
@@ -24,15 +24,16 @@ export class AssignationQuizzComponent implements OnInit
   /* ------ Declaration des variables ------ */
 
   resultatForm: FormGroup;               // Contiens les valeurs du formulaire d'assignation de quizz
-  dataQuizz: any;                        // Contiens le quizz passé de la page generation de quizz
-  concatForms: any;                      // Contiens les valeur des deux formulaires pour l'envoi a l'api
+  dataQuizz: any;                               // Contiens le quizz passé de la page generation de quizz
+  concatForms: any;                          // Contiens les valeur des deux formulaires pour l'envoi a l'api
 
 
 
   /* ------ Constructeur ------ */
   constructor(private builder: FormBuilder, private router: Router)
   {
-    this.dataQuizz = this.router.getCurrentNavigation().extras.state;
+    console.log( "---------------" + this.router.getCurrentNavigation().extras);
+    this.dataQuizz = this.router.getCurrentNavigation().extras;
     this.resultatForm = this.builder.group
       ({
         compte: ['', Validators.required]
@@ -42,10 +43,10 @@ export class AssignationQuizzComponent implements OnInit
 
 
   /* --- Methodes Angular --- */
-  ngOnInit() 
+  ngOnInit()
   {
-    this.getCompteCandidatID();
-   }
+
+  }
 
 
 
@@ -59,8 +60,8 @@ export class AssignationQuizzComponent implements OnInit
 
       quizzGen.nbQuestions = this.dataQuizz.nbQuestions;
       quizzGen.theme = this.dataQuizz.theme;
-      quizzGen.complexite = this.dataQuizz.complexites;
-      this.getCompteCandidatID().then(valID => { quizzGen.idCompteCandidat = valID });
+      quizzGen.complexite = this.dataQuizz.complexite;
+      quizzGen.idCompteRecruteur = 1;
       quizzGen.idCompteRecruteur = this.getCompteRecruteurID();
 
       this.insertQuizz(quizzGen);
@@ -79,7 +80,7 @@ export class AssignationQuizzComponent implements OnInit
   }
 
 
-  
+
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
   insertQuizz(data: DTOQuizz)

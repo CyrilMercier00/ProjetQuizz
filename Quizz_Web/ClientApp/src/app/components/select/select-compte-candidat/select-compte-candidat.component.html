@@ -1,7 +1,7 @@
 <div class="mybox">
     <span class="myarrow"></span>
     <select>
-        <option *ngFor="let candidat of valRetourRequeteCompteAssigne">{{candidat.nom | titlecase}}, {{candidat.mail}}
+        <option *ngFor="let candidat of valRetourRequeteCompteAssigne">Nom : {{candidat.nom | titlecase}} | Mail: {{candidat.mail}}
         </option>
     </select>
 </div>
