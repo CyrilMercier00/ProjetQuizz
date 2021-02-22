@@ -35,6 +35,7 @@ import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/pag
 import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
+import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
     BoutonReponseQcmComponent,
     EnonceComponent,
     PageDebutQuizzComponent,
+    CheckBoxComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
