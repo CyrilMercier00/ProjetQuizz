@@ -10,38 +10,12 @@ namespace Quizz_Web.Controllers
     [Route("api/question")]
     public class ControllerQuestion : Controller
     {
-        readonly CompteService compteService;
+        readonly QuestionService questionService;
 
-        public ControllerQuestion(CompteService compteService)
+        public ControllerQuestion(QuestionService prmQuestionService)
         {
-            this.compteService = compteService;
+            this.questionService = prmQuestionService;
         }
-
-
-
-        [HttpGet("{id}")]
-        public CompteDTOAdmin Get(int id)
-        {
-            CompteDTOAdmin compte = this.compteService.GetCompte(id);
-
-            if (compte == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            }
-
-            return compte;
-        }
-
-        
-
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            this.compteService.DeleteCompte(id);
-        }
-
-
 
         [HttpPost]
         public void Post([FromBody] QuestionDTO prmDTO)

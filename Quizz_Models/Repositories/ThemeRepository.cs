@@ -44,7 +44,7 @@ namespace Quizz_Models.Repositories
         /// <returns></returns>
         internal Theme GetThemeByID(int prmFKTheme)
         {
-            return bdd_entities.Theme.Find(prmFKTheme;
+            return bdd_entities.Theme.Find(prmFKTheme);
         }
 
         /// <summary>
