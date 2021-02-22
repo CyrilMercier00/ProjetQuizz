@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { questionDTO } from 'src/app/DTO/questionDTO';
+import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
   selector: 'app-formulaire-creation-question',
@@ -13,6 +15,7 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
 {
 
   /* ------ Declaration des variables ------ */
+  @Output("valForm") valForm: FormData;
   resultatForm: FormGroup;
 
 
@@ -25,7 +28,7 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
         texteQuestion: ['', Validators.required],
         theme: ['', Validators.required],
         complexite: ['', Validators.required],
-        repLibre: ['', Validators.required],
+        repLibre: ["false"],
       })
   }
 
@@ -39,13 +42,70 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
 
 
   /* ------ Methodes ------ */
+  handleSubmit()
+  {
+    console.log(this.resultatForm)
+  }
+
+
+
+  /* --- Set de la valeur enoncé si changement dans le select --- */
   setValeurEnonce(prmValue: string)
   {
     this.resultatForm.patchValue({ "texteQuestion": prmValue });
   }
 
 
-}
 
+  setValeurFormLibre(prmValue: string)
+  {
+    this.resultatForm.patchValue({ "repLibre": prmValue });
+    console.log(this.resultatForm);
+  }
+
+
+
+  /* --- Set de la niveau enoncé si changement dans le select --- */
+  setValeurFormNiveau(prmValue: string)
+  {
+    this.resultatForm.patchValue({ "complexite": prmValue });
+  }
+
+
+
+  /* --- Set de la valeur theme si changement dans le select --- */
+  setValeurFormTheme(prmValue: string)
+  {
+    this.resultatForm.patchValue({ "theme": prmValue });
+  }
+
+
+
+  /* --- Envoi a l'api de la question ---*/
+  InsertQuestion(data)
+  {
+
+    let q = new questionDTO();
+    q.enonce = data.value.texteQuestion;
+    q.repLibre = data.value.texteQuestion;
+    q.FKComplexite = data.value.texteQuestion;
+    q.FKTheme = data.value.texteQuestion;
+
+    fetch(
+      VariableGlobales.apiURLQuestion,
+      {
+        method: "POST",
+        headers:
+        {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(q)
+      }
+    )
+  }
+
+
+}
 
 
