@@ -17,6 +17,8 @@ namespace Quizz_Web.Controllers
             this.questionService = prmQuestionService;
         }
 
+
+
         [HttpPost]
         public void Post([FromBody] QuestionDTO prmDTO)
         { 
@@ -42,5 +44,30 @@ namespace Quizz_Web.Controllers
             }
         }
 
+
+
+        [HttpGet("{idQuizz}")]
+        public List<CompteDTO> Get(int idQuizz)
+        {
+            List<Question> listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);
+            List<QuestionDTO> listQuestionDTO = new List<QuestionDTO>();
+
+            if (listQuestion == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            foreach (Question q in listQuestion)
+            {
+                listQuestionDTO.Add(new CompteDTO()
+                {
+
+                });
+
+            }
+
+            return listDTO;
+        }
     }
 }

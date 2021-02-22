@@ -93,7 +93,7 @@ import { CheckBoxComponent } from './components/input/check-box/check-box.compon
       { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage', component: PageDebutQuizzComponent},                 // Page de demarrage du quizz
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent},                 // Page de demarrage du quizz
       { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 

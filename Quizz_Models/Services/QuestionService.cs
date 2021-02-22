@@ -2,6 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace Quizz_Models.Services
 {
@@ -41,6 +42,11 @@ namespace Quizz_Models.Services
             }
 
             return nbLigneInsert;
+        }
+
+        public List<Question> GetListQuestionByIDQuizz(int idQuizz)
+        {
+            return repoQuestion.GetQuestionByIDQuizz();
         }
 
         /// <summary>
