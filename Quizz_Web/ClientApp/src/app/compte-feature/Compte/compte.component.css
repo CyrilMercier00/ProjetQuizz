@@ -46,7 +46,15 @@
     background-color: red;
 }
 
-.containerButton .modifyButton {
+.containerButton > .modifyButton {
     background-color: orange;
     padding: 0.3rem 3rem;
+}
+
+.containerButton > .modifyButton:hover{
+    background-color: rgb(255,105,30);
+}
+
+.deleteButton:hover{
+    background-color: rgb(220,0,0);
 }
