@@ -60,6 +60,6 @@
     background-color: rgb(41, 75, 143);
 }
 
-p {
-    transform: translateX(-100%);
+.creation-button:disabled{
+    opacity: 40%;
 }

@@ -12,6 +12,6 @@
     <div class="creationcompte-input">
       <input type="text" id="passwordInput" placeholder="Mot de passe" formControlName="mdp">
     </div>
-    <button class="creation-button" type="submit">Valider</button>
+    <button class="creation-button" [disabled]="compteProfile.invalid" type="submit">Valider</button>
   </span>
 </form>
