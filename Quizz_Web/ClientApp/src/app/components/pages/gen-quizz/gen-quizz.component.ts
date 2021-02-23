@@ -63,6 +63,6 @@ export class GenQuizzComponent implements OnInit
   /* --- Envoie a la page suivante avec les données du formulaire --- */
   onSubmit()
   {
-    this.router.navigate(['/assignation-quizz'], { state: { c: this.resultatForm.value} });
+    this.router.navigate(['/assignation-quizz'], { state: { form : this.resultatForm.value} });
   }
 }
