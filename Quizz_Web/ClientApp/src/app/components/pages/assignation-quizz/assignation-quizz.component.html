@@ -1,13 +1,15 @@
-<div class="container-component-assign flex flex-vertical">
+<div class="container-component-assign container flex flex-vertical">
   <button id="btn-retour" [routerLink]="['/creer-quizz']">Retour</button>
 
-  <div class="container-assign flex flex-vertical flex-align-i-center">
+  <form [formGroup]='resultatForm'  (ngSubmit)="onSubmit()">
+    <div class="container-assign flex flex-vertical flex-align-i-center">
 
-    <label id="nom-candidat">A qui assigner ce quizz </label>
+      <label id="nom-candidat">A qui assigner ce quizz </label>
 
-    <app-select-compte-candidat></app-select-compte-candidat>
-    <app-button-valid class="margin-1"></app-button-valid>
-    <!-- <app-button-ajouter-nouveau-candidat></app-button-ajouter-nouveau-candidat> -->
+      <app-select-compte-candidat  (ChoixEvent)="setValeurFormIDCandidat($event.id.value)"></app-select-compte-candidat>
+      <app-button-valid class="margin-1"></app-button-valid>
+      <!-- <app-button-ajouter-nouveau-candidat></app-button-ajouter-nouveau-candidat> -->
 
-  </div>
+    </div>
+  </form>
 </div>
