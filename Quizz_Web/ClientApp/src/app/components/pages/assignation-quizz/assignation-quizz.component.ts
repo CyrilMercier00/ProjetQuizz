@@ -32,8 +32,7 @@ export class AssignationQuizzComponent implements OnInit
   /* ------ Constructeur ------ */
   constructor(private builder: FormBuilder, private router: Router)
   {
-    console.log( "---------------" + this.router.getCurrentNavigation().extras);
-    this.dataQuizz = this.router.getCurrentNavigation().extras;
+    this.dataQuizz = this.router.getCurrentNavigation().extras.state;
     this.resultatForm = this.builder.group
       ({
         compte: ['', Validators.required]
@@ -54,27 +53,33 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Insertion du quizz & gestion erreur --- */
   onSubmit()
   {
-    try
-    {
-      let quizzGen: DTOQuizz = new DTOQuizz;
+    console.log(this.dataQuizz);
+    let quizzGen: DTOQuizz = new DTOQuizz;
 
-      quizzGen.nbQuestions = this.dataQuizz.nbQuestions;
-      quizzGen.theme = this.dataQuizz.theme;
-      quizzGen.complexite = this.dataQuizz.complexite;
-      quizzGen.idCompteRecruteur = 1;
-      quizzGen.idCompteRecruteur = this.getCompteRecruteurID();
+    quizzGen.$NbQuestions = this.dataQuizz.form.nbQuestions;
+    quizzGen.$Theme = this.dataQuizz.form.theme;
+    quizzGen.$Complexite = this.dataQuizz.form.complexite;
+    quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
+    quizzGen.$FKCompteAssigne = this.resultatForm.value.compte;
 
-      this.insertQuizz(quizzGen);
-    } catch (e)
-    {
-      console.log(e);
-    }
+    this.insertQuizz(quizzGen);
+    console.log(quizzGen);
+    // this.router.navigate(['/'])
+  }
+
+
+
+
+  setValeurFormIDCandidat(prmID: number)
+  {
+    this.resultatForm.patchValue({"compte" : prmID})
+    console.log(this.resultatForm.value)
   }
 
 
 
   /* ---  Retourne l'id du compte qui a créer le quizz --- */
-  getCompteRecruteurID()
+  getCompteRecruteurID(): number
   { /* ---------- TODO ---------- */
     return 1;
   }
@@ -83,9 +88,9 @@ export class AssignationQuizzComponent implements OnInit
 
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
-  insertQuizz(data: DTOQuizz)
+  async insertQuizz(data: DTOQuizz)
   {
-    fetch(
+    await fetch(
       VariableGlobales.apiURLQuizz,
       {
         method: "POST",

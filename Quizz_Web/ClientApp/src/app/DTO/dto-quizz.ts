@@ -1,102 +1,122 @@
 export class DTOQuizz
 {
-    private _idCompteRecruteur: number;
-    private _nbQuestions: number;
-    private _theme: string;
-    private _complexite: string;
+    private FKCompteRecruteur: number;
+    private FKCompteAssigne: number;
+    private NbQuestions: number;
+    private Chrono: string;
+    private Theme: String;
+    private Complexite: String;
+    private Urlcode: String;
 
     /**
-     * Getter idCompteCandidat
+     * Getter $FKCompteRecruteur
      * @return {number}
      */
-    public get idCompteCandidat(): number
-    {
-        return this._idCompteCandidat;
-    }
+	public get $FKCompteRecruteur(): number {
+		return this.FKCompteRecruteur;
+	}
 
     /**
-     * Setter idCompteCandidat
-     * @param {number} value
-     */
-    public set idCompteCandidat(value: number)
-    {
-        this._idCompteCandidat = value;
-    }
-    private _idCompteCandidat: number;
-
-
-    /**
-     * Getter idCompteRecruteur
+     * Getter $FKCompteAssigne
      * @return {number}
      */
-    public get idCompteRecruteur(): number
-    {
-        return this._idCompteRecruteur;
-    }
+	public get $FKCompteAssigne(): number {
+		return this.FKCompteAssigne;
+	}
 
     /**
-     * Setter idCompteRecruteur
-     * @param {number} value
+     * Getter $NbQuestions
+     * @return {number}
      */
-    public set idCompteRecruteur(value: number)
-    {
-        this._idCompteRecruteur = value;
-    }
-
-
+	public get $NbQuestions(): number {
+		return this.NbQuestions;
+	}
 
     /**
-     * Getter theme
+     * Getter $Chrono
      * @return {string}
      */
-    public get theme(): string
-    {
-        return this._theme;
-    }
+	public get $Chrono(): string {
+		return this.Chrono;
+	}
 
     /**
-     * Setter theme
-     * @param {string} value
+     * Getter $Theme
+     * @return {String}
      */
-    public set theme(value: string)
-    {
-        this._theme = value;
-    }
+	public get $Theme(): String {
+		return this.Theme;
+	}
 
     /**
-     * Getter complexite
-     * @return {string}
+     * Getter Complexite
+     * @return {String}
      */
-    public get complexite(): string
-    {
-        return this._complexite;
-    }
+	public get $Complexite(): String {
+		return this.Complexite;
+	}
 
     /**
-     * Setter complexite
-     * @param {string} value
+     * Getter $Urlcode
+     * @return {String}
      */
-    public set complexite(value: string)
-    {
-        this._complexite = value;
-    }
-    /**
-     * Getter nbQuestions
-     * @return {number}
-     */
-    public get nbQuestions(): number
-    {
-        return this._nbQuestions;
-    }
+	public get $Urlcode(): String {
+		return this.Urlcode;
+	}
 
     /**
-     * Setter nbQuestions
+     * Setter $FKCompteRecruteur
      * @param {number} value
      */
-    public set nbQuestions(value: number)
-    {
-        this._nbQuestions = value;
-    }
+	public set $FKCompteRecruteur(value: number) {
+		this.FKCompteRecruteur = value;
+	}
 
+    /**
+     * Setter $FKCompteAssigne
+     * @param {number} value
+     */
+	public set $FKCompteAssigne(value: number) {
+		this.FKCompteAssigne = value;
+	}
 
+    /**
+     * Setter $NbQuestions
+     * @param {number} value
+     */
+	public set $NbQuestions(value: number) {
+		this.NbQuestions = value;
+	}
+
+    /**
+     * Setter $Chrono
+     * @param {string} value
+     */
+	public set $Chrono(value: string) {
+		this.Chrono = value;
+	}
+
+    /**
+     * Setter $Theme
+     * @param {String} value
+     */
+	public set $Theme(value: String) {
+		this.Theme = value;
+	}
+
+    /**
+     * Setter Complexite
+     * @param {String} value
+     */
+	public set $Complexite(value: String) {
+		this.Complexite = value;
+	}
+
+    /**
+     * Setter $Urlcode
+     * @param {String} value
+     */
+	public set $Urlcode(value: String) {
+		this.Urlcode = value;
+	}
 }
