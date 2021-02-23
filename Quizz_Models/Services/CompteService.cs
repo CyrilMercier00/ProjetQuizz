@@ -70,6 +70,11 @@ namespace Quizz_Models.Services
 
         }
 
+        public Compte FindCompteByMail(string mail)
+        {
+            return this.repoCompte.FindCompteByMail(mail);
+        }
+
         /// <summary>
         /// Retourne la liste des comptes en DTO.
         /// </summary>

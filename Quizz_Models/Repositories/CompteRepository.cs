@@ -23,6 +23,18 @@ namespace Quizz_Models.Repositories
             return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
         }
 
+        public Compte FindCompteByMail(string mail)
+        {
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte.Where(c => c.Mail == mail).First();
+            } catch(Exception)
+            { }
+
+            return c;
+        }
+
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
         {
             return bdd_entities.Compte
