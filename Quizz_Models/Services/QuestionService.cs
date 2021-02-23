@@ -11,8 +11,9 @@ namespace Quizz_Models.Services
         readonly ThemeRepository repoTheme;
         readonly ComplexiteRepository repoComplex;
         readonly QuestionRepository repoQuestion;
+        readonly PropositionReponseRepository repoPropoReponse;
 
-        public QuestionService(ThemeRepository prmRepoTheme, ComplexiteRepository prmRepoComplex, QuestionRepository prmRepoQuestion)
+        public QuestionService(ThemeRepository prmRepoTheme, ComplexiteRepository prmRepoComplex, QuestionRepository prmRepoQuestion, PropositionReponseRepository prmRepoPropoReponse)
         {
             this.repoTheme = prmRepoTheme;
             this.repoComplex = prmRepoComplex;
@@ -44,9 +45,14 @@ namespace Quizz_Models.Services
             return nbLigneInsert;
         }
 
+        /// <summary>
+        /// Retourne la liste des questions générées pour ce quizz.
+        /// </summary>
+        /// <param name="idQuizz"></param>
+        /// <returns></returns>
         public List<Question> GetListQuestionByIDQuizz(int idQuizz)
         {
-            return repoQuestion.GetQuestionByIDQuizz();
+            return repoQuestion.GetQuestionByIDQuizz(idQuizz);
         }
 
         /// <summary>
@@ -68,6 +74,31 @@ namespace Quizz_Models.Services
                 FkThemeNavigation = t,
                 RepLibre = Convert.ToByte(prmDTO.RepLibre)
             };
+        }
+
+        /// <summary>
+        /// La methode recupere les propositions de reponse possible pour la liste de question passée
+        /// </summary>
+        /// <param name="listQuestion"></param>
+        public List<QuestionReponseDTO> AddReponseToQuestion(List<Question> prmListQuestion)
+        {
+            List<QuestionReponseDTO> listQRepDTO = new List<QuestionReponseDTO>();
+
+            foreach (Question q in prmListQuestion)
+            {
+                listQRepDTO.Add(new QuestionReponseDTO()
+                {
+                    Enonce = q.Enonce,
+                    RepLibre = Convert.ToBoolean(q.RepLibre),
+                    PKQuestion= q.PkQuestion
+                });
+
+                if (q.RepLibre == 0x0000)
+                {   // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
+                    listQRepDTO[listQRepDTO.Count - 1].ListeReponses = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+                }
+            }
+            return listQRepDTO;
         }
     }
 }

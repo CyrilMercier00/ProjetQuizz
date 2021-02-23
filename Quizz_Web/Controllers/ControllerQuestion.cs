@@ -3,6 +3,7 @@ using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
 using Quizz_Models.bdd_quizz;
+using System;
 
 namespace Quizz_Web.Controllers
 {
@@ -19,9 +20,15 @@ namespace Quizz_Web.Controllers
 
 
 
+
+
+        /// <summary>
+        /// Insertion d'une nouvelle question
+        /// </summary>
+        /// <param name="prmDTO"></param>
         [HttpPost]
         public void Post([FromBody] QuestionDTO prmDTO)
-        { 
+        {
             int lignes = this.questionService.Insert(prmDTO);
 
             if (lignes == -1)
@@ -46,28 +53,63 @@ namespace Quizz_Web.Controllers
 
 
 
+
+
+        /// <summary>
+        /// Get des questions associées à ce quizz 
+        /// </summary>
+        /// <param name="idQuizz"></param>
+        /// <returns></returns>
         [HttpGet("{idQuizz}")]
-        public List<CompteDTO> Get(int idQuizz)
+        public List<QuestionReponseDTO> Get(int idQuizz)
         {
-            List<Question> listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);
-            List<QuestionDTO> listQuestionDTO = new List<QuestionDTO>();
+            List<Question> listQuestion;
+            List<QuestionReponseDTO> listQuestionReponseDTO;
+
+            listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);
+            listQuestionReponseDTO = this.questionService.AddReponseToQuestion(listQuestion);
 
             if (listQuestion == null)
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
                 return null;
             }
-
-            foreach (Question q in listQuestion)
+            else
             {
-                listQuestionDTO.Add(new CompteDTO()
-                {
-
-                });
-
+                return listQuestionReponseDTO;
             }
 
-            return listDTO;
+        }
+
+
+
+
+
+        /// <summary>
+        /// Get des questions et des réponses associé au quizz avec l'id passé
+        /// </summary>
+        /// <param name="idQuizz"></param>
+        /// <returns></returns>
+        [HttpGet("{vide}/{idQuizz}")]
+        public List<QuestionReponseDTO> GetQuestionReponses(int idQuizz)
+        {
+            List<Question> listQuestion;                        // Contiens la liste des questions
+            List<QuestionReponseDTO> listQuestionReponseDTO;    // Contiens la liste des questions avec les réponses associées
+
+            listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);  // Get des questions 
+            listQuestionReponseDTO = this.questionService.AddReponseToQuestion(listQuestion);   // Get des reponses
+
+            if (listQuestion == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+            else
+            {
+                return listQuestionReponseDTO;
+            }
+
         }
     }
 }
+

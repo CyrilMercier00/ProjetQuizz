@@ -61,9 +61,17 @@ namespace Quizz_Models.Repositories
                 .Where(x => x.FkQuizz == prmIDQuizz)
                 .ToList();
 
-            bdd_entities.Question
-                       .Intersect()
- 
+            foreach (QuizzQuestion qq in listQuizzQuestion)
+            {
+                listeRetour.Add(
+                    bdd_entities.Question
+                    .Where(x => x.PkQuestion == qq.FkQuestion)
+                    .SingleOrDefault()
+                    );
+            }
+
+            return listeRetour;
+
         }
 
         /// <summary>
