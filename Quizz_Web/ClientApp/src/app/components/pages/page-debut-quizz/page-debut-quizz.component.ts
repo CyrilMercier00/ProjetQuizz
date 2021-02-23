@@ -19,6 +19,7 @@ export class PageDebutQuizzComponent implements OnInit
   valRetourRequeteQuestions : any ;
 
 
+
   /* --- Constructeur ---*/
   constructor(private router: Router, private route: ActivatedRoute) { }
 
@@ -38,7 +39,7 @@ export class PageDebutQuizzComponent implements OnInit
   }
 
 
-  GetQuestions(prmID)
+  async GetQuestions(prmID)
   {
 
     await fetch(VariableGlobales.apiURLQuestion + "/" + prmID, { method: "GET" })
@@ -48,7 +49,5 @@ export class PageDebutQuizzComponent implements OnInit
         this.valRetourRequeteQuestions = json;
       });
   }
-
-}
 
 }
