@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace Quizz_Models.Repositories
 {
@@ -29,6 +29,15 @@ namespace Quizz_Models.Repositories
                 .Where(x => x.FkPermission == prmidPerm)
                 .ToList();
                 
+        }
+        /// <summary>
+        /// Retourne les comptes ayant comme referent le compte avec l'id passé.
+        /// </summary>
+        /// <param name="iDPerm"></param>
+        /// <returns></returns>
+        internal List<Compte> GetCompteByCompteRef(int prmID)
+        {
+            return bdd_entities.Compte.Where(x => x.PkCompte == prmID).ToList();
         }
 
         /// <summary>
