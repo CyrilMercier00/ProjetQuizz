@@ -96,12 +96,12 @@ namespace Quizz_Models.Repositories
 
             // Recuperer le nombre de questions total pour ce theme & niv de complexite
             int nbQuestTotal = bdd_entities.Question
-                .Where(x => x.FkTheme == idTheme && x.NvComplexite == prmEnumComplex.ToString())
+                .Where(x => x.FkTheme == idTheme && x.FkComplexiteNavigation.Niveau == prmEnumComplex.ToString())
                 .Count();
 
             // Recuper un certain nombre de question pour ce theme & niv de complexite
             var data = bdd_entities.Question
-                .Where(x => x.FkTheme == idTheme && x.NvComplexite == prmEnumComplex.ToString())
+                .Where(x => x.FkTheme == idTheme && x.FkComplexiteNavigation.Niveau == prmEnumComplex.ToString())
                 .OrderBy(x => Guid.NewGuid())
                 .Take(prmNBQuestions);
 
