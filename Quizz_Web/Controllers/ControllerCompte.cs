@@ -50,6 +50,26 @@ namespace Quizz_Web.Controllers
 
 
 
+        [HttpGet("{methode}/{idCompteRef}")]
+        public List<CompteDTO> GetCompteByRef(string methode, int idCompteRef)
+        {
+            // Recuperation et transformation en DTO des comptes lié a cette ref
+            List<CompteDTO> listDTO = this.compteService.listCompteToDTO(this.compteService.GetCandidatByCompteRef(idCompteRef));
+
+            if (listDTO.Count == 0)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+            else
+            {
+                return listDTO;
+            }
+
+        }
+
+
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
@@ -101,23 +121,6 @@ namespace Quizz_Web.Controllers
 
 
         
-        [HttpGet("{idCompteRef}")]
-        [ActionName("GetByRef")]
-        public List<CompteDTO> GetCompteByRef(int prmID)
-        {
-            // Recuperation et transformation en DTO des comptes lié a cette ref
-            List<CompteDTO> listDTO = this.compteService.listCompteToDTO(this.compteService.GetCandidatByCompteRef(prmID));
 
-            if (listDTO == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            }
-            else
-            {
-                return listDTO;
-            }
-
-        }
     }
 }
