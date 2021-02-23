@@ -7,7 +7,8 @@ namespace Quizz_Models.bdd_quizz
     {
         public Permission()
         {
-            Compte = new HashSet<Compte>();
+            CompteFkCompteReferentNavigation = new HashSet<Compte>();
+            CompteFkPermissionNavigation = new HashSet<Compte>();
         }
 
         public int PkPermission { get; set; }
@@ -19,6 +20,7 @@ namespace Quizz_Models.bdd_quizz
         public byte? SupprQuestion { get; set; }
         public byte? SupprimerCompte { get; set; }
 
-        public virtual ICollection<Compte> Compte { get; set; }
+        public virtual ICollection<Compte> CompteFkCompteReferentNavigation { get; set; }
+        public virtual ICollection<Compte> CompteFkPermissionNavigation { get; set; }
     }
 }
