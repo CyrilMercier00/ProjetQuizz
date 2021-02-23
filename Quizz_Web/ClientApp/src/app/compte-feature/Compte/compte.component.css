@@ -28,7 +28,7 @@
 .containerButton{
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
     justify-content: center;
     flex: 2 0 0;
 }
@@ -37,13 +37,15 @@
     font-size: 1rem;
     padding: 0.4rem 2.6rem;
     border-radius: 10px;
+    border: unset;
+    margin: 0.5rem 0.5rem;
 }
 
 .deleteButton {
     background-color: red;
-    
 }
 
-.modifyButton {
+.containerButton .modifyButton {
     background-color: orange;
+    padding: 0.3rem 3rem;
 }

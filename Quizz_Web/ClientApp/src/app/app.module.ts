@@ -35,6 +35,7 @@ import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/pag
 import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
