@@ -117,6 +117,16 @@ namespace Quizz_Models.Services
         }
 
         /// <summary>
+        /// Méthode qui modifie la permission d'un utilisateur.
+        /// </summary>
+        /// <param name="idCompte">ID du compte à modifier.</param>
+        /// <param name="idPermission">ID de la permission voulue.</param>
+        public void ModifyComptePermission(int idCompte, int idPermission)
+        {
+            this.repoCompte.ModifyPermission(idCompte, idPermission);
+        }
+
+        /// <summary>
         /// Transforme un CompteDTO en entité Compte.
         /// </summary>
         /// <param name="CompteDTO"></param>

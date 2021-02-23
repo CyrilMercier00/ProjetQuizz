@@ -58,6 +58,21 @@ namespace Quizz_Models.Repositories
         }
 
         /// <summary>
+        /// Méthode qui modifie la permission d'un utilisateur.
+        /// </summary>
+        /// <param name="idCompte">ID du compte à modifier.</param>
+        /// <param name="idPermission">ID de la permission voulue.</param>
+        public void ModifyPermission(int idCompte, int idPermission)
+        {
+            Compte c = bdd_entities.Compte.Find(idCompte);
+            if(c != null)
+            {
+                c.FkPermission = idPermission;
+            }
+            bdd_entities.SaveChanges();
+        }
+
+        /// <summary>
         /// Méthode qui prépare la bdd à une modification de compte.
         /// </summary>
         /// <param name="compte">Entité du compte à modifier.</param>
