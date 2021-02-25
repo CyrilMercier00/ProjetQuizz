@@ -95,7 +95,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent},  // Page de demarrage du quizz
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
       { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
