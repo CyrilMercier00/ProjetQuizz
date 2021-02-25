@@ -40,15 +40,14 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* --- Get des candidats assignés a ce recruteur --- */
-  async getCandidatAsigne()
+   getCandidatAsigne()
   {
-    await fetch(VariableGlobales.apiURLCompte + "1" + "/Candidat", { method: "GET" })
+     fetch(VariableGlobales.apiURLCompte  + "GetByRef" + "/1", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
         this.valRetourRequeteCompteAssigne = json;
       });
-    return reponse
   }
 
 }

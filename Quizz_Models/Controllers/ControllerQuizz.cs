@@ -18,8 +18,7 @@ namespace Quizz_Web.Controllers
             this.servQuizz = serviceQuizz;
         }
 
-        [HttpPost]
-           
+        [HttpPost] 
         public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
         {
             valRetour = Ok ();
@@ -38,13 +37,21 @@ namespace Quizz_Web.Controllers
 
 
 
+        [HttpPut]
+        [Route("{idQuizz}/{idCandidat}")]
+        public void AssignCandidatToQuizz () 
+        {
+            servQuizz.assignCandidatToQuizz();
+        }
+
+
+
         [HttpGet]
         [Route("{id}/{Urlcode}")]
         public QuizzDTO GetQuizzById(int id)
         {
           
-
-                QuizzDTO quizz = new QuizzDTO();
+            QuizzDTO quizz = new QuizzDTO();
             
             quizz = this.servQuizz.GetQuizz(id);
                 

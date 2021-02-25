@@ -18,6 +18,7 @@ namespace Quizz_Web.Controllers
         }
 
         
+
         [HttpGet("{id}")]
         public CompteDTOAdmin Get(int id)
         {

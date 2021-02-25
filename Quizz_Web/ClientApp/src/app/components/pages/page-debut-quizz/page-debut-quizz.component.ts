@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VariableGlobales } from 'src/app/url_api';
 
 
@@ -15,19 +15,22 @@ import { VariableGlobales } from 'src/app/url_api';
 export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
-  codeQuizz = this.route.params.subscribe(params => { return params.urlQuizz });
-  valRetourRequeteQuestions : any ;
+  codeQuizz: any;
+  valRetourRequeteQuestions: any;
 
 
 
   /* --- Constructeur ---*/
-  constructor(private router: Router, private route: ActivatedRoute) { }
-
+  constructor(private router: Router, private actRoute: ActivatedRoute)
+  {
+    this.codeQuizz = this.actRoute.snapshot.params['urlQuizz'];   // Recup de de l'url du
+  }
 
 
   /* --- Methodes Angular --- */
   ngOnInit()
   {
+    console.log(this.codeQuizz);
   }
 
 
@@ -39,6 +42,15 @@ export class PageDebutQuizzComponent implements OnInit
   }
 
 
+
+  questionToArray(prmData ) 
+  {
+    
+  }
+
+
+
+
   async GetQuestions(prmID)
   {
 
@@ -46,7 +58,7 @@ export class PageDebutQuizzComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteQuestions = json;
+        this.questionToArray(json);
       });
   }
 
