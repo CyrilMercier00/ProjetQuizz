@@ -23,6 +23,18 @@ namespace Quizz_Models.Repositories
             return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
         }
 
+        public Compte FindCompteByMail(string mail)
+        {
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte.Where(c => c.Mail == mail).First();
+            } catch(Exception)
+            { }
+
+            return c;
+        }
+
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
         {
             return bdd_entities.Compte
@@ -55,6 +67,21 @@ namespace Quizz_Models.Repositories
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
+        }
+
+        /// <summary>
+        /// Méthode qui modifie la permission d'un utilisateur.
+        /// </summary>
+        /// <param name="idCompte">ID du compte à modifier.</param>
+        /// <param name="idPermission">ID de la permission voulue.</param>
+        public void ModifyPermission(int idCompte, int idPermission)
+        {
+            Compte c = bdd_entities.Compte.Find(idCompte);
+            if(c != null)
+            {
+                c.FkPermission = idPermission;
+            }
+            bdd_entities.SaveChanges();
         }
 
         /// <summary>
