@@ -41,7 +41,7 @@ namespace Quizz_Web.Controllers
 
             if (comptes == null)
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NoContent;
                 return null;
             }
 
@@ -76,7 +76,11 @@ namespace Quizz_Web.Controllers
             this.compteService.DeleteCompte(id);
         }
 
-
+        [HttpPut("{idCompte}/permission")]
+        public void Put(int idCompte, [FromBody] ModifyComptePermissionDTO modifyComptePermissionDTO)
+        {
+            this.compteService.ModifyComptePermission(idCompte, modifyComptePermissionDTO.IdPermission);
+        }
 
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)

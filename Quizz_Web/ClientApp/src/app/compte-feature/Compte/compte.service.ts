@@ -18,4 +18,10 @@ export class CompteService {
   create(compte : Compte) : Observable<Compte>{
     return this.httpClient.post<Compte>(VariableGlobales.apiURLCompte, compte);
   }
+
+  delete(compte: Compte){
+    let deleteRequest: string =  VariableGlobales.apiURLCompte;
+    deleteRequest += `${compte.id}`;
+    return this.httpClient.delete(deleteRequest);
+  }
 }

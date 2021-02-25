@@ -36,6 +36,7 @@ import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-q
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
 import { CheckBoxComponent } from './components/input/check-box/check-box.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CheckBoxComponent } from './components/input/check-box/check-box.compon
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
@@ -93,7 +95,7 @@ import { CheckBoxComponent } from './components/input/check-box/check-box.compon
       { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent},                 // Page de demarrage du quizz
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
       { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 

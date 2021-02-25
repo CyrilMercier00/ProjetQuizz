@@ -8,5 +8,5 @@ p {
 }
 
 ::ng-deep button {
-    margin: 3em !important;
+    margin: 3em;
 }
