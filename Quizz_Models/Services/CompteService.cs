@@ -106,6 +106,11 @@ namespace Quizz_Models.Services
 
         }
 
+        public Compte FindCompteByMail(string mail)
+        {
+            return this.repoCompte.FindCompteByMail(mail);
+        }
+
         /// <summary>
         /// Retourne la liste des comptes en DTO.
         /// </summary>
@@ -150,6 +155,16 @@ namespace Quizz_Models.Services
             this.repoCompte.ModifyCompte(compteAModifier);
             MailUtils.ModifyCompte(ref compteAModifier, modifyCompteDTO);
             this.repoCompte.Sauvegarder();
+        }
+
+        /// <summary>
+        /// Méthode qui modifie la permission d'un utilisateur.
+        /// </summary>
+        /// <param name="idCompte">ID du compte à modifier.</param>
+        /// <param name="idPermission">ID de la permission voulue.</param>
+        public void ModifyComptePermission(int idCompte, int idPermission)
+        {
+            this.repoCompte.ModifyPermission(idCompte, idPermission);
         }
 
         /// <summary>

@@ -5,7 +5,7 @@
 }
 
 .ligneDelimitation{
-    width: 330px;
+    width: 21rem;
     height: 0.08em;
     background-color: grey;
     margin-left: 1em;
@@ -43,9 +43,11 @@
 .connexion-button{
     background-color: rgb(66, 103, 178);
     border-radius: 8px;
-    width: 350px;
-    height: 45px;
-    margin: 7px;
+    width: 22rem;
+    height: 3rem;
+    margin: 0.5rem;
+    border: unset;
+    outline: none;
     transition: background-color 1s;
     color: white;
 }
@@ -58,10 +60,12 @@
     display: flex;
     background-color: rgb(4, 153, 4);
     color: white;
-    width: 350px;
-    height: 45px;
-    margin: 7px;
+    width: 22rem;
+    height: 3rem;
+    margin: 0.5rem;
     border-radius: 8px;
+    border: unset;
+    outline: none;
     align-items: center;
     justify-content: center;
     transition: background-color 1s;
