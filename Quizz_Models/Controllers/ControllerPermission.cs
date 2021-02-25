@@ -29,6 +29,19 @@ namespace Quizz_Web.Controllers
             return permissionDTOs;
         }
 
+        [HttpGet("/names")]
+        public List<AffichagePermissionDTO> GetNames()
+        {
+            List<AffichagePermissionDTO> permissionsNames = this.permissionService.GetPermissionsNames();
+
+            if(permissionsNames.Count == 0)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+            }
+
+            return permissionsNames;
+        }
+
         [HttpPost]
         public void Post(PermissionDTO permissionDTO)
         {

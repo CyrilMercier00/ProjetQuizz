@@ -36,6 +36,7 @@ import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-q
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BoutonReponseQcmComponent,
     EnonceComponent,
     PageDebutQuizzComponent,
+    SelectPermissionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

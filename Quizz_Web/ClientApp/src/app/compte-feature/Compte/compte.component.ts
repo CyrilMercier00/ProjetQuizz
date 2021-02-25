@@ -11,11 +11,16 @@ export class CompteComponent implements OnInit {
 
   @Input() compte : Compte;
   @Output() refreshEvent = new EventEmitter();
+  modifying: boolean = false;
   
   constructor(private compteService: CompteService) {
   }
 
   ngOnInit(): void {
+  }
+
+  modifyPermission(): void{
+    
   }
 
   supprimerCompte(): void{
