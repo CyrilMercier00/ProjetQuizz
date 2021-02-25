@@ -1,6 +1,6 @@
-<Project Sdk="Microsoft.NET.Sdk.web">
+﻿<Project Sdk="Microsoft.NET.Sdk.web">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
