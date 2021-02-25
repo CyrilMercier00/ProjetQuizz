@@ -67,7 +67,7 @@ namespace Quizz_Web.Controllers
 
             if (comptes == null)
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NoContent;
                 return null;
             }
 

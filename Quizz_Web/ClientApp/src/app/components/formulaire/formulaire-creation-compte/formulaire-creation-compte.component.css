@@ -1,16 +1,16 @@
-@keyframes slideInFromBottom{
+/*@keyframes slideInFromRight{
     0% {
         transform: translateX(80%);
     }
     100%{
         transform: translateX(0);
     }
-}
+}*/
 
 .creation-compte-form{
     display: inline-block;
     margin-left: 8em;
-    animation: 1s 1 slideInFromBottom;
+    /*animation: 1s 1 slideInFromRight;*/
 }
 
 .creation-compte{
@@ -47,13 +47,19 @@
 .creation-button{
     background-color: rgb(66, 103, 178);
     border-radius: 8px;
-    width: 350px;
-    height: 45px;
-    margin: 7px;
+    width: 22rem;
+    height: 3rem;
+    margin: 0.5rem;
+    border: unset;
+    outline: none;
     transition: background-color 1s;
     color: white;
 }
 
 .creation-button:hover{
     background-color: rgb(41, 75, 143);
+}
+
+.creation-button:disabled{
+    opacity: 40%;
 }

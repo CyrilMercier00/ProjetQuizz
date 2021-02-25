@@ -1,22 +1,16 @@
 .rectangle{
     display: flex;
     flex-direction: row;
+    flex-grow: 0;
 
-    height : 100px;
-    width : 400px;
+    height : 7rem;
+    width : 30rem;
     background-color: #50536f;
     margin: 10px;
     border-radius: 25px;
     justify-content: center;
+    align-items: stretch;
     transition: background-color 1s, color 1s;
-}
-
-.container{
-    margin-top: 13px;
-}
-
-.textDiv p{
-    margin-top: 23px !important;
 }
 
 .rectangle:hover{
@@ -28,18 +22,39 @@
 }
 
 .rectangle p{
-    padding-left: 20px;
+    margin-left: 25px;
 }
 
-::ng-deep button{
-    background-color: red !important;
-    font-size: 12px !important;
-    opacity: 0.8 !important;
-    margin: 10px 20px !important;
-    padding: 6px 55px !important;
+.containerButton{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 2 0 0;
 }
 
-::ng-deep .modifiedButton > button{
-    padding: 6px 60px !important;
-    background-color: orange !important;
+.containerButton > button{
+    font-size: 1rem;
+    padding: 0.4rem 2.6rem;
+    border-radius: 10px;
+    border: unset;
+    outline: none;
+    margin: 0.5rem 0.5rem;
+}
+
+.deleteButton {
+    background-color: red;
+}
+
+.containerButton > .modifyButton {
+    background-color: orange;
+    padding: 0.3rem 3rem;
+}
+
+.containerButton > .modifyButton:hover{
+    background-color: rgb(255,105,30);
+}
+
+.deleteButton:hover{
+    background-color: rgb(220,0,0);
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-
+using System;
 
 namespace Quizz_Models.Repositories
 {
@@ -38,7 +38,14 @@ namespace Quizz_Models.Repositories
         /// <returns>Le compte demandé.</returns>
         public Compte GetCompteByID(int prmID)
         {
-            return bdd_entities.Compte.Where(c => c.PkCompte == prmID).Include(c => c.FkPermissionNavigation).Single();
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte.Where(c => c.PkCompte == prmID).Include(c => c.FkPermissionNavigation).Single();
+            } catch (Exception)
+            { }
+
+            return c;
         }
 
         /// <summary>

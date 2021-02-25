@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-formulaire-connexion',
@@ -8,16 +8,20 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class FormulaireConnexionComponent implements OnInit {
 
   @Output() clickToSend = new EventEmitter<boolean>();
+  @Input() isCreationOpen: boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
-  isOpen = false;
+  changeBoolean(): void{
+    this.isCreationOpen = !this.isCreationOpen;
+  }
 
-  changeBoolean(){
-    this.isOpen = !this.isOpen;
-    this.clickToSend.emit(this.isOpen);
+  emitClick(): void{
+    this.changeBoolean();
+    this.clickToSend.emit(this.isCreationOpen);
   }
 }

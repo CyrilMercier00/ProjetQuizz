@@ -1,4 +1,4 @@
-<form [formGroup]="compteProfile" (ngSubmit)="onSubmit()" class="creation-compte-form">
+<form [formGroup]="compteProfile" (ngSubmit)="onSubmit()" *ngIf="inOut" @flyInOut class="creation-compte-form">
   <span class="creation-compte">
     <div class="creationcompte-input">
       <input type="text" id="nameInput" placeholder="Nom" formControlName="nom">
@@ -10,8 +10,8 @@
       <input type="text" id="mailInput" placeholder="Mail" formControlName="mail">
     </div>
     <div class="creationcompte-input">
-      <input type="text" id="passwordInput" placeholder="Mot de passe" formControlName="mdp">
+      <input type="password" id="passwordInput" placeholder="Mot de passe" formControlName="mdp">
     </div>
-    <button class="creation-button" type="submit">Valider</button>
+    <button class="creation-button" [disabled]="compteProfile.invalid" type="submit">Valider</button>
   </span>
 </form>
