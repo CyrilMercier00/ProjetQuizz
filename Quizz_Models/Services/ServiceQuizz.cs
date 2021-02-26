@@ -199,7 +199,7 @@ namespace Quizz_Models.Services
         {
             return new QuizzDTO
             {
-
+                PkQuizz = quizz.PkQuizz,
                 NbQuestions = quizz.PkQuizz,
                 Chrono = Convert.ToString(quizz.Chrono),
                 Theme = Convert.ToString(quizz.FkTheme),
