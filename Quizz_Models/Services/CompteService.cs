@@ -16,12 +16,48 @@ namespace Quizz_Models.Services
         const int RECRUTEUR_PERMISSION_ID = 2;
         const int CANDIDAT_PERMISSION_ID = 3;
 
-        public CompteService(PermissionRepository repoPermission, CompteRepository repoCompte) 
+        public CompteService(PermissionRepository repoPermission, CompteRepository repoCompte)
         {
             this.repoPermission = repoPermission;
             this.repoCompte = repoCompte;
         }
+        /// <summary>
+        /// Renvoie une liste des compte ayant comme referent l'id du compte passé
+        /// </summary>
+        /// <param name="prmIDCompteRef"></param>
+        /// <returns></returns>
+        public List<Compte> GetCandidatByCompteRef(int prmIDCompteRef)
+        {
+            return repoCompte.GetCompteByCompteRef(prmIDCompteRef);
+        }
 
+        /// <summary>
+        /// Transforme une liste de compte en liste de DTO
+        /// </summary>
+        /// <param name="lists"></param>
+        /// <returns></returns>
+        public List<CompteDTO> listCompteToDTO(List<Compte> prmList)
+        {
+            List<CompteDTO> listRetour = new List<CompteDTO>();
+
+            foreach (Compte c in prmList)
+            {
+                listRetour.Add(new CompteDTO()
+                {
+                    Nom = c.Nom,
+                    Prenom = c.Prenom,
+                    Mail = c.Mail,
+                    MDP = c.MotDePasse
+                });
+            }
+            return listRetour;
+        }
+
+        /// <summary>
+        /// Retourne tout les comptes ayant le nom de cette permisison (Sensible a la casse).
+        /// </summary>
+        /// <param name="prmNom"></param>
+        /// <returns></returns>
         public List<Compte> GetCompteByNomPerm(string prmNom)
         {
             int IDPerm = repoPermission.GetPermissionByNom(prmNom).PkPermission;
@@ -57,6 +93,7 @@ namespace Quizz_Models.Services
 
             return lignes;
         }
+
 
 
         /// <summary>

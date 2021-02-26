@@ -35,6 +35,7 @@ import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/pag
 import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
+import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 
@@ -73,6 +74,7 @@ import { SelectPermissionComponent } from './components/select/select-permission
     EnonceComponent,
     PageDebutQuizzComponent,
     SelectPermissionComponent,
+    CheckBoxComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -92,11 +94,11 @@ import { SelectPermissionComponent } from './components/select/select-permission
       { path: 'resultats', component: ResultatsComponent },                                 // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },                           // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
-      { path: 'creation-question', component: PageCreationQuestionComponent },      // Page de creation des questions
+      { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage', component: PageDebutQuizzComponent },                // Page de demarrage du quizz
-      //{ path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
+      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
 

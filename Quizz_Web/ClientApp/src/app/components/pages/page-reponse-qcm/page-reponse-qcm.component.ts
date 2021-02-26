@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-page-reponse-qcm',
   templateUrl: './page-reponse-qcm.component.html',
-  styleUrls: ['./page-reponse-qcm.component.css']
+  styleUrls: ['./page-reponse-qcm.component.css', '../../../app.flex-util.css']
 })
 export class PageReponseQcmComponent implements OnInit
 {
@@ -54,14 +54,14 @@ export class PageReponseQcmComponent implements OnInit
 
 
 
-  /* --- GET des reposes possibles pour cette question --- */
+  /* --- GET des reponses possibles pour cette question --- */
   async getQuestions(prmIDQuestion: number)
   {
     await fetch(VariableGlobales.apiURLQuestion + "/" + this.idQuestion, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteGETQuestion = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteGETQuestion = json;
       });
   }
 
@@ -75,11 +75,9 @@ export class PageReponseQcmComponent implements OnInit
 
 
   /* --- POST de la reponse choisie --- */
-  async envoiFormulaire(prmDTO: reponseDTO)
+   envoiFormulaire(prmDTO: reponseDTO)
   {
-
-    {
-      await fetch(
+       fetch(
         VariableGlobales.apiURLReponseCandidat,
         {
           method: "POST",
@@ -92,6 +90,4 @@ export class PageReponseQcmComponent implements OnInit
         }
       )
     }
-
-  }
 }

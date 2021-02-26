@@ -3,7 +3,7 @@
     TODO : Recup de l'id du compte & l'envoyer avec le quizz
 ------------------------------------------------------------
 */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VariableGlobales } from '../../../url_api';
 import { Router } from "@angular/router";
@@ -24,8 +24,8 @@ export class AssignationQuizzComponent implements OnInit
   /* ------ Declaration des variables ------ */
 
   resultatForm: FormGroup;               // Contiens les valeurs du formulaire d'assignation de quizz
-  dataQuizz: any;                        // Contiens le quizz passé de la page generation de quizz
-  concatForms: any;                      // Contiens les valeur des deux formulaires pour l'envoi a l'api
+  dataQuizz: any;                               // Contiens le quizz passé de la page generation de quizz
+  concatForms: any;                          // Contiens les valeur des deux formulaires pour l'envoi a l'api
 
 
 
@@ -42,10 +42,10 @@ export class AssignationQuizzComponent implements OnInit
 
 
   /* --- Methodes Angular --- */
-  ngOnInit() 
+  ngOnInit()
   {
-    /*this.getCompteCandidatID();*/
-   }
+
+  }
 
 
 
@@ -53,38 +53,43 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Insertion du quizz & gestion erreur --- */
   onSubmit()
   {
-    try
-    {
-      let quizzGen: DTOQuizz = new DTOQuizz;
+    console.log(this.dataQuizz);
+    let quizzGen: DTOQuizz = new DTOQuizz;
 
-      quizzGen.nbQuestions = this.dataQuizz.nbQuestions;
-      quizzGen.theme = this.dataQuizz.theme;
-      quizzGen.complexite = this.dataQuizz.complexites;
-      /*this.getCompteCandidatID().then(valID => { quizzGen.idCompteCandidat = valID });*/
-      quizzGen.idCompteRecruteur = this.getCompteRecruteurID();
+    quizzGen.$NbQuestions = this.dataQuizz.form.nbQuestions;
+    quizzGen.$Theme = this.dataQuizz.form.theme;
+    quizzGen.$Complexite = this.dataQuizz.form.complexite;
+    quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
+    
+    this.insertQuizz(quizzGen);
+    console.log(quizzGen);
+    // this.router.navigate(['/'])
+  }
 
-      this.insertQuizz(quizzGen);
-    } catch (e)
-    {
-      console.log(e);
-    }
+
+
+
+  setValeurFormIDCandidat(prmID: number)
+  {
+    this.resultatForm.patchValue({"compte" : prmID})
+    console.log(this.resultatForm.value)
   }
 
 
 
   /* ---  Retourne l'id du compte qui a créer le quizz --- */
-  getCompteRecruteurID()
+  getCompteRecruteurID(): number
   { /* ---------- TODO ---------- */
     return 1;
   }
 
 
-  
+
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
-  insertQuizz(data: DTOQuizz)
+  async insertQuizz(data: DTOQuizz)
   {
-    fetch(
+    await fetch(
       VariableGlobales.apiURLQuizz,
       {
         method: "POST",

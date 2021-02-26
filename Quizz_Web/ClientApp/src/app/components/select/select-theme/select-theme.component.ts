@@ -14,7 +14,7 @@ import { VariableGlobales } from 'src/app/url_api';
 export class SelectThemeComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
-  valRetourRequeteTheme: string;                          // Retour de la requete GET faite a l'api
+  valRetourRequeteTheme: string;                                        // Retour de la requete GET faite a l'api
   @Output() ChoixEvent = new EventEmitter<string>();      // Emit si la valeur dans le select change
 
 
@@ -47,7 +47,7 @@ export class SelectThemeComponent implements OnInit
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteTheme = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteTheme = json;
       });
   }
 }

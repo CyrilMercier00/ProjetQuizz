@@ -5,15 +5,32 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './enonce.component.html',
   styleUrls: ['./enonce.component.css']
 })
+
+
+
 export class EnonceComponent implements OnInit
 {
 
-  @Input("texte") text: string;
+  /* --- Variables --- */
+  @Input("text") text: string;
+  
 
+
+
+  /* --- Constructeur --- */
   constructor() { }
 
+
+
+  /* --- Methodes Angular --- */
   ngOnInit()
   {
   }
+
+
+
+  /* --- Methodes --- */
+
+
 
 }

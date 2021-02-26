@@ -17,34 +17,7 @@ namespace Quizz_Web.Controllers
             this.compteService = compteService;
         }
 
-
-
-        [HttpGet("{vide}/{nomPerm}")]
-        public List<CompteDTO> Get(string nomPerm)
-        {
-            List<Compte> listCompte = this.compteService.GetCompteByNomPerm(nomPerm);
-            List<CompteDTO> listDTO = new List<CompteDTO>();
-
-            if (listCompte == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            }
-
-            foreach (Compte c in listCompte)
-            {
-                listDTO.Add(new CompteDTO() { 
-                    Nom = c.Nom, 
-                    Prenom = c.Prenom, 
-                    Mail = c.Mail, 
-                    MDP = c.MotDePasse 
-                });
-
-            }
-
-            return listDTO;
-        }
-
+        
 
         [HttpGet("{id}")]
         public CompteDTOAdmin Get(int id)
@@ -59,6 +32,8 @@ namespace Quizz_Web.Controllers
 
             return compte;
         }
+        
+
 
         [HttpGet]
         public List<CompteDTOAdmin> Get()
@@ -74,17 +49,43 @@ namespace Quizz_Web.Controllers
             return comptes;
         }
 
+
+
+        [HttpGet("{methode}/{idCompteRef}")]
+        public List<CompteDTO> GetCompteByRef(string methode, int idCompteRef)
+        {
+            // Recuperation et transformation en DTO des comptes lié a cette ref
+            List<CompteDTO> listDTO = this.compteService.listCompteToDTO(this.compteService.GetCandidatByCompteRef(idCompteRef));
+
+            if (listDTO.Count == 0)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+            else
+            {
+                return listDTO;
+            }
+
+        }
+
+
+
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             this.compteService.DeleteCompte(id);
         }
 
+
+
         [HttpPut("{idCompte}/permission")]
         public void Put(int idCompte, [FromBody] AffichagePermissionDTO affichagePermissionDTO)
         {
             this.compteService.ModifyComptePermission(idCompte, affichagePermissionDTO.PkPermission);
         }
+
+
 
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
@@ -111,6 +112,8 @@ namespace Quizz_Web.Controllers
             }
         }
 
+
+
         [HttpPut]
         public void Put([FromBody] ModifyCompteDTO modifyCompteDTO)
         {
@@ -123,5 +126,10 @@ namespace Quizz_Web.Controllers
                 this.compteService.ModifyCompte(modifyCompteDTO);
             }
         }
+
+
+
+        
+
     }
 }

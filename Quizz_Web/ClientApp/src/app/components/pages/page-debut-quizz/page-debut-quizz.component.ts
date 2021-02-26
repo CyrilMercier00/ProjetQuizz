@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { VariableGlobales } from 'src/app/url_api';
 
 
 
@@ -11,15 +12,67 @@ import { Router } from '@angular/router';
 
 
 
-export class PageDebutQuizzComponent implements OnInit {
+export class PageDebutQuizzComponent implements OnInit
+{
+  /* --- Variables --- */
+  prmCode: any;
+  valRetourRequeteQuestions: any;
+  Quizz :any ;
 
-  constructor(private router: Router) { }
 
-  ngOnInit() {
+
+  /* --- Constructeur ---*/
+  constructor(private router: Router, private actRoute: ActivatedRoute)
+  {
+    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];  
   }
 
-  handleClick() {
+
+
+  /* --- Methodes Angular --- */
+  ngOnInit()
+  {
+    console.log(this.prmCode);
+  }
+
+
+  
+  /*--- Methodes ---*/
+  handleClick()
+  {
     this.router.navigate([''])
+  }
+
+
+
+
+  questionToArray(prmData ) 
+  {
+    
+  }
+
+
+
+   GetQuizz(prmCode)
+  {
+     fetch(VariableGlobales.apiURLQuizz + "/" + prmCode , { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        this.Quizz = json;
+      });
+  }
+
+
+
+   GetQuestions()
+  {
+     fetch(VariableGlobales.apiURLQuestion + "/" + this.Quizz.pkQuizz , { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        this.questionToArray(json);
+      });
   }
 
 }

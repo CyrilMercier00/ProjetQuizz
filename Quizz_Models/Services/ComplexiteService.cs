@@ -45,7 +45,7 @@ namespace Quizz_Models.Services
         public Taux_complexiteDTO GetComplexite(int id)
         {
 
-            return TransferModelToDto(this._complexiteRepository.Find(id));
+            return TransferModelToDto(this._complexiteRepository.GetComplexiteByID(id));
         }
 
         public void Delete(int id)
