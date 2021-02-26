@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Quizz_Models.bdd_quizz
 {
@@ -31,6 +30,7 @@ namespace Quizz_Models.bdd_quizz
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=root;database=bdd_quizz");
             }
         }
@@ -105,6 +105,8 @@ namespace Quizz_Models.bdd_quizz
                 entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
 
                 entity.Property(e => e.FkQuizz).HasColumnName("fk_quizz");
+
+                entity.Property(e => e.EstCreateur).HasColumnName("est_createur");
 
                 entity.HasOne(d => d.FkCompteNavigation)
                     .WithMany(p => p.CompteQuizz)
