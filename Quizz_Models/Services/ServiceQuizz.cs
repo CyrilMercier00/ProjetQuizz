@@ -47,7 +47,6 @@ namespace Quizz_Models.Services
                 FkCompte = prmIDCandidat,
                 FkQuizz = prmIDQuizz
             });
-
             return repoQuizz.Sauvegarde();
         }
 
@@ -141,6 +140,8 @@ namespace Quizz_Models.Services
             );
         }
 
+
+
         public void SupprimerQuizz(int prmIDQuizz)
         {
             try
@@ -153,18 +154,17 @@ namespace Quizz_Models.Services
             }
         }
 
+
+
         /// <summary>
         /// Calcul le nombre de question de chaque niveau pour un taux de complexité du quizz defini
         /// </summary>
         /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
         /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
         /// <returns></returns>
-
         private int CalculerNombreQuestion(int prmNBQuestionTotal, Enum prmNomComplex)
         {
-
             String complex = prmNomComplex.ToString().ToLower();
-
 
             var valRet = complex switch
             {
@@ -181,16 +181,19 @@ namespace Quizz_Models.Services
             return (int)Math.Round(n1 * n2);
         }
 
+
+
         /// <summary>
         /// Retourne toutes les permissions de la bdd.
         /// </summary>
         /// <returns>Liste de toute les permissions sous format PermissionDTO.</returns>
-        public QuizzDTO GetQuizz(int prmIDQuizz)
+        public QuizzDTO GetQuizz(string prmCodeQuizz)
         {
-            Quizz quizz = this.repoQuizz.GetQuizzByID(prmIDQuizz);
-
+            Quizz quizz = this.repoQuizz.prmCodeQuizz(prmCodeQuizz);
             return TransformQuizzToQuizzDTO(quizz);
         }
+
+
 
         private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)
         {

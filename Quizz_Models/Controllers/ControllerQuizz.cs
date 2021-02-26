@@ -40,6 +40,7 @@ namespace Quizz_Web.Controllers
         }
 
 
+
         /// <summary>
         /// Assignation d'un candidat a un quizz
         /// </summary>
@@ -47,9 +48,9 @@ namespace Quizz_Web.Controllers
         /// <param name="prmIDCandidat"></param>
         [HttpPut]
         [Route("{idQuizz}/{idCandidat}")]
-        public ActionResult<QuizzDTO> AssignCandidatToQuizz([FromRoute] int prmIDQuizz, [FromRoute] int prmIDCandidat)
+        public ActionResult<QuizzDTO> AssignCandidatToQuizz(int idQuizz, int idCandidat)
         {
-            switch (servQuizz.assignCandidatToQuizz(prmIDQuizz, prmIDCandidat))
+            switch (servQuizz.assignCandidatToQuizz(idQuizz, idCandidat))
             {
                 case 0:
                     valRetour = Problem();
@@ -70,13 +71,12 @@ namespace Quizz_Web.Controllers
 
 
         [HttpGet]
-        [Route("{id}/{Urlcode}")]
-        public QuizzDTO GetQuizzById(int id)
+        [Route("{codeQuizz}")]
+        public QuizzDTO GetQuizzByCode(string codeQuizz)
         {
-
             QuizzDTO quizz = new QuizzDTO();
 
-            quizz = this.servQuizz.GetQuizz(id);
+            quizz = this.servQuizz.GetQuizz(codeQuizz);
 
             if (quizz == null)
             {
@@ -86,7 +86,6 @@ namespace Quizz_Web.Controllers
 
             return quizz;
         }
-
 
 
 

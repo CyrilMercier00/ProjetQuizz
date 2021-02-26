@@ -1,7 +1,5 @@
 using Quizz_Models.bdd_quizz;
-using System;
-using System.Collections.Generic;
-
+using System.Linq;
 namespace Quizz_Models.Repositories
 {
     public class QuizzRepository
@@ -99,5 +97,16 @@ namespace Quizz_Models.Repositories
             });
         }
 
+
+
+        /// <summary>
+        /// Retourne le quizz avec le code url passé
+        /// </summary>
+        /// <param name="prmCodeQuizz"></param>
+        /// <returns></returns>
+        internal Quizz prmCodeQuizz(string prmCodeQuizz)
+        {
+            return bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
+        }
     }
 }
