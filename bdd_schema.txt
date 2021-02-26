@@ -181,6 +181,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte_quizz` (
   `fk_compte` INT NOT NULL,
   `fk_quizz` INT NOT NULL,
+  `est_createur` TINYINT NULL,
   PRIMARY KEY (`fk_compte`, `fk_quizz`),
   INDEX `fk_compte_has_quizz_quizz1_idx` (`fk_quizz` ASC)  ,
   INDEX `fk_compte_has_quizz_compte1_idx` (`fk_compte` ASC)  ,
