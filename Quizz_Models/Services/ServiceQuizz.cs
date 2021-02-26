@@ -36,7 +36,7 @@ namespace Quizz_Models.Services
 
 
         /// <summary>
-        /// Assigne une liaison compte quizz a un quizz a 
+        /// Lie un compte a un quizz
         /// </summary>
         /// <param name="prmIDQuizz"></param>
         /// <param name="prmIDCandidat"></param>
