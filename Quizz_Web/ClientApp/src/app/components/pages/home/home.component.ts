@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
+import { AuthService } from 'src/app/Service/AuthService';
 import { Compte } from '../../../compte-feature/Compte/compte.model';
 import { CompteService } from '../../../compte-feature/Compte/compte.service';
 
@@ -12,7 +14,7 @@ export class HomeComponent {
 
   creationIsOpen: boolean = false;
   
-  public constructor(private router : Router, private compteService: CompteService){}
+  public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
   redirectToHome(){
     this.router.navigate(['/']);
@@ -25,5 +27,10 @@ export class HomeComponent {
   recupCompte(compte: Compte){
     this.creationIsOpen = !this.creationIsOpen;
     this.compteService.create(compte).subscribe();
+  }
+  
+  connexion(connexionDTO: ConnexionDTO){
+    console.log(connexionDTO);
+    this.authService.connect(connexionDTO).subscribe();
   }
 }

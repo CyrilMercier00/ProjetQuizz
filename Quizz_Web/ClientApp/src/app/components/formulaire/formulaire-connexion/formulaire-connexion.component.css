@@ -56,6 +56,10 @@
     background-color: rgb(41, 75, 143);
 }
 
+.connexion-button:disabled{
+    opacity: 40%;
+}
+
 .button-href{
     display: flex;
     background-color: rgb(4, 153, 4);

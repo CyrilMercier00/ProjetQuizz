@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
 
 @Component({
   selector: 'app-formulaire-connexion',
@@ -8,9 +10,17 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 export class FormulaireConnexionComponent implements OnInit {
 
   @Output() clickToSend = new EventEmitter<boolean>();
+  @Output() connexionEmitter = new EventEmitter<ConnexionDTO>();
   @Input() isCreationOpen: boolean = false;
 
-  constructor() { }
+  compteConnexion: FormGroup;
+
+  constructor(private fb: FormBuilder) {
+    this.compteConnexion = this.fb.group({
+      mail: ['', Validators.required],
+      MotDePasse: ['', Validators.required]
+    });
+   }
 
   ngOnInit(): void {
     
@@ -23,5 +33,9 @@ export class FormulaireConnexionComponent implements OnInit {
   emitClick(): void{
     this.changeBoolean();
     this.clickToSend.emit(this.isCreationOpen);
+  }
+
+  onSubmit(): void{
+    this.connexionEmitter.emit(this.compteConnexion.value);
   }
 }

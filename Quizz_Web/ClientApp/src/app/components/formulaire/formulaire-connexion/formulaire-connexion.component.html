@@ -1,13 +1,13 @@
-<form class="login-form">
+<form [formGroup]="compteConnexion" class="login-form" (ngSubmit)="onSubmit()">
     <span class="home-form">
       <div class="home-input">
-        <input type="text" id="home-loginInput" placeholder="Adresse e-mail">
+        <input type="text" id="home-loginInput" placeholder="Adresse e-mail" formControlName="mail">
       </div>
       <div class="home-input">
-        <input type="text" id="home-passwordInput" placeholder="Mot de passe">
+        <input type="password" id="home-passwordInput" placeholder="Mot de passe" formControlName="MotDePasse">
       </div>
       <div>
-        <button class="connexion-button" type="submit">Connexion</button>
+        <button class="connexion-button" [disabled]="compteConnexion.invalid" type="submit">Connexion</button>
       </div>
       <div class="ligneDelimitation"></div>
       <button class="button-href" (click)="emitClick()">Créer un compte</button>
