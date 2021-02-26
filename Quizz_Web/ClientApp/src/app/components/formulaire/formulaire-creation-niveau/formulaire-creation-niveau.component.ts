@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-formulaire-creation-niveau',
@@ -7,12 +7,23 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./formulaire-creation-niveau.component.css']
 })
 export class FormulaireCreationNiveauComponent implements OnInit {
-
+@httpPos
+  
+niveauForm :  FormGroup;
   constructor( private fb :FormBuilder) { 
-    
+this.niveauForm=this.fb.group({
+  Niveau :[""],
+  questionjunior: [0],
+  questionconfirme:[0],
+  questionexperimente:[0]
+
+});
+
   }
 
   ngOnInit(): void {
   }
-
+  onSubmit(): void{
+   
+  }
 }
