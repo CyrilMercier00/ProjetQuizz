@@ -12,7 +12,7 @@
     
     <div class="containerButton">
         <button class="modifyButton" (click)="startModify()" >Modifier</button>
-        <button *ngIf="modifying" class="ValidateButton" (click)="modifyPermission($event)">Valider</button>
+        <button *ngIf="modifying" class="ValidateButton" (click)="validateModifyPermission($event)">Valider</button>
         <button *ngIf="!modifying" class="deleteButton" (click)="supprimerCompte()">Supprimer</button>
     </div>
 </div>

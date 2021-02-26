@@ -38,8 +38,9 @@
     margin: 0.5rem 0.5rem;
 }
 
-.deleteButton {
+.containerButton > .deleteButton {
     background-color: red;
+    padding: 0.3rem 3rem;
 }
 
 .containerButton > .modifyButton {
@@ -53,13 +54,12 @@
 
 .deleteButton:hover{
     background-color: rgb(220,0,0);
-    padding: 0.3rem 3.4rem
 }
 
-.ValidateButton{
-    padding: 0.3rem 3.4rem !important;
+.containerButton > .ValidateButton{
+    padding: 0.3rem 3.8rem;
 }
 
-.ValidateButton:hover{
+.containerButton > .ValidateButton:hover{
     background-color: rgb(200,200,200);
 }

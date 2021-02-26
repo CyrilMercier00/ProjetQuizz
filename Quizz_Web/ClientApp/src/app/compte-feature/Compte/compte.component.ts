@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { PermissionNameDTO } from 'src/app/DTO/permissionNameDTO';
 import { Compte } from './compte.model';
 import { CompteService } from './compte.service';
@@ -15,7 +16,7 @@ export class CompteComponent implements OnInit {
   modifying: boolean = false;
   newPerm: PermissionNameDTO;
   
-  constructor(private compteService: CompteService) {
+  constructor(private compteService: CompteService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,13 +33,24 @@ export class CompteComponent implements OnInit {
     });;
   }
 
-  modifyPermission(): void{
-    this.compteService.modifyPermission(this.compte, this.newPerm).subscribe();
-    this.modifying = false;
+  validateModifyPermission(): void{
+    this.compteService.modifyPermission(this.compte, this.newPerm).subscribe(
+      () => {
+        this.modifying = false;
+        this.refreshComponent();
+      }
+    );
   }
 
   permissionSelect(permissionNameDTO: PermissionNameDTO): void{
     this.newPerm = permissionNameDTO;
+  }
+
+  refreshComponent(): void{
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    }); 
   }
 
 }
