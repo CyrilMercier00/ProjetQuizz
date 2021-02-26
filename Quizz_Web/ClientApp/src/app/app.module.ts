@@ -19,7 +19,7 @@ import { FormulaireConnexionComponent } from './components/formulaire/formulaire
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
-import { CompteComponent } from './compte-feature/compte/compte.component';
+import { CompteComponent } from './compte-feature/Compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
