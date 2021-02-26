@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
   selector: 'app-formulaire-creation-niveau',
@@ -7,23 +8,45 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./formulaire-creation-niveau.component.css']
 })
 export class FormulaireCreationNiveauComponent implements OnInit {
-@httpPos
   
 niveauForm :  FormGroup;
+
   constructor( private fb :FormBuilder) { 
+    
 this.niveauForm=this.fb.group({
   Niveau :[""],
-  questionjunior: [0],
-  questionconfirme:[0],
-  questionexperimente:[0]
+  QuestionJunior: [0],
+  QuestionConfirme:[0],
+  QuestionExperimente:[0]
 
 });
+
 
   }
 
   ngOnInit(): void {
   }
   onSubmit(): void{
-   
+console.log(this.niveauForm.value)
   }
+  
+      async envoiFormulaire()
+      {
+    
+        {
+          await fetch(
+            VariableGlobales.apiURLReponseCandidat,
+            {
+              method: "POST",
+              headers:
+              {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(this.niveauForm.value )
+            }
+          )
+        }
 }
+}
+

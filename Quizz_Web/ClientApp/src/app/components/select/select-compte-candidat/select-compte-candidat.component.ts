@@ -48,7 +48,7 @@ export class SelectCompteCandidatComponent implements OnInit
       {
         this.valRetourRequeteCompteAssigne = json;
       });
-    return reponse
+
   }
 
 }

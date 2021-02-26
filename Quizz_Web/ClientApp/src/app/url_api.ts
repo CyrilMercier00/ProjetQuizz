@@ -6,5 +6,6 @@ export class VariableGlobales
   public static apiURLComplexite = VariableGlobales.apiURL + "complexite/";
   public static apiURLQuizz = VariableGlobales.apiURL + "quizz/";
   public static apiURLQuestion = VariableGlobales.apiURL + "question/";
+  public static apiURLNiveau = VariableGlobales.apiURL + "complexite/";
   static apiURLReponseCandidat = VariableGlobales.apiURL + "reponsecandidat";
 }
