@@ -95,6 +95,7 @@ namespace Quizz_Models.Services
         }
 
 
+
         /// <summary>
         /// Méthode qui crée un Compte avec un CompteDTO et le nom d'une Permission.<br></br>
         /// Cette méthode doit être utilisée pour les Permissions de base (Compte candidat, recruteur, administrateur).
