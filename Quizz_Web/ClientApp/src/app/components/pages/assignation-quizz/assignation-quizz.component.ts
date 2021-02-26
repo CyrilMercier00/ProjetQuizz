@@ -60,8 +60,7 @@ export class AssignationQuizzComponent implements OnInit
     quizzGen.$Theme = this.dataQuizz.form.theme;
     quizzGen.$Complexite = this.dataQuizz.form.complexite;
     quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
-    quizzGen.$FKCompteAssigne = this.resultatForm.value.compte;
-
+    
     this.insertQuizz(quizzGen);
     console.log(quizzGen);
     // this.router.navigate(['/'])

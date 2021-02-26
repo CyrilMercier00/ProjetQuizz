@@ -7,7 +7,7 @@ using System;
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route ("api/quizz")]
+    [Route("api/quizz")]
     public class ControllerQuizz : Controller
     {
         readonly ServiceQuizz servQuizz;
@@ -18,30 +18,53 @@ namespace Quizz_Web.Controllers
             this.servQuizz = serviceQuizz;
         }
 
-        [HttpPost] 
-        public ActionResult<QuizzDTO> Post ( [FromBody] QuizzDTO prmQuizzDTO )
+
+
+        [HttpPost]
+        public ActionResult<QuizzDTO> Post([FromBody] QuizzDTO prmQuizzDTO)
         {
-            valRetour = Ok ();
+            ActionResult valRetour;
+
             try
             {
-                servQuizz.GenererQuizz (prmQuizzDTO);
+                servQuizz.GenererQuizz(prmQuizzDTO);
+                valRetour = Ok();
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
-                Console.WriteLine (e.Message);
-                valRetour = NotFound ();
+                Console.WriteLine(e.Message);
+                valRetour = BadRequest(e.InnerException);
             }
+
             return valRetour;
         }
 
 
-
-
+        /// <summary>
+        /// Assignation d'un candidat a un quizz
+        /// </summary>
+        /// <param name="prmIDQuizz"></param>
+        /// <param name="prmIDCandidat"></param>
         [HttpPut]
         [Route("{idQuizz}/{idCandidat}")]
-        public void AssignCandidatToQuizz () 
+        public ActionResult<QuizzDTO> AssignCandidatToQuizz([FromRoute] int prmIDQuizz, [FromRoute] int prmIDCandidat)
         {
-            servQuizz.assignCandidatToQuizz();
+            switch (servQuizz.assignCandidatToQuizz(prmIDQuizz, prmIDCandidat))
+            {
+                case 0:
+                    valRetour = Problem();
+                    break;
+
+                case 1:
+                    valRetour = Ok();
+                    break;
+
+                default:
+                    valRetour = Problem("Erreur Put ControllerQuizz");
+                    break;
+            }
+
+            return valRetour;
         }
 
 
@@ -50,37 +73,35 @@ namespace Quizz_Web.Controllers
         [Route("{id}/{Urlcode}")]
         public QuizzDTO GetQuizzById(int id)
         {
-          
-            QuizzDTO quizz = new QuizzDTO();
-            
-            quizz = this.servQuizz.GetQuizz(id);
-                
-                if (quizz == null)
-                {
-                    Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                    return null;
-                }
 
-                return quizz;
+            QuizzDTO quizz = new QuizzDTO();
+
+            quizz = this.servQuizz.GetQuizz(id);
+
+            if (quizz == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
             }
-       
- 
+
+            return quizz;
+        }
 
 
 
 
         [HttpDelete]
-        public ActionResult<QuizzDTO> Delete ( [FromBody] int prmIDQuizz )
+        public ActionResult<QuizzDTO> Delete([FromBody] int prmIDQuizz)
         {
-            valRetour = Ok ();
+            valRetour = Ok();
             try
             {
-                servQuizz.SupprimerQuizz (prmIDQuizz);
+                servQuizz.SupprimerQuizz(prmIDQuizz);
             }
-            catch ( Exception e )
+            catch (Exception e)
             {
-                Console.WriteLine (e.Message);
-                valRetour = NotFound ();
+                Console.WriteLine(e.Message);
+                valRetour = NotFound();
             }
             return valRetour;
         }
