@@ -1,0 +1,20 @@
+
+<H1>Créer un nouveau niveau</H1>
+
+<form [formGroup]="niveauForm" (ngSubmit)="onSubmit()"   class="creation-niveau-form">
+    <span class="creation-niveau">
+      <div class="creationniveau-input">
+        <input type="number" id="juniorInput" placeholder="% questions juniors" formControlName="junior">
+      </div>
+      <div class="creationniveau-input">
+        <input type="number" id="confirmeInput" placeholder="% questions confirmées" formControlName="confirmé">
+      </div>
+      <div class="creationniveau-input">
+        <input type="number" id="experimenteInput" placeholder="% questions experimentées" formControlName="experimenté">
+      </div>
+      <div class="creationniveau-input">
+        <input type="text" id="nomInput" placeholder="nom du niveau" formControlName="nom">
+      </div>
+      <button class="creation-button" [disabled]="niveauForm.invalid" type="submit">Valider</button>
+    </span>
+  </form>

@@ -37,6 +37,7 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
 import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormulaireCreationNiveauComponent } from './components/formulaire/formulaire-creation-niveau/formulaire-creation-niveau.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EnonceComponent,
     PageDebutQuizzComponent,
     CheckBoxComponent,
+    FormulaireCreationNiveauComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
