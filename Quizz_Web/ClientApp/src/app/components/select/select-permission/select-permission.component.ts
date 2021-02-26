@@ -14,24 +14,18 @@ export class SelectPermissionComponent implements OnInit {
   selectedPerm : PermissionNameDTO;
   @Input() compte : Compte;
   @Output() choixEvent = new EventEmitter<PermissionNameDTO>();
-  index: number;
 
   constructor(private permissionService: PermissionService) { }
 
   ngOnInit(): void {
     this.permissionService.getAll().subscribe(response => {
       this.permissionsNames = response;
-      console.log(this.permissionsNames);
     });
-    console.log(this.compte);
   }
 
   changePermission(newPerm){
-    console.log(newPerm);
-    let dto = this.permissionsNames.find(Permission => Permission.GetPkPermission === newPerm.PkPermission);
-    this.choixEvent.emit(
-      this.permissionsNames.find(Permission => Permission.GetPkPermission === newPerm.PkPermission)
-    );
+    this.selectedPerm = newPerm;
+    this.choixEvent.emit(this.selectedPerm);
   }
 
 }

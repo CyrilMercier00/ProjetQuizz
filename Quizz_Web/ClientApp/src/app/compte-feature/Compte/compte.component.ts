@@ -21,6 +21,10 @@ export class CompteComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  startModify(): void{
+    this.modifying = !this.modifying;
+  }
+
   supprimerCompte(): void{
     this.compteService.delete(this.compte).subscribe(response => {
       console.log('Le compte ' + this.compte.nom + ' a été supprimé.');
@@ -30,10 +34,10 @@ export class CompteComponent implements OnInit {
 
   modifyPermission(): void{
     this.compteService.modifyPermission(this.compte, this.newPerm).subscribe();
+    this.modifying = false;
   }
 
   permissionSelect(permissionNameDTO: PermissionNameDTO): void{
-    console.log('permisision select :' + permissionNameDTO);
     this.newPerm = permissionNameDTO;
   }
 
