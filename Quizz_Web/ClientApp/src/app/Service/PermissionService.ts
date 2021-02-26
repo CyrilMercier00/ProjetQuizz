@@ -12,6 +12,6 @@ export class PermissionService {
   constructor(private httpClient : HttpClient) { }
 
   getAll(): Observable<PermissionNameDTO[]> {
-    return this.httpClient.get<PermissionNameDTO[]>(VariableGlobales.apiURLPermission + "/names");
+    return this.httpClient.get<PermissionNameDTO[]>(VariableGlobales.apiURLPermission + "names/");
   }
 }

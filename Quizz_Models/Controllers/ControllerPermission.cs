@@ -29,7 +29,7 @@ namespace Quizz_Web.Controllers
             return permissionDTOs;
         }
 
-        [HttpGet("/names")]
+        [HttpGet("names")]
         public List<AffichagePermissionDTO> GetNames()
         {
             List<AffichagePermissionDTO> permissionsNames = this.permissionService.GetPermissionsNames();

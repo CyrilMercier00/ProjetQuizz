@@ -81,9 +81,9 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPut("{idCompte}/permission")]
-        public void Put(int idCompte, [FromBody] ModifyComptePermissionDTO modifyComptePermissionDTO)
+        public void Put(int idCompte, [FromBody] AffichagePermissionDTO affichagePermissionDTO)
         {
-            this.compteService.ModifyComptePermission(idCompte, modifyComptePermissionDTO.IdPermission);
+            this.compteService.ModifyComptePermission(idCompte, affichagePermissionDTO.PkPermission);
         }
 
         [HttpPost]
