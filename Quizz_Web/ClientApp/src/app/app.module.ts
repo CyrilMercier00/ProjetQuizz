@@ -94,11 +94,11 @@ import { FormulaireCreationNiveauComponent } from './components/formulaire/formu
       { path: 'resultats', component: ResultatsComponent },                                 // Page de fin de quizz
       { path: 'permission', component: PermissionComponent },                           // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
-      { path: 'creation-question', component: PageCreationQuestionComponent },      // Page de creation des questions
+      { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
       { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
       { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage', component: PageDebutQuizzComponent },                // Page de demarrage du quizz
-      //{ path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
+      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
 

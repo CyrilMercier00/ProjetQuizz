@@ -41,7 +41,7 @@ namespace Quizz_Web
             services.AddScoped<ServiceTheme, ServiceTheme>();
             services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
             services.AddScoped<QuestionService, QuestionService>();
-
+            
             /* --- Repo --- */
             services.AddScoped<ComplexiteRepository, ComplexiteRepository>();
             services.AddScoped<PermissionRepository, PermissionRepository>();
@@ -51,6 +51,7 @@ namespace Quizz_Web
             services.AddScoped<CompteRepository, CompteRepository>();
             services.AddScoped<ReponseCandidatRepository, ReponseCandidatRepository>();
             services.AddScoped<QuestionRepository, QuestionRepository>();
+            services.AddScoped<PropositionReponseRepository, PropositionReponseRepository>();
 
         }
 

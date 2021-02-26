@@ -64,7 +64,7 @@ namespace Quizz_Models.Services
                 // Liaisons compte -> quizz
                 new CompteQuizz
                 {
-                    FkCompte = prmDTO.PKCompte,
+                    FkCompte = prmDTO.FKCompteRecruteur,
                     FkQuizz = quizzCreation.PkQuizz
                 };
 

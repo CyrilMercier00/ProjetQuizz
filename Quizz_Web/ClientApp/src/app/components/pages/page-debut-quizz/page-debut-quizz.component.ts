@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { VariableGlobales } from 'src/app/url_api';
 
 
 
@@ -11,15 +12,42 @@ import { Router } from '@angular/router';
 
 
 
-export class PageDebutQuizzComponent implements OnInit {
+export class PageDebutQuizzComponent implements OnInit
+{
+  /* --- Variables --- */
+  codeQuizz = this.route.params.subscribe(params => { return params.urlQuizz });
+  valRetourRequeteQuestions : any ;
 
-  constructor(private router: Router) { }
 
-  ngOnInit() {
+
+  /* --- Constructeur ---*/
+  constructor(private router: Router, private route: ActivatedRoute) { }
+
+
+
+  /* --- Methodes Angular --- */
+  ngOnInit()
+  {
   }
 
-  handleClick() {
+
+
+  /*--- Methodes ---*/
+  handleClick()
+  {
     this.router.navigate([''])
+  }
+
+
+  async GetQuestions(prmID)
+  {
+
+    await fetch(VariableGlobales.apiURLQuestion + "/" + prmID, { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        this.valRetourRequeteQuestions = json;
+      });
   }
 
 }
