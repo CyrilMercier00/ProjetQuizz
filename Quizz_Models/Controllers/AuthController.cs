@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.IdentityModel.Tokens
+using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 
 namespace Quizz_Web.Controllers
