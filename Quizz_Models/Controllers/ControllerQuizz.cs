@@ -33,7 +33,7 @@ namespace Quizz_Web.Controllers
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                valRetour = BadRequest(e.InnerException);
+                valRetour = BadRequest(e.Message);
             }
 
             return valRetour;

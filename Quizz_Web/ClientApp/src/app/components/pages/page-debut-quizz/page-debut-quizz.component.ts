@@ -65,7 +65,7 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-   GetQuestions(prmID)
+   GetQuestions()
   {
      fetch(VariableGlobales.apiURLQuestion + "/" + this.Quizz.pkQuizz { method: "GET" })
       .then((response) => response.json())

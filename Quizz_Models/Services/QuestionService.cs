@@ -18,6 +18,7 @@ namespace Quizz_Models.Services
             this.repoTheme = prmRepoTheme;
             this.repoComplex = prmRepoComplex;
             this.repoQuestion = prmRepoQuestion;
+            this.repoPropoReponse = prmRepoPropoReponse;
         }
 
 
@@ -76,6 +77,8 @@ namespace Quizz_Models.Services
             };
         }
 
+
+
         /// <summary>
         /// La methode recupere les propositions de reponse possible pour la liste de question passée
         /// </summary>
@@ -93,7 +96,7 @@ namespace Quizz_Models.Services
                     PKQuestion= q.PkQuestion
                 });
 
-                if (q.RepLibre == 0x0000)
+                if (q.RepLibre == Convert.ToByte(false) )
                 {   // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
                     listQRepDTO[listQRepDTO.Count - 1].ListeReponses = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
                 }
