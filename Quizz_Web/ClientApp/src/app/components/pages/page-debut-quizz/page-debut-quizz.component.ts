@@ -15,31 +15,34 @@ import { VariableGlobales } from 'src/app/url_api';
 export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
-  codeQuizz: any;
+  prmCode: any;
   valRetourRequeteQuestions: any;
+  Quizz :any ;
 
 
 
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
   {
-    this.codeQuizz = this.actRoute.snapshot.params['urlQuizz'];   // Recup de de l'url du
+    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];  
   }
+
 
 
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    console.log(this.codeQuizz);
+    console.log(this.prmCode);
   }
 
 
-
+  
   /*--- Methodes ---*/
   handleClick()
   {
     this.router.navigate([''])
   }
+
 
 
 
@@ -50,11 +53,21 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-
-  async GetQuestions(prmID)
+   GetQuizz(prmCode)
   {
+     fetch(VariableGlobales.apiURLQuizz + "/" + prmCode , { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        this.Quizz = json;
+      });
+  }
 
-    await fetch(VariableGlobales.apiURLQuestion + "/" + prmID, { method: "GET" })
+
+
+   GetQuestions(prmID)
+  {
+     fetch(VariableGlobales.apiURLQuestion + "/" + this.Quizz.pkQuizz { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {

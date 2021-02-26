@@ -75,11 +75,9 @@ export class PageReponseQcmComponent implements OnInit
 
 
   /* --- POST de la reponse choisie --- */
-  async envoiFormulaire(prmDTO: reponseDTO)
+   envoiFormulaire(prmDTO: reponseDTO)
   {
-
-    {
-      await fetch(
+       fetch(
         VariableGlobales.apiURLReponseCandidat,
         {
           method: "POST",
@@ -92,6 +90,4 @@ export class PageReponseQcmComponent implements OnInit
         }
       )
     }
-
-  }
 }
