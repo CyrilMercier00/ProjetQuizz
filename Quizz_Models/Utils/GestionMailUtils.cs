@@ -98,16 +98,12 @@ namespace Quizz_Models.Utils
         //methode sui gerent le contenu du mail candidat
         public static string contentMailCandidat(string NomRecruteur, string NomCandidat, string prenomCandidat, string prenomRecruteur, Quizz quizz)
         {
-            //NomRecruteur = "nom recruteur";
-            //NomCandidat = "nom Candidat";
-            //prenomRecruteur = "nom recruteur";
-           // prenomCandidat = "nom Candidat";
             String UrlCode = quizz.Urlcode;
-            String Url = "https:localhost/5001/Api/Quizz/"+ UrlCode;
-            
+            String Url = "https://localhost:5001/api/quizz/" + UrlCode;
+        
 
             string htmlBody = "<html><body> Bonjour, <br><br>" + NomCandidat+" " + prenomCandidat+
-                "<h3>Suivez le lien Suivant pour réaliser le test de compétence :" + "<a href =" +Url+ ">"+Url+"< /a ></h3>" +
+                "<h3>Suivez le lien Suivant pour réaliser le test de compétence :" + "<a href = \" " + Url + " \" >" + Url + "</ a ></h3>" +
                 "<b>Pour information :</b><br>" +
                 "<li>Le Test est à réaliser sans limite de temps," +
                  "<br> un chronomètre vous indiqueras le temps passé sur le test <br> " +
