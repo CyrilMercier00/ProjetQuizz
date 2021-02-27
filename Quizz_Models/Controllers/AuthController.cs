@@ -7,7 +7,6 @@ using System.Security.Claims;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
-using System.Collections.Generic;
 
 namespace Quizz_Web.Controllers
 {
@@ -23,31 +22,50 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPost]
-        public void Login([FromBody] LoginDTO loginDTO)
+        public string Login([FromBody] LoginDTO loginDTO)
         {
             Compte compte = this.compteService.FindCompteByMail(loginDTO.Mail);
 
-            if(compte.MotDePasse == loginDTO.MotDePasse)
+            if (verifyPassword(loginDTO, compte))
             {
                 // [FRONT -> JWT Decode]
-                var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";
-                var securityKey = new SymmetricSecurityKey(Convert.FromBase64String(mySecret));
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {
-                        new Claim(ClaimTypes.NameIdentifier, compte.PkCompte.ToString())
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(7),
-                    SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.Sha256)
-                };
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-                string wtoken = tokenHandler.WriteToken(token);
-                HttpContext.Session.SetInt32("userId", compte.PkCompte);
-            } else
+                return GenererJWTToken(compte);
+            }
+            else
             {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                return "";
                 //Traiter l'erreur de connexion
             }
+        }
+
+        private string GenererJWTToken(Compte compte)
+        {
+            var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";
+            var securityKey = new SymmetricSecurityKey(Convert.FromBase64String(mySecret));
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {
+                        new Claim(ClaimTypes.NameIdentifier, compte.PkCompte.ToString()),
+                        new Claim(ClaimTypes.Email, compte.Mail)
+                    }),
+                Expires = DateTime.UtcNow.AddHours(2),
+                SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            string wtoken = tokenHandler.WriteToken(token);
+            return wtoken;
+        }
+
+        private bool verifyPassword(LoginDTO loginDTO, Compte compte)
+        {
+            if(compte != null && compte.MotDePasse == loginDTO.MotDePasse)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         [HttpGet]
