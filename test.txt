@@ -1,0 +1,14 @@
+******************************************
+************** SWAGGER *******************
+
+
+****** QUIZZ ******
+POST :
+{
+  "fkCompteRecruteur": 1,
+  "nbQuestions": 10,
+  "chrono": "00:00:00",
+  "theme": "C#",
+  "complexite": "junior",
+  "urlcode": "aqsdfGhJKoLLlb"
+}

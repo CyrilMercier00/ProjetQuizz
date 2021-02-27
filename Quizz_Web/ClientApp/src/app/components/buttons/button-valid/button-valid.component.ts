@@ -14,11 +14,13 @@ export class ButtonValidComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
   @Input("isDisabled") isDisabled: boolean = false;
+  @Input("Message") message: string = "Valider";
 
 
 
   /* ------ Constructeur ------ */
-  constructor() { }
+  constructor() {
+   }
 
 
 

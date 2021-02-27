@@ -10,8 +10,12 @@ namespace Quizz_Models.Services
 {
     public class PermissionService
     {
-        readonly PermissionRepository repoPermission = new PermissionRepository();
-        public PermissionService() { }
+        readonly PermissionRepository repoPermission;
+        public PermissionService(PermissionRepository prmRepoPerm) 
+        {
+            repoPermission = prmRepoPerm;
+        }
+
 
         /// <summary>
         /// Retourne toutes les permissions de la bdd.
@@ -54,6 +58,7 @@ namespace Quizz_Models.Services
             return new PermissionDTO
             {
                 PkPermission = p.PkPermission,
+                Nom = p.Nom,
                 AjouterQuest = (p.AjouterQuest != 0),
                 GenererQuizz = (p.GenererQuizz != 0),
                 ModifierQuest = (p.ModifierQuest != 0),
@@ -73,6 +78,7 @@ namespace Quizz_Models.Services
             return new Permission
             {
                 PkPermission = p.PkPermission,
+                Nom = p.Nom,
                 AjouterQuest = Convert.ToByte(p.AjouterQuest),
                 GenererQuizz = Convert.ToByte(p.GenererQuizz),
                 ModifierQuest = Convert.ToByte(p.ModifierQuest),
@@ -89,7 +95,20 @@ namespace Quizz_Models.Services
         /// <returns>Nombre de lignes ajoutées.</returns>
         public int AddPermission(PermissionDTO permissionDTO)
         {
+            if(IsAllValueNull(permissionDTO))
+            {
+                return -1;
+            }
+
             Permission p = TransformPermissionDTOToPermission(permissionDTO);
+
+            Permission test = this.repoPermission.FindPermissionByValues(p);
+
+            if(test != null)
+            {
+                return 0;
+            }
+
             this.repoPermission.AddPermission(p);
 
             return this.repoPermission.Sauvegarder();
@@ -108,6 +127,22 @@ namespace Quizz_Models.Services
             this.repoPermission.ModifyPermission(permissionAModifier);
             MailUtils.ModifyPermission(ref permissionAModifier, permissionDTO);
             return this.repoPermission.Sauvegarder();
+        }
+
+        /// <summary>
+        /// Check si toutes les valeurs sont à nuls (mauvaise requête).
+        /// </summary>
+        /// <param name="permissionDTO"></param>
+        /// <returns>True si toutes les valeurs du DTO sont à null.</returns>
+        private bool IsAllValueNull(PermissionDTO permissionDTO)
+        {
+            if(permissionDTO.AjouterQuest == null && permissionDTO.ModifierCompte == null && permissionDTO.ModifierQuest == null
+                && permissionDTO.SupprimerCompte == null && permissionDTO.SupprQuestion == null && permissionDTO.GenererQuizz == null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

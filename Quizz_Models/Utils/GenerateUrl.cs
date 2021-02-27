@@ -18,7 +18,7 @@ namespace Quizz_Models.Utils
         /// Genere un code Alphanuerique unique 
         /// </summary>
         /// <returns></returns>
-        public static string GenerateGuid() 
+        private static string GenerateGuid() 
         {
             Guid guid = Guid.NewGuid();
             string rString = Convert.ToBase64String(guid.ToByteArray());
@@ -32,7 +32,7 @@ namespace Quizz_Models.Utils
         /// </summary>
         /// <param name="input"> chaine de characters avec characters speciaux</param>
         /// <returns>chaine de characters sans characters speciaux</returns>
-        public static string RemoveSpecialCharacters(string input)
+        private static string RemoveSpecialCharacters(string input)
         {
             Regex r = new Regex( "(?:[^a-zA-Z0-9 ]|(?<=['\"])s)", RegexOptions.IgnoreCase| RegexOptions.CultureInvariant | RegexOptions.Compiled);
             return r.Replace(input, String.Empty);

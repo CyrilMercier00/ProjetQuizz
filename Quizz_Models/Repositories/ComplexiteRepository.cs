@@ -5,15 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Quizz_Models.Services
+namespace Quizz_Models.Repositories
 {
     public class ComplexiteRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext ();
+        private readonly bdd_quizzContext bdd_entities ;
 
-        public ComplexiteRepository ()
+        public ComplexiteRepository (bdd_quizzContext context)
         {
-
+            bdd_entities = context;
         }
 
         public  TauxComplexite Create(TauxComplexite taux_Complexite)
@@ -38,12 +38,12 @@ namespace Quizz_Models.Services
            
         }
 
-        internal TauxComplexite Find(int id)
+        public TauxComplexite GetComplexiteByID(int id)
         {
             return bdd_entities.TauxComplexite.Find(id);
         }
 
-        internal void Delete(int id)
+        public void Delete(int id)
         {
             TauxComplexite Taux= bdd_entities.TauxComplexite.Find(id);
             bdd_entities.TauxComplexite.Remove(Taux);
@@ -58,8 +58,6 @@ namespace Quizz_Models.Services
         /// <returns></returns>
         public TauxComplexite GetComplexiteByNom(String prmNomComplexite)
         {
-
-            
             return bdd_entities.TauxComplexite
                 .Where(x => x.Niveau.Equals( prmNomComplexite)).Single();
          

@@ -6,10 +6,14 @@ using System;
 
 namespace Quizz_Models.Repositories
 {
-    class PermissionRepository
+    public class PermissionRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
-        public PermissionRepository() { }
+        private readonly bdd_quizzContext bdd_entities ;
+
+        public PermissionRepository(bdd_quizzContext prmContext) 
+        {
+            bdd_entities = prmContext;
+        }
 
         /// <summary>
         /// Méthode qui insère une Permission.
@@ -19,6 +23,13 @@ namespace Quizz_Models.Repositories
         {
             bdd_entities.Permission.Add(PermissionEntity);
             bdd_entities.SaveChanges ();
+        }
+
+        public Permission GetPermissionByNom(string prmNomPerm)
+        {
+            return bdd_entities.Permission
+                .Where(x => x.Nom == prmNomPerm)
+                .Single();
         }
 
         /// <summary>
@@ -47,14 +58,23 @@ namespace Quizz_Models.Repositories
         /// <returns>Retourne la Permission trouvée ou lance une exception si aucune n'a été trouvée.</returns>
         public Permission FindPermissionByValues(Permission PermissionEntity)
         {
-            return bdd_entities.Permission
-                    .Where(x => x.AjouterQuest == PermissionEntity.AjouterQuest
-                        && x.GenererQuizz == PermissionEntity.GenererQuizz
-                        && x.ModifierQuest == PermissionEntity.ModifierQuest
-                        && x.SupprQuestion == PermissionEntity.SupprQuestion
-                        && x.ModifierCompte == PermissionEntity.ModifierCompte
-                        && x.SupprimerCompte == PermissionEntity.SupprimerCompte)
-                    .Single();
+            var sql = bdd_entities.Permission
+                    .Where(x => x.AjouterQuest == PermissionEntity.AjouterQuest)
+                    .Where(x => x.GenererQuizz == PermissionEntity.GenererQuizz)
+                    .Where(x => x.ModifierQuest == PermissionEntity.ModifierQuest)
+                    .Where(x => x.SupprQuestion == PermissionEntity.SupprQuestion)
+                    .Where(x => x.ModifierCompte == PermissionEntity.ModifierCompte)
+                    .Where(x => x.SupprimerCompte == PermissionEntity.SupprimerCompte);
+
+            Permission p = null;
+            try
+            {
+                p = sql.First();
+            } catch(InvalidOperationException)
+            {
+            }
+
+            return p;
         }
 
         /// <summary>

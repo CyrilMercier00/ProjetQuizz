@@ -1,9 +1,12 @@
-.container {
-    padding: 1rem;
+.wrapper-select-theme {
+    display       : flex;
+    flex-direction: column;
+    padding       : 1rem;
+    align-items   : center;
 }
 
 .title {
-    text-align: center;
+    text-align   : center;
     margin-bottom: 0.5rem;
 }
 

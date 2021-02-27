@@ -13,9 +13,9 @@ namespace Quizz_Models.bdd_quizz
         }
 
         public int PkQuestion { get; set; }
-        public string NvComplexite { get; set; }
         public string Enonce { get; set; }
         public byte? ARepondu { get; set; }
+        public byte RepLibre { get; set; }
         public int FkTheme { get; set; }
         public int FkComplexite { get; set; }
 

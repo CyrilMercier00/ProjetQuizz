@@ -1,9 +1,9 @@
-<div class="container">
+<div class="wrapper-select-theme">
   <div class="title">Theme</div>
   <div class="mybox">
     <span class="myarrow"></span>
     <select (change)="themeUpdate($event)">
-      <option disabled selected value class="hidden">Niveau de difficulté</option>
+      <option disabled selected value class="hidden">Thème</option>
       <option *ngFor="let themes of valRetourRequeteTheme">
         {{ themes.nomTheme | titlecase }}
       </option>

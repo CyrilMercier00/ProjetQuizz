@@ -1,14 +1,19 @@
 select {
-    margin: 0.5rem 1rem;
-    min-width : 28rem;
+    margin   : 0.5rem 1rem;
+    min-width: 28rem;
 }
 
-
 select {
-    background-color: white;
     border          : unset;
+    background-color: white;
     appearance      : none;
     border-radius   : 4px;
+}
+
+select option {
+    margin-right: 4.3em;
+    padding  : 2em;
+    font-size: large;
 }
 
 .mybox {
@@ -19,10 +24,10 @@ select {
 .mybox .myarrow {
     width         : 26px;
     height        : 36px;
-    position      : absolute;
+    position     : absolute;
     display       : inline-block;
-    top           : 8px;
-    right         : 16px;
+    top            : 8px;
+    right          : 16px;
     background    : url(../../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
     pointer-events: none;
 }

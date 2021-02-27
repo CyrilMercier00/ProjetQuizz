@@ -1,21 +1,22 @@
 ﻿using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Models.Services
 {
     public class ServiceReponseCandidat
     {
 
-        ReponseCandidatRepository RepoRepC = new ReponseCandidatRepository ();
+        ReponseCandidatRepository reponseCandidatRepo;
 
-        public ServiceReponseCandidat () { }
+        public ServiceReponseCandidat (ReponseCandidatRepository reponseCandidatRepository) 
+        {
+            this.reponseCandidatRepo = reponseCandidatRepository;
+        }
 
         public void InsertReponseCandidat ( ReponseCandidatDTO prmRepC )
         {
-            RepoRepC.InsertReponseCandidat (new ReponseCandidat ()
+            reponseCandidatRepo.InsertReponseCandidat (new ReponseCandidat ()
             {
                 Reponse = prmRepC.Reponse,
                 Commentaire = prmRepC.Commentaire,

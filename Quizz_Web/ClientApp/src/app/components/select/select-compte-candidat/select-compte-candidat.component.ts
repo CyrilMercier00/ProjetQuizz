@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { VariableGlobales } from 'src/app/url_api';
 
 
@@ -15,7 +15,7 @@ export class SelectCompteCandidatComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
   valRetourRequeteCompteAssigne: string;    // Contiens le retour de la requete get all compte assigne au recruteur
-
+  @Output() ChoixEvent = new EventEmitter<string>();
 
 
   /* ------ Constructeur ------ */
@@ -26,18 +26,27 @@ export class SelectCompteCandidatComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit(): void
   {
+    this.getCandidatAsigne();
   }
 
 
 
-  /* ------ Fonctions ------ */
-  getCandidatAsigne()
+  /* ------ Methodes ------ */
+  IDUpdate(prmEvent) 
   {
-    fetch(VariableGlobales.apiURLCompte, { method: "GET" })
+    this.ChoixEvent.emit(prmEvent.value);
+  }
+
+
+
+  /* --- Get des candidats assignés a ce recruteur --- */
+   getCandidatAsigne()
+  {
+     fetch(VariableGlobales.apiURLCompte  + "GetByRef" + "/1", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteCompteAssigne = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteCompteAssigne = json;
       });
   }
 

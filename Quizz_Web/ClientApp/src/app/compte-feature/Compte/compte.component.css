@@ -1,14 +1,15 @@
 .rectangle{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-grow: 0;
 
-    height : 100px;
-    width : 250px;
+    height : 7rem;
+    width : 30rem;
     background-color: #50536f;
-    opacity: 1;
     margin: 10px;
     border-radius: 25px;
     justify-content: center;
+    align-items: stretch;
     transition: background-color 1s, color 1s;
 }
 
@@ -21,5 +22,39 @@
 }
 
 .rectangle p{
-    align-self: center;
+    margin-left: 25px;
+}
+
+.containerButton{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 2 0 0;
+}
+
+.containerButton > button{
+    font-size: 1rem;
+    padding: 0.4rem 2.6rem;
+    border-radius: 10px;
+    border: unset;
+    outline: none;
+    margin: 0.5rem 0.5rem;
+}
+
+.deleteButton {
+    background-color: red;
+}
+
+.containerButton > .modifyButton {
+    background-color: orange;
+    padding: 0.3rem 3rem;
+}
+
+.containerButton > .modifyButton:hover{
+    background-color: rgb(255,105,30);
+}
+
+.deleteButton:hover{
+    background-color: rgb(220,0,0);
 }
