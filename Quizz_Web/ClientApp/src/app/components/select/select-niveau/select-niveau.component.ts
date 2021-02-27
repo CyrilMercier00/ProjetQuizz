@@ -41,13 +41,13 @@ export class SelectNiveauComponent implements OnInit
 
 
   /* --- Fetch de la complexité a la bdd --- */
-  getAllComplexite()
+ async  getAllComplexite()
   {
-    fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
-        this.valRetourRequeteComplex = JSON.parse(JSON.stringify(json));
+        this.valRetourRequeteComplex = json;
       });
   }
 }

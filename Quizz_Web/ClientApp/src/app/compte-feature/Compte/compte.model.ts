@@ -1,11 +1,13 @@
 export class Compte {
-    private nom : string;
+    public id: number;
+    public nom : string;
     private prenom : string;
     private mail : string;
     private mdp : string;
-    private role : number;
+    public role : string;
 
-    constructor(nom : string, prenom : string, mail : string, mdp : string, role : number){
+    constructor(id: number, nom: string, prenom: string, mail: string, mdp: string, role: string){
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.mail = mail;

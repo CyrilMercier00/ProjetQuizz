@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System;
 
-
-namespace Quizz_Models.Services
+namespace Quizz_Models.Repositories
 {
     public class CompteRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
-        public CompteRepository() { }
+        private readonly bdd_quizzContext bdd_entities ;
+        public CompteRepository(bdd_quizzContext quizzContext) 
+        {
+            bdd_entities = quizzContext;
+        }
 
         /// <summary>
         /// Méthode qui retourne tout les comptes de la bdd.
@@ -17,7 +20,19 @@ namespace Quizz_Models.Services
         /// <returns>Liste de tout les comptes.</returns>
         public List<Compte> GetAllComptes()
         {
-            return bdd_entities.Compte.ToList();
+            return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
+        }
+
+        public Compte FindCompteByMail(string mail)
+        {
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte.Where(c => c.Mail == mail).First();
+            } catch(Exception)
+            { }
+
+            return c;
         }
 
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
@@ -27,6 +42,17 @@ namespace Quizz_Models.Services
                 .ToList();
                 
         }
+        /// <summary>
+        /// Retourne les comptes ayant comme referent le compte avec l'id passé.
+        /// </summary>
+        /// <param name="iDPerm"></param>
+        /// <returns></returns>
+        internal List<Compte> GetCompteByCompteRef(int prmID)
+        {
+            return bdd_entities.Compte
+                .Where(x => x.FkCompteReferent == prmID)
+                .ToList();
+        }
 
         /// <summary>
         /// Méthode qui retourne un compte par son ID.
@@ -35,7 +61,14 @@ namespace Quizz_Models.Services
         /// <returns>Le compte demandé.</returns>
         public Compte GetCompteByID(int prmID)
         {
-            return bdd_entities.Compte.Find(prmID);
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte.Where(c => c.PkCompte == prmID).Include(c => c.FkPermissionNavigation).Single();
+            } catch (Exception)
+            { }
+
+            return c;
         }
 
         /// <summary>
@@ -45,6 +78,21 @@ namespace Quizz_Models.Services
         public void InsertCompte(Compte prmCompte)
         {
             bdd_entities.Compte.Add(prmCompte);
+        }
+
+        /// <summary>
+        /// Méthode qui modifie la permission d'un utilisateur.
+        /// </summary>
+        /// <param name="idCompte">ID du compte à modifier.</param>
+        /// <param name="idPermission">ID de la permission voulue.</param>
+        public void ModifyPermission(int idCompte, int idPermission)
+        {
+            Compte c = bdd_entities.Compte.Find(idCompte);
+            if(c != null)
+            {
+                c.FkPermission = idPermission;
+            }
+            bdd_entities.SaveChanges();
         }
 
         /// <summary>

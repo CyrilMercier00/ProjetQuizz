@@ -4,15 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Quizz_Models.Services
+namespace Quizz_Models.Repositories
 {
     public class ThemeRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
+        private readonly bdd_quizzContext bdd_entities ;
 
-        public ThemeRepository() { }
+        public ThemeRepository(bdd_quizzContext context) 
+        {
+            bdd_entities = context;
+        }
 
-        /* Theme */
         /// <summary>
         /// Retourne l'id de la complexite ou le nom correspond (sensible a la casse)
         /// </summary>
@@ -35,6 +37,16 @@ namespace Quizz_Models.Services
             .Where (x => x.NomTheme.Equals (prmNiveauComplex))
             .Single ();
         }
+        /// <summary>
+        /// Retourne le theme en fonction de l'id passée
+        /// </summary>
+        /// <param name="fkTheme"></param>
+        /// <returns></returns>
+        internal Theme GetThemeByID(int prmFKTheme)
+        {
+            return bdd_entities.Theme.Find(prmFKTheme);
+        }
+
         /// <summary>
         /// Retourne tout ojets theme
         /// </summary>

@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Quizz_Models.bdd_quizz;
+using Quizz_Models.Services;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Web
 {
@@ -20,19 +23,42 @@ namespace Quizz_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
+            // // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();
+            services.AddDbContext<bdd_quizzContext>();
+            services.AddScoped<bdd_quizzContext, bdd_quizzContext>();
+
+            /* --- Services --- */
+            services.AddScoped<CompteService, CompteService>();
+            services.AddScoped<PermissionService, PermissionService>();
+            services.AddScoped<ComplexiteService, ComplexiteService>();
+            services.AddScoped<ServiceQuizz, ServiceQuizz>();
+            services.AddScoped<ServiceTheme, ServiceTheme>();
+            services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
+            services.AddScoped<QuestionService, QuestionService>();
+            
+            /* --- Repo --- */
+            services.AddScoped<ComplexiteRepository, ComplexiteRepository>();
+            services.AddScoped<PermissionRepository, PermissionRepository>();
+            services.AddScoped<QuestionRepository, QuestionRepository>();
+            services.AddScoped<QuizzRepository, QuizzRepository>();
+            services.AddScoped<ThemeRepository, ThemeRepository>();
+            services.AddScoped<CompteRepository, CompteRepository>();
+            services.AddScoped<ReponseCandidatRepository, ReponseCandidatRepository>();
+            services.AddScoped<QuestionRepository, QuestionRepository>();
+            services.AddScoped<PropositionReponseRepository, PropositionReponseRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            // // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
@@ -63,13 +89,13 @@ namespace Quizz_Web
             app.UseRouting();
 
             app.UseCors(
-    x =>
-    {
-        x.AllowAnyOrigin()
-                      .AllowAnyMethod()
-                      .AllowAnyHeader();
-    }
-);
+                x =>
+                {
+                    x.AllowAnyOrigin()
+                                .AllowAnyMethod()
+                                .AllowAnyHeader();
+                }
+            );
 
             app.UseEndpoints(endpoints =>
             {

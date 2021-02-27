@@ -1,14 +1,18 @@
 ﻿using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using Quizz_Models.Repositories;
 
 namespace Quizz_Models.Services
 {
     public class ComplexiteService
     {
-        private readonly ComplexiteRepository _complexiteRepository = new ComplexiteRepository();
+        private readonly ComplexiteRepository _complexiteRepository;
+
+        public ComplexiteService(ComplexiteRepository repoComplexite)
+        {
+            _complexiteRepository = repoComplexite;
+        }
 
         public TauxComplexite AjouterTauxComplexite(TauxComplexite taux_Complexite)
         {
@@ -41,7 +45,7 @@ namespace Quizz_Models.Services
         public Taux_complexiteDTO GetComplexite(int id)
         {
 
-            return TransferModelToDto(this._complexiteRepository.Find(id));
+            return TransferModelToDto(this._complexiteRepository.GetComplexiteByID(id));
         }
 
         public void Delete(int id)

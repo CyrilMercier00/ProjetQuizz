@@ -1,0 +1,17 @@
+<form [formGroup]="compteProfile" (ngSubmit)="onSubmit()" *ngIf="inOut" @flyInOut class="creation-compte-form">
+  <span class="creation-compte">
+    <div class="creationcompte-input">
+      <input type="text" id="nameInput" placeholder="Nom" formControlName="nom">
+    </div>
+    <div class="creationcompte-input">
+      <input type="text" id="lastNameInput" placeholder="Prenom" formControlName="prenom">
+    </div>
+    <div class="creationcompte-input">
+      <input type="text" id="mailInput" placeholder="Mail" formControlName="mail">
+    </div>
+    <div class="creationcompte-input">
+      <input type="password" id="passwordInput" placeholder="Mot de passe" formControlName="mdp">
+    </div>
+    <button class="creation-button" [disabled]="compteProfile.invalid" type="submit">Valider</button>
+  </span>
+</form>

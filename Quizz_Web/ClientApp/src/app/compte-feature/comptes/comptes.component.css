@@ -8,7 +8,7 @@
 }
 
 .comptes{
-    animation: 3s 1 slideInFromBottom;
+    animation: 0.4s 1 slideInFromBottom;
     display: flex;
     flex-direction: column;
     justify-content: center;

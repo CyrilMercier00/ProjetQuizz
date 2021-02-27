@@ -6,10 +6,14 @@ using System;
 
 namespace Quizz_Models.Repositories
 {
-    class PermissionRepository
+    public class PermissionRepository
     {
-        private readonly bdd_quizzContext bdd_entities = new bdd_quizzContext();
-        public PermissionRepository() { }
+        private readonly bdd_quizzContext bdd_entities ;
+
+        public PermissionRepository(bdd_quizzContext prmContext) 
+        {
+            bdd_entities = prmContext;
+        }
 
         /// <summary>
         /// Méthode qui insère une Permission.

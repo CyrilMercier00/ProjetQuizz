@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component'
+import { HomeComponent } from './components/pages/home/home.component'
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { QuizzQuestionComponent } from './components/quizz-question/quizz-question.component';
-import { GenQuizzComponent } from './components/gen-quizz/gen-quizz.component';
-import { AssignationQuizzComponent } from './components/assignation-quizz/assignation-quizz.component';
-import { GestionQuizzComponent } from './components/gestion-quizz/gestion-quizz.component';
-import { ResultatsComponent } from './resultats/resultats.component';
-import { PermissionComponent } from './permission/permission.component';
-import { ChronometreComponent } from './chronometre/chronometre.component';
-import { FooterComponent } from './footer/footer.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { FormulaireConnexionComponent } from './components/formulaire-connexion/formulaire-connexion.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { QuizzQuestionComponent } from './components/pages/quizz-question/quizz-question.component';
+import { GenQuizzComponent } from './components/pages/gen-quizz/gen-quizz.component';
+import { AssignationQuizzComponent } from './components/pages/assignation-quizz/assignation-quizz.component';
+import { GestionQuizzComponent } from './components/pages/gestion-quizz/gestion-quizz.component';
+import { ResultatsComponent } from './components/pages/resultats/resultats.component';
+import { PermissionComponent } from './components/pages/permission/permission.component';
+import { ChronometreComponent } from './components/chronometre/chronometre.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
+import { FormulaireConnexionComponent } from './components/formulaire/formulaire-connexion/formulaire-connexion.component';
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
@@ -23,13 +23,20 @@ import { CompteComponent } from './compte-feature/compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
-import { GenerateNiveauComponent } from './generate-niveau/generate-niveau.component';
-import { FormulaireCreationCompteComponent } from './components/formulaire-creation-compte/formulaire-creation-compte.component';
+import { GenerateNiveauComponent } from './components/pages/generate-niveau/generate-niveau.component';
+import { FormulaireCreationCompteComponent } from './components/formulaire/formulaire-creation-compte/formulaire-creation-compte.component';
 import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
-import { FormulaireCreationCandidatComponent } from './components/formulaire-creation-candidat/formulaire-creation-candidat.component';
-import { FormulaireAjoutQuestionBddComponent } from './components/formulaire-creation-question/formulaire-creation-question.component';
+import { FormulaireCreationCandidatComponent } from './components/formulaire/formulaire-creation-candidat/formulaire-creation-candidat.component';
+import { FormulaireAjoutQuestionBddComponent } from './components/formulaire/formulaire-creation-question/formulaire-creation-question.component';
 import { DragabbleTextInputComponent } from './components/input/dragabble-text-input/dragabble-text-input.component';
-import { PageCreationQuestionComponent } from './components/page-creation-question/page-creation-question.component';
+import { PageCreationQuestionComponent } from './components/pages/page-creation-question/page-creation-question.component';
+import { PageReponseLibreComponent } from './components/pages/page-reponse-libre/page-reponse-libre.component';
+import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/page-reponse-qcm.component';
+import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
+import { EnonceComponent } from './components/text/enonce/enonce.component';
+import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
+import { CheckBoxComponent } from './components/input/check-box/check-box.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -60,26 +67,36 @@ import { PageCreationQuestionComponent } from './components/page-creation-questi
     FormulaireAjoutQuestionBddComponent,
     DragabbleTextInputComponent,
     PageCreationQuestionComponent,
+    PageReponseLibreComponent,
+    PageReponseQcmComponent,
+    BoutonReponseQcmComponent,
+    EnonceComponent,
+    PageDebutQuizzComponent,
+    CheckBoxComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                                           // Page d'accueil
-      { path: 'assign-quizz', component: AssignationQuizzComponent },      // Page pour assigner un quizz une fois crée
-      { path: 'chronometre', component: ChronometreComponent },           //
-      { path: 'gen-quizz', component: GenQuizzComponent },                     // Page pour créer un quizz
-      { path: 'gen-niveau', component: GenerateNiveauComponent },         // Page pour creer un nouveau niveau
-      { path: 'gest-quizz', component: GestionQuizzComponent },              // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },     // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },                 //
-      { path: 'resultats', component: ResultatsComponent },                       // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },                 // Page de permission admin pour Joris
+      { path: '', component: HomeComponent },                                                     // Page d'accueil
+      { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
+      { path: 'chronometre', component: ChronometreComponent },             
+      { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
+      { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
+      { path: 'gestion-quizz', component: GestionQuizzComponent },                   // Page pour modifier un quizz
+      { path: 'quizz-question', component: QuizzQuestionComponent },              // Page pour repondre aux questons
+      { path: 'permission', component: PermissionComponent },                  
+      { path: 'resultats', component: ResultatsComponent },                                 // Page de fin de quizz
+      { path: 'permission', component: PermissionComponent },                           // Page de permission admin pour Joris
       { path: 'comptes', component: ComptesComponent },
-      { path: 'crea-quest', component: PageCreationQuestionComponent },  // Page de creation des questions
-      { path: '**', component: PageNotFoundComponent }                         // Wildcard route for a 404 page
+      { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
+      { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
+      { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
+      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
+      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
     ]),
 
 

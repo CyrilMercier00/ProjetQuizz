@@ -1,0 +1,12 @@
+h2 {
+    margin-top: 1em;
+}
+
+p {
+    font-size: large;
+    margin   : 1em;
+}
+
+::ng-deep button {
+    margin: 3em;
+}
