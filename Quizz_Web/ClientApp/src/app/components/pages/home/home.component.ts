@@ -30,7 +30,10 @@ export class HomeComponent {
   }
   
   connexion(connexionDTO: ConnexionDTO){
-    console.log(connexionDTO);
-    this.authService.connect(connexionDTO).subscribe();
+    this.authService.connect(connexionDTO).subscribe(
+      jwt => {
+        console.log(jwt);
+      }
+    );
   }
 }

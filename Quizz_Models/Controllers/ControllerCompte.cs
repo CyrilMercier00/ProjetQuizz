@@ -34,7 +34,7 @@ namespace Quizz_Web.Controllers
         }
         
 
-
+        [Authorize]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
         {

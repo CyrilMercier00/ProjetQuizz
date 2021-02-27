@@ -2,7 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using Quizz_Models.bdd_quizz;
-using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 using System.Security.Claims;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -29,7 +29,7 @@ namespace Quizz_Web.Controllers
             if (verifyPassword(loginDTO, compte))
             {
                 // [FRONT -> JWT Decode]
-                return GenererJWTToken(compte);
+                return JsonSerializer.Serialize(GenererJWTToken(compte));
             }
             else
             {
@@ -47,8 +47,8 @@ namespace Quizz_Web.Controllers
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {
-                        new Claim(ClaimTypes.NameIdentifier, compte.PkCompte.ToString()),
-                        new Claim(ClaimTypes.Email, compte.Mail)
+                        new Claim("id", compte.PkCompte.ToString()),
+                        new Claim("mail", compte.Mail)
                     }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)

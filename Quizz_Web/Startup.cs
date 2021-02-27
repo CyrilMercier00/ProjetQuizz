@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Quizz_Models.bdd_quizz;
 using Quizz_Models.Services;
 using Quizz_Models.Repositories;
+using Quizz_Models.Middleware;
 
 namespace Quizz_Web
 {
@@ -96,6 +97,8 @@ namespace Quizz_Web
                                 .AllowAnyHeader();
                 }
             );
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
