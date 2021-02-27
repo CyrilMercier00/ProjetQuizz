@@ -70,7 +70,7 @@ namespace Quizz_Models.Repositories
             bdd_entities.Quizz.Find(prmIDQuizz).CompteQuizz.Add(prmCompteQuizz);
         }
 
-
+        
 
         /// <summary>
         /// Supprimer l'objet quizz passé

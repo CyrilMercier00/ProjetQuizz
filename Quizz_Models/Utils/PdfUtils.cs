@@ -41,7 +41,7 @@ namespace Quizz_Models.Utils
                 //trouver solution envoi mail sans enregistrer
 
                 document.Close();
-                GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath);
+               // GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath);
 
                 Console.WriteLine("pdf + mail 2 ok");
             }
