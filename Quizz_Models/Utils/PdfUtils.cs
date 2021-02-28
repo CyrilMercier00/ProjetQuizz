@@ -1,22 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Runtime.InteropServices;
 using iText.IO.Image;
 using iText.Kernel.Colors;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Draw;
-using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
-using System.Web;
-using Ubiety.Dns.Core;
-using Microsoft.AspNetCore.Http;
-using Grpc.Core;
-using Org.BouncyCastle.Utilities;
-using iTextSharp.tool.xml.pipeline.html;
-using iTextSharp.tool.xml.pipeline.css;
-using iTextSharp.tool.xml;
-using iTextSharp.tool.xml.parser;
 using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Models.Utils
@@ -30,12 +18,15 @@ namespace Quizz_Models.Utils
         //********************************************************************************
         private static Compte candidat { get; set; }
         private static Compte recruteur{ get; set; }
-        private static Compte question { get; set; } //Question
-        private static Compte reponsesQuestion { get; set; } //Reponse
-        private static Compte reponsesCandidat { get; set; } //Reponse
-        private static Compte commentaireCandidat { get; set; }//Technologie
-        private static Compte technologie { get; set; }//Technologie
-        private static string nomCandidat { get; set; }//Technologie
+        private static string question { get; set; } //Question
+        private static string reponsesQuestion { get; set; } //Reponse
+        private static string reponsesCandidat { get; set; } //Reponse
+        private static string commentaireCandidat { get; set; }//Technologie
+        private static string technologie { get; set; }//Technologie
+        private static string nomCandidat { get; set; }//nom
+        private static string prenomCandidat { get; set; }//nom
+        private static string nomRecruteur { get; set; }//nom
+        private static string prenomRecruteur { get; set; }//nom
         //modifier les attributs et methode pour faire le lien avec la bdd
 
 
@@ -45,13 +36,17 @@ namespace Quizz_Models.Utils
 
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
-        public static void ContentPdf(Quizz quizz,Compte candidatQuizz)
+        public static void ContentPdf(Quizz quizz,Compte candidatQuizz, Compte recruteurQuizz)
         {
             try
             {
                 candidat = candidatQuizz;
-                nomCandidat=candidat.Nom;
-                
+                recruteur = recruteurQuizz;
+                nomCandidat =candidat.Nom;
+                prenomCandidat = candidat.Prenom;
+                nomRecruteur = recruteur.Nom;
+                prenomRecruteur = recruteur.Prenom;
+
                 //ajout attribut et modif methode
 
                 PdfHeader();
@@ -63,7 +58,7 @@ namespace Quizz_Models.Utils
                 //trouver solution envoi mail sans enregistrer
 
                 document.Close();
-                GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath,quizz);
+                GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
 
                 Console.WriteLine("pdf + mail 2 ok");
             }
@@ -74,27 +69,7 @@ namespace Quizz_Models.Utils
 
         }
 
-        public static void pdfmemory() {
-           
 
-            PdfWriter writer = PdfWriter.GetHighPrecision(document, new FileStream(Server.MapPath(~/ Times /) + pdf.GetPdfObject, FileMode.CreateNew));
-
-
-            ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
-
-            IPipeline pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(pdfDocument, writer)));
-
-            XMLWorker worker = new XMLWorker(pipeline, true);
-            XMLParser xmlParse = new XMLParser(true, worker);
-
-            this.Page.RenderControl(htw);
-            StringReader sr = new StringReader(sw.ToString());
-            xmlParse.Parse(sr);
-            xmlParse.Flush();
-            pdfDocument.Close();
-            //Response.Write(pdfDocument);
-            Response.End();
-        }
         public static void PdfLogo()
         {
             // Add image
@@ -107,11 +82,11 @@ namespace Quizz_Models.Utils
         }
         public static void PdfHeader()
         {
-            Paragraph recruter = new Paragraph(" Recruteur : ")
+            Paragraph recruter = new Paragraph(" Recruteur : "+ nomRecruteur + " " + prenomRecruteur)
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(15);
 
-            Paragraph candidat = new Paragraph(" Candidat : ")
+            Paragraph candidat = new Paragraph(" Candidat : "+ nomCandidat+ " " +prenomCandidat)
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(15);
 
@@ -127,6 +102,7 @@ namespace Quizz_Models.Utils
         }
         public static void PdfBody() 
         {
+
             Paragraph question = new Paragraph(" Question ")
                .SetTextAlignment(TextAlignment.LEFT)
                .SetFontSize(15);
@@ -154,7 +130,7 @@ namespace Quizz_Models.Utils
         public static void PdfSubHeader()
         {
 
-            Paragraph subheader = new Paragraph(" Technologie : ")
+            Paragraph subheader = new Paragraph(" Technologie : " + technologie )
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetUnderline()
                 .SetFontSize(15);
@@ -184,11 +160,11 @@ namespace Quizz_Models.Utils
             Cell cell11 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph(" Nombre de question"));
+               .Add(new Paragraph(" Nombre de question "));
             Cell cell12 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph("Nombre de bonne réponse"));
+               .Add(new Paragraph("Nombre de bonne réponse "));
 
             Cell cell21 = new Cell(1, 1)
                .SetTextAlignment(TextAlignment.CENTER)

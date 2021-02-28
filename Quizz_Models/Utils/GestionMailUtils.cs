@@ -46,7 +46,7 @@ namespace Quizz_Models.Utils
         }
 
         //methode gerent l'envoi du mail recruteur (utilise SendMail)
-        public static void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach,Quizz quizz)
+        public static void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach, string prenomRecruteur, string pdfPath, Quizz quizz)
         {
             string mailAutomatique = "comptequizztechnique@gmail.com";
             NomRecruteur = "Recruteur";
