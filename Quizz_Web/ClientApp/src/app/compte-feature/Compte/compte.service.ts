@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VariableGlobales } from 'src/app/url_api';
 import { Compte } from './compte.model';
 import { PermissionNameDTO } from '../../DTO/permissionNameDTO';
+import { Globals } from 'src/app/globals';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,16 @@ export class CompteService {
   constructor(private httpClient : HttpClient) { }
 
   getAll(): Observable<Compte[]>{
-    return this.httpClient.get<Compte[]>(VariableGlobales.apiURLCompte);
+
+    const headerDictionnary = {
+      'Authorization' : Globals.clientJwt
+    }
+
+    const requestOptions = {
+      headers: new HttpHeaders(headerDictionnary)
+    }
+
+    return this.httpClient.get<Compte[]>(VariableGlobales.apiURLCompte, requestOptions);
   }
 
   create(compte : Compte) : Observable<Compte>{

@@ -33,7 +33,7 @@ namespace Quizz_Models.Middleware
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes("Y2VjaWVzdG1vbnNlY3JldA==");
+                var key = Convert.FromBase64String("Y2VjaWVzdG1vbnNlY3JldA==");
                 tokenHandler.ValidateToken(token, new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -50,7 +50,7 @@ namespace Quizz_Models.Middleware
                 // attach account to context on successful jwt validation
                 context.Items["Compte"] = await dataContext.Compte.FindAsync(accountId);
             }
-            catch
+            catch (Exception e)
             {
                 // do nothing if jwt validation fails
                 // account is not attached to context so request won't have access to secure routes

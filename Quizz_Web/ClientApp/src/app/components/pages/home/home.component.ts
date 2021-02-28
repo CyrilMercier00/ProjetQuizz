@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
+import { Globals } from 'src/app/globals';
 import { AuthService } from 'src/app/Service/AuthService';
 import { Compte } from '../../../compte-feature/Compte/compte.model';
 import { CompteService } from '../../../compte-feature/Compte/compte.service';
@@ -33,6 +34,7 @@ export class HomeComponent {
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
         console.log(jwt);
+        Globals.clientJwt = jwt;
       }
     );
   }

@@ -11,7 +11,7 @@ export class AuthService {
 
   constructor(private httpClient : HttpClient) { }
 
-  connect(connexionDTO : ConnexionDTO): Observable<ConnexionDTO> {
-    return this.httpClient.post<ConnexionDTO>(VariableGlobales.apiURLLogin, connexionDTO);
+  connect(connexionDTO : ConnexionDTO): Observable<string> {
+    return this.httpClient.post<string>(VariableGlobales.apiURLLogin, connexionDTO);
   }
 }
