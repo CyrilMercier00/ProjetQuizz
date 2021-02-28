@@ -11,7 +11,8 @@ namespace Quizz_Models.Utils
 {
     class PdfUtils
     {
-        private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
+        public static string pdfPath = @"..\TestCompetence.pdf";
+        //private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
         private static PdfWriter writer = new PdfWriter(pdfPath);
         private static PdfDocument pdf = new PdfDocument(writer);
         private static iText.Layout.Document document = new iText.Layout.Document(pdf);
@@ -55,16 +56,23 @@ namespace Quizz_Models.Utils
                 PdfPageNumber();
                 PdfBody();
                 
-                //trouver solution envoi mail sans enregistrer
+                document.Close();
+                writer.Dispose();
 
                 document.Close();
                 GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
-
+                System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
             }
             catch (Exception e)
             {
-                Console.WriteLine("pb mail + pdf" + e);
+                Console.WriteLine("prob mail + pdf" + e);
+            }
+            finally
+            {
+                document.Close();
+                writer.Dispose();
+
             }
 
         }
