@@ -53,44 +53,12 @@ namespace Quizz_Web.Controllers
 
 
 
-
-
-        /// <summary>
-        /// Get des questions associées à ce quizz 
-        /// </summary>
-        /// <param name="idQuizz"></param>
-        /// <returns></returns>
-        [HttpGet("{idQuizz}")]
-        public List<QuestionReponseDTO> Get(int idQuizz)
-        {
-            List<Question> listQuestion;
-            List<QuestionReponseDTO> listQuestionReponseDTO;
-
-            listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);
-            listQuestionReponseDTO = this.questionService.AddReponseToQuestion(listQuestion);
-
-            if (listQuestion == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            }
-            else
-            {
-                return listQuestionReponseDTO;
-            }
-
-        }
-
-
-
-
-
         /// <summary>
         /// Get des questions et des réponses associé au quizz avec l'id passé
         /// </summary>
         /// <param name="idQuizz"></param>
         /// <returns></returns>
-        [HttpGet("{vide}/{idQuizz}")]
+        [HttpGet("{idQuizz}")]
         public List<QuestionReponseDTO> GetQuestionReponses(int idQuizz)
         {
             List<Question> listQuestion;                        // Contiens la liste des questions
