@@ -14,7 +14,6 @@ namespace Quizz_Models.Utils
 {
     class PdfUtils
     {
-<<<<<<< Updated upstream
         // public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
         //public static PdfWriter writer = new PdfWriter(@"C:\\Users\\Public\\Downloads\\Test.pdf");
         public static string pdfPath = @"C:\\Users\\Public\\Downloads\\Test.pdf";
@@ -22,32 +21,6 @@ namespace Quizz_Models.Utils
         public static PdfDocument pdf = new PdfDocument(writer);
         public static iText.Layout.Document document = new iText.Layout.Document(pdf);
    
-=======
-        public static string pdfPath = @"..\TestCompetence.pdf";
-        //private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
-        private static PdfWriter writer = new PdfWriter(pdfPath);
-        private static PdfDocument pdf = new PdfDocument(writer);
-        private static iText.Layout.Document document = new iText.Layout.Document(pdf);
-        //********************************************************************************
-        private static Compte candidat { get; set; }
-        private static Compte recruteur{ get; set; }
-        private static string question { get; set; } //Question
-        private static string reponsesQuestion { get; set; } //Reponse
-        private static string reponsesCandidat { get; set; } //Reponse
-        private static string commentaireCandidat { get; set; }//Technologie
-        private static string technologie { get; set; }//Technologie
-        private static string nomCandidat { get; set; }//nom
-        private static string prenomCandidat { get; set; }//nom
-        private static string nomRecruteur { get; set; }//nom
-        private static string prenomRecruteur { get; set; }//nom
-        //modifier les attributs et methode pour faire le lien avec la bdd
-
-
-        public PdfUtils()
-        {
-        }
-
->>>>>>> Stashed changes
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
         public static void ContentPdf()
@@ -61,28 +34,16 @@ namespace Quizz_Models.Utils
                 PdfPageNumber();
                 PdfBody();
                 
-                document.Close();
-                writer.Dispose();
+                //trouver solution envoi mail sans enregistrer
 
                 document.Close();
-<<<<<<< Updated upstream
                 GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath);
 
-=======
-                GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
-                System.IO.File.Delete(pdfPath);
->>>>>>> Stashed changes
                 Console.WriteLine("pdf + mail 2 ok");
             }
             catch (Exception e)
             {
-                Console.WriteLine("prob mail + pdf" + e);
-            }
-            finally
-            {
-                document.Close();
-                writer.Dispose();
-
+                Console.WriteLine("pb mail + pdf" + e);
             }
 
         }

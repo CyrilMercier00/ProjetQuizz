@@ -41,11 +41,6 @@ namespace Quizz_Models.Utils
                 Console.WriteLine("Mail non envoyé" + message.Message + "");
 
             }
-            finally
-            {
-                msg.Dispose();
-
-            }
         }
 
         //methode gerent l'envoi du mail recruteur (utilise SendMail)

@@ -6,21 +6,14 @@ namespace Quizz_Models.DTO
 {
     class AffichageQuizzDto
     {
-        public AffichageQuizzDto()
-        {
-        }
 
-       
 
-        Compte candidat { get; set; }
-        Compte recruteur { get; set; }
-        Quizz quizz { get; set; }
-        int nbRepOK{ get; set; }
-        int nbQuest { get; set; }
-        List<ReponseCandidatDTO> listeQuestions { get; set; }
-        List<ReponseCandidatDTO> listeRepQuestion { get; set; }
-        List<ReponseCandidatDTO> listeRepCandidat { get; set; }
-        List<ReponseCandidatDTO> listeCommentaireCandidat { get; set; }
+        CompteDTO Candidat { get; set; }
+        CompteDTO recruteur { get; set; }
+        QuizzDTO QuestionCandidat { get; set; }
+        List<ReponseCandidatDTO> repCandidat { get; set; }
+        List<ReponseCandidatDTO> repQuestion { get; set; }
+        List<ReponseCandidatDTO> CommentaireCandidat{ get; set; }
         
 
 
