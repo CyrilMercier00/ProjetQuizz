@@ -58,20 +58,8 @@ namespace Quizz_Models.Utils
             SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, quizz));
 
         }
-        ////methode sui gerent l'envoi du mail candidat (utilise SendMail)
-        //public static void SendMailcandidat(string NomRecruteur, string NomCandidat,Quizz quizz)
-        //{
-        //    string mailFromRecruteur = "comptequizztechnique@gmail.com";
-        //    NomCandidat = "Candidat";
-        //    NomRecruteur = "recruteur";
-        //    string mailToCandidat = "comptequizztechnique@gmail.com";
-
-        //    msg.Subject = " Test de Compétense ";
-        //    SendMail(mailFromRecruteur, NomRecruteur, mailToCandidat, contentMailCandidat(NomRecruteur, NomCandidat, quizz));
-
-        //}
-
-        //************************relation bdd 
+          //methode sui gerent l'envoi du mail candidat (utilise SendMail)
+         //************************relation bdd 
         //methode sui gerent l'envoi du mail candidat (utilise SendMail)
         public static void SendMailCandidat(Compte CompteRecruteur, Compte CompteCandidat,Quizz quizz)
         {
@@ -126,12 +114,10 @@ namespace Quizz_Models.Utils
         //methode sui gerent le contenu du mail recruteur
         public static string contentMailRecruteur(string NomRecruteur, string NomCandidat, Quizz quizz)
         {
-            
-           NomRecruteur = "nom recruteur";
-           NomCandidat = "nom Candidat";
+          
 
             string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur +
-                "ceci est un mail automatique <br> " +
+                "Ceci est un mail automatique <br> " +
                 "Vous trouverez ci-joint les resultas du test de compétence du candidat " + NomCandidat + "." +
                 "Cordialement,<br>" +
                 "</html></body> ";

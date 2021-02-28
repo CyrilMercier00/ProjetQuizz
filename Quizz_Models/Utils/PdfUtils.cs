@@ -9,28 +9,50 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using System.Web;
+using Ubiety.Dns.Core;
+using Microsoft.AspNetCore.Http;
+using Grpc.Core;
+using Org.BouncyCastle.Utilities;
+using iTextSharp.tool.xml.pipeline.html;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml;
+using iTextSharp.tool.xml.parser;
+using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Models.Utils
 {
     class PdfUtils
     {
-        // public static PdfWriter writer = new PdfWriter("C:\\Users\\IB\\Desktop\\Test\\Test.pdf");
-        //public static PdfWriter writer = new PdfWriter(@"C:\\Users\\Public\\Downloads\\Test.pdf");
-        public static string pdfPath = @"C:\\Users\\Public\\Downloads\\Test.pdf";
-        public static PdfWriter writer = new PdfWriter(pdfPath);
-        public static PdfDocument pdf = new PdfDocument(writer);
-        public static iText.Layout.Document document = new iText.Layout.Document(pdf);
-        String Recruteur ="";
-        // Candidat
-        //Question
-        //Reponse
-        //Technologie
+        private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
+        private static PdfWriter writer = new PdfWriter(pdfPath);
+        private static PdfDocument pdf = new PdfDocument(writer);
+        private static iText.Layout.Document document = new iText.Layout.Document(pdf);
+        //********************************************************************************
+        private static Compte candidat { get; set; }
+        private static Compte recruteur{ get; set; }
+        private static Compte question { get; set; } //Question
+        private static Compte reponsesQuestion { get; set; } //Reponse
+        private static Compte reponsesCandidat { get; set; } //Reponse
+        private static Compte commentaireCandidat { get; set; }//Technologie
+        private static Compte technologie { get; set; }//Technologie
+        private static string nomCandidat { get; set; }//Technologie
+        //modifier les attributs et methode pour faire le lien avec la bdd
+
+
+        public PdfUtils()
+        {
+        }
+
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
-        public static void ContentPdf()
+        public static void ContentPdf(Quizz quizz,Compte candidatQuizz)
         {
             try
             {
+                candidat = candidatQuizz;
+                nomCandidat=candidat.Nom;
+                
+                //ajout attribut et modif methode
 
                 PdfHeader();
                 PdfSubHeader();
@@ -41,7 +63,7 @@ namespace Quizz_Models.Utils
                 //trouver solution envoi mail sans enregistrer
 
                 document.Close();
-               // GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath);
+                GestionMailUtils.SendMailRecruteur("toto", "titi", pdfPath,quizz);
 
                 Console.WriteLine("pdf + mail 2 ok");
             }
@@ -50,6 +72,28 @@ namespace Quizz_Models.Utils
                 Console.WriteLine("pb mail + pdf" + e);
             }
 
+        }
+
+        public static void pdfmemory() {
+           
+
+            PdfWriter writer = PdfWriter.GetHighPrecision(document, new FileStream(Server.MapPath(~/ Times /) + pdf.GetPdfObject, FileMode.CreateNew));
+
+
+            ICSSResolver cssResolver = XMLWorkerHelper.GetInstance().GetDefaultCssResolver(false);
+
+            IPipeline pipeline = new CssResolverPipeline(cssResolver, new HtmlPipeline(htmlContext, new PdfWriterPipeline(pdfDocument, writer)));
+
+            XMLWorker worker = new XMLWorker(pipeline, true);
+            XMLParser xmlParse = new XMLParser(true, worker);
+
+            this.Page.RenderControl(htw);
+            StringReader sr = new StringReader(sw.ToString());
+            xmlParse.Parse(sr);
+            xmlParse.Flush();
+            pdfDocument.Close();
+            //Response.Write(pdfDocument);
+            Response.End();
         }
         public static void PdfLogo()
         {
