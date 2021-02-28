@@ -33,9 +33,12 @@ export class HomeComponent {
   connexion(connexionDTO: ConnexionDTO){
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
-        console.log(jwt);
         Globals.clientJwt = jwt;
       }
     );
+  }
+  
+  logout(){
+    Globals.logout();
   }
 }

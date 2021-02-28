@@ -26,7 +26,7 @@ namespace Quizz_Web.Controllers
         {
             Compte compte = this.compteService.FindCompteByMail(loginDTO.Mail);
 
-            if (verifyPassword(loginDTO, compte))
+            if (VerifyPassword(loginDTO, compte))
             {
                 // [FRONT -> JWT Decode]
                 return JsonSerializer.Serialize(GenererJWTToken(compte));
@@ -46,7 +46,7 @@ namespace Quizz_Web.Controllers
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new System.Security.Claims.ClaimsIdentity(new Claim[] {
+                Subject = new ClaimsIdentity(new Claim[] {
                         new Claim("id", compte.PkCompte.ToString()),
                         new Claim("mail", compte.Mail)
                     }),
@@ -58,7 +58,7 @@ namespace Quizz_Web.Controllers
             return wtoken;
         }
 
-        private bool verifyPassword(LoginDTO loginDTO, Compte compte)
+        private bool VerifyPassword(LoginDTO loginDTO, Compte compte)
         {
             if(compte != null && compte.MotDePasse == loginDTO.MotDePasse)
             {

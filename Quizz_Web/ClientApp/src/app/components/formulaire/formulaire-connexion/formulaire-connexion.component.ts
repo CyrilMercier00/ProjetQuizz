@@ -11,6 +11,7 @@ export class FormulaireConnexionComponent implements OnInit {
 
   @Output() clickToSend = new EventEmitter<boolean>();
   @Output() connexionEmitter = new EventEmitter<ConnexionDTO>();
+  @Output() deconnexionEvent = new EventEmitter();
   @Input() isCreationOpen: boolean = false;
 
   compteConnexion: FormGroup;
@@ -37,5 +38,9 @@ export class FormulaireConnexionComponent implements OnInit {
 
   onSubmit(): void{
     this.connexionEmitter.emit(this.compteConnexion.value);
+  }
+
+  logout(): void{
+    this.deconnexionEvent.emit();
   }
 }

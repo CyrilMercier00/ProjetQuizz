@@ -6,8 +6,13 @@
       <div class="home-input">
         <input type="password" id="home-passwordInput" placeholder="Mot de passe" formControlName="MotDePasse">
       </div>
-      <div>
-        <button class="connexion-button" [disabled]="compteConnexion.invalid" type="submit">Connexion</button>
+      <div class="div-connexion">
+        <div>
+          <button class="connexion-button" [disabled]="compteConnexion.invalid" type="submit">Connexion</button>
+        </div>
+        <div>
+          <button class="deconnexion-button" (click)="logout()">Déconnexion</button>
+        </div>
       </div>
       <div class="ligneDelimitation"></div>
       <button class="button-href" (click)="emitClick()">Créer un compte</button>
