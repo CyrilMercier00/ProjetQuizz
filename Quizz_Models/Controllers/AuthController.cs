@@ -48,7 +48,9 @@ namespace Quizz_Web.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[] {
                         new Claim("id", compte.PkCompte.ToString()),
-                        new Claim("mail", compte.Mail)
+                        new Claim("mail", compte.Mail),
+                        new Claim("nom", compte.Nom),
+                        new Claim("prenom", compte.Prenom)
                     }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
@@ -66,13 +68,6 @@ namespace Quizz_Web.Controllers
             }
 
             return false;
-        }
-
-        [HttpGet]
-        [Route("logout")]
-        public void Logout()
-        {
-
         }
     }
 }

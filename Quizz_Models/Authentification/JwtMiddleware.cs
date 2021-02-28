@@ -53,7 +53,7 @@ namespace Quizz_Models.Middleware
                 context.Items["Compte"] = compte;
                 context.Items["Permission"] = permission;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // do nothing if jwt validation fails
                 // account is not attached to context so request won't have access to secure routes
