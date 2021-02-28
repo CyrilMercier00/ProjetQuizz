@@ -2,7 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
-using Quizz_Models.bdd_quizz;
+using Quizz_Models.Authentification;
 
 namespace Quizz_Web.Controllers
 {
@@ -34,7 +34,7 @@ namespace Quizz_Web.Controllers
         }
         
 
-        [Authorize]
+        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte)]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
         {

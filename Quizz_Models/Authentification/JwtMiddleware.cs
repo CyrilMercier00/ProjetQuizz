@@ -48,7 +48,10 @@ namespace Quizz_Models.Middleware
                 var accountId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
                 // attach account to context on successful jwt validation
-                context.Items["Compte"] = await dataContext.Compte.FindAsync(accountId);
+                Compte compte = await dataContext.Compte.FindAsync(accountId);
+                Permission permission = await dataContext.Permission.FindAsync(compte.FkPermission);
+                context.Items["Compte"] = compte;
+                context.Items["Permission"] = permission;
             }
             catch (Exception e)
             {
