@@ -19,7 +19,7 @@ import { FormulaireConnexionComponent } from './components/formulaire/formulaire
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
-import { CompteComponent } from './compte-feature/compte/compte.component';
+import { CompteComponent } from './compte-feature/Compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
@@ -37,6 +37,7 @@ import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/page-debut-quizz.component';
 import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EnonceComponent,
     PageDebutQuizzComponent,
     CheckBoxComponent,
+    SelectPermissionComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
