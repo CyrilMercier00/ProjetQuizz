@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { utils } from 'protractor';
 
 @Component({
   selector: 'app-resultats',
@@ -10,6 +11,7 @@ export class ResultatsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+   
   }
 
 }

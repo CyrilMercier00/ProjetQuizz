@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { timeStamp } from 'console';
 import { Stopwatch } from "ts-stopwatch";
 
 
@@ -14,6 +15,16 @@ export class ChronoComponent implements OnInit {
   ngOnInit(): void {
     start();
   }
+
+ //Appel dans button submit
+  reset(){
+    clearInterval(t);
+     ms=0,s=0,mn=0,h=0;
+    // ***on accède aux différents span par leurs indice***
+     sp[0].innerHTML=h+" h";
+     sp[1].innerHTML=mn+" min";
+     sp[2].innerHTML=s+" s";
+       }
 
 }
 
@@ -52,14 +63,11 @@ function update_chrono(){
      sp[0].innerHTML=h+" h";
      sp[1].innerHTML=mn+" min";
      sp[2].innerHTML=s+" s";
-     sp[3].innerHTML=ms+" ms";
+    // sp[3].innerHTML=ms+" ms";
 
 }
 //***on arrête le "timer" par clearInterval ,on réactive le bouton start 
-function stop(){
-  clearInterval(t);
-  
-}
+
 /*pas besoin de reset
 
 
@@ -73,6 +81,14 @@ function reset(){
   sp[2].innerHTML=s+" s";
   sp[3].innerHTML=ms+" ms";
     }
+
+     stop(){
+     let date=new Date();
+     date.setHours(h);
+     date.setMinutes(mn);
+     date.setSeconds(s);
+     clearInterval(t);
+  }
 */
 
 
