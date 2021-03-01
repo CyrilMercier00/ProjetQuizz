@@ -1,37 +1,38 @@
 .wrapper-select-theme {
-    display       : flex;
-    flex-direction: column;
-    padding       : 1rem;
-    align-items   : center;
+  display       : flex;
+  flex-direction: column;
+  padding       : 1rem;
+  align-items   : center;
 }
 
 .title {
-    text-align   : center;
-    margin-bottom: 0.5rem;
+  text-align   : center;
+  margin-bottom: 0.5rem;
 }
 
 select {
-    min-width    : 16rem;
-    padding      : 12px;
-    appearance   : none;
-    border-radius: 4px;
-    border       : none;
-    text-align   : center;
-    font-size    : inherit;
+  min-width      : 16rem;
+  padding        : 12px;
+  appearance     : none;
+  border-radius  : 4px;
+  border         : none;
+  text-align     : center;
+  text-align-last: center;
+  font-size      : inherit;
 }
 
 .mybox {
-    position: relative;
-    display : inline-block;
+  position: relative;
+  display : inline-block;
 }
 
 .mybox .myarrow {
-    background    : url(../../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
-    pointer-events: none;
-    width         : 28px;
-    height        : 28px;
-    position      : absolute;
-    display       : inline-block;
-    top           : 10px;
-    right         : 7px;
+  background    : url(../../../../assets/Images/arrow-down.svg) center / 90% no-repeat;
+  pointer-events: none;
+  width         : 28px;
+  height        : 28px;
+  position      : absolute;
+  display       : inline-block;
+  top           : 10px;
+  right         : 7px;
 }

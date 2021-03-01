@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { VariableGlobales } from 'src/app/url_api';
-
-
 
 @Component({
   selector: 'app-select-compte-candidat',
@@ -32,7 +31,7 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* ------ Methodes ------ */
-  IDUpdate(prmEvent) 
+  IDUpdate(prmEvent)
   {
     this.ChoixEvent.emit(prmEvent.value);
   }
@@ -40,9 +39,9 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* --- Get des candidats assignés a ce recruteur --- */
-   getCandidatAsigne()
+  getCandidatAsigne()
   {
-     fetch(VariableGlobales.apiURLCompte  + "GetByRef" + "/1", { method: "GET" })
+    fetch(VariableGlobales.apiURLCompte + "GetByRef" + "/1", { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
