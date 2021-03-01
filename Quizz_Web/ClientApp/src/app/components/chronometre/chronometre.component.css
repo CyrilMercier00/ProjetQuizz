@@ -20,10 +20,10 @@
   }
   
   .digit .segment {
-    background:#acaaeb;
+    background:#e2aa11b6;
     border-radius:5px;
     position:absolute;
-    opacity:0.15;
+    opacity:0.1;
     transition:opacity 0.2s;
     -webkit-transition:opacity 0.2s;
     -ms-transition:opacity 0.2s;
