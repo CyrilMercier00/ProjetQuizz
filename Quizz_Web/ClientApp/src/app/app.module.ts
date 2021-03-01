@@ -23,6 +23,7 @@ import { CompteComponent } from './compte-feature/Compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
+import { ChronoComponent } from './chrono/chrono.component';
 import { GenerateNiveauComponent } from './components/pages/generate-niveau/generate-niveau.component';
 import { FormulaireCreationCompteComponent } from './components/formulaire/formulaire-creation-compte/formulaire-creation-compte.component';
 import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
@@ -61,6 +62,7 @@ import { SelectPermissionComponent } from './components/select/select-permission
     InputNumberComponent,
     ButtonValidComponent,
     SelectCompteCandidatComponent,
+    ChronoComponent,
     GenerateNiveauComponent,
     FormulaireCreationCompteComponent,
     ButtonAjouterNouveauCandidatComponent,
