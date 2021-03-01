@@ -41,7 +41,7 @@ namespace Quizz_Web
             services.AddScoped<ServiceTheme, ServiceTheme>();
             services.AddScoped<ServiceReponseCandidat, ServiceReponseCandidat>();
             services.AddScoped<QuestionService, QuestionService>();
-
+            
             /* --- Repo --- */
             services.AddScoped<ComplexiteRepository, ComplexiteRepository>();
             services.AddScoped<PermissionRepository, PermissionRepository>();
@@ -106,10 +106,10 @@ namespace Quizz_Web
 
             app.UseSpa(spa =>
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+                 spa.Options.SourcePath = "ClientApp";
 
                 if (env.IsDevelopment())
                 {

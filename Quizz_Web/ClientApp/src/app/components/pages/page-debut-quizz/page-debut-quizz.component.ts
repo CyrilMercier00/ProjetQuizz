@@ -1,7 +1,8 @@
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { VariableGlobales } from 'src/app/url_api';
+
+
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -16,14 +17,14 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Variables --- */
   prmCode: any;
   valRetourRequeteQuestions: any;
-  Quizz: any;
+  Quizz :any ;
 
 
 
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
   {
-    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];
+    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];  
   }
 
 
@@ -35,7 +36,7 @@ export class PageDebutQuizzComponent implements OnInit
   }
 
 
-
+  
   /*--- Methodes ---*/
   handleClick()
   {
@@ -45,16 +46,16 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-  questionToArray(prmData)
+  questionToArray(prmData ) 
   {
-    console.log(prmData);
+    
   }
 
 
 
-  GetQuizz(prmCode)
+   GetQuizz(prmCode)
   {
-    fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "GET" })
+     fetch(VariableGlobales.apiURLQuizz + "/" + prmCode , { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
@@ -64,9 +65,9 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-  GetQuestions()
+   GetQuestions()
   {
-    fetch(VariableGlobales.apiURLQuestion + this.Quizz.pkQuizz, { method: "GET" })
+     fetch(VariableGlobales.apiURLQuestion + "/" + this.Quizz.pkQuizz , { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-
 import { VariableGlobales } from 'src/app/url_api';
+
+
 
 @Component({
   selector: 'app-select-niveau',
@@ -40,9 +41,9 @@ export class SelectNiveauComponent implements OnInit
 
 
   /* --- Fetch de la complexité a la bdd --- */
-  getAllComplexite()
+ async  getAllComplexite()
   {
-    fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {
