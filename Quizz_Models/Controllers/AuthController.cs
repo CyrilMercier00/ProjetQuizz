@@ -15,21 +15,23 @@ namespace Quizz_Web.Controllers
     public class AuthController : Controller
     {
         readonly CompteService compteService;
+        readonly PermissionService permissionService;
 
-        public AuthController(CompteService compteService)
+        public AuthController(CompteService compteService, PermissionService permissionService)
         {
             this.compteService = compteService;
+            this.permissionService = permissionService;
         }
 
         [HttpPost]
         public string Login([FromBody] LoginDTO loginDTO)
         {
             Compte compte = this.compteService.FindCompteByMail(loginDTO.Mail);
+            PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
 
             if (VerifyPassword(loginDTO, compte))
             {
-                // [FRONT -> JWT Decode]
-                return JsonSerializer.Serialize(GenererJWTToken(compte));
+                return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
             }
             else
             {
@@ -39,7 +41,7 @@ namespace Quizz_Web.Controllers
             }
         }
 
-        private string GenererJWTToken(Compte compte)
+        private string GenererJWTToken(Compte compte, PermissionDTO permissionDTO)
         {
             var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";
             var securityKey = new SymmetricSecurityKey(Convert.FromBase64String(mySecret));
@@ -50,7 +52,13 @@ namespace Quizz_Web.Controllers
                         new Claim("id", compte.PkCompte.ToString()),
                         new Claim("mail", compte.Mail),
                         new Claim("nom", compte.Nom),
-                        new Claim("prenom", compte.Prenom)
+                        new Claim("prenom", compte.Prenom),
+                        new Claim("GenererQuizz", permissionDTO.GenererQuizz.ToString()),
+                        new Claim("AjouterQuest", permissionDTO.AjouterQuest.ToString()),
+                        new Claim("ModifierQuest", permissionDTO.ModifierQuest.ToString()),
+                        new Claim("SupprQuestion", permissionDTO.SupprQuestion.ToString()),
+                        new Claim("ModifierCompte", permissionDTO.ModifierCompte.ToString()),
+                        new Claim("SupprimerCompte", permissionDTO.SupprimerCompte.ToString())
                     }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature)
