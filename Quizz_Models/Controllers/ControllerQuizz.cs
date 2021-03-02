@@ -86,7 +86,27 @@ namespace Quizz_Web.Controllers
 
             return quizz;
         }
+        //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
+        [HttpGet]
+        [Route("FinQuizz")]
+        public ActionResult<QuizzDTO> FinQuizz(string codeQuizz)
+        {
+            QuizzDTO quizz = new QuizzDTO();
 
+            quizz = this.servQuizz.GetQuizz(codeQuizz);
+
+            valRetour = Ok();
+            try
+            {
+                this.servQuizz.SendMail(quizz);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                valRetour = NotFound();
+            }
+            return valRetour;
+        }
 
 
         [HttpDelete]

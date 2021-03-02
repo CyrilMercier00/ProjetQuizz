@@ -127,9 +127,17 @@ namespace Quizz_Models.Services
                 //********
             }
         }
+        
+        //Cree le pdf recrutrue et envoi  un mail au recruteur
 
-
-
+        internal void SendMail(int prmIDQuizz)
+        {
+            //Cree le pdf recrutrue et envoi  un mail au recruteur  
+            Quiz quizz, Compte candidatQuizz, Compte recruteurQuizz
+            repoQuizz.GetQuizzByID(prmIDQuizz);
+            Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
+        }
+        
         private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions)
         {
             // Gen questions junior

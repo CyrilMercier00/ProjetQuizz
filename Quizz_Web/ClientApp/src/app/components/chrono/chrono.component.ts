@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { timeStamp } from 'console';
-import { Stopwatch } from "ts-stopwatch";
+import { VariableGlobales } from 'src/app/url_api';
+import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 
 
 @Component({
@@ -27,6 +28,28 @@ export class ChronoComponent implements OnInit {
     //test affichege d
     //H[0].innerHTML="TQuest : " + d; 
     reset();
+ }
+
+ /* --- Envoi a l'api de la quizz ---*/
+ InsertQuestion(data)
+ {
+
+   let q = new DTOQuizz();
+   q.$Chrono = data.value;
+   
+
+   fetch(
+     VariableGlobales.apiURLQuizz+"OnsIwz28FkJiLVq9Ak5A",
+     {
+       method: "PUT",
+       headers:
+       {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       },
+       body: JSON.stringify(q)
+     }
+   )
  }
   
 

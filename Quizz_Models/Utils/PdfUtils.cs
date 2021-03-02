@@ -20,8 +20,8 @@ namespace Quizz_Models.Utils
         private static Compte candidat { get; set; }
         private static Compte recruteur{ get; set; }
         private static string question { get; set; } //Question
-        private static string reponsesQuestion { get; set; } //Reponse
-        private static string reponsesCandidat { get; set; } //Reponse
+        private static string reponsesQuestion { get; set; } //Reponse q
+        private static string reponsesCandidat { get; set; } //Reponse C
         private static string commentaireCandidat { get; set; }//Technologie
         private static string technologie { get; set; }//Technologie
         private static string nomCandidat { get; set; }//nom
