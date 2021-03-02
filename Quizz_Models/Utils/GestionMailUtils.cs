@@ -80,7 +80,7 @@ namespace Quizz_Models.Utils
             string PrenomCandidat = CompteCandidat.Prenom;
             string prenomRecruteur = CompteRecruteur.Prenom;
 
-            string mailCandidat = "\"CompteCandidat.Mail\"";
+            //string mailCandidat = "\"CompteCandidat.Mail\"";
             string mailToCandidat = "comptequizztechnique@gmail.com";
 
 
