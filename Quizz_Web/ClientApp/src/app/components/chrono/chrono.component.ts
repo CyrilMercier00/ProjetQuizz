@@ -34,7 +34,7 @@ export class ChronoComponent implements OnInit
  }
 
  /* --- Envoi a l'api de la quizz ---*/
- InsertQuestion(data)
+/* InsertQuestion(data)
  {
 
    let q = new DTOQuizz();
@@ -54,14 +54,14 @@ export class ChronoComponent implements OnInit
      }
    )
  }
-  
+  */
 
 }
 
 
 /*la fonction getElementByTagName renvoie une liste des éléments portant le nom de balise donné ici "span".*/
-var sp = document.getElementsByTagName("span");
-var H = document.getElementsByTagName("h5");
+var sp = document.getElementsByClassName("spanChrono");
+var H = document.getElementsByClassName("h5Chrono");
 var t;
 var ms = 0, s = 0, mn = 0, h = 0;
 
