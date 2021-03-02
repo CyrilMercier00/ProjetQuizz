@@ -43,6 +43,8 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
+import { ProfilComponent } from './components/pages/profil/profil.component';
+import { ConnexionGuard } from './Guards/ConnexionGuard';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,7 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
     FormulaireCreationNiveauComponent,
     CheckBoxComponent,
     LoginPageComponent,
+    ProfilComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -158,6 +161,11 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
       { // Page de demarrage du quizz
         path: 'page-demarrage/:urlQuizz',
         component: PageDebutQuizzComponent
+      },
+      { // Page de profil pour l'utilisateur
+        path: 'profil',
+        component: ProfilComponent,
+        canActivate: [ConnexionGuard]
       },
       { // Wildcard route for a 404 page
         path: '**',

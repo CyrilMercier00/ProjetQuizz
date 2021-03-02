@@ -8,6 +8,10 @@ export class Globals
         this.clientJwt = "";
     }
 
+    static isLoggedIn(): boolean{
+        return this.clientJwt != "";
+    }
+
     static isLoggedOut(): boolean{
         return this.clientJwt === "";
     }
