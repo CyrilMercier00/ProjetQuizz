@@ -14,6 +14,6 @@ export class Globals
 
     static decodeJwt(): string{
         let jwtdecode: string = jwt_decode(this.clientJwt);
-        return jwtdecode; 
+        return jwtdecode;
     }
 }
