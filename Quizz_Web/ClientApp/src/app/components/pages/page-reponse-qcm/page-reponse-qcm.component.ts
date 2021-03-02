@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Component, Input, OnInit, Output } from '@angular/core';
 
+import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { Router } from '@angular/router';
 import { VariableGlobales } from 'src/app/url_api';
 import { reponseDTO } from '../../../DTO/reponseDTO';
@@ -14,8 +14,8 @@ export class PageReponseQcmComponent implements OnInit
 {
 
   /* ------ Declaration des variables ------ */
-  @Input("dataQuestion") data: any;
-
+  @Input("dataQuestion") dataQ: DTOQuestion[];
+  @Input("dataReponses") dataR;
   rep1: string;
   rep2: string;
   rep3: string;
@@ -24,12 +24,14 @@ export class PageReponseQcmComponent implements OnInit
   nbQuestionTotal: number;
   nbQuestionActu: number;
   idQuestion: number;
-  valRetourRequeteGETQuestion: any;
+  enonce: string;
 
   /* ------ Constructeur ------ */
   constructor(private router: Router)
   {
-
+    this.dataQ.forEach((data) =>{
+    this.enonce = data.enonce;
+    })
   }
 
 
@@ -37,7 +39,7 @@ export class PageReponseQcmComponent implements OnInit
   /* ------ Methodes Angular --- */
   ngOnInit()
   {
-    this.getQuestions(this.idQuestion);
+
   }
 
 
@@ -49,31 +51,10 @@ export class PageReponseQcmComponent implements OnInit
 
     data._Commentaire = this.textCommentaire;
     data._Reponse = event.target.value;
-    data._FKCompte = this.getIDCommpte();
+    data._FKCompte = 0;
     data._FKQuestion = parseInt(this.router.getCurrentNavigation().extras.state["fkQuestion"]);
 
     this.envoiFormulaire(data);
-  }
-
-
-
-  /* --- GET des reponses possibles pour cette question --- */
-  async getQuestions(prmIDQuestion: number)
-  {
-    await fetch(VariableGlobales.apiURLQuestion + "/" + this.idQuestion, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.valRetourRequeteGETQuestion = json;
-      });
-  }
-
-
-
-  /* --- GET id de la session actuelle --- */
-  getIDCommpte(): number
-  {
-    return 1;
   }
 
 

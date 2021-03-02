@@ -42,7 +42,6 @@ export class PageDebutQuizzComponent implements OnInit
           .then(retour => { this.dataQuizz = retour })   // Sauvegarder les données
           .then(x =>
           {
-            console.log(this.dataQuizz.$UrlCode)
             ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
               .then(repFetch =>
               {
@@ -77,7 +76,7 @@ export class PageDebutQuizzComponent implements OnInit
 
   startQuizz()
   {
-
+console.log("cc")
     this.dataQuestions.forEach(question =>
     {
       console.log(question);
