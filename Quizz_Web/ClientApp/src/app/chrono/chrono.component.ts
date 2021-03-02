@@ -19,7 +19,7 @@ export class ChronoComponent implements OnInit {
 
 
 /*la fonction getElementByTagName renvoie une liste des éléments portant le nom de balise donné ici "span".*/
-var sp = document.getElementsByTagName("span");
+var sp = document.getElementsByClassName("spanchrono")
 
 var t;
 var ms=0,s=0,mn=0,h=0;
