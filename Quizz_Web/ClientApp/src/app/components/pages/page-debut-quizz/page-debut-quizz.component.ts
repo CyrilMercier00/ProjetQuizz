@@ -1,6 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import { DTOQuestion } from 'src/app/DTO/questionDTO';
+import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { ServiceQuestions } from 'src/app/Services/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Services/serviceQuizz'
 
@@ -16,8 +18,8 @@ export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
   code: string;
-  quizz: any;
-
+  dataQuizz: DTOQuizz;
+  dataQuestions: DTOQuestion[];
 
 
   /* --- Constructeur ---*/
@@ -37,16 +39,18 @@ export class PageDebutQuizzComponent implements OnInit
       .then(repFetch =>
       {
         repFetch.json()                                  // Extraire les données json de la promise
-          .then(retour => { this.quizz = retour })       // Sauvegarder les données
+          .then(retour => { this.dataQuizz = retour })   // Sauvegarder les données
           .then(x =>
           {
-            ServiceQuestions.GetQuestionsByCodeQuizz(this.quizz.urlcode)    // Chercher les questions associées a ce quizz
+            console.log(this.dataQuizz)
+            ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
               .then(repFetch =>
               {
                 repFetch.json()                          // Extraire les données json de la promise
                   .then(retour =>                        // Sauvegarder les données en array
                   {
-                    this.questionToArray(retour);
+                    this.dataQuestions = retour;
+                    this.startQuizz();
                   }
                   )
               })
@@ -59,7 +63,7 @@ export class PageDebutQuizzComponent implements OnInit
   /*--- Methodes ---*/
   handleClick()
   {
-    console.log(this.quizz);
+    console.log(this.dataQuizz);
   }
 
 
@@ -69,6 +73,17 @@ export class PageDebutQuizzComponent implements OnInit
     console.log(prmData);
   }
 
+
+
+  startQuizz()
+  {
+
+    this.dataQuestions.forEach(question =>
+    {
+      console.log(question);
+    })
+
+  }
 
 
 
