@@ -47,7 +47,7 @@ namespace Quizz_Models.Repositories
         /// </summary>
         /// <param name="iDPerm"></param>
         /// <returns></returns>
-        internal List<Compte> GetCompteByCompteRef(int prmID)
+        internal List<Compte> GetCompteByCompteRef(int prmID=1)
         {
             return bdd_entities.Compte
                 .Where(x => x.FkCompteReferent == prmID)

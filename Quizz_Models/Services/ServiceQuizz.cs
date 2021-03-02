@@ -12,13 +12,14 @@ namespace Quizz_Models.Services
         readonly QuestionRepository repoQuest;
         readonly QuizzRepository repoQuizz;
         readonly ThemeRepository repoTheme;
-
-        public ServiceQuizz(ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository)
+        readonly CompteRepository repoCompte;
+        public ServiceQuizz(ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
         {
             repoComplex = complexiteRepository;
             repoQuest = questionRepository;
             repoQuizz = quizzRepository;
             repoTheme = themeRepository;
+            repoCompte = compteRepository;
         }
 
 
@@ -47,8 +48,11 @@ namespace Quizz_Models.Services
                 FkCompte = prmIDCandidat,
                 FkQuizz = prmIDQuizz
             });
+          
             return repoQuizz.Sauvegarde();
         }
+
+     
 
 
 
@@ -108,7 +112,20 @@ namespace Quizz_Models.Services
 
             // Sauvegarde & throw si aucunes ligne insert
             repoQuizz.InsertQuizz(quizzCreation);
-            if (repoQuizz.Sauvegarde() <= 1) throw new Exception("Probleme lors de la sauvegarde du quizz");
+            if (repoQuizz.Sauvegarde() <= 1)
+            { 
+                throw new Exception("Probleme lors de la sauvegarde du quizz"); 
+            }
+            else {
+                //****envoi automatique mail candidat à l'assignation
+                // Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
+                
+                 Compte compteCandidat = repoCompte.GetCompteByID(prmDTO.FKCompteRecruteur);
+                Compte compteRecruteur = repoCompte.GetCompteByID(prmDTO.FKCompteRecruteur);
+
+                Utils.GestionMailUtils.SendMailCandidat(compteRecruteur, compteCandidat, quizzCreation);
+                //********
+            }
         }
 
 

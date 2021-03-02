@@ -17,6 +17,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ceTe.DynamicPDF.CoreSuite.NET" Version="11.6.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.35.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.36.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
       <PrivateAssets>all</PrivateAssets>

@@ -12,7 +12,6 @@ import { AssignationQuizzComponent } from './components/pages/assignation-quizz/
 import { GestionQuizzComponent } from './components/pages/gestion-quizz/gestion-quizz.component';
 import { ResultatsComponent } from './components/pages/resultats/resultats.component';
 import { PermissionComponent } from './components/pages/permission/permission.component';
-import { ChronometreComponent } from './components/chronometre/chronometre.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 import { FormulaireConnexionComponent } from './components/formulaire/formulaire-connexion/formulaire-connexion.component';
@@ -23,6 +22,7 @@ import { CompteComponent } from './compte-feature/Compte/compte.component';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ButtonValidComponent } from './components/buttons/button-valid/button-valid.component';
 import { SelectCompteCandidatComponent } from './components/select/select-compte-candidat/select-compte-candidat.component';
+import { ChronoComponent } from './components/chrono/chrono.component';
 import { GenerateNiveauComponent } from './components/pages/generate-niveau/generate-niveau.component';
 import { FormulaireCreationCompteComponent } from './components/formulaire/formulaire-creation-compte/formulaire-creation-compte.component';
 import { ButtonAjouterNouveauCandidatComponent } from './components/buttons/button-ajouter-nouveau-candidat/button-ajouter-nouveau-candidat.component';
@@ -50,7 +50,6 @@ import { FormulaireCreationNiveauComponent } from './components/formulaire/formu
     GestionQuizzComponent,
     ResultatsComponent,
     PermissionComponent,
-    ChronometreComponent,
     FooterComponent,
     PageNotFoundComponent,
     HomeComponent,
@@ -62,6 +61,7 @@ import { FormulaireCreationNiveauComponent } from './components/formulaire/formu
     InputNumberComponent,
     ButtonValidComponent,
     SelectCompteCandidatComponent,
+    ChronoComponent,
     GenerateNiveauComponent,
     FormulaireCreationCompteComponent,
     ButtonAjouterNouveauCandidatComponent,
@@ -87,7 +87,7 @@ import { FormulaireCreationNiveauComponent } from './components/formulaire/formu
     RouterModule.forRoot([
       { path: '', component: HomeComponent },                                                     // Page d'accueil
       { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
-      { path: 'chronometre', component: ChronometreComponent },             
+                  
       { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
       { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
       { path: 'gestion-quizz', component: GestionQuizzComponent },                   // Page pour modifier un quizz
