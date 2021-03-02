@@ -112,27 +112,36 @@ namespace Quizz_Models.Repositories
                 prmListQuestion.Add(q);
             }
         }
-
+        /// <summary>
+        /// Retourne la liste des questions pour le quizz avec le code passé. Retourne null si le code est invalide
+        /// </summary>
+        /// <param name="prmCodeQuizz"></param>
+        /// <returns></returns>
         internal List<Question> GetQuestionByCodeQuizz(string prmCodeQuizz)
         {
             List<Question> listeRetour = new List<Question>();                      // Liste des questions recupérées 
-            int idQuizz = repoQuizz.GetQuizzByCode(prmCodeQuizz).PkQuizz;           // PK du quizz correspondant au code passé
+            Quizz quizzRecup = repoQuizz.GetQuizzByCode(prmCodeQuizz);              // PK du quizz correspondant au code passé 
 
-            // Recup de la table de liaison pour ce quizz questions
-            List<QuizzQuestion> listQuizzQuestion = bdd_entities.QuizzQuestion
-                .Where(x => x.FkQuizz == idQuizz)
-                .ToList();
-
-            // Recup des questions
-            foreach (QuizzQuestion qq in listQuizzQuestion)
+            if (quizzRecup != null)
             {
-                listeRetour.Add(
-                    bdd_entities.Question
-                    .Where(x => x.PkQuestion == qq.FkQuestion)
-                    .SingleOrDefault()
-                    );
-            }
+                // Recup de la table de liaison pour ce quizz questions
+                List<QuizzQuestion> listQuizzQuestion = bdd_entities.QuizzQuestion
+                    .Where(x => x.FkQuizz == quizzRecup.PkQuizz)
+                    .ToList();
 
+                // Recup des questions
+                foreach (QuizzQuestion qq in listQuizzQuestion)
+                {
+                    listeRetour.Add(
+                        bdd_entities.Question
+                        .Where(x => x.PkQuestion == qq.FkQuestion)
+                        .SingleOrDefault()
+                        );
+                }
+            } else
+            {
+                listeRetour = null;
+            }
             return listeRetour;
         }
     }

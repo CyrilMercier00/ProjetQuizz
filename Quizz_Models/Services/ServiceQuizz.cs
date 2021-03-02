@@ -184,13 +184,22 @@ namespace Quizz_Models.Services
 
 
         /// <summary>
-        /// Retourne toutes les permissions de la bdd.
+        /// Retourne le quizz avec le code passé en parametre. Retourne null si le code n'est pas valide
         /// </summary>
         /// <returns>Liste de toute les permissions sous format PermissionDTO.</returns>
         public QuizzDTO GetQuizz(string prmCodeQuizz)
         {
-            Quizz quizz = this.repoQuizz.prmCodeQuizz(prmCodeQuizz);
-            return TransformQuizzToQuizzDTO(quizz);
+            Quizz quizz = this.repoQuizz.GetQuizzByCode(prmCodeQuizz);
+            QuizzDTO retour;
+
+            if (quizz != null)
+            {
+                retour = TransformQuizzToQuizzDTO(quizz);
+            } else
+            {
+                retour = null;
+            }
+            return retour;
         }
 
 

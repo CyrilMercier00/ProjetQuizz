@@ -93,20 +93,17 @@ namespace Quizz_Web.Controllers
         [HttpGet("{vide}/{codeQuizz}")]
         public List<QuestionReponseDTO> GetQuestionReponses(string codeQuizz)
         {
-            List<Question> listQuestion;                        // Contiens la liste des questions
-            List<QuestionReponseDTO> listQuestionReponseDTO;    // Contiens la liste des questions avec les réponses associées
+            List<Question> listQuestion;    // Contiens la liste des questions
 
-            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get des questions 
-            listQuestionReponseDTO = this.questionService.AddReponseToQuestion(listQuestion);   // Get des reponses
-
-            if (listQuestion == null)
+            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
+            if (listQuestion != null)
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
+                return this.questionService.AddReponseToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous DTO
             }
             else
             {
-                return listQuestionReponseDTO;
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
             }
 
         }

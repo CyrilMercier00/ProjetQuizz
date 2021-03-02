@@ -112,7 +112,7 @@ namespace Quizz_Models.Services
 
         internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
-            return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
+           return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);            
         }
     }
 }

@@ -101,18 +101,24 @@ namespace Quizz_Models.Repositories
 
 
         /// <summary>
-        /// Retourne le quizz avec le code url passé
+        /// Retourn le quizz avec le champs codeurl correspondant au code passé. Retourne null si n'existe pas
         /// </summary>
         /// <param name="prmCodeQuizz"></param>
         /// <returns></returns>
-        internal Quizz prmCodeQuizz(string prmCodeQuizz)
-        {
-            return bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
-        }
-
         internal Quizz GetQuizzByCode(string prmCodeQuizz)
         {
-            return bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
+            Quizz valRet;
+
+            try
+            {
+                valRet =  bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+                valRet = null;
+            }
+
+            return valRet;
         }
     }
 }
