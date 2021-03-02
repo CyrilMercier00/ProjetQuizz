@@ -9,10 +9,12 @@ namespace Quizz_Models.Repositories
     {
         private readonly bdd_quizzContext bdd_entities;
         private readonly ThemeRepository repoTheme;
-        public QuestionRepository(bdd_quizzContext context, ThemeRepository repoTheme)
+        private readonly QuizzRepository repoQuizz;
+        public QuestionRepository(bdd_quizzContext context, ThemeRepository repoTheme, QuizzRepository repoQuizz)
         {
             bdd_entities = context;
             this.repoTheme = repoTheme;
+            this.repoQuizz = repoQuizz;
         }
 
         /// <summary>
@@ -111,6 +113,28 @@ namespace Quizz_Models.Repositories
             }
         }
 
+        internal List<Question> GetQuestionByCodeQuizz(string prmCodeQuizz)
+        {
+            List<Question> listeRetour = new List<Question>();                      // Liste des questions recupérées 
+            int idQuizz = repoQuizz.GetQuizzByCode(prmCodeQuizz).PkQuizz;           // PK du quizz correspondant au code passé
+
+            // Recup de la table de liaison pour ce quizz questions
+            List<QuizzQuestion> listQuizzQuestion = bdd_entities.QuizzQuestion
+                .Where(x => x.FkQuizz == idQuizz)
+                .ToList();
+
+            // Recup des questions
+            foreach (QuizzQuestion qq in listQuizzQuestion)
+            {
+                listeRetour.Add(
+                    bdd_entities.Question
+                    .Where(x => x.PkQuestion == qq.FkQuestion)
+                    .SingleOrDefault()
+                    );
+            }
+
+            return listeRetour;
+        }
     }
 
 }

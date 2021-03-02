@@ -86,17 +86,17 @@ namespace Quizz_Web.Controllers
 
 
         /// <summary>
-        /// Get des questions et des réponses associé au quizz avec l'id passé
+        /// Get des questions et des réponses associé au quizz avec le code unique
         /// </summary>
         /// <param name="idQuizz"></param>
         /// <returns></returns>
-        [HttpGet("{vide}/{idQuizz}")]
-        public List<QuestionReponseDTO> GetQuestionReponses(int idQuizz)
+        [HttpGet("{vide}/{codeQuizz}")]
+        public List<QuestionReponseDTO> GetQuestionReponses(string codeQuizz)
         {
             List<Question> listQuestion;                        // Contiens la liste des questions
             List<QuestionReponseDTO> listQuestionReponseDTO;    // Contiens la liste des questions avec les réponses associées
 
-            listQuestion = this.questionService.GetListQuestionByIDQuizz(idQuizz);  // Get des questions 
+            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get des questions 
             listQuestionReponseDTO = this.questionService.AddReponseToQuestion(listQuestion);   // Get des reponses
 
             if (listQuestion == null)

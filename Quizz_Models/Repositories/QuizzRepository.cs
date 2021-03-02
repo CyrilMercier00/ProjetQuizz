@@ -1,4 +1,5 @@
 using Quizz_Models.bdd_quizz;
+using System;
 using System.Linq;
 namespace Quizz_Models.Repositories
 {
@@ -105,6 +106,11 @@ namespace Quizz_Models.Repositories
         /// <param name="prmCodeQuizz"></param>
         /// <returns></returns>
         internal Quizz prmCodeQuizz(string prmCodeQuizz)
+        {
+            return bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
+        }
+
+        internal Quizz GetQuizzByCode(string prmCodeQuizz)
         {
             return bdd_entities.Quizz.Where(x => x.Urlcode == prmCodeQuizz).Single();
         }

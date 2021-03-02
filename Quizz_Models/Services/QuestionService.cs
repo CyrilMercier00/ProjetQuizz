@@ -18,6 +18,7 @@ namespace Quizz_Models.Services
             this.repoTheme = prmRepoTheme;
             this.repoComplex = prmRepoComplex;
             this.repoQuestion = prmRepoQuestion;
+            this.repoPropoReponse = prmRepoPropoReponse;
         }
 
 
@@ -82,23 +83,36 @@ namespace Quizz_Models.Services
         /// <param name="listQuestion"></param>
         public List<QuestionReponseDTO> AddReponseToQuestion(List<Question> prmListQuestion)
         {
-            List<QuestionReponseDTO> listQRepDTO = new List<QuestionReponseDTO>();
+            List<QuestionReponseDTO> listQRepDTO = new List<QuestionReponseDTO>();      // Liste des DTO contenant ls questions et leur reponses
+            List<PropositionReponse> listeRep = new List<PropositionReponse>();         // Liste des reponses pour la question
+            int i = 0;
 
+            // Pour chaque questions de la liste passée
             foreach (Question q in prmListQuestion)
             {
+                // Initialisationd du DTO pour cette question
                 listQRepDTO.Add(new QuestionReponseDTO()
                 {
                     Enonce = q.Enonce,
                     RepLibre = Convert.ToBoolean(q.RepLibre),
-                    PKQuestion= q.PkQuestion
+                    PKQuestion = q.PkQuestion
                 });
 
-                if (q.RepLibre == 0x0000)
-                {   // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
-                    listQRepDTO[listQRepDTO.Count - 1].ListeReponses = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+                // Si ce n'est pas une question a réponse libre
+                if (q.RepLibre == Convert.ToByte(false))
+                {
+                    // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
+                    listeRep = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+                    listQRepDTO[i].ListeReponses = listeRep;
+                    i++;
                 }
             }
             return listQRepDTO;
+        }
+
+        internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
+        {
+            return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
         }
     }
 }
