@@ -60,7 +60,7 @@ namespace Quizz_Models.Utils
                 writer.Dispose();
 
                 document.Close();
-                GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
+              //  GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
                 System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
             }

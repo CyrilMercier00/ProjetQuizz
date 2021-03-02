@@ -98,7 +98,7 @@ namespace Quizz_Web.Controllers
             valRetour = Ok();
             try
             {
-                this.servQuizz.SendMail(quizz);
+              //  this.servQuizz.SendMail(quizz);
             }
             catch (Exception e)
             {

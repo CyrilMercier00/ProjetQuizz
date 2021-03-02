@@ -133,9 +133,9 @@ namespace Quizz_Models.Services
         internal void SendMail(int prmIDQuizz)
         {
             //Cree le pdf recrutrue et envoi  un mail au recruteur  
-            Quiz quizz, Compte candidatQuizz, Compte recruteurQuizz
-            repoQuizz.GetQuizzByID(prmIDQuizz);
-            Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
+            //Quiz quizz, Compte candidatQuizz, Compte recruteurQuizz;
+            //repoQuizz.GetQuizzByID(prmIDQuizz);
+            //Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
         }
         
         private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions)
