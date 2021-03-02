@@ -11,11 +11,15 @@ export class ModifierQuestGuard implements CanActivate {
     constructor(private _router: Router) {}
 
     canActivate(): boolean{
-        let jwt = Globals.decodeJwt();
-        if(jwt['ModifierQuest'] === 'True'){
-            return true;
+        if(!Globals.isLoggedOut())
+        {
+            let jwt = Globals.decodeJwt();
+        
+            if(jwt['ModiferQuest'] === 'True'){
+                return true;
+            }
         }
-        this._router.navigate(['login']);
+        
         return false;
     }
 }

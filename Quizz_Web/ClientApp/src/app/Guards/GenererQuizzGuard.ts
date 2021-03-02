@@ -11,11 +11,15 @@ export class GenererQuizzGuard implements CanActivate {
     constructor(private _router: Router) {}
 
     canActivate(): boolean{
-        let jwt = Globals.decodeJwt();
-        if(jwt['GenererQuizz'] === 'True'){
-            return true;
+        if(!Globals.isLoggedOut())
+        {
+            let jwt = Globals.decodeJwt();
+        
+            if(jwt['GenererQuizz'] === 'True'){
+                return true;
+            }
         }
-        this._router.navigate(['login']);
+        
         return false;
     }
 }

@@ -11,11 +11,15 @@ export class SupprQuestionGuard implements CanActivate {
     constructor(private _router: Router) {}
 
     canActivate(): boolean{
-        let jwt = Globals.decodeJwt();
-        if(jwt['SupprQuestion'] === 'True'){
-            return true;
+        if(!Globals.isLoggedOut())
+        {
+            let jwt = Globals.decodeJwt();
+        
+            if(jwt['SupprQuestion'] === 'True'){
+                return true;
+            }
         }
-        this._router.navigate(['login']);
+        
         return false;
     }
 }

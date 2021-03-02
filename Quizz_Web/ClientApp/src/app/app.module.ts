@@ -38,6 +38,9 @@ import { CheckBoxComponent } from './components/input/check-box/check-box.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component';
+import { GenererQuizzGuard } from './Guards/GenererQuizzGuard';
+import { ModifierQuestGuard } from './Guards/ModifierQuestGuard';
+import { ModifierCompteGuard } from './Guards/ModifierCompteGuard';
 
 @NgModule({
   declarations: [
@@ -83,23 +86,79 @@ import { LoginPageComponent } from './components/pages/login/login-page/login-pa
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo:'/login', pathMatch:'full' },                                                     // Page d'accueil
-      { path: 'login', component: LoginPageComponent },
-      { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
-      { path: 'chronometre', component: ChronometreComponent },             
-      { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
-      { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
-      { path: 'gestion-quizz', component: GestionQuizzComponent },                   // Page pour modifier un quizz
-      { path: 'quizz-question', component: QuizzQuestionComponent },              // Page pour repondre aux questons
-      { path: 'permission', component: PermissionComponent },                  
-      { path: 'resultats', component: ResultatsComponent },                                 // Page de fin de quizz
-      { path: 'permission', component: PermissionComponent },                           // Page de permission admin pour Joris
-      { path: 'comptes', component: ComptesComponent },
-      { path: 'creation-question', component: PageCreationQuestionComponent },     // Page de creation des questions
-      { path: 'reponse-qcm', component: PageReponseQcmComponent },                   // Page de réponse pour les questions qcm
-      { path: 'reponse-libre', component: PageReponseLibreComponent },                  // Page de réponse pour les questions libres
-      { path: 'page-demarrage/:urlQuizz', component: PageDebutQuizzComponent}, // Page de demarrage du quizz
-      { path: '**', component: PageNotFoundComponent }                                          // Wildcard route for a 404 page
+      { 
+        path: '', 
+        redirectTo:'/login', 
+        pathMatch:'full'
+      },
+      { // Page d'acceuil
+        path: 'login', 
+        component: LoginPageComponent 
+      },
+      { // Page pour assigner un quizz une fois crée
+        path: 'assignation-quizz',
+        component: AssignationQuizzComponent,
+        canActivate: [GenererQuizzGuard]
+      },      
+      {
+        path: 'chronometre',
+        component: ChronometreComponent
+      },             
+      { // Page pour créer un quizz
+        path: 'creer-quizz',
+        component: GenQuizzComponent,
+        canActivate: [GenererQuizzGuard]
+      },
+      {  // Page pour creer un nouveau niveau
+        path: 'creer-niveau',
+        component: GenerateNiveauComponent,
+        canActivate: [GenererQuizzGuard] 
+      },
+      { // Page pour modifier un quizz
+        path: 'gestion-quizz',
+        component: GestionQuizzComponent,
+        canActivate: [GenererQuizzGuard] 
+      },
+      { // Page pour repondre aux questons
+        path: 'quizz-question',
+        component: QuizzQuestionComponent,
+        canActivate: [ModifierQuestGuard]
+      },
+      { 
+        path: 'permission',
+        component: PermissionComponent,
+        canActivate: [ModifierCompteGuard] 
+      },
+      { // Page de fin de quizz
+        path: 'resultats',
+        component: ResultatsComponent 
+      },
+      { 
+        path: 'comptes',
+        component: ComptesComponent,
+        canActivate: [ModifierCompteGuard] 
+      },
+      { // Page de creation des questions
+        path: 'creation-question',
+        component: PageCreationQuestionComponent,
+        canActivate: [GenererQuizzGuard] 
+      },
+      { // Page de réponse pour les questions qcm
+        path: 'reponse-qcm',
+        component: PageReponseQcmComponent 
+      },
+      { // Page de réponse pour les questions libres
+        path: 'reponse-libre',
+        component: PageReponseLibreComponent 
+      },
+      { // Page de demarrage du quizz
+        path: 'page-demarrage/:urlQuizz', 
+        component: PageDebutQuizzComponent
+      },
+      { // Wildcard route for a 404 page
+        path: '**', 
+        component: PageNotFoundComponent 
+      }
     ]),
 
 

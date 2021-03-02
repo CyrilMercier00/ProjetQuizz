@@ -17,11 +17,15 @@ export class PermissionService {
   }
 
   verifyPermission(permissionName : string) : boolean {
-    let obj = Globals.decodeJwt();
+    if(!Globals.isLoggedOut())
+    {
+      let obj = Globals.decodeJwt();
 
-    if(obj[permissionName] === 'True'){
-      return true;
+      if(obj[permissionName] === 'True'){
+        return true;
+      }
     }
+    
     return false;
   }
 }
