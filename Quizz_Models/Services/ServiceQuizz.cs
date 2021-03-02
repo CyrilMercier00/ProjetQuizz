@@ -3,7 +3,7 @@ using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using Quizz_Models.Repositories;
-
+//
 namespace Quizz_Models.Services
 {
     public class ServiceQuizz
@@ -48,11 +48,13 @@ namespace Quizz_Models.Services
                 FkCompte = prmIDCandidat,
                 FkQuizz = prmIDQuizz
             });
-          
+
+            // Compte compteRecruteur = repoCompte.GetCompteByID();
+            // SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteur);
             return repoQuizz.Sauvegarde();
         }
 
-     
+
 
 
 
@@ -113,31 +115,38 @@ namespace Quizz_Models.Services
             // Sauvegarde & throw si aucunes ligne insert
             repoQuizz.InsertQuizz(quizzCreation);
             if (repoQuizz.Sauvegarde() <= 1)
-            { 
-                throw new Exception("Probleme lors de la sauvegarde du quizz"); 
+            {
+                throw new Exception("Probleme lors de la sauvegarde du quizz");
             }
-            else {
-                //****envoi automatique mail candidat à l'assignation
-                // Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
-                
-                 Compte compteCandidat = repoCompte.GetCompteByID(prmDTO.FKCompteRecruteur);
-                Compte compteRecruteur = repoCompte.GetCompteByID(prmDTO.FKCompteRecruteur);
 
-                Utils.GestionMailUtils.SendMailCandidat(compteRecruteur, compteCandidat, quizzCreation);
-                //********
-            }
         }
-        
+        //Envoi  un mail au candidat avec l'url
+        public void SendMailQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
+        {
+            //****envoi automatique mail candidat à l'assignation
+            Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
+
+            Compte compteCandidat = repoCompte.GetCompteByID(prmIDCandidat);
+            Compte compteRecruteur = repoCompte.GetCompteByID(prmIDRecruteur);
+
+            Utils.GestionMailUtils.SendMailCandidat(compteRecruteur, compteCandidat, quizz);
+            //********
+        }
+
         //Cree le pdf recrutrue et envoi  un mail au recruteur
 
-        internal void SendMail(int prmIDQuizz)
+        public void SendMailFinQuizz(int prmIDQuizz,int prmIDCandidat, int prmIDRecruteur)
         {
             //Cree le pdf recrutrue et envoi  un mail au recruteur  
-            //Quiz quizz, Compte candidatQuizz, Compte recruteurQuizz;
-            //repoQuizz.GetQuizzByID(prmIDQuizz);
-            //Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
+            Quizz quizz= repoQuizz.GetQuizzByID(prmIDQuizz);
+            Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
+            Compte recruteurQuizz= repoCompte.GetCompteByID(prmIDRecruteur);
+
+            Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
+         
         }
         
+
         private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions)
         {
             // Gen questions junior
@@ -220,7 +229,8 @@ namespace Quizz_Models.Services
             if (quizz != null)
             {
                 retour = TransformQuizzToQuizzDTO(quizz);
-            } else
+            }
+            else
             {
                 retour = null;
             }
