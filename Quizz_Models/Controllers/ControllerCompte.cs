@@ -70,7 +70,7 @@ namespace Quizz_Web.Controllers
         }
 
 
-
+        [Authorize(AuthorizationEnum.SupprimerCompte)]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

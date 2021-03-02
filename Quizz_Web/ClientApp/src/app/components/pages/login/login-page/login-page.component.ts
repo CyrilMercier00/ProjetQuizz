@@ -1,23 +1,24 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Compte } from 'src/app/compte-feature/Compte/compte.model';
+import { CompteService } from 'src/app/compte-feature/Compte/compte.service';
 import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
 import { Globals } from 'src/app/globals';
 import { AuthService } from 'src/app/Service/AuthService';
-import { Compte } from '../../../compte-feature/Compte/compte.model';
-import { CompteService } from '../../../compte-feature/Compte/compte.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css']
 })
-export class HomeComponent {
+
+export class LoginPageComponent{
 
   creationIsOpen: boolean = false;
   
   public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
-  redirectToHome(){
+  redirectToLogin(){
     this.router.navigate(['/']);
   }
   
@@ -41,4 +42,5 @@ export class HomeComponent {
   logout(){
     Globals.logout();
   }
+
 }

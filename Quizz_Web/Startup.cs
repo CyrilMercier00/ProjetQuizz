@@ -93,8 +93,8 @@ namespace Quizz_Web
                 x =>
                 {
                     x.AllowAnyOrigin()
-                                .AllowAnyMethod()
-                                .AllowAnyHeader();
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
                 }
             );
 

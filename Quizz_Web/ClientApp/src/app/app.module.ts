@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { HomeComponent } from './components/pages/home/home.component'
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { QuizzQuestionComponent } from './components/pages/quizz-question/quizz-question.component';
@@ -38,6 +37,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
 import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
+import { LoginPageComponent } from './components/pages/login/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,6 @@ import { SelectPermissionComponent } from './components/select/select-permission
     ChronometreComponent,
     FooterComponent,
     PageNotFoundComponent,
-    HomeComponent,
     CompteComponent,
     ComptesComponent,
     FormulaireConnexionComponent,
@@ -75,6 +74,7 @@ import { SelectPermissionComponent } from './components/select/select-permission
     PageDebutQuizzComponent,
     SelectPermissionComponent,
     CheckBoxComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -83,7 +83,8 @@ import { SelectPermissionComponent } from './components/select/select-permission
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },                                                     // Page d'accueil
+      { path: '', redirectTo:'/login', pathMatch:'full' },                                                     // Page d'accueil
+      { path: 'login', component: LoginPageComponent },
       { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },             
       { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
