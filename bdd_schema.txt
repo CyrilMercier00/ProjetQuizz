@@ -244,6 +244,8 @@ Insert into taux_complexite (niveau, question_junior, question_confirme, questio
 
 -- Insert question :
 Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) values 
+
+-- Question junior
 ("qui, quoi, quand ?", 0, 1, 1, 1),
 ("oui ou non ?", 0, 1, 1, 0),
 ("petit ecureils", 0, 1, 1, 0),
@@ -253,7 +255,21 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 ("singe", 0, 1, 1, 0),
 ("pitié monsieur", 0, 1, 1, 0),
 ("maité", 0, 1, 1, 0),
-("des orlotans ", 0, 1, 1, 0);
+("des orlotans ", 0, 1, 1, 0),
+
+-- Questions Confimé
+("a", 0, 1, 2, 0),
+("br", 0, 1, 2, 0),
+("c", 0, 1, 2, 0),
+("d ", 0, 1, 2, 0),
+
+-- Question experimenté
+("haha", 0, 1, 3, 0),
+("hihi", 0, 1, 3, 0),
+("honhon", 0, 1, 3, 0),
+("huahua ", 0, 1, 3, 0);
+
+select * from taux_complexite
 
 -- Insert Quizz:
 INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES 

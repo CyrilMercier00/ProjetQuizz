@@ -1,4 +1,4 @@
-export class questionDTO
+export class DTOQuestion
 {
 
     private Enonce: string;

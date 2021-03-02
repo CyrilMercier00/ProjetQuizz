@@ -82,9 +82,11 @@ namespace Quizz_Web.Controllers
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
                 return null;
+            } else
+            {
+                return quizz;
             }
 
-            return quizz;
         }
 
 

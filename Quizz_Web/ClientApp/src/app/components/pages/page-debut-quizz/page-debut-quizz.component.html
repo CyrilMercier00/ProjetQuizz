@@ -1,8 +1,9 @@
-
 <div class="container wrapper flex flex-column flex-align-i-center">
-    <h2>Vous allez debuter le quizz</h2>
-    <p>Nous vous souhaitons bonne chance !</p>
+  <h2>Vous allez debuter le quizz</h2>
+  <p>Nous vous souhaitons bonne chance !</p>
 
-    <app-button-valid Message="Commencer" onClick="handleClick()"></app-button-valid>
+  <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
+  <app-page-reponse-qcm *ngIf="isQcm" [dataQuestion]="questionAffichager"></app-page-reponse-qcm>
+  <app-page-reponse-libre *ngIf="isQcm" [dataQuestion]="questionAffichager"></app-page-reponse-libre>
 
 </div>
