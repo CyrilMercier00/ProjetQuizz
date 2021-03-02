@@ -7,6 +7,11 @@ insert into permission(nom, generer_quizz, ajouter_quest, modifier_quest, modifi
 	values ('Administrateur', true, true, true, true, true, true), 
     ('Recruteur', true, true, true, false, true, false), 
     ('Candidat', false, false, false, false, false, false);
+    
+insert into compte(nom, prenom, mail, mot_de_passe, fk_permission)
+	values ('Cadillac', 'Johnny', 'admin@gmail.com', 123, 1), 
+    ('Lafarge', 'David', 'recruteur@gmail.com', 123, 2), 
+    ('Jonathan', 'Zablot', 'candidat@gmail.com', 123, 3);
 
 select * from compte;
 select * from permission;
