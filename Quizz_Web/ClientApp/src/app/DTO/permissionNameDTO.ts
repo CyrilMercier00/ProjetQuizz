@@ -2,18 +2,17 @@ export class PermissionNameDTO {
     private PkPermission : number;
     private Nom : string;
 
-    constructor(PkPermission: number, Nom: string, GenererQuizz: boolean, AjouterQuest: boolean, SupprQuestion: boolean,
-        ModifierQuest: boolean, ModifierCompte: boolean, SupprimerCompte: boolean){
+    constructor(pkPermission: number, nom: string){
 
-        this.PkPermission = PkPermission;
-        this.Nom = Nom;
+        this.PkPermission = pkPermission;
+        this.Nom = nom;
     }
 
-    public GetPkPermission(): number{
+    public get GetPkPermission(): number{
         return this.PkPermission;
     }
 
-    public GetNom(): string{
+    public get GetNom(): string{
         return this.Nom;
     }
 }

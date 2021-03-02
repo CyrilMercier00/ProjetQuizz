@@ -2,7 +2,7 @@
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
-using Quizz_Models.bdd_quizz;
+using Quizz_Models.Authentification;
 
 namespace Quizz_Web.Controllers
 {
@@ -34,7 +34,7 @@ namespace Quizz_Web.Controllers
         }
         
 
-
+        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte)]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
         {
@@ -70,7 +70,7 @@ namespace Quizz_Web.Controllers
         }
 
 
-
+        [Authorize(AuthorizationEnum.SupprimerCompte)]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
@@ -80,9 +80,9 @@ namespace Quizz_Web.Controllers
 
 
         [HttpPut("{idCompte}/permission")]
-        public void Put(int idCompte, [FromBody] ModifyComptePermissionDTO modifyComptePermissionDTO)
+        public void Put(int idCompte, [FromBody] AffichagePermissionDTO affichagePermissionDTO)
         {
-            this.compteService.ModifyComptePermission(idCompte, modifyComptePermissionDTO.IdPermission);
+            this.compteService.ModifyComptePermission(idCompte, affichagePermissionDTO.PkPermission);
         }
 
 

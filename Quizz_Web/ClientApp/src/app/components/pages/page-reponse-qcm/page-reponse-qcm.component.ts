@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { VariableGlobales } from 'src/app/url_api';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { reponseDTO } from '../../../DTO/reponseDTO';
+
 import { Router } from '@angular/router';
+import { VariableGlobales } from 'src/app/url_api';
+import { reponseDTO } from '../../../DTO/reponseDTO';
 
 @Component({
   selector: 'app-page-reponse-qcm',
@@ -13,6 +14,8 @@ export class PageReponseQcmComponent implements OnInit
 {
 
   /* ------ Declaration des variables ------ */
+  @Input("dataQuestion") data: any;
+
   rep1: string;
   rep2: string;
   rep3: string;
@@ -40,15 +43,15 @@ export class PageReponseQcmComponent implements OnInit
 
 
   /* ------ Methodes ------*/
-  handleBtnClick(event) 
+  handleBtnClick(event)
   {
-    let data = new reponseDTO();  
+    let data = new reponseDTO();
 
     data._Commentaire = this.textCommentaire;
     data._Reponse = event.target.value;
     data._FKCompte = this.getIDCommpte();
     data._FKQuestion = parseInt(this.router.getCurrentNavigation().extras.state["fkQuestion"]);
-    
+
     this.envoiFormulaire(data);
   }
 
@@ -74,20 +77,21 @@ export class PageReponseQcmComponent implements OnInit
   }
 
 
+
   /* --- POST de la reponse choisie --- */
-   envoiFormulaire(prmDTO: reponseDTO)
+  envoiFormulaire(prmDTO: reponseDTO)
   {
-       fetch(
-        VariableGlobales.apiURLReponseCandidat,
+    fetch(
+      VariableGlobales.apiURLReponseCandidat,
+      {
+        method: "POST",
+        headers:
         {
-          method: "POST",
-          headers:
-          {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(prmDTO)
-        }
-      )
-    }
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(prmDTO)
+      }
+    )
+  }
 }

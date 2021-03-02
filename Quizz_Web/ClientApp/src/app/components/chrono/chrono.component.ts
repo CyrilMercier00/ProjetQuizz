@@ -3,17 +3,20 @@ import { timeStamp } from 'console';
 import { VariableGlobales } from 'src/app/url_api';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 
+import { Stopwatch } from "ts-stopwatch";
 
 @Component({
   selector: 'app-chrono',
   templateUrl: './chrono.component.html',
   styleUrls: ['./chrono.component.css']
 })
-export class ChronoComponent implements OnInit {
+export class ChronoComponent implements OnInit
+{
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
     start();
   }
 
@@ -60,18 +63,20 @@ export class ChronoComponent implements OnInit {
 var sp = document.getElementsByTagName("span");
 var H = document.getElementsByTagName("h5");
 var t;
-var ms=0,s=0,mn=0,h=0;
- 
- /*La fonction "start" démarre un appel répétitive de la fonction update_chrono par une cadence de 100 milliseconde en utilisant setInterval et désactive le bouton "start" */
+var ms = 0, s = 0, mn = 0, h = 0;
 
-function start(){
- t =setInterval(update_chrono,100);
+/*La fonction "start" démarre un appel répétitive de la fonction update_chrono par une cadence de 100 milliseconde en utilisant setInterval et désactive le bouton "start" */
+
+function start()
+{
+  t = setInterval(update_chrono, 100);
 
 
 }
 /*La fonction update_chrono incrémente le nombre de millisecondes par 1 <==> 1*cadence = 100 */
-function update_chrono(){
-  ms+=1;
+function update_chrono()
+{
+  ms += 1;
   /*si ms=10 <==> ms*cadence = 1000ms <==> 1s alors on incrémente le nombre de secondes*/
      if(ms==10){
       ms=1;
@@ -105,9 +110,9 @@ function reset(){
 /*pas besoin de reset
 
 
-**dans cette fonction on arrête le "timer" ,on réactive le bouton "start" et on initialise les variables à zéro 
+**dans cette fonction on arrête le "timer" ,on réactive le bouton "start" et on initialise les variables à zéro
 function reset(){
- clearInterval(t);
+clearInterval(t);
   ms=0,s=0,mn=0,h=0;
   ***on accède aux différents span par leurs indice***
   sp[0].innerHTML=h+" h";

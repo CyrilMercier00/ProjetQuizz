@@ -40,20 +40,34 @@
     box-shadow: 0 0 0.1em 0.03em rgb(83, 138, 248);
 }
 
-.connexion-button{
-    background-color: rgb(66, 103, 178);
+.div-connexion button{
     border-radius: 8px;
     width: 22rem;
     height: 3rem;
     margin: 0.5rem;
     border: unset;
     outline: none;
-    transition: background-color 1s;
     color: white;
+}
+
+.connexion-button{
+    background-color: rgb(66, 103, 178);
 }
 
 .connexion-button:hover{
     background-color: rgb(41, 75, 143);
+}
+
+.deconnexion-button{
+    background-color: rgb(148, 148, 148);
+}
+
+.deconnexion-button:hover{
+    background-color: rgb(88, 88, 88);
+}
+
+.connexion-button:disabled{
+    opacity: 40%;
 }
 
 .button-href{

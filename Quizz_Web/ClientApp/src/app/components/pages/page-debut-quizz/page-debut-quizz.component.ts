@@ -1,8 +1,10 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { VariableGlobales } from 'src/app/url_api';
 
-
+import { DTOQuestion } from 'src/app/DTO/questionDTO';
+import { DTOQuizz } from 'src/app/DTO/dto-quizz';
+import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -15,16 +17,16 @@ import { VariableGlobales } from 'src/app/url_api';
 export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
-  prmCode: any;
-  valRetourRequeteQuestions: any;
-  Quizz :any ;
+  code: string;
+  dataQuizz: DTOQuizz;
+  dataQuestions: DTOQuestion[];
 
 
 
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
   {
-    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];  
+    this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
 
 
@@ -32,47 +34,56 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    console.log(this.prmCode);
+
+
+    ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+      .then(repFetch =>
+      {
+        repFetch.json()                                  // Extraire les données json de la promise
+          .then(retour => { this.dataQuizz = retour })   // Sauvegarder les données
+          .then(x =>
+          {
+            console.log(this.dataQuizz.$UrlCode)
+            ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
+              .then(repFetch =>
+              {
+                repFetch.json()                          // Extraire les données json de la promise
+                  .then(retour =>                        // Sauvegarder les données en array
+                  {
+                    this.dataQuestions = retour;
+                    this.startQuizz();
+                  }
+                  )
+              })
+          });
+      })
+
   }
 
 
-  
   /*--- Methodes ---*/
   handleClick()
   {
-    this.router.navigate([''])
+    console.log(this.dataQuizz);
   }
 
 
 
-
-  questionToArray(prmData ) 
+  questionToArray(prmData: any)
   {
-    
+
   }
 
 
 
-   GetQuizz(prmCode)
+  startQuizz()
   {
-     fetch(VariableGlobales.apiURLQuizz + "/" + prmCode , { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.Quizz = json;
-      });
-  }
 
+    this.dataQuestions.forEach(question =>
+    {
+      console.log(question);
+    })
 
-
-   GetQuestions()
-  {
-     fetch(VariableGlobales.apiURLQuestion + "/" + this.Quizz.pkQuizz , { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.questionToArray(json);
-      });
   }
 
 }

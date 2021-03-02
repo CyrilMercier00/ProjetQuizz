@@ -81,7 +81,7 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="p">Permission(entité) à transformer.</param>
         /// <returns>PermissionDTO correspondant.</returns>
-        private PermissionDTO TransformPermissionToPermissionDTO(Permission p)
+        public static PermissionDTO TransformPermissionToPermissionDTO(Permission p)
         {
             return new PermissionDTO
             {
