@@ -38,6 +38,7 @@ import { PageDebutQuizzComponent } from './components/pages/page-debut-quizz/pag
 import { CheckBoxComponent } from './components/input/check-box/check-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
+import { FormulaireCreationNiveauComponent } from './components/formulaire/formulaire-creation-niveau/formulaire-creation-niveau.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { SelectPermissionComponent } from './components/select/select-permission
     PageDebutQuizzComponent,
     CheckBoxComponent,
     SelectPermissionComponent,
+    FormulaireCreationNiveauComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

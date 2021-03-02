@@ -1,0 +1,66 @@
+h1 {
+    display:flex;
+    justify-content:space-around;
+}
+.creation-niveau-form{
+    display:flex;
+    justify-content:space-evenly;
+    margin-left: 8em;
+    /*animation: 1s 1 slideInFromRight;*/
+}
+
+ .creation-niveau{
+   /* // background-color: white; */
+    display: table;
+    border-radius: 8px;
+   /* // box-shadow: 0 0 1em 0.1em white; */
+
+    margin-top: 4em;
+} 
+.creationniveau-input{
+    display: table-row;
+    border-radius: 8px;
+}
+label{ display: table-row;
+;}
+
+.creationniveau-input input{
+    width: 350px;
+    height: 45px;
+    margin: 7px;
+    padding-left: 25px;
+    border-color: rgb(180, 180, 180);
+    border-width: 0.03em;
+    border-radius: 10px;
+}
+
+.creationniveau-input input:focus{
+    outline-width: 0;
+    border-radius: 10px;
+    border-color: rgb(83, 138, 248);
+    box-shadow: 0 0 0.1em 0.03em rgb(83, 138, 248);
+}
+
+.creation-button{
+    background-color: rgb(143, 165, 209);
+    border-radius: 8px;
+    width: 22rem;
+    height: 3rem;
+    margin: 0.5rem;
+    border: unset;
+    outline: none;
+    transition: background-color 1s;
+    color: white;
+}
+
+.creation-button:hover{
+    background-color: rgb(41, 75, 143);
+}
+
+.creation-button:disabled{
+    opacity: 40%;
+    background-color: grey;
+}
+.creation-button:disabled :hover {
+    background-color: grey;
+}
