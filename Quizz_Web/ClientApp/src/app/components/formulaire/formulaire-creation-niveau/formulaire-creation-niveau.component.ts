@@ -9,7 +9,7 @@ import { VariableGlobales } from "src/app/url_api";
 })
 export class FormulaireCreationNiveauComponent implements OnInit {
   niveauForm: FormGroup;
-  isValid = true;
+  
 
   constructor(private fb: FormBuilder) {
     this.niveauForm = this.fb.group({
