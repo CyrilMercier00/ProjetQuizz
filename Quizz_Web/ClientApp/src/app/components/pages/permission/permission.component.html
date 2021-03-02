@@ -16,11 +16,11 @@
 
     <div class="bouttonPermission" [routerLinkActive]="['link-active']">
         
-        <input type="button"  [routerLink]="['/comptes']" value="Modifier/Supprimer Compte">
-        <input type="button" value="Ajouter une Question">
-        <input type="button" value="Modifier une Question">
-        <input type="button" value="Supprimer une question">
-        <input type="button" value="Générer Quizz">
+        <input *ngIf="canModifyOrSupprCompte()" type="button"  [routerLink]="['/comptes']" value="Modifier/Supprimer Compte">
+        <input *ngIf="AjouterQuest" type="button" value="Ajouter une Question">
+        <input *ngIf="ModifierQuest" type="button" value="Modifier une Question">
+        <input *ngIf="SupprQuestion" type="button" value="Supprimer une question">
+        <input *ngIf="GenererQuizz" type="button" value="Générer Quizz">
     </div>
 
 </div>

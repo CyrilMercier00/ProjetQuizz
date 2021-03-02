@@ -1,12 +1,10 @@
 <div class="wrapper-select-permission">
-    <div class="title">Permission</div>
-    <div class="mybox">
-      <span class="myarrow"></span>
-      <select (change)="complexUpdate($event)">
-        <option disabled selected value class="hidden">Permission hein</option>
-        <option *ngFor="let permission of Permission">
-          {{ permission.name | titlecase }}
-        </option>
-      </select>
-    </div>
+  <div class="mybox">
+    <span class="myarrow"></span>
+    <select [ngModel]="selectedPerm" (ngModelChange)="changePermission($event)">
+      <option *ngFor="let permissionName of permissionsNames" [ngValue]="permissionName">
+        {{ permissionName.nom | titlecase }}
+      </option>
+    </select>
   </div>
+</div>

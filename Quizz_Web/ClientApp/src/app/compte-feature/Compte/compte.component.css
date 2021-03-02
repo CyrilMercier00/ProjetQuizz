@@ -14,11 +14,7 @@
 }
 
 .rectangle:hover{
-    background-color: rgb(250, 248, 242);
-}
-
-.rectangle:hover p{
-    color: rgb(252, 1, 1);
+    background-color: #1f213d;
 }
 
 .rectangle p{
@@ -42,13 +38,14 @@
     margin: 0.5rem 0.5rem;
 }
 
-.deleteButton {
+.containerButton > .deleteButton {
     background-color: red;
+    padding: 0.3rem 3rem;
 }
 
 .containerButton > .modifyButton {
     background-color: orange;
-    padding: 0.3rem 3rem;
+    padding: 0.3rem 3.4rem;
 }
 
 .containerButton > .modifyButton:hover{
@@ -57,4 +54,12 @@
 
 .deleteButton:hover{
     background-color: rgb(220,0,0);
+}
+
+.containerButton > .ValidateButton{
+    padding: 0.3rem 3.8rem;
+}
+
+.containerButton > .ValidateButton:hover{
+    background-color: rgb(200,200,200);
 }

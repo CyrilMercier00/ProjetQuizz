@@ -12,10 +12,6 @@ namespace Quizz_Models.Services
         readonly PermissionRepository repoPermission;
         readonly CompteRepository repoCompte;
 
-        const int ADMIN_PERMISSION_ID = 1;
-        const int RECRUTEUR_PERMISSION_ID = 2;
-        const int CANDIDAT_PERMISSION_ID = 3;
-
         public CompteService(PermissionRepository repoPermission, CompteRepository repoCompte)
         {
             this.repoPermission = repoPermission;
@@ -134,6 +130,20 @@ namespace Quizz_Models.Services
 
             if (compte == null) return null;
             return TransformCompteEntityToCompteDTOAdmin(compte);
+        }
+
+        public PermissionDTO GetCurrentComptePermission(int compteID)
+        {
+            PermissionDTO permissionDTO = null;
+            Compte c = this.repoCompte.GetCompteByID(compteID);
+
+            if(c != null)
+            {
+                Permission p = this.repoPermission.GetPermissionById(c.FkPermission);
+                permissionDTO = PermissionService.TransformPermissionToPermissionDTO(p);
+            }
+
+            return permissionDTO;
         }
 
         /// <summary>

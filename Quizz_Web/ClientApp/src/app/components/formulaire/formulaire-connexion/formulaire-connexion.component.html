@@ -1,13 +1,18 @@
-<form class="login-form">
+<form [formGroup]="compteConnexion" class="login-form">
     <span class="home-form">
       <div class="home-input">
-        <input type="text" id="home-loginInput" placeholder="Adresse e-mail">
+        <input type="text" id="home-loginInput" placeholder="Adresse e-mail" formControlName="mail">
       </div>
       <div class="home-input">
-        <input type="text" id="home-passwordInput" placeholder="Mot de passe">
+        <input type="password" id="home-passwordInput" placeholder="Mot de passe" formControlName="MotDePasse">
       </div>
-      <div>
-        <button class="connexion-button" type="submit">Connexion</button>
+      <div class="div-connexion">
+        <div>
+          <button class="connexion-button" [disabled]="compteConnexion.invalid" (click)="onSubmit()">Connexion</button>
+        </div>
+        <div>
+          <button class="deconnexion-button" (click)="logout()">Déconnexion</button>
+        </div>
       </div>
       <div class="ligneDelimitation"></div>
       <button class="button-href" (click)="emitClick()">Créer un compte</button>

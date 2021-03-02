@@ -5,23 +5,25 @@
     <!-- Elements de navigation -->
     <ul class="navbar-inner-container">
 
-      <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-        <a class="nav-link " [routerLink]="['/']">Acceuil</a>
+      <li class="nav-item" [routerLinkActive]="['link-active']">
+        <a class="nav-link " [routerLink]="['/login']">Acceuil</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['link-active']">
+      <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/creer-quizz']">Generation de quizz</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['link-active']">
+      <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/creer-niveau']">Creer un niveau</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['link-active']">
+      <li class="nav-item" 
+        *ngIf="hasAccessTo('AjouterQuest') || hasAccessTo('ModifierQuest') || hasAccessTo('SupprQuestion')" 
+        [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/gestion-quizz']">Gestion de quizz</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['link-active']">
+      <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/assignation-quizz']">Assignation de quizz</a>
       </li>
 
