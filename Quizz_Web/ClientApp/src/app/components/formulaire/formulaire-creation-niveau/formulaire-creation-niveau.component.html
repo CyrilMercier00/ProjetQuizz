@@ -1,20 +1,26 @@
 
 <H1>Créer un nouveau niveau</H1>
 
-<form [formGroup]="niveauForm" (ngSubmit)="onSubmit()"   class="creation-niveau-form">
+<form [formGroup]="niveauForm" (ngSubmit)="onSubmit()"   class="creation-niveau-form" (change)="pourcent()">
     <span class="creation-niveau">
       <div class="creationniveau-input">
-        <input type="number" id="juniorInput" placeholder="% questions juniors" formControlName="QuestionJunior">
+        <label>% questions juniors*</label>
+        <input type="number" id="juniorInput" placeholder="% questions juniors" formControlName="QuestionJunior" min="0" max="100">
       </div>
       <div class="creationniveau-input">
-        <input type="number" id="confirmeInput" placeholder="% questions confirmées" formControlName="QuestionConfirme">
+        <label>% questions confirmées*</label>
+        <input type="number" id="confirmeInput" placeholder="% questions confirmées" formControlName="QuestionConfirme" min="0" max="100">
       </div>
       <div class="creationniveau-input">
-        <input type="number" id="experimenteInput" placeholder="% questions experimentées" formControlName="QuestionExperimente">
+        <label>% questions experimentées*</label>
+        <input type="number" id="experimenteInput" placeholder="% questions experimentées" formControlName="QuestionExperimente" min="0" max="100">
       </div>
       <div class="creationniveau-input">
         <input type="text" id="nomInput" placeholder="nom du niveau" formControlName="Niveau">
+        
       </div>
-      <button class="creation-button" [disabled]="niveauForm.invalid" type="submit">Valider</button>
+      <button class="creation-button" 
+           [disabled]="pourcent() || niveauForm.invalid" type="submit">Valider</button>
+           <label>*la somme des % doit être de 100</label>
     </span>
   </form>

@@ -21,6 +21,8 @@ h1 {
     display: table-row;
     border-radius: 8px;
 }
+label{ display: table-row;
+;}
 
 .creationniveau-input input{
     width: 350px;
@@ -57,4 +59,8 @@ h1 {
 
 .creation-button:disabled{
     opacity: 40%;
+    background-color: grey;
+}
+.creation-button:disabled :hover {
+    background-color: grey;
 }
