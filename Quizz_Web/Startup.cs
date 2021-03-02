@@ -24,7 +24,7 @@ namespace Quizz_Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // // In production, the Angular files will be served from this directory
+            // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -59,7 +59,7 @@ namespace Quizz_Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // // Enable middleware to serve generated Swagger as a JSON endpoint.
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
