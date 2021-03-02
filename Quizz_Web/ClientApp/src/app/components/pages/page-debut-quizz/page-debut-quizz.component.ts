@@ -1,7 +1,8 @@
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { VariableGlobales } from 'src/app/url_api';
+import { ServiceQuestions } from 'src/app/Services/serviceQuestion'
+import { ServiceQuizz } from 'src/app/Services/serviceQuizz'
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -14,16 +15,15 @@ import { VariableGlobales } from 'src/app/url_api';
 export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
-  prmCode: any;
-  valRetourRequeteQuestions: any;
-  Quizz: any;
+  code: string;
+  quizz: any;
 
 
 
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
   {
-    this.prmCode = this.actRoute.snapshot.params['urlQuizz'];
+    this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
 
 
@@ -31,47 +31,50 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    console.log(this.prmCode);
-  }
 
+
+    ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+      .then(repFetch =>
+      {
+        repFetch.json()                                  // Extraire les données json de la promise
+          .then(retour => { this.quizz = retour })       // Sauvegarder les données
+          .then(x =>
+          {
+            ServiceQuestions.GetQuestionsByCodeQuizz(this.quizz.urlcode)    // Chercher les questions associées a ce quizz
+              .then(repFetch =>
+              {
+                repFetch.json()                          // Extraire les données json de la promise
+                  .then(retour =>                        // Sauvegarder les données en array
+                  {
+                    this.questionToArray(retour);
+                  }
+                  )
+              })
+          });
+      })
+
+  }
 
 
   /*--- Methodes ---*/
   handleClick()
   {
-    this.router.navigate([''])
+    console.log(this.quizz);
   }
 
 
 
-
-  questionToArray(prmData)
+  questionToArray(prmData: any)
   {
     console.log(prmData);
   }
 
 
 
-  GetQuizz(prmCode)
-  {
-    fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.Quizz = json;
-      });
-  }
 
 
 
-  GetQuestions()
-  {
-    fetch(VariableGlobales.apiURLQuestion + this.Quizz.pkQuizz, { method: "GET" })
-      .then((response) => response.json())
-      .then((json) =>
-      {
-        this.questionToArray(json);
-      });
-  }
+
+
 
 }
