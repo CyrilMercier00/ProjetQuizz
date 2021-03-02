@@ -17,21 +17,25 @@ export class ChronoComponent implements OnInit {
   }
 
  //Appel dans button submit
-  reset(){
+ OnSubmitQuest(){
+  let TQuest=new Date;
+    TQuest.setHours(h);
+    TQuest.setMinutes(mn);
+    TQuest.setSeconds(s);
     clearInterval(t);
-     ms=0,s=0,mn=0,h=0;
-    // ***on accède aux différents span par leurs indice***
-     sp[0].innerHTML=h+" h";
-     sp[1].innerHTML=mn+" min";
-     sp[2].innerHTML=s+" s";
-       }
+    let TimeQ=TQuest.getTime();
+    //test affichege d
+    //H[0].innerHTML="TQuest : " + d; 
+    reset();
+ }
+  
 
 }
 
 
 /*la fonction getElementByTagName renvoie une liste des éléments portant le nom de balise donné ici "span".*/
 var sp = document.getElementsByTagName("span");
-
+var H = document.getElementsByTagName("h5");
 var t;
 var ms=0,s=0,mn=0,h=0;
  
@@ -67,7 +71,14 @@ function update_chrono(){
 
 }
 //***on arrête le "timer" par clearInterval ,on réactive le bouton start 
-
+function reset(){
+  clearInterval(t);
+   ms=0,s=0,mn=0,h=0;
+  // ***on accède aux différents span par leurs indice***
+   sp[0].innerHTML=h+" h";
+   sp[1].innerHTML=mn+" min";
+   sp[2].innerHTML=s+" s";
+     }
 /*pas besoin de reset
 
 
