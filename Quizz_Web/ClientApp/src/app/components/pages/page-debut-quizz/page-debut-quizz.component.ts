@@ -22,6 +22,7 @@ export class PageDebutQuizzComponent implements OnInit
   dataQuestions: DTOQuestion[];
 
 
+
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
   {
@@ -34,14 +35,14 @@ export class PageDebutQuizzComponent implements OnInit
   ngOnInit()
   {
 
-
     ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
       .then(repFetch =>
       {
         repFetch.json()                                  // Extraire les données json de la promise
-          .then(retour => { this.dataQuizz = retour })   // Sauvegarder les données
+          .then(retour => { this.DTOTransform(retour) })   // Sauvegarder les données
           .then(x =>
           {
+            console.log(this.dataQuizz.$UrlCode);
             ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
               .then(repFetch =>
               {
@@ -57,6 +58,19 @@ export class PageDebutQuizzComponent implements OnInit
       })
 
   }
+
+
+
+  DTOTransform(prmData: any)
+  {
+    this.dataQuizz = new DTOQuizz();
+    this.dataQuizz.$Complexite = prmData.complexite;
+    this.dataQuizz.$Chrono = prmData.chrono;
+    this.dataQuizz.$FKCompteRecruteur = prmData.fkCompteRecruteur;
+    this.dataQuizz.$UrlCode = prmData.urlcode;
+    this.dataQuizz.$Theme = prmData.theme;
+  }
+
 
 
   /*--- Methodes ---*/
@@ -76,19 +90,12 @@ export class PageDebutQuizzComponent implements OnInit
 
   startQuizz()
   {
-console.log("cc")
     this.dataQuestions.forEach(question =>
     {
       console.log(question);
     })
 
   }
-
-
-
-
-
-
 
 
 }

@@ -1,66 +1,80 @@
 export class DTOQuestion
 {
+  private PKQuestion: number;
+  private Enonce: string;
+  private RepLibre: boolean;
+  private ListeReponses: any;
 
-    private Enonce: string;
-    private RepLibre: boolean;
-    private NomComplexite: number;
-    private NomTheme: number;
+  /**
+   * Getter $PKQuestion
+   * @return {number}
+   */
+  public get $PKQuestion(): number
+  {
+    return this.PKQuestion;
+  }
 
-    public get enonce(): string
-    {
-        return this.Enonce;
-    }
+  /**
+   * Getter $Enonce
+   * @return {string}
+   */
+  public get $Enonce(): string
+  {
+    return this.Enonce;
+  }
 
-    public set enonce(enonce: string)
-    {
-        this.Enonce = enonce;
-    }
+  /**
+   * Getter $RepLibre
+   * @return {boolean}
+   */
+  public get $RepLibre(): boolean
+  {
+    return this.RepLibre;
+  }
 
-    public get repLibre(): boolean
-    {
-        return this.RepLibre;
-    }
+  /**
+   * Getter $ListeReponses
+   * @return {any}
+   */
+  public get $ListeReponses(): any
+  {
+    return this.ListeReponses;
+  }
 
-    public set repLibre(repLibre: boolean)
-    {
-        this.RepLibre = repLibre;
-    }
+  /**
+   * Setter $PKQuestion
+   * @param {number} value
+   */
+  public set $PKQuestion(value: number)
+  {
+    this.PKQuestion = value;
+  }
 
-    public get nomComplexite(): number
-    {
-        return this.NomComplexite;
-    }
+  /**
+   * Setter $Enonce
+   * @param {string} value
+   */
+  public set $Enonce(value: string)
+  {
+    this.Enonce = value;
+  }
 
-    public set nomComplexite(nomComplexite: number
-    )
-    {
-        this.NomComplexite = nomComplexite;
-    }
+  /**
+   * Setter $RepLibre
+   * @param {boolean} value
+   */
+  public set $RepLibre(value: boolean)
+  {
+    this.RepLibre = value;
+  }
 
-    public get nomTheme(): number
-    {
-        return this.NomTheme;
-    }
-
-    public set nomTheme(nomTheme: number)
-    {
-        this.NomTheme = nomTheme;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  /**
+   * Setter $ListeReponses
+   * @param {any} value
+   */
+  public set $ListeReponses(value: any)
+  {
+    this.ListeReponses = value;
+  }
 
 }

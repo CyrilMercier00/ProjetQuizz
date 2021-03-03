@@ -15,7 +15,7 @@ export class PageReponseQcmComponent implements OnInit
 
   /* ------ Declaration des variables ------ */
   @Input("dataQuestion") dataQ: DTOQuestion[];
-  @Input("dataReponses") dataR;
+  @Input("dataReponses") dataR: reponseDTO[];
   rep1: string;
   rep2: string;
   rep3: string;
@@ -29,8 +29,9 @@ export class PageReponseQcmComponent implements OnInit
   /* ------ Constructeur ------ */
   constructor(private router: Router)
   {
-    this.dataQ.forEach((data) =>{
-    this.enonce = data.enonce;
+    this.dataQ.forEach((dataQ) =>
+    {
+      this.enonce;
     })
   }
 
@@ -49,10 +50,10 @@ export class PageReponseQcmComponent implements OnInit
   {
     let data = new reponseDTO();
 
-    data._Commentaire = this.textCommentaire;
-    data._Reponse = event.target.value;
-    data._FKCompte = 0;
-    data._FKQuestion = parseInt(this.router.getCurrentNavigation().extras.state["fkQuestion"]);
+    data.$Commentaire = this.textCommentaire;
+    data.$Reponse = event.target.value;
+    data.$FKCompte = 0;
+    data.$FKQuestion = parseInt(this.router.getCurrentNavigation().extras.state["fkQuestion"]);
 
     this.envoiFormulaire(data);
   }

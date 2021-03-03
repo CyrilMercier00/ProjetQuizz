@@ -5,8 +5,8 @@ export class DTOQuizz
   private FKCompteRecruteur: number;
   private NbQuestions: number;
   private Chrono: string;
-  private Theme: String;
-  private Complexite: String;
+  private Theme: string;
+  private Complexite: string;
 
   /**
    * Getter $UrlCode
