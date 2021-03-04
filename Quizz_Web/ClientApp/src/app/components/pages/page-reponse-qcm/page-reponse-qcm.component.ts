@@ -15,7 +15,6 @@ export class PageReponseQcmComponent implements OnInit
 
   /* ------ Declaration des variables ------ */
   @Input("dataQuestion") dataQ: DTOQuestion[];
-  @Input("dataReponses") dataR: reponseDTO[];
   rep1: string;
   rep2: string;
   rep3: string;
@@ -25,6 +24,8 @@ export class PageReponseQcmComponent implements OnInit
   nbQuestionActu: number;
   idQuestion: number;
   enonce: string;
+
+
 
   /* ------ Constructeur ------ */
   constructor(private router: Router)
@@ -76,4 +77,7 @@ export class PageReponseQcmComponent implements OnInit
       }
     )
   }
+
+
+
 }

@@ -5,6 +5,7 @@ import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { ServiceQuestions } from 'src/app/Services/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Services/serviceQuizz'
+import { utilDTO } from 'src/app/DTO/utilDTO';
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -19,7 +20,8 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Variables --- */
   code: string;
   dataQuizz: DTOQuizz;
-  dataQuestions: DTOQuestion[];
+  arrayDataQuestions: DTOQuestion[];
+  dataQuestionParent: DTOQuestion;
 
 
 
@@ -39,17 +41,16 @@ export class PageDebutQuizzComponent implements OnInit
       .then(repFetch =>
       {
         repFetch.json()                                  // Extraire les données json de la promise
-          .then(retour => { this.DTOTransform(retour) })   // Sauvegarder les données
+          .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
           .then(x =>
           {
-            console.log(this.dataQuizz.$UrlCode);
             ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
               .then(repFetch =>
               {
                 repFetch.json()                          // Extraire les données json de la promise
                   .then(retour =>                        // Sauvegarder les données en array
                   {
-                    this.dataQuestions = retour;
+                    this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
                     this.startQuizz();
                   }
                   )
@@ -61,15 +62,6 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-  DTOTransform(prmData: any)
-  {
-    this.dataQuizz = new DTOQuizz();
-    this.dataQuizz.$Complexite = prmData.complexite;
-    this.dataQuizz.$Chrono = prmData.chrono;
-    this.dataQuizz.$FKCompteRecruteur = prmData.fkCompteRecruteur;
-    this.dataQuizz.$UrlCode = prmData.urlcode;
-    this.dataQuizz.$Theme = prmData.theme;
-  }
 
 
 
@@ -87,12 +79,11 @@ export class PageDebutQuizzComponent implements OnInit
   }
 
 
-
   startQuizz()
   {
-    this.dataQuestions.forEach(question =>
+    this.arrayDataQuestions.forEach(question =>
     {
-      console.log(question);
+      this.dataQuestionParent = (question);
     })
 
   }
