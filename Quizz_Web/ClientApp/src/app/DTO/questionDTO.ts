@@ -5,8 +5,6 @@ export class DTOQuestion
   private RepLibre: boolean;
   private ListeReponses: any;
 
-  DTOQuestion() { }
-
   /**
    * Getter $PKQuestion
    * @return {number}
