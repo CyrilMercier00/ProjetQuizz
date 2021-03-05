@@ -18,12 +18,13 @@ import { utilDTO } from 'src/app/DTO/utilDTO';
 export class PageDebutQuizzComponent implements OnInit
 {
   /* --- Variables --- */
-  code: string;
-  dataQuizz: DTOQuizz;
-  arrayDataQuestions: DTOQuestion[];
-  dataQuestionParent: DTOQuestion;
-
-
+  code: string;                           // Contiens le code de la page
+  dataQuizz: DTOQuizz;                    // Contiens le quizz correspondant au code de la page
+  arrayDataQuestions: DTOQuestion[];      // Contiens toutes les questions récupérées pour ce quizz
+  dataQuestion: DTOQuestion;              // Contiens les données de la question actuellement posée
+  componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
+  componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
+  isReady: boolean                        // Active le bouton commencer si la recuperaion des données a bien été faite
 
   /* --- Constructeur ---*/
   constructor(private router: Router, private actRoute: ActivatedRoute)
@@ -37,21 +38,22 @@ export class PageDebutQuizzComponent implements OnInit
   ngOnInit()
   {
 
+    // * Récuperation des données du quizz
     ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
       .then(repFetch =>
       {
-        repFetch.json()                                  // Extraire les données json de la promise
+        repFetch.json()                                  // Extraire les données json de la promesse
           .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
           .then(x =>
           {
             ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)    // Chercher les questions associées a ce quizz
               .then(repFetch =>
               {
-                repFetch.json()                          // Extraire les données json de la promise
-                  .then(retour =>                        // Sauvegarder les données en array
+                repFetch.json()                          // Extraire les données json de la promesse
+                  .then(retour =>                        // Sauvegarder les données dans un array
                   {
                     this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                    this.startQuizz();
+                    this.isReady = true;
                   }
                   )
               })
@@ -62,31 +64,35 @@ export class PageDebutQuizzComponent implements OnInit
 
 
 
-
-
-
   /*--- Methodes ---*/
   handleClick()
   {
-    console.log(this.dataQuizz);
+    this.startQuizz();
   }
 
 
 
-  questionToArray(prmData: any)
-  {
-    console.log(prmData);
-  }
-
-
+  /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
     this.arrayDataQuestions.forEach(question =>
     {
-      this.dataQuestionParent = (question);
+      // * Preparation des données pour la prochaine question
+      this.dataQuestion = question;
+
+      if (question.$RepLibre == true)
+      {
+        // * Desactiver le component inutile et activer celui correspondant à la question
+        this.componentRepQCMEnabled = false;
+        this.componentRepLibreEnabled = true;
+
+      } else
+      {
+        this.componentRepLibreEnabled = false;
+        this.componentRepQCMEnabled = true;
+      }
+
     })
-
   }
-
 
 }

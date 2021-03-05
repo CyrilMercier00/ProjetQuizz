@@ -7,12 +7,24 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BoutonReponseQcmComponent implements OnInit
 {
-  @Input("text-bouton") text: string;
+  @Input("text") text: string;
   @Input("ID") idBtn: number;
+
+
+
   constructor() { }
+
+
 
   ngOnInit()
   {
   }
 
+
+
+
+  onclick()
+  {
+    // TODO : Emmetre l'id de la question choisie
+  }
 }
