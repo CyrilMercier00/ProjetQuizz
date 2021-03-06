@@ -1,1 +1,8 @@
-<p>profil works!</p>
+<p>Nom : {{comptePerso.GetNom}}</p>
+<p>Prénom : {{comptePerso.GetPrenom}}</p>
+<p>GenererQuizz : {{comptePerso.GetPermissionDTO.GetGenererQuizz | booleanPipe}}</p>
+<p>AjouterQuest : {{comptePerso.GetPermissionDTO.AjouterQuest | booleanPipe}}</p>
+<p>ModifierQuest : {{comptePerso.GetPermissionDTO.ModifierQuest | booleanPipe}}</p>
+<p>SupprQuestion : {{comptePerso.GetPermissionDTO.SupprQuestion | booleanPipe}}</p>
+<p>ModifierCompte : {{comptePerso.GetPermissionDTO.ModifierCompte | booleanPipe}}</p>
+<p>SupprimerCompte : {{comptePerso.GetPermissionDTO.SupprimerCompte | booleanPipe}}</p>

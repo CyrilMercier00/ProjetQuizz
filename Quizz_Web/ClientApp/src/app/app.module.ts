@@ -45,6 +45,7 @@ import { SelectPermissionComponent } from './components/select/select-permission
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
 import { ProfilComponent } from './components/pages/profil/profil.component';
 import { ConnexionGuard } from './Guards/ConnexionGuard';
+import { BooleanPipe } from './Pipe/boolean-pipe';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { ConnexionGuard } from './Guards/ConnexionGuard';
     CheckBoxComponent,
     LoginPageComponent,
     ProfilComponent,
+    BooleanPipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
