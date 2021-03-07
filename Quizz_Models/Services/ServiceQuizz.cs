@@ -14,6 +14,8 @@ namespace Quizz_Models.Services
         readonly ThemeRepository repoTheme;
         readonly CompteRepository repoCompte;
        // readonly Compte repoCompteQuizz;
+
+
         public ServiceQuizz(ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
         {
             repoComplex = complexiteRepository;
@@ -143,6 +145,7 @@ namespace Quizz_Models.Services
             Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
             Compte recruteurQuizz= repoCompte.GetCompteByID(prmIDRecruteur);
 
+            
             Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
          
         }
