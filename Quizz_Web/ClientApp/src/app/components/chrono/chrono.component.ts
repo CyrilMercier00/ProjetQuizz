@@ -33,8 +33,8 @@ export class ChronoComponent implements OnInit
     reset();
  }
 
- /* --- Envoi a l'api de la quizz ---*/
-/* InsertQuestion(data)
+ /* --- Maj Chrono envoi a l'api de la quizz ---*/
+ InsertChrono(data)
  {
 
    let q = new DTOQuizz();
@@ -42,7 +42,7 @@ export class ChronoComponent implements OnInit
    
 
    fetch(
-     VariableGlobales.apiURLQuizz+"OnsIwz28FkJiLVq9Ak5A",
+     VariableGlobales.apiURLFinQuizz+"OnsIwz28FkJiLVq9Ak5A",
      {
        method: "PUT",
        headers:
@@ -54,7 +54,7 @@ export class ChronoComponent implements OnInit
      }
    )
  }
-  */
+  
 
 }
 

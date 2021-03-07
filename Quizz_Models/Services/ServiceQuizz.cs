@@ -13,6 +13,7 @@ namespace Quizz_Models.Services
         readonly QuizzRepository repoQuizz;
         readonly ThemeRepository repoTheme;
         readonly CompteRepository repoCompte;
+       // readonly Compte repoCompteQuizz;
         public ServiceQuizz(ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
         {
             repoComplex = complexiteRepository;
@@ -49,8 +50,8 @@ namespace Quizz_Models.Services
                 FkQuizz = prmIDQuizz
             });
 
-            // Compte compteRecruteur = repoCompte.GetCompteByID();
-            // SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteur);
+         //   int prmIDRecruteurQuizz = repoCompte.GetComptebyIdQuizz(prmIDQuizz);
+          //  SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteurQuizz);
             return repoQuizz.Sauvegarde();
         }
 

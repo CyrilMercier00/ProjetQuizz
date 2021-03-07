@@ -7,4 +7,11 @@ export class ServiceQuizz
   {
     return fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "GET" })
   }
+
+  // * Retourne la route de validation du Quizz 
+  public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
+  {
+    
+    return fetch(VariableGlobales.apiURLQuizz + prmCodeQuizz, { method: "GET" })
+  }
 }
