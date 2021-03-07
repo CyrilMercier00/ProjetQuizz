@@ -137,7 +137,7 @@ import { ConnexionGuard } from './Guards/ConnexionGuard';
         canActivate: [ModifierCompteGuard]
       },
       { // Page de fin de quizz
-        path: 'resultats',
+        path: 'quizzsuccess',
         component: ResultatsComponent
       },
       {
