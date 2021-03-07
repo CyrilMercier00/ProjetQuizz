@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { timeStamp } from 'console';
 import { VariableGlobales } from 'src/app/url_api';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
@@ -12,8 +12,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './chrono.component.html',
   styleUrls: ['./chrono.component.css']
 })
+
 export class ChronoComponent implements OnInit
 {
+  @Output() TimeQToSend = new EventEmitter<any>();
 
   /* --- Variables --- */
   code: string;
@@ -37,6 +39,7 @@ export class ChronoComponent implements OnInit
     
   }
 
+  //************************ Partie page question Quizz ************************* */
  //Appel dans button submit
  OnSubmitQuest(){
   let TQuest=new Date;
@@ -84,7 +87,7 @@ export class ChronoComponent implements OnInit
 
      //******/
  }
- 
+ //************************ Partie page question Quizz ************************* */
 
 }
 
@@ -126,6 +129,8 @@ function update_chrono()
      sp[1].innerHTML=mn+" min";
      sp[2].innerHTML=s+" s";
     // sp[3].innerHTML=ms+" ms";
+    this.TimeQToSend=this.TimeQ;
+    this.userEvent.emit(this.TimeQToSend);
 
 }
 //***on arrête le "timer" par clearInterval ,on réactive le bouton start 
