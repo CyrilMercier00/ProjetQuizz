@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { timeStamp } from 'console';
 import { VariableGlobales } from 'src/app/url_api';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Stopwatch } from "ts-stopwatch";
+
 
 @Component({
   selector: 'app-chrono',
@@ -13,11 +15,26 @@ import { Stopwatch } from "ts-stopwatch";
 export class ChronoComponent implements OnInit
 {
 
-  constructor() { }
+  /* --- Variables --- */
+  code: string;
+  
+  //******************/
+
+  
+  quizz:DTOQuizz;
+  TimeQ;
+  
+  
+  /* --- Constructeur ---*/
+  constructor(private router: Router, private actRoute: ActivatedRoute)
+  {
+    this.code = this.actRoute.snapshot.params['urlQuizz'];
+  }
 
   ngOnInit(): void
   {
     start();
+    
   }
 
  //Appel dans button submit
@@ -27,34 +44,47 @@ export class ChronoComponent implements OnInit
     TQuest.setMinutes(mn);
     TQuest.setSeconds(s);
     clearInterval(t);
-    let TimeQ=TQuest.getTime();
+    this.TimeQ=TQuest.getTime();
     //test affichege d
     //H[0].innerHTML="TQuest : " + d; 
+    this.InsertChrono();
     reset();
  }
 
- /* --- Maj Chrono envoi a l'api de la quizz ---*/
- InsertChrono(data)
+
+
+ /* --- Maj Chrono envoi a l'api du quizz ---*/
+ InsertChrono()
  {
+     //**************/
+     ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+      .then(repFetch =>
+      {
+        repFetch.json()                                  // Extraire les données json de la promise
+          .then(retour => { this.quizz = retour })   // Sauvegarder les données
+          .then(x =>
+          {
+            let q=this.quizz;
+            q.$Chrono = q.$Chrono + this.TimeQ.value;
+            fetch(
+              VariableGlobales.apiURLQuizz + this.code,
+               {
+                 method: "PUT",
+                 headers:
+                 {
+                   'Accept': 'application/json',
+                   'Content-Type': 'application/json'
+                 },
+                 body: JSON.stringify(q)
+               }
+             ).then(response => response.json())
+           
+          });
+      })
 
-   let q = new DTOQuizz();
-   q.$Chrono = data.value;
-   
-
-   fetch(
-     VariableGlobales.apiURLFinQuizz+"OnsIwz28FkJiLVq9Ak5A",
-     {
-       method: "PUT",
-       headers:
-       {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json'
-       },
-       body: JSON.stringify(q)
-     }
-   )
+     //******/
  }
-  
+ 
 
 }
 

@@ -20,7 +20,7 @@ export class ServiceQuizz
   public static UpdateQuizz(prmCode: string): Promise<Response>
   {
     this.GetQuizzByCode(prmCode);
-    return fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "GET" })
+    return fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "PUT" })
   }
 
   
@@ -28,7 +28,6 @@ export class ServiceQuizz
   // * Retourne la route de validation du Quizz 
   public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
   {
-    
     return fetch(VariableGlobales.apiURLQuizz + prmCodeQuizz, { method: "PUT" })
   }
  
