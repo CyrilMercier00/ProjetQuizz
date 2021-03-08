@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-bouton-reponse-qcm',
@@ -9,6 +9,7 @@ export class BoutonReponseQcmComponent implements OnInit
 {
   @Input("text") text: string;
   @Input("ID") idBtn: number;
+  @Output("ID") emitterID = new EventEmitter()
 
 
 
@@ -22,9 +23,9 @@ export class BoutonReponseQcmComponent implements OnInit
 
 
 
-
   onclick()
   {
-    // TODO : Emmetre l'id de la question choisie
+    this.emitterID.emit(this.idBtn);
   }
+
 }
