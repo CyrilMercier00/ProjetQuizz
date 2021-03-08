@@ -1,4 +1,5 @@
 export class PermissionDTO {
+    private Nom             : string;
     private GenererQuizz    : boolean;
     private AjouterQuest    : boolean;
     private ModifierQuest   : boolean;
@@ -6,15 +7,19 @@ export class PermissionDTO {
     private SupprQuestion   : boolean;
     private SupprimerCompte : boolean;
 
-    constructor(GenererQuizz: boolean, AjouterQuest: boolean, ModifierQuest : boolean, ModifierCompte : boolean,
+    constructor(Nom: string, GenererQuizz: boolean, AjouterQuest: boolean, ModifierQuest : boolean, ModifierCompte : boolean,
         SupprQuestion : boolean, SupprimerCompte : boolean){
-
+        this.Nom = Nom;
         this.GenererQuizz       = GenererQuizz;
         this.AjouterQuest       = AjouterQuest;
         this.ModifierQuest      = ModifierQuest;
         this.ModifierCompte     = ModifierCompte;
         this.SupprQuestion      = SupprQuestion;
         this.SupprimerCompte    = SupprimerCompte;
+    }
+
+    public get GetNom(): string{
+        return this.Nom;
     }
 
     public get GetGenererQuizz(): boolean{

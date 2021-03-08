@@ -53,6 +53,7 @@ namespace Quizz_Web.Controllers
                         new Claim("mail", compte.Mail),
                         new Claim("nom", compte.Nom),
                         new Claim("prenom", compte.Prenom),
+                        new Claim("role", permissionDTO.Nom),
                         new Claim("GenererQuizz", permissionDTO.GenererQuizz.ToString()),
                         new Claim("AjouterQuest", permissionDTO.AjouterQuest.ToString()),
                         new Claim("ModifierQuest", permissionDTO.ModifierQuest.ToString()),
