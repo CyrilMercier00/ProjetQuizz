@@ -2,22 +2,27 @@ import jwt_decode from "jwt-decode";
 
 export class Globals
 {
-    static clientJwt: string = "";
+    static init(jwt: string): void{
+        localStorage.setItem('clientJwt', jwt);
+    }
 
+    static getJwt(): string{
+        return localStorage.getItem('clientJwt');
+    }
+    
     static logout(): void{
-        this.clientJwt = "";
+        localStorage.setItem('clientJwt', "");
     }
 
     static isLoggedIn(): boolean{
-        return this.clientJwt != "";
+        return localStorage.getItem('clientJwt') != "";
     }
 
     static isLoggedOut(): boolean{
-        return this.clientJwt === "";
+        return localStorage.getItem('clientJwt') == "";
     }
 
     static decodeJwt(): string{
-        let jwtdecode: string = jwt_decode(this.clientJwt);
-        return jwtdecode;
+        return jwt_decode(localStorage.getItem('clientJwt'));
     }
 }

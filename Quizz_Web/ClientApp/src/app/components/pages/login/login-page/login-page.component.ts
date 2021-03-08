@@ -34,7 +34,7 @@ export class LoginPageComponent{
   connexion(connexionDTO: ConnexionDTO){
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
-        Globals.clientJwt = jwt;
+        Globals.init(jwt);
       }
     );
   }

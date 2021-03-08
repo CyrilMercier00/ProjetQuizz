@@ -16,7 +16,7 @@ export class CompteService {
   getAll(): Observable<Compte[]>{
 
     const headerDictionnary = {
-      'Authorization' : Globals.clientJwt
+      'Authorization' : Globals.getJwt()
     }
 
     const requestOptions = {
