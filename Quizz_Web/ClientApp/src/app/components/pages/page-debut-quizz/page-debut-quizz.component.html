@@ -3,7 +3,7 @@
   <p>Nous vous souhaitons bonne chance !</p>
 
   <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
-  <app-page-reponse-qcm *ngIf="isQcm" [dataQuestion]="questionAffichager"></app-page-reponse-qcm>
-  <app-page-reponse-libre *ngIf="isQcm" [dataQuestion]="questionAffichager"></app-page-reponse-libre>
+  <app-page-reponse-qcm *ngIf="componentRepQCMEnabled" [dataQuestion]="dataQuestion"></app-page-reponse-qcm>
+  <app-page-reponse-libre *ngIf="componentRepLibreEnabled" [dataQuestion]="dataQuestion"></app-page-reponse-libre>
 
 </div>
