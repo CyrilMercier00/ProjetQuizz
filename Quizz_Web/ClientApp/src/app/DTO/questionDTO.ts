@@ -1,9 +1,49 @@
 export class DTOQuestion
 {
+
   private PKQuestion: number;
   private Enonce: string;
   private RepLibre: boolean;
   private ListeReponses: any;
+  private Theme: string;
+  private complexite: string;
+
+  /**
+   * Getter $Theme
+   * @return {string}
+   */
+  public get $Theme(): string
+  {
+    return this.Theme;
+  }
+
+  /**
+   * Getter $complexite
+   * @return {string}
+   */
+  public get $complexite(): string
+  {
+    return this.complexite;
+  }
+
+  /**
+   * Setter $Theme
+   * @param {string} value
+   */
+  public set $Theme(value: string)
+  {
+    this.Theme = value;
+  }
+
+  /**
+   * Setter $complexite
+   * @param {string} value
+   */
+  public set $complexite(value: string)
+  {
+    this.complexite = value;
+  }
+
 
   /**
    * Getter $PKQuestion
@@ -76,5 +116,7 @@ export class DTOQuestion
   {
     this.ListeReponses = value;
   }
+
+
 
 }
