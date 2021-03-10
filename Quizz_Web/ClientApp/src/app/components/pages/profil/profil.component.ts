@@ -21,7 +21,7 @@ export class ProfilComponent implements OnInit {
       let jwt = Globals.decodeJwt();
 
       if(this.checkJWTProps(jwt)){
-        let permissionDTO = new PermissionDTO(jwt['GenererQuizz'], jwt['AjouterQuest'], jwt['ModifierQuest'], jwt['ModifierCompte'], jwt['SupprQuestion'], jwt['SupprimerCompte']);
+        let permissionDTO = new PermissionDTO(jwt['role'], jwt['GenererQuizz'], jwt['AjouterQuest'], jwt['ModifierQuest'], jwt['ModifierCompte'], jwt['SupprQuestion'], jwt['SupprimerCompte']);
         this.comptePerso = new ComptePersonnelDTO(jwt['nom'], jwt['prenom'], permissionDTO);
       }
     }
