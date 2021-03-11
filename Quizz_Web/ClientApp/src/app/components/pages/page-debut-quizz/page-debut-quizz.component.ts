@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
-import { ServiceQuestions } from 'src/app/Services/serviceQuestion'
-import { ServiceQuizz } from 'src/app/Services/serviceQuizz'
+import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
 import { utilDTO } from 'src/app/DTO/utilDTO';
 
 @Component({
