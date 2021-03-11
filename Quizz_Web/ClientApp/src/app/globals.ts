@@ -2,7 +2,7 @@ import jwt_decode from "jwt-decode";
 
 export class Globals
 {
-    static init(jwt: string): void{
+    static initJwt(jwt: string): void{
         localStorage.setItem('clientJwt', jwt);
     }
 

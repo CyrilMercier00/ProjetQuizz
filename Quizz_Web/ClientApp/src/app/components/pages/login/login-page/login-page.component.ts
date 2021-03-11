@@ -19,7 +19,9 @@ export class LoginPageComponent{
   public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
   ngOnInit(){
-    Globals.init('');
+    if(Globals.isLoggedOut()){
+      Globals.initJwt('');
+    }
   }
   
   redirectToLogin(){
@@ -38,7 +40,7 @@ export class LoginPageComponent{
   connexion(connexionDTO: ConnexionDTO){
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
-        Globals.init(jwt);
+        Globals.initJwt(jwt);
       }
     );
   }
