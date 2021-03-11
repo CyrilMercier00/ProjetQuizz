@@ -27,17 +27,24 @@ namespace Quizz_Web.Controllers
         public string Login([FromBody] LoginDTO loginDTO)
         {
             Compte compte = this.compteService.FindCompteByMail(loginDTO.Mail);
-            PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
 
-            if (VerifyPassword(loginDTO, compte))
+            if (compte != null && VerifyPassword(loginDTO, compte))
             {
-                return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
+                PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
+                if(permissionDTO != null)
+                {
+                    return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                    return "";
+                }
             }
             else
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
                 return "";
-                //Traiter l'erreur de connexion
             }
         }
 
@@ -53,6 +60,7 @@ namespace Quizz_Web.Controllers
                         new Claim("mail", compte.Mail),
                         new Claim("nom", compte.Nom),
                         new Claim("prenom", compte.Prenom),
+                        new Claim("role", permissionDTO.Nom),
                         new Claim("GenererQuizz", permissionDTO.GenererQuizz.ToString()),
                         new Claim("AjouterQuest", permissionDTO.AjouterQuest.ToString()),
                         new Claim("ModifierQuest", permissionDTO.ModifierQuest.ToString()),

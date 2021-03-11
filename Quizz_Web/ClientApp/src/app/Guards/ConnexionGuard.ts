@@ -11,7 +11,6 @@ export class ConnexionGuard implements CanActivate {
     constructor(private _router: Router) {}
 
     canActivate(): boolean{
-        console.log(Globals.isLoggedIn());
         return Globals.isLoggedIn();
     }
 }

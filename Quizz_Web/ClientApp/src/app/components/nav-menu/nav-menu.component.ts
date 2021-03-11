@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Globals } from 'src/app/globals';
 import { PermissionService } from 'src/app/Service/PermissionService';
 
 @Component({
@@ -21,5 +22,9 @@ export class NavMenuComponent {
 
   hasAccessTo(permission: string): boolean{
     return this.permissionService.verifyPermission(permission);
+  }
+
+  isLoggedIn(): boolean{
+    return Globals.isLoggedIn();
   }
 }

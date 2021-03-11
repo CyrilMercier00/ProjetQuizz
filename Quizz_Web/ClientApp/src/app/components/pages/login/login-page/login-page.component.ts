@@ -18,6 +18,10 @@ export class LoginPageComponent{
   
   public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
+  ngOnInit(){
+    Globals.init('');
+  }
+  
   redirectToLogin(){
     this.router.navigate(['/']);
   }
@@ -34,7 +38,7 @@ export class LoginPageComponent{
   connexion(connexionDTO: ConnexionDTO){
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
-        Globals.clientJwt = jwt;
+        Globals.init(jwt);
       }
     );
   }

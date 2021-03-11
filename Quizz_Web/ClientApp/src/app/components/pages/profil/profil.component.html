@@ -1,1 +1,12 @@
-<p>profil works!</p>
+<div id="rectangle">
+    <p>{{comptePerso.GetNom}} {{comptePerso.GetPrenom}} | Rôle : {{comptePerso.GetPermissionDTO.GetNom}}</p>
+
+    <div id="permissions">
+        <p>GenererQuizz : {{comptePerso.GetPermissionDTO.GetGenererQuizz | booleanPipe}}</p>
+        <p>AjouterQuest : {{comptePerso.GetPermissionDTO.AjouterQuest | booleanPipe}}</p>
+        <p>ModifierQuest : {{comptePerso.GetPermissionDTO.ModifierQuest | booleanPipe}}</p>
+        <p>SupprQuestion : {{comptePerso.GetPermissionDTO.SupprQuestion | booleanPipe}}</p>
+        <p>ModifierCompte : {{comptePerso.GetPermissionDTO.ModifierCompte | booleanPipe}}</p>
+        <p>SupprimerCompte : {{comptePerso.GetPermissionDTO.SupprimerCompte | booleanPipe}}</p>
+    </div>
+</div>

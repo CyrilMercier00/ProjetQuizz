@@ -52,8 +52,8 @@
     background-color: rgb(255,105,30);
 }
 
-.deleteButton:hover{
-    background-color: rgb(220,0,0);
+.containerButton > .deleteButton:hover{
+    background-color: rgb(180, 0, 0);
 }
 
 .containerButton > .ValidateButton{

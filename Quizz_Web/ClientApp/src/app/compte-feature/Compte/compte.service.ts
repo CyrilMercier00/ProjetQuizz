@@ -16,7 +16,7 @@ export class CompteService {
   getAll(): Observable<Compte[]>{
 
     const headerDictionnary = {
-      'Authorization' : Globals.clientJwt
+      'Authorization' : Globals.getJwt()
     }
 
     const requestOptions = {
@@ -27,7 +27,6 @@ export class CompteService {
   }
 
   create(compte : Compte) : Observable<Compte>{
-    console.log(compte);
     return this.httpClient.post<Compte>(VariableGlobales.apiURLCompte, compte);
   }
 
@@ -38,7 +37,6 @@ export class CompteService {
   }
 
   modifyPermission(compte: Compte, permissionNameDTO : PermissionNameDTO) : Observable<PermissionNameDTO>{
-    let idCompte = compte.id;
-    return this.httpClient.put<PermissionNameDTO>(VariableGlobales.apiURLCompte + idCompte + "/permission", permissionNameDTO);
+    return this.httpClient.put<PermissionNameDTO>(VariableGlobales.apiURLCompte + compte.id + "/permission", permissionNameDTO);
   }
 }
