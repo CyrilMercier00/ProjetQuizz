@@ -11,7 +11,7 @@ namespace Quizz_Models.DTO
     {
         public QuestionReponseDTO()
         {
-            ListeReponses = new List<PropositionReponse>();
+            ListeReponses = new List<PropositionReponseDTO>();
         }
 
         public int PKQuestion { get; set; }
