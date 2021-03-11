@@ -8,10 +8,20 @@ export class utilDTO
   public static DTOTransformQuestion(prmDataQuestion: any): DTOQuestion[]
   {
     let arrayDTO: DTOQuestion[] = [];
+    let q = new DTOQuestion()
 
     prmDataQuestion.forEach(question =>
     {
-      arrayDTO.push(question)
+
+      console.log (question)
+      q.$Enonce = question.enonce
+      q.$ListeReponses = question.listeReponses
+      q.$PKQuestion = question.pkQuestion
+      q.$RepLibre = question.repLibre
+      q.$Theme = question.theme
+      q.$complexite = question.complexite
+
+      arrayDTO.push(q)
     });
 
     return arrayDTO

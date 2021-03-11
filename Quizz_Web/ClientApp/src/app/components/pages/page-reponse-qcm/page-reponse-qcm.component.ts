@@ -18,7 +18,7 @@ export class PageReponseQcmComponent implements OnInit
 {
 
   /* ------ Declaration des variables ------ */
-  @Input("dataQuestion") dataQ: DTOQuestion;    // DTO de la question passée
+  @Input("dataQuestion") dataQ: any;    // DTO de la question passée
   rep1: string;               // Texte de la réponse 1
   rep2: string;               // Texte de la réponse 2
   rep3: string;               // Texte de la réponse 3
@@ -28,10 +28,18 @@ export class PageReponseQcmComponent implements OnInit
 
 
 
-
   /* ------ Constructeur ------ */
   constructor(private router: Router)
   {
+  }
+
+
+
+  /* ------ Methodes Angular --- */
+  ngOnInit()
+  {
+    console.log("called")
+    console.log(this.dataQ)
     this.enonce == this.dataQ.$Enonce;
 
     // * Choisis les reponses aléatoirement
@@ -43,15 +51,6 @@ export class PageReponseQcmComponent implements OnInit
     this.rep2 == this.dataQ.$ListeReponses[arrayNbChoisis[1]];
     this.rep3 == this.dataQ.$ListeReponses[arrayNbChoisis[2]];
     this.rep4 == this.dataQ.$ListeReponses[arrayNbChoisis[3]];
-
-  }
-
-
-
-  /* ------ Methodes Angular --- */
-  ngOnInit()
-  {
-
   }
 
 
