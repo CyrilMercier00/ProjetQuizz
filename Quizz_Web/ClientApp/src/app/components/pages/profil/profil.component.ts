@@ -17,7 +17,7 @@ export class ProfilComponent implements OnInit {
   constructor(private booleanPipe: BooleanPipe) { }
 
   ngOnInit(): void {
-    if(Globals.isLoggedIn){
+    if(Globals.isLoggedIn()){
       let jwt = Globals.decodeJwt();
 
       if(this.checkJWTProps(jwt)){

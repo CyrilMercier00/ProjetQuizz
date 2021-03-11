@@ -18,6 +18,10 @@ export class LoginPageComponent{
   
   public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
+  ngOnInit(){
+    Globals.init('');
+  }
+  
   redirectToLogin(){
     this.router.navigate(['/']);
   }
