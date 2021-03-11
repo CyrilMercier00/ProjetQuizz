@@ -13,7 +13,7 @@ export class EnonceComponent implements OnInit
 
   /* --- Variables --- */
   @Input("text") text: string;
-  
+
 
 
 
