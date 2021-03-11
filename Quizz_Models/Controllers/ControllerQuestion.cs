@@ -3,7 +3,7 @@ using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
 using Quizz_Models.bdd_quizz;
-using System;
+using Newtonsoft.Json;
 
 namespace Quizz_Web.Controllers
 {
@@ -59,14 +59,15 @@ namespace Quizz_Web.Controllers
         /// <param name="idQuizz"></param>
         /// <returns></returns>
         [HttpGet("{vide}/{codeQuizz}")]
-        public List<QuestionReponseDTO> GetQuestionReponses(string codeQuizz)
+        public string GetQuestionReponses(string codeQuizz)
         {
             List<Question> listQuestion;    // Contiens la liste des questions
 
             listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
             if (listQuestion != null)
             {
-                return this.questionService.AddReponseToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous DTO
+                List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous 
+                return JsonConvert.SerializeObject(a);
             }
             else
             {
