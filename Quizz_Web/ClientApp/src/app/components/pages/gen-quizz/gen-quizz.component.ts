@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Router } from "@angular/router"
-
-
 
 @Component({
   selector: 'app-gen-quizz',
@@ -53,7 +52,7 @@ export class GenQuizzComponent implements OnInit
   }
 
 
-  setValeurFormNbQ(prmValue: number) 
+  setValeurFormNbQ(prmValue: number)
   {
     this.resultatForm.patchValue({ "nbQuestions": prmValue });
   }
@@ -63,6 +62,6 @@ export class GenQuizzComponent implements OnInit
   /* --- Envoie a la page suivante avec les données du formulaire --- */
   onSubmit()
   {
-    this.router.navigate(['/assignation-quizz'], { state: { form : this.resultatForm.value} });
+    this.router.navigate(['/assignation-quizz'], { state: { form: this.resultatForm.value } });
   }
 }
