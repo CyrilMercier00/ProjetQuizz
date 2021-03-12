@@ -25,7 +25,7 @@ export class PageDebutQuizzComponent implements OnInit
   componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
   componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
   isReady: boolean                        // Active le bouton commencer si la recuperaion des données a bien été faite
-
+  started: boolean = false                // Affiche les elements qui sont présent avant de commencer le quizz
 
 
 
@@ -80,6 +80,7 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
+    this.started = true;
     this.arrayDataQuestions.forEach(question =>
     {
       // * Preparation des données pour la prochaine question
