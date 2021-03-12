@@ -1,18 +1,5 @@
-
 <div class="wrapper">
-
-    
-    <div class="admin">
-      <ul><label>Administarteur : </label>
-            <li>
-                <label>Nom </label>
-            </li>
-            <li>
-                <label>Prenom </label>
-            </li>
-        </ul>
-    </div>
-    <h1>Permission</h1>
+    <h1>Permissions</h1>
 
     <div class="bouttonPermission" [routerLinkActive]="['link-active']">
         
@@ -20,7 +7,6 @@
         <input *ngIf="AjouterQuest" type="button" value="Ajouter une Question">
         <input *ngIf="ModifierQuest" type="button" value="Modifier une Question">
         <input *ngIf="SupprQuestion" type="button" value="Supprimer une question">
-        <input *ngIf="GenererQuizz" type="button" value="Générer Quizz">
     </div>
 
 </div>
