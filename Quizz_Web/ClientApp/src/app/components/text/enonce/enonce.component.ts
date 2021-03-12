@@ -18,13 +18,14 @@ export class EnonceComponent implements OnInit
 
 
   /* --- Constructeur --- */
-  constructor() { }
+  constructor() {}
 
 
 
   /* --- Methodes Angular --- */
   ngOnInit()
   {
+    console.log(this.text)
   }
 
 
