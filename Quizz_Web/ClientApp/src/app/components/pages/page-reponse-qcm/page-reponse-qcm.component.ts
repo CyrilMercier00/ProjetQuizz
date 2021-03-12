@@ -1,8 +1,6 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
-import { Router } from '@angular/router';
-import { VariableGlobales } from 'src/app/url_api';
 import { reponseDTO } from '../../../DTO/reponseDTO';
 import { utils } from 'src/app/utils';
 
@@ -17,19 +15,23 @@ import { utils } from 'src/app/utils';
 export class PageReponseQcmComponent implements OnInit
 {
 
+
+
   /* ------ Declaration des variables ------ */
-  @Input("dataQuestion") dataQ: any;    // DTO de la question passée
+  @Input("dataQuestion") dataQ: DTOQuestion;                                             // DTO de la question passée
+  @Output("estRepondu") estRepondu: EventEmitter<boolean> = new EventEmitter<boolean>() // Emmet si on appuie sur valider
+
   rep1: string;               // Texte de la réponse 1
   rep2: string;               // Texte de la réponse 2
   rep3: string;               // Texte de la réponse 3
   rep4: string;               // Texte de la réponse 4
   enonce: string;             // Enonce de la question
   textCommentaire: string;    // Commentaire du candidat
-
+  aRepondu: boolean;          // Si on a repondu a la question
 
 
   /* ------ Constructeur ------ */
-  constructor(private router: Router)
+  constructor()
   {
   }
 
@@ -38,8 +40,6 @@ export class PageReponseQcmComponent implements OnInit
   /* ------ Methodes Angular --- */
   ngOnInit()
   {
-    console.log("called")
-    console.log(this.dataQ)
     this.enonce == this.dataQ.$Enonce;
 
     // * Choisis les reponses aléatoirement
@@ -57,37 +57,17 @@ export class PageReponseQcmComponent implements OnInit
 
   /* ------ Methodes ------*/
   // Envoi de la réponse a la base de données
-  handleBtnClick(event)
+  handleClick (event)
   {
     let data = new reponseDTO();
 
     data.$Commentaire = this.textCommentaire;
     data.$Reponse = event.target.value;
     data.$FKCompte = 0;
-    data.$FKQuestion = parseInt(this.router.getCurrentNavigation().extras.state["fkQuestion"]);
+    data.$FKQuestion = this.dataQ.$PKQuestion;
 
-    this.envoiFormulaire(data);
+    this.estRepondu.emit(true);
+
   }
-
-
-
-  /* --- POST de la reponse choisie --- */
-  envoiFormulaire(prmDTO: reponseDTO)
-  {
-    fetch(
-      VariableGlobales.apiURLReponseCandidat,
-      {
-        method: "POST",
-        headers:
-        {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(prmDTO)
-      }
-    )
-  }
-
-
 
 }
