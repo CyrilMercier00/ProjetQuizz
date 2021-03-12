@@ -76,6 +76,32 @@ namespace Quizz_Web.Controllers
             }
 
         }
+
+        //************************** A modifier pr le nb question
+        /// <summary>
+        /// Get des questions et des réponses associé au quizz avec le code unique
+        /// </summary>
+        /// <param name="idQuizz"></param>
+        /// <returns></returns>
+        [HttpGet("{vide}/{codeQuizz}")]
+        public string GetNbQuestion(string codeQuizz)
+        {
+            List<Question> listQuestion;    // Contiens la liste des questions
+
+            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
+           int nbQuest= listQuestion.Count;
+            if (listQuestion != null)
+            {
+                List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion);   // Ajout des reponses pour chaque questions sous 
+                return JsonConvert.SerializeObject(a);
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+        }
     }
 }
 

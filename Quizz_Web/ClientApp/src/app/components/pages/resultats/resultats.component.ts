@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { utils } from 'protractor';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { ChronoComponent } from '../../chrono/chrono.component';
 
 @Component({
@@ -37,8 +39,7 @@ export class ResultatsComponent implements OnInit {
     }
 
   ngOnInit() {
-    
-   
+    ServiceQuizz.ValidateQuizz(this.code);
   }
-  EnregisteChrono() { this.chronoComponent.OnSubmitQuest(); }
+  //EnregisteChrono() { this.chronoComponent.OnSubmitQuest(); }
 }

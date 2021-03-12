@@ -37,8 +37,13 @@ namespace Quizz_Models.Utils
 
         //modifier les attributs et methode pour faire le lien avec la bdd
 
-        readonly  static ServiceTheme _servTheme ;
-        
+        readonly ServiceTheme _servTheme ;
+
+        public PdfUtils(ServiceTheme serviceTheme)
+        {
+            this._servTheme = serviceTheme;
+        }
+
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
         public static void ContentPdf(Quizz quizz, Compte candidatQuizz, Compte recruteurQuizz)
@@ -51,8 +56,13 @@ namespace Quizz_Models.Utils
                 prenomCandidat = candidat.Prenom;
                 nomRecruteur = recruteur.Nom;
                 prenomRecruteur = recruteur.Prenom;
-                technologie = _servTheme.GetThemeNameByID(quizz.FkTheme);
-               // Nb_QUEST=
+              //  technologie = _servTheme.GetThemeNameByID(quizz.FkTheme);
+
+
+                //recup le nb queqtion
+                List<Question> listQuestion;    // Contiens la liste des questions
+               // listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
+               // int nbQuest = listQuestion.Count;
                 //ajout attribut et modif methode
 
                 PdfHeader();
