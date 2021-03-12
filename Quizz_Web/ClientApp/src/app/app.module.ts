@@ -46,6 +46,7 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
 import { ProfilComponent } from './components/pages/profil/profil.component';
 import { ConnexionGuard } from './Guards/ConnexionGuard';
 import { BooleanPipe } from './Pipe/boolean-pipe';
+import { ModificationQuizzComponent } from './components/pages/modification-quizz/modification-quizz.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { BooleanPipe } from './Pipe/boolean-pipe';
     CheckBoxComponent,
     LoginPageComponent,
     ProfilComponent,
-    BooleanPipe
+    BooleanPipe,
+    ModificationQuizzComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -136,7 +138,7 @@ import { BooleanPipe } from './Pipe/boolean-pipe';
       {
         path: 'permission',
         component: PermissionComponent,
-        canActivate: [ModifierCompteGuard]
+        canActivate: [GenererQuizzGuard]
       },
       { // Page de fin de quizz
         path: 'quizzsuccess',
@@ -146,6 +148,11 @@ import { BooleanPipe } from './Pipe/boolean-pipe';
         path: 'comptes',
         component: ComptesComponent,
         canActivate: [ModifierCompteGuard]
+      },
+      {
+        path: 'permission/quizzlist',
+        component: ModificationQuizzComponent,
+        canActivate: [GenererQuizzGuard]
       },
       { // Page de creation des questions
         path: 'creation-question',
