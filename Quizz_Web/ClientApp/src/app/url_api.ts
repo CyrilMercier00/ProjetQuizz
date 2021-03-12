@@ -9,5 +9,5 @@ export class VariableGlobales
   static apiURLQuestion = VariableGlobales.apiURL + "question/";
   static apiURLReponseCandidat = VariableGlobales.apiURL + "reponsecandidat";
   static apiURLPermission = VariableGlobales.apiURL + "permission/";  
-  static apiURLFinQuizz = VariableGlobales.apiURL + "finquizz/";
+  static apiURLFinQuizz = VariableGlobales.apiURL + "quizzsuccess/";
 }

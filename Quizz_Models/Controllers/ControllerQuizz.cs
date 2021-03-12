@@ -90,17 +90,16 @@ namespace Quizz_Web.Controllers
         }
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
-        [Route("{codeQuizz}/FinQuizz")]
-        public ActionResult<QuizzDTO> FinQuizz(string codeQuizz)
+        [Route("/quizzsuccess")]
+        public ActionResult<QuizzDTO> FinQuizz(int idQuizz, int idCandidat, int idRecruteur)
         {
-            QuizzDTO quizz = new QuizzDTO();
-
-            quizz = this.servQuizz.GetQuizz(codeQuizz);
-
+           
             valRetour = Ok();
             try
             {
-             //this.servQuizz.SendMail(quizz);
+                
+                this.servQuizz.ValiderQuizz(idQuizz, idCandidat, idRecruteur);
+
             }
             catch (Exception e)
             {

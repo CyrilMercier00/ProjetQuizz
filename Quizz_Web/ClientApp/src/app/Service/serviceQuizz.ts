@@ -28,7 +28,7 @@ export class ServiceQuizz
   // * Retourne la route de validation du Quizz 
   public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
   {
-    return fetch(VariableGlobales.apiURLQuizz + prmCodeQuizz, { method: "PUT" })
+    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz, { method: "PUT" })
   }
  
 }

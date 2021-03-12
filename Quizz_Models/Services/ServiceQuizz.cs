@@ -244,8 +244,11 @@ namespace Quizz_Models.Services
         }
 
         //*********************valider Quizz
-        public void ValiderQuizz(QuizzDTO prmDTO)
+        public void ValiderQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
         {
+            
+            SendMailFinQuizz(prmIDQuizz,prmIDCandidat,prmIDRecruteur);
+
         }
 
             //***********************************
