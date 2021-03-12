@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
 import { DTOQuizz } from "../DTO/dto-quizz";
+import { Globals } from "../globals";
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,9 @@ export class ServiceQuizz
   // * Retourne la route de validation du Quizz 
   public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
   {
-    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz, { method: "PUT" })
+    let jwt = Globals.decodeJwt();
+    
+    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz+ "/" + jwt['id'],{ method: "GET" })
   }
  
 }
