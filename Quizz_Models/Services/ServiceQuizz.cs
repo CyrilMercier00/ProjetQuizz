@@ -241,6 +241,16 @@ namespace Quizz_Models.Services
             return retour;
         }
 
+        /// <summary>
+        /// Méthode qui retourne tout les quizz crées par un recruteur.
+        /// </summary>
+        /// <param name="idCreateur">ID du créateur du quizz.</param>
+        /// <returns>Les quizz sous forme QuizzDTO.</returns>
+        public QuizzDTO GetQuizz(int idCreateur)
+        {
+
+        }
+
 
 
         private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)

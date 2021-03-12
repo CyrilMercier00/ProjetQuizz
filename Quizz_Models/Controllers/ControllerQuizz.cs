@@ -39,7 +39,12 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
+        [HttpGet]
+        [Route("{idCreateur}")]
+        public QuizzDTO GetAllQuizzFromCreateur(int idCreateur)
+        {
 
+        }
 
         /// <summary>
         /// Assignation d'un candidat a un quizz
