@@ -9,6 +9,7 @@ using Quizz_Models.bdd_quizz;
 
 namespace Quizz_Models.Middleware
 {
+    // Classe middleware pour authentification
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
