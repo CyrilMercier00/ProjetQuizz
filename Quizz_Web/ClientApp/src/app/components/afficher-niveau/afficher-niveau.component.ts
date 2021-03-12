@@ -21,5 +21,6 @@ export class AfficherNiveauComponent implements OnInit {
       {
         this.valRetourRequeteComplex = json;
       });
+      console.log(this.valRetourRequeteComplex);
   }
 }

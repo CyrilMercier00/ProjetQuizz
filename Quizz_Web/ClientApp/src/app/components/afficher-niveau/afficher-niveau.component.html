@@ -1,14 +1,16 @@
-<p>afficher-niveau works!</p>
-<app-select-niveau ></app-select-niveau>
 
-
-    <div class="title">Niveau</div>
-
+     <ul *ngFor="let complexite of valRetourRequeteComplex">
+        <div  class="card" style="width: 18rem;" >
+            <div  class="card-header">
+                {{ complexite.niveau  }}
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"> % questions juniors: {{ complexite.question_junior }}</li>
+              <li class="list-group-item"> % questions confirmées: {{ complexite.quest_confirme }}</li>
+              <li class="list-group-item"> % questions experimentées{{ complexite.question_experimente }}</li>
+            </ul>
+          </div>
   
-       
-        <div *ngFor="let complexite of valRetourRequeteComplex">
-          {{ complexite.niveau | titlecase }}
-        </div>
+     </ul>
       
-    </div>
  
