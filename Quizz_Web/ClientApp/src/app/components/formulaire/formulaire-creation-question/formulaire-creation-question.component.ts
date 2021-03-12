@@ -87,10 +87,10 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
   {
 
     let q = new DTOQuestion();
-    q.enonce = data.value.texteQuestion;
-    q.repLibre = data.value.repLibre;
-    q.nomComplexite = data.value.complexite;
-    q.nomTheme = data.value.theme;
+    q.$Enonce = data.value.texteQuestion;
+    q.$RepLibre = data.value.repLibre;
+    q.$complexite = data.value.complexite;
+    q.$Theme = data.value.theme;
 
     fetch(
       VariableGlobales.apiURLQuestion,

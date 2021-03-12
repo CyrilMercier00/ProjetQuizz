@@ -11,7 +11,7 @@ export class ServiceQuestions
 
   public static GetQuestionsByCodeQuizz(prmCodeQuizz: string): Promise<Response>
   {
-    return fetch(VariableGlobales.apiURLQuestion + "code/" + prmCodeQuizz, { method: "GET" })
+    return fetch(VariableGlobales.apiURLQuestion +"AvecLesQuesitionsSVP/" + prmCodeQuizz, { method: "GET" })
   }
 
 }

@@ -85,15 +85,16 @@ namespace Quizz_Models.Services
         /// <param name="listQuestion"></param>
         public List<QuestionReponseDTO> AddReponseToQuestion(List<Question> prmListQuestion)
         {
-            List<QuestionReponseDTO> listQRepDTO = new List<QuestionReponseDTO>();      // Liste des DTO contenant ls questions et leur reponses
-            List<PropositionReponse> listeRep = new List<PropositionReponse>();         // Liste des reponses pour la question
+            List<QuestionReponseDTO> listQuestRepDTO = new List<QuestionReponseDTO>();   // Liste des DTO contenant ls questions et leur reponses
+            List<PropositionReponse> listReponse = new List<PropositionReponse>();       // Liste des reponses pour la question
+            List<PropositionReponseDTO> listeRepDTO = new List<PropositionReponseDTO>(); // Liste des DTO de reponses pour la question 
             int i = 0;
 
             // Pour chaque questions de la liste passée
             foreach (Question q in prmListQuestion)
             {
                 // Initialisationd du DTO pour cette question
-                listQRepDTO.Add(new QuestionReponseDTO()
+                listQuestRepDTO.Add(new QuestionReponseDTO()
                 {
                     Enonce = q.Enonce,
                     RepLibre = Convert.ToBoolean(q.RepLibre),
@@ -103,18 +104,29 @@ namespace Quizz_Models.Services
                 // Si ce n'est pas une question a réponse libre
                 if (q.RepLibre == Convert.ToByte(false))
                 {
-                    // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
-                    listeRep = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
-                    listQRepDTO[i].ListeReponses = listeRep;
-                    i++;
+                    // Ajouter les reponses pour cette question
+                    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+                    // Convertion en DTO pour eviter l'auto-referencement
+                    foreach (PropositionReponse pr in listReponse)
+                    {
+                        listQuestRepDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+                        {
+                            PkReponse = pr.PkReponse,
+                            Text = pr.Texte,
+                            estBonne = Convert.ToBoolean(pr.EstBonne),
+                            FkQuestion = pr.FkQuestion
+                        });
+                    }
                 }
+                i++;
             }
-            return listQRepDTO;
+            return listQuestRepDTO;
         }
 
         internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
-           return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);            
+            return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
         }
     }
 }
