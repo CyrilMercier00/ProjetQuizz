@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
   selector: 'app-afficher-niveau',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./afficher-niveau.component.css']
 })
 export class AfficherNiveauComponent implements OnInit {
-
+  valRetourRequeteComplex: string;  
   constructor() { }
 
   ngOnInit(): void {
+    this.getAllComplexite();
   }
-
+  async  getAllComplexite()
+  {
+    await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+      .then((response) => response.json())
+      .then((json) =>
+      {
+        this.valRetourRequeteComplex = json;
+      });
+  }
 }
