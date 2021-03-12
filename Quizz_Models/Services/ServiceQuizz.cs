@@ -52,8 +52,10 @@ namespace Quizz_Models.Services
                 FkQuizz = prmIDQuizz
             });
 
-         //   int prmIDRecruteurQuizz = repoCompte.GetComptebyIdQuizz(prmIDQuizz);
-          //  SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteurQuizz);
+            //   int prmIDRecruteurQuizz = repoCompte.GetComptebyIdQuizz(prmIDQuizz);
+            //à modifier avec le prm du recrutaur 
+            int prmIDRecruteurQuizz = prmIDCandidat;
+          SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteurQuizz);
             return repoQuizz.Sauvegarde();
         }
 
@@ -241,9 +243,15 @@ namespace Quizz_Models.Services
             return retour;
         }
 
+        //*********************valider Quizz
+        public void ValiderQuizz(QuizzDTO prmDTO)
+        {
+        }
+
+            //***********************************
 
 
-        private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)
+            private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)
         {
             return new QuizzDTO
             {
