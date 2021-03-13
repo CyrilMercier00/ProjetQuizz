@@ -1,0 +1,11 @@
+.notfound {
+   display: flex;
+    align-self: center;
+    justify-self: center;
+    height: 100%;
+    width: 100%;
+}
+.Imgnotfound{
+    height: 100%;
+    width: 100%;
+}

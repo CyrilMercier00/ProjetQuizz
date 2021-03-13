@@ -111,6 +111,7 @@ export class PageDebutQuizzComponent implements OnInit
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
       // Finis le quizz
+      //[routerLink]="['/quizzsuccess']">quizzsuccess</a>
     } else
     {
       this.nbQuestionRepondues++
