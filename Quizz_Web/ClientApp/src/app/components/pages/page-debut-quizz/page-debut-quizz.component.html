@@ -5,7 +5,17 @@
     <p>Nous vous souhaitons bonne chance !</p>
     <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
   </div>
-
+  <div class="row">
+    <div class="col-md-9">
+     
+    </div>
+    <div class="col-md-3">
+        <div class="chrono">
+          <app-chrono *ngIf="componentChronoEnabled"
+          ></app-chrono>
+        </div>
+    </div>
+  </div>
   <app-page-reponse-qcm
     *ngIf="componentRepQCMEnabled"
     [dataQuestion]="dataQuestion"

@@ -25,6 +25,7 @@ export class PageDebutQuizzComponent implements OnInit
   dataQuestion: DTOQuestion;              // Contiens les données de la question actuellement posée
   componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
   componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
+  componentChronoEnabled: boolean         // Active ou désactive le component chrono
   isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
   showWelcome = true                      // Cache l'ecran de debut de quizz si false
   nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
@@ -73,13 +74,17 @@ export class PageDebutQuizzComponent implements OnInit
   {
     this.startQuizz();
   }
-
-
+  
+  /*redirige vers la page quizz success*/
+  redirectNotFind(){
+    this.router.navigate(['/quizzsuccess']);
+  }
 
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
     this.showWelcome = false
+    this.componentChronoEnabled=false
     this.nextQuestion()
   }
 
@@ -95,11 +100,13 @@ export class PageDebutQuizzComponent implements OnInit
     {
       this.componentRepQCMEnabled = false
       this.componentRepLibreEnabled = true
+      this.componentChronoEnabled=true
 
     } else
     {
       this.componentRepLibreEnabled = false
       this.componentRepQCMEnabled = true
+      this.componentChronoEnabled=true
     }
   }
 
@@ -111,7 +118,8 @@ export class PageDebutQuizzComponent implements OnInit
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
       // Finis le quizz
-      //[routerLink]="['/quizzsuccess']">quizzsuccess</a>
+      this.redirectNotFind();
+
     } else
     {
       this.nbQuestionRepondues++
