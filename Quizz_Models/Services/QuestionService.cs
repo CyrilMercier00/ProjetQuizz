@@ -124,6 +124,50 @@ namespace Quizz_Models.Services
             return listQuestRepDTO;
         }
 
+        //public List<AffichageQuizzDto> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
+        //{
+        //    List<ReponseCandidatDTO> listQuestRepRepCandidatDTO = new List<ReponseCandidatDTO>();   // Liste des DTO contenant ls questions et leur reponses et la rep candidat
+        //    List<PropositionReponse> listReponse = new List<PropositionReponse>();       // Liste des reponses pour la question
+        //    int i = 0;
+
+
+        //    // Pour chaque questions de la liste passée
+        //    foreach (Question q in prmListQuestion)
+        //    {
+        //        // Initialisationd du DTO pour cette question
+        //        listQuestRepRepCandidatDTO.Add(new ReponseCandidatDTO()
+        //        {
+        //            //Reponse=q.ReponseCandidat.,
+        //            //Commentaire=Reponse.,
+        //            //FkCompte= q.,
+        //            //FkQuestion= q.
+                    
+        //        });
+
+        //        //// Si ce n'est pas une question a réponse libre
+        //        //if (q.RepLibre == Convert.ToByte(false))
+        //        //{
+        //        //    // Ajouter les reponses pour cette question
+        //        //    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+        //        //    // Convertion en DTO pour eviter l'auto-referencement
+        //        //    foreach (PropositionReponse pr in listReponse)
+        //        //    {
+        //        //        listQuestRepDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+        //        //        {
+        //        //            PkReponse = pr.PkReponse,
+        //        //            Text = pr.Texte,
+        //        //            estBonne = Convert.ToBoolean(pr.EstBonne),
+        //        //            FkQuestion = pr.FkQuestion
+        //        //        });
+        //        //    }
+        //        //}
+        //        //i++;
+        //    }
+
+        //    return listQuestRepRepCandidatDTO;
+        //}
+
         internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
             return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);

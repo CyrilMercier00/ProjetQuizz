@@ -20,5 +20,7 @@ namespace Quizz_Models.DTO
         public String NomComplexite { get; set; }
         public String NomTheme { get; set; }
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
+
+
     }
 }

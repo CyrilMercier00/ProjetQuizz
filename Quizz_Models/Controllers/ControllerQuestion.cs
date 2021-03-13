@@ -12,21 +12,22 @@ namespace Quizz_Web.Controllers
     public class ControllerQuestion : Controller
     {
         readonly QuestionService questionService;
+        readonly ServiceTheme _servTheme;
 
-        public ControllerQuestion(QuestionService prmQuestionService)
+        public ControllerQuestion(QuestionService prmQuestionService,ServiceTheme serviceTheme)
         {
             this.questionService = prmQuestionService;
+            this._servTheme = serviceTheme;
         }
+       
 
 
 
-
-
-        /// <summary>
-        /// Insertion d'une nouvelle question
-        /// </summary>
-        /// <param name="prmDTO"></param>
-        [HttpPost]
+    /// <summary>
+    /// Insertion d'une nouvelle question
+    /// </summary>
+    /// <param name="prmDTO"></param>
+    [HttpPost]
         public void Post([FromBody] QuestionDTO prmDTO)
         {
             int lignes = this.questionService.Insert(prmDTO);
@@ -61,12 +62,12 @@ namespace Quizz_Web.Controllers
         [HttpGet("{vide}/{codeQuizz}")]
         public string GetQuestionReponses(string codeQuizz)
         {
-            List<Question> listQuestion;    // Contiens la liste des questions
+            List<Question> listQuestion;             // Contiens la liste des questions
 
-            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
+            listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz); // Get de la liste des questions 
             if (listQuestion != null)
             {
-                List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous 
+                List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion); // Ajout des reponses pour chaque questions sous 
                 return JsonConvert.SerializeObject(a);
             }
             else
@@ -77,31 +78,60 @@ namespace Quizz_Web.Controllers
 
         }
 
-        //************************** A modifier pr le nb question
+        //
         /// <summary>
         /// Get des questions et des réponses associé au quizz avec le code unique
         /// </summary>
         /// <param name="idQuizz"></param>
         /// <returns></returns>
         [HttpGet("{vide}/{codeQuizz}")]
-        public string GetNbQuestion(string codeQuizz)
+        public AffichageQuizzDto GetQuestionReponsesRepCandidat(string codeQuizz)
         {
-            List<Question> listQuestion;    // Contiens la liste des questions
+            AffichageQuizzDto affichageQuizzDto=new AffichageQuizzDto();
+            // Contiens la liste des questions
+            List<Question> listQuestion;    
 
             listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
-           int nbQuest= listQuestion.Count;
+            List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous 
+          //  List<ReponseCandidatDTO> reponseCandidats = this.questionService.AddReponseCandidatToQuestion(listQuestion);         // Ajout des reponses pour chaque questions sous 
+
+
             if (listQuestion != null)
             {
-                List<QuestionReponseDTO> a = this.questionService.AddReponseToQuestion(listQuestion);   // Ajout des reponses pour chaque questions sous 
-                return JsonConvert.SerializeObject(a);
+                
+
+                int nbQuest = listQuestion.Count;
+                //PropositionReponse = new HashSet<PropositionReponse>();
+                //QuizzQuestion = new HashSet<QuizzQuestion>();
+                //ReponseCandidat = new HashSet<ReponseCandidat>();
+
+                foreach (Question q in listQuestion)
+                {
+                    for (int i = 1; i > nbQuest; i++)
+                    {
+                        if (q.PropositionReponse == q.ReponseCandidat) {
+                            affichageQuizzDto.nbRepOK++;
+
+                        }
+                   
+                    }
+                }
+
+                
+
+                return affichageQuizzDto;
             }
             else
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
+               
             }
+            return affichageQuizzDto;
 
         }
+
+
+
     }
 }
 

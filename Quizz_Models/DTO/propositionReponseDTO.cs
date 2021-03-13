@@ -12,4 +12,5 @@ namespace Quizz_Models.DTO
         public int FkQuestion { get; set; }
 
     }
+
 }

@@ -7,6 +7,7 @@ using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using Quizz_Models.Services;
 
 namespace Quizz_Models.Utils
@@ -24,25 +25,23 @@ namespace Quizz_Models.Utils
         //********************************************************************************
         private static Compte candidat { get; set; }
         private static Compte recruteur { get; set; }
-        private static ICollection<PropositionReponse> question { get; set; } //Question
-        private static string reponsesQuestion { get; set; } //Reponse q
-        private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse C
-        private static string commentaireCandidat { get; set; }//commentaire
+        private static List<AffichageQuizzDto> question { get; set; } //Question
+      //  private static string reponsesQuestion { get; set; } //Reponse q
+       // private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse Candidat
+       // private static string commentaireCandidat { get; set; }//commentaire
         private static string technologie { get; set; }//Technologie
-        private static string nomCandidat { get; set; }//nom
-        private static string prenomCandidat { get; set; }//nom
+        private static string nomCandidat { get; set; }//nom candidat
+        private static string prenomCandidat { get; set; }//prenom candidat
         private static string nomRecruteur { get; set; }//nom
         private static string prenomRecruteur { get; set; }//nom
-        public static int Nb_QUEST { get; private set; }
+        public static int Nb_QUEST { get; set; }
+        public static int Nb_RepOk { get; set; }
+        public static AffichageQuizzDto affichageQuizz { get; set; }
+       
 
         //modifier les attributs et methode pour faire le lien avec la bdd
 
-        readonly ServiceTheme _servTheme ;
 
-        public PdfUtils(ServiceTheme serviceTheme)
-        {
-            this._servTheme = serviceTheme;
-        }
 
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
@@ -50,19 +49,19 @@ namespace Quizz_Models.Utils
         {
             try
             {
+                //affichageQuizz = GetQuestionReponsesRepCandidat(quizz.Urlcode);
                 candidat = candidatQuizz;
                 recruteur = recruteurQuizz;
                 nomCandidat = candidat.Nom;
                 prenomCandidat = candidat.Prenom;
                 nomRecruteur = recruteur.Nom;
                 prenomRecruteur = recruteur.Prenom;
-              //  technologie = _servTheme.GetThemeNameByID(quizz.FkTheme);
+               // question = affichageQuizz.ListeReponses;
+              //  Nb_QUEST = affichageQuizz.
+               //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
 
 
-                //recup le nb queqtion
-                List<Question> listQuestion;    // Contiens la liste des questions
-               // listQuestion = this.questionService.GetListQuestionByCodeQuizz(codeQuizz);  // Get de la liste des questions 
-               // int nbQuest = listQuestion.Count;
+
                 //ajout attribut et modif methode
 
                 PdfHeader();
@@ -92,6 +91,7 @@ namespace Quizz_Models.Utils
 
         }
 
+    
 
         public static void PdfLogo()
         {
@@ -133,20 +133,20 @@ namespace Quizz_Models.Utils
                    .SetFontSize(15);
                 document.Add(question);
 
-                Paragraph reponse = new Paragraph(" Reponse ")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(15);
-                document.Add(reponse);
+                //Paragraph reponse = new Paragraph(" Reponse ")
+                //    .SetTextAlignment(TextAlignment.LEFT)
+                //    .SetFontSize(15);
+                //document.Add(reponse);
 
-                Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
-                   .SetTextAlignment(TextAlignment.LEFT)
-                   .SetFontSize(15);
-                document.Add(reponsecandidat);
+                //Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
+                //   .SetTextAlignment(TextAlignment.LEFT)
+                //   .SetFontSize(15);
+                //document.Add(reponsecandidat);
 
-                Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(15);
-                document.Add(commentaireCandidat);
+                //Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
+                //    .SetTextAlignment(TextAlignment.LEFT)
+                //    .SetFontSize(15);
+                //document.Add(commentaireCandidat);
             }
 
             // Line separator
@@ -192,18 +192,30 @@ namespace Quizz_Models.Utils
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
                .Add(new Paragraph(" Nombre de bonne réponse "));
+            Cell cell13 = new Cell(1, 3)
+                .SetBackgroundColor(ColorConstants.BLUE)
+                .SetTextAlignment(TextAlignment.RIGHT)
+                .Add(new Paragraph(" Note "));
 
             Cell cell21 = new Cell(2, 1)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("10"));
+               .Add(new Paragraph(Nb_QUEST.ToString()));
             Cell cell22 = new Cell(2, 2)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("10"));
+               .Add(new Paragraph(Nb_RepOk.ToString()));
+            Cell cell23 = new Cell(2, 3)
+               .SetTextAlignment(TextAlignment.CENTER)
+               .Add(new Paragraph(
+                                    ((((Nb_QUEST-(Nb_QUEST-Nb_RepOk)))/Nb_QUEST)*20).ToString()+" / 20 "
+                                 )
+                );
 
             scoreTable.AddCell(cell11);
             scoreTable.AddCell(cell12);
+            scoreTable.AddCell(cell13);
             scoreTable.AddCell(cell21);
             scoreTable.AddCell(cell22);
+            scoreTable.AddCell(cell23);
 
             document.Add(scoreTable);
 
