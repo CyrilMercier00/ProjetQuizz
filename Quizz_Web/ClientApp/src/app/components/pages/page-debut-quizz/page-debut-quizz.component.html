@@ -1,12 +1,21 @@
 <div class="container wrapper flex flex-column flex-align-i-center">
 
-  <div *ngIf="!started">
+  <div *ngIf="showWelcome">
     <h2>Vous allez debuter le quizz</h2>
     <p>Nous vous souhaitons bonne chance !</p>
     <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
   </div>
 
-  <app-page-reponse-qcm *ngIf="componentRepQCMEnabled" [dataQuestion]="dataQuestion"></app-page-reponse-qcm>
-  <app-page-reponse-libre *ngIf="componentRepLibreEnabled" [dataQuestion]="dataQuestion"></app-page-reponse-libre>
+  <app-page-reponse-qcm
+    *ngIf="componentRepQCMEnabled"
+    [dataQuestion]="dataQuestion"
+    (estRepondu)="incrementNBQuestionRep()">
+  </app-page-reponse-qcm>
+
+  <app-page-reponse-libre
+    *ngIf="componentRepLibreEnabled"
+    [dataQuestion]="dataQuestion"
+    (estRepondu)="incrementNBQuestionRep()">
+  </app-page-reponse-libre>
 
 </div>

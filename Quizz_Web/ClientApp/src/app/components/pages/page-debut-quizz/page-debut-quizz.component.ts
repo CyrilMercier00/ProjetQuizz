@@ -1,4 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
@@ -24,8 +25,9 @@ export class PageDebutQuizzComponent implements OnInit
   dataQuestion: DTOQuestion;              // Contiens les données de la question actuellement posée
   componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
   componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
-  isReady: boolean                        // Active le bouton commencer si la recuperaion des données a bien été faite
-  started: boolean = false                // Affiche les elements qui sont présent avant de commencer le quizz
+  isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
+  showWelcome = true                      // Cache l'ecran de debut de quizz si false
+  nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
 
 
 
@@ -40,7 +42,6 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-
     // * Récuperation des données du quizz
     ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
       .then(repFetch =>
@@ -57,14 +58,12 @@ export class PageDebutQuizzComponent implements OnInit
                   {
                     console.log(retour)
                     this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                    console.log(this.arrayDataQuestions)
                     this.isReady = true;
                   }
                   )
               })
           });
       })
-
   }
 
 
@@ -80,25 +79,44 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
-    this.started = true;
-    this.arrayDataQuestions.forEach(question =>
+    this.showWelcome = false
+    this.nextQuestion()
+  }
+
+
+
+  // Passe à la prochaine question
+  nextQuestion()
+  {
+    this.dataQuestion = this.arrayDataQuestions[this.nbQuestionRepondues]
+
+    // * Afficher le component correct pour cette question
+    if (this.dataQuestion.$RepLibre)
     {
-      // * Preparation des données pour la prochaine question
-      this.dataQuestion = question;
+      this.componentRepQCMEnabled = false
+      this.componentRepLibreEnabled = true
 
-      if (question.$RepLibre == true)
-      {
-        // * Desactiver le component inutile et activer celui correspondant à la question
-        this.componentRepQCMEnabled = false;
-        this.componentRepLibreEnabled = true;
+    } else
+    {
+      this.componentRepLibreEnabled = false
+      this.componentRepQCMEnabled = true
+    }
+  }
 
-      } else
-      {
-        this.componentRepLibreEnabled = false;
-        this.componentRepQCMEnabled = true;
-      }
 
-    })
+
+  // Incremente le nombre de questions repondues et trigger l'affichage de la prochaine question
+  incrementNBQuestionRep()
+  {
+    if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
+    {
+      // Finis le quizz
+    } else
+    {
+      this.nbQuestionRepondues++
+      this.nextQuestion()
+    }
+
   }
 
 }
