@@ -14,6 +14,7 @@ namespace Quizz_Models.DTO
         public AffichageQuizzDto()
         {
             ListeReponses = new List<PropositionReponseDTO>();
+            ListeReponsesCandidat = new List<ReponseCandidatDTO>();
             nbRepOK = 0;
         }
 
@@ -44,7 +45,7 @@ namespace Quizz_Models.DTO
         public String NomTheme { get; set; }
         
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
-
+        public List<ReponseCandidatDTO> ListeReponsesCandidat { get; set; }
         public int nbRepOK { get; set; }
         
 

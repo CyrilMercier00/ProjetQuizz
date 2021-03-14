@@ -124,49 +124,55 @@ namespace Quizz_Models.Services
             return listQuestRepDTO;
         }
 
-        //public List<AffichageQuizzDto> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
-        //{
-        //    List<ReponseCandidatDTO> listQuestRepRepCandidatDTO = new List<ReponseCandidatDTO>();   // Liste des DTO contenant ls questions et leur reponses et la rep candidat
-        //    List<PropositionReponse> listReponse = new List<PropositionReponse>();       // Liste des reponses pour la question
-        //    int i = 0;
+        public List<QuestionReponseReponseCandidatDTO> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
+        {
+            // Liste des DTO contenant ls questions et leur reponses et la rep candidat
+            List<QuestionReponseReponseCandidatDTO> listQuestRepRepCandidatDTO = new List<QuestionReponseReponseCandidatDTO>();
+            // Liste des reponses pour la question
+            List<PropositionReponse> listReponse = new List<PropositionReponse>();       
+            int i = 0;
 
 
-        //    // Pour chaque questions de la liste passée
-        //    foreach (Question q in prmListQuestion)
-        //    {
-        //        // Initialisationd du DTO pour cette question
-        //        listQuestRepRepCandidatDTO.Add(new ReponseCandidatDTO()
-        //        {
-        //            //Reponse=q.ReponseCandidat.,
-        //            //Commentaire=Reponse.,
-        //            //FkCompte= q.,
-        //            //FkQuestion= q.
-                    
-        //        });
+            // Pour chaque questions de la liste passée
+            foreach (Question q in prmListQuestion)
+            {
+                // Initialisationd du DTO pour cette question
+                listQuestRepRepCandidatDTO.Add(new QuestionReponseReponseCandidatDTO()
+                {
+                    //Solution= q.,
+                    //Commentaire = q.,
+                    //FkCompte = q.,
+                    //FkQuestion = q.,
 
-        //        //// Si ce n'est pas une question a réponse libre
-        //        //if (q.RepLibre == Convert.ToByte(false))
-        //        //{
-        //        //    // Ajouter les reponses pour cette question
-        //        //    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+                    // Enonce = q.Enonce,
+                    //RepLibre = Convert.ToBoolean(q.RepLibre),
+                    //PKQuestion = q.PkQuestion
 
-        //        //    // Convertion en DTO pour eviter l'auto-referencement
-        //        //    foreach (PropositionReponse pr in listReponse)
-        //        //    {
-        //        //        listQuestRepDTO[i].ListeReponses.Add(new PropositionReponseDTO()
-        //        //        {
-        //        //            PkReponse = pr.PkReponse,
-        //        //            Text = pr.Texte,
-        //        //            estBonne = Convert.ToBoolean(pr.EstBonne),
-        //        //            FkQuestion = pr.FkQuestion
-        //        //        });
-        //        //    }
-        //        //}
-        //        //i++;
-        //    }
+                });
 
-        //    return listQuestRepRepCandidatDTO;
-        //}
+                // Si ce n'est pas une question a réponse libre
+                if (q.RepLibre == Convert.ToByte(false))
+                {
+                    // Ajouter les reponses pour cette question
+                    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+                    // Convertion en DTO pour eviter l'auto-referencement
+                    foreach (PropositionReponse pr in listReponse)
+                    {
+                        listQuestRepRepCandidatDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+                        {
+                            PkReponse = pr.PkReponse,
+                            Text = pr.Texte,
+                            estBonne = Convert.ToBoolean(pr.EstBonne),
+                            FkQuestion = pr.FkQuestion
+                        });
+                    }
+                }
+                i++;
+            }
+
+            return listQuestRepRepCandidatDTO;
+        }
 
         public List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
