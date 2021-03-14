@@ -74,7 +74,10 @@ namespace Quizz_Models.Utils
                 writer.Dispose();
 
                 document.Close();
-                GestionMailUtils.SendMailRecruteur(nomRecruteur, nomCandidat, pdfPath, prenomRecruteur, prenomCandidat,quizz);
+                //quizz, candidatQuizz, recruteurQuizz
+               // GestionMailUtils.SendMailRecruteur(nomRecruteur, nomCandidat, pdfPath, prenomRecruteur, prenomCandidat, quizz);
+
+                GestionMailUtils.SendMailRecruteur(candidatQuizz, pdfPath, recruteurQuizz, quizz);
                 System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
             }
@@ -185,7 +188,7 @@ namespace Quizz_Models.Utils
             Nb_QUEST = 20;
             Nb_RepOk = 10;
             // Table
-            Table scoreTable = new Table(2, false);
+            Table scoreTable = new Table(3, false);
             Cell cell11 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)

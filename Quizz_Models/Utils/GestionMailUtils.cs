@@ -60,18 +60,24 @@ namespace Quizz_Models.Utils
         }
 
         //methode gerent l'envoi du mail recruteur (utilise SendMail)
-        public static void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach, string prenomRecruteur, string prenomCandidat, Quizz quizz)
+       
+        public static void SendMailRecruteur(Compte CompteRecruteur, string PdfToAttach, Compte CompteCandidat, Quizz quizz)
         {
-            string mailAutomatique = MailCredential;          
-            string mailToRecruteur = MailCredential;
+            string mailAutomatique = MailCredential;
+            //string mailToRecruteur = MailCredential;
+            string mailToRecruteur = CompteRecruteur.Mail;
+            string nomCandidat = CompteCandidat.Nom;
+            string nomRecruteur = CompteRecruteur.Nom;
+            string prenomCandidat = CompteCandidat.Prenom;
+            string prenomRecruteur = CompteRecruteur.Prenom;
             // string PdfToAttach = "C:/dev/Dev Projet Quizz/28_01_2021/ProjQuizz_oldold/ProjQuizz/Resources/Test.pdf";
             attachmentpdf(PdfToAttach);
-            msg.Subject = "Test de Compétense " + NomCandidat;
+            msg.Subject = "Test de Compétense " + nomCandidat+ " "+ prenomCandidat;
 
             //SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, quizz));
 
 
-            SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, prenomCandidat, prenomRecruteur, quizz));
+            SendMail(mailAutomatique, nomRecruteur, mailToRecruteur, contentMailRecruteur(nomRecruteur, nomCandidat, prenomCandidat, prenomRecruteur, quizz));
 
 
         }
@@ -89,7 +95,8 @@ namespace Quizz_Models.Utils
             string PrenomCandidat = CompteCandidat.Prenom;
             string prenomRecruteur = CompteRecruteur.Prenom;
 
-            string mailToCandidat = "\"CompteCandidat.Mail\"";
+            //string mailToCandidat = "\"CompteCandidat.Mail\"";
+            string mailToCandidat = CompteCandidat.Mail;
             //string mailToCandidat = MailCredential;
 
 
@@ -135,11 +142,10 @@ namespace Quizz_Models.Utils
 
 
     
-            string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur + prenomRecruteur +
+            string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur +" "+ prenomRecruteur +
                 "<br><b>Ceci est un mail automatique </b><br> " +
                 "Vous trouverez ci-joint les resultas du test de compétence du candidat " + NomCandidat + " " + prenomCandidat +
-
-                "<br>Cordialement,<br>" +
+                "<br><br>Cordialement,<br>" +
                 "</html></body> ";
             return htmlBody;
 
