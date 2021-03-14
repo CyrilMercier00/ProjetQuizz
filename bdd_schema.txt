@@ -44,11 +44,11 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
   INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
-
+    
     CONSTRAINT `fk_compte_compte1`
     FOREIGN KEY (`fk_compteReferent`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`),
-
+    
 	CONSTRAINT `fk_compte_permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
@@ -223,39 +223,39 @@ ENGINE = InnoDB;
 -- ---------------   Insertions test    ----------------
 -- -----------------------------------------------------
 
--- Insert permissions :
-insert into permission(nom, generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
-	values
-("Administrateur", true, true, true, true, true, true),
+-- Insert permissions : 
+insert into permission (nom, generer_quizz, ajouter_quest, modifier_quest, modifier_compte, suppr_question, supprimer_compte)
+	values 
+("Administrateur", true, true, true, true, true, true), 
 ("Recruteur", true, true, true, false, true, false),
 ("Candidat", false, false, false, false, false, false);
 
 -- Insert themes :
-    Insert into theme (nom_theme) values
-    ("C#"),
+    Insert into theme (nom_theme) values 
+    ("C#"), 
     ("SQL"),
     ("Les animaux  de la foret");
 
 -- Insert complextite :
-Insert into taux_complexite (niveau, question_junior, question_confirme, question_experimente) values
+Insert into taux_complexite (niveau, question_junior, question_confirme, question_experimente) values 
 ("junior", 70, 20, 10),
 ("confirme", 25, 50, 25),
 ("experimente", 10, 40, 50);
 
 -- Insert question :
-Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) values
+Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) values 
 
 -- Question junior
-("qui, quoi, quand ?", 0, 1, 1, 1),
-("oui ou non ?", 0, 1, 1, 0),
-("petit ecureils", 0, 1, 1, 0),
-("oulalalalla", 0, 1, 1, 0),
-("davidlafargepokemon", 0, 1, 1, 0),
-(":)", 0, 1, 1, 0),
-("singe", 0, 1, 1, 0),
-("pitié monsieur", 0, 1, 1, 0),
-("maité", 0, 1, 1, 0),
-("des orlotans ", 0, 1, 1, 0),
+("qui, quoi, quand ?", 0, 1, 1),
+("oui ou non ?", 0, 1, 1),
+("petit ecureils", 0, 1, 1),
+("oulalalalla", 0, 1, 1),
+("davidlafargepokemon", 0, 1, 1),
+(":)", 0, 1, 1),
+("singe", 0, 1, 1),
+("pitié monsieur", 0, 1, 1),
+("maité", 0, 1, 1),
+("des orlotans ", 0, 1, 1),
 
 -- Questions Confimé
 ("a", 0, 1, 2, 0),
@@ -267,17 +267,18 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 ("haha", 0, 1, 3, 0),
 ("hihi", 0, 1, 3, 0),
 ("honhon", 0, 1, 3, 0),
-("huahua ", 0, 1, 3, 0),
+("huahua ", 0, 1, 3, 0);
 
 
 -- Proposition de reponse
+insert into proposition_reponse (pk_reponse,texte,est_bonne,fk_question) values
 ("Salut c'est moi", 1, 1),
 ("Salut c'est lui", 0, 1),
 ("Salut c'est nous", 1, 1),
 ("Salut c'est eux", 0, 1);
 
 -- Insert Quizz:
-INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES
+INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES 
 (NULL, NULL, 'JqWeBiSlQ0mcJQqYXLqD5Q', '1', '1'),
 (NULL, NULL, 'TsMlAjEtNEWaZxTYZwk83w', '2', '3'),
 (NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2');
