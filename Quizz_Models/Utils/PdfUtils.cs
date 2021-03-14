@@ -54,7 +54,7 @@ namespace Quizz_Models.Utils
                 recruteur = recruteurQuizz;
                 nomCandidat = candidat.Nom;
                 prenomCandidat = candidat.Prenom;
-                nomRecruteur = recruteur.Nom;
+                nomRecruteur =recruteur.Nom;//modifier test
                 prenomRecruteur = recruteur.Prenom;
                // question = affichageQuizz.ListeReponses;
               //  Nb_QUEST = affichageQuizz.
@@ -74,7 +74,7 @@ namespace Quizz_Models.Utils
                 writer.Dispose();
 
                 document.Close();
-                //  GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
+                GestionMailUtils.SendMailRecruteur(nomRecruteur, nomCandidat, pdfPath, prenomRecruteur, prenomCandidat,quizz);
                 System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
             }
@@ -105,7 +105,7 @@ namespace Quizz_Models.Utils
         }
         public static void PdfHeader()
         {
-            Paragraph recruter = new Paragraph(" Recruteur : " + nomRecruteur + " " + prenomRecruteur)
+            Paragraph recruteur = new Paragraph(" Recruteur : " + nomRecruteur + " " + prenomRecruteur)
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(15);
 
@@ -117,7 +117,7 @@ namespace Quizz_Models.Utils
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
 
-            document.Add(recruter);
+            document.Add(recruteur);
             document.Add(candidat);
             document.Add(header);
 

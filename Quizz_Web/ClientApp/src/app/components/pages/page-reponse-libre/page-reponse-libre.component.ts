@@ -58,6 +58,7 @@ export class PageReponseLibreComponent implements OnInit
     data.$FKQuestion = this.dataQ.$PKQuestion;
 
     this.estRepondu.emit(true);
+   
   }
 
 

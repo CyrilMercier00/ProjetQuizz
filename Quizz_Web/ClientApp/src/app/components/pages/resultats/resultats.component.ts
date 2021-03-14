@@ -41,5 +41,5 @@ export class ResultatsComponent implements OnInit {
   ngOnInit() {
     ServiceQuizz.ValidateQuizz(this.code);
   }
-  //EnregisteChrono() { this.chronoComponent.OnSubmitQuest(); }
+  
 }

@@ -29,9 +29,8 @@ export class ServiceQuizz
   // * Retourne la route de validation du Quizz 
   public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
   {
-    let jwt = Globals.decodeJwt();
-    
-    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz+ "/" + jwt['id'],{ method: "GET" })
+    let jwt = Globals.decodeJwt();    
+    return fetch(VariableGlobales.apiURLFinQuizz+ prmCodeQuizz+ "/" + jwt['id'],{ method: "GET" })
   }
  
 }

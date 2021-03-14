@@ -139,7 +139,7 @@ import { BooleanPipe } from './Pipe/boolean-pipe';
         canActivate: [ModifierCompteGuard]
       },
       { // Page de fin de quizz
-        path: 'quizzsuccess',
+        path: 'quizzsuccess/:urlQuizz/:jwtId',
         component: ResultatsComponent
       },
       {

@@ -146,7 +146,6 @@ namespace Quizz_Models.Services
             Quizz quizz= repoQuizz.GetQuizzByID(prmIDQuizz);
             Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
             Compte recruteurQuizz= repoCompte.GetCompteByID(prmIDRecruteur);
-
             
             Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
          

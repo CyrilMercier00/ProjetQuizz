@@ -7,7 +7,7 @@ using System;
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route("api/quizz")]
+    [Route("api/quizz/")]
     public class ControllerQuizz : Controller
     {
         readonly ServiceQuizz servQuizz;
@@ -90,7 +90,7 @@ namespace Quizz_Web.Controllers
         }
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
-        [Route("/quizzsuccess/{codeQuizz}/{idCandidat}")]
+        [Route("quizzsuccess/{codeQuizz}/{idCandidat}")]
         public ActionResult<QuizzDTO> FinQuizz(string codeQuizz,int idCandidat)
         {
            

@@ -58,7 +58,7 @@ namespace Quizz_Models.Utils
         }
 
         //methode gerent l'envoi du mail recruteur (utilise SendMail)
-        public void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach, string prenomRecruteur, string prenomCandidat, Quizz quizz)
+        public static void SendMailRecruteur(string NomRecruteur, string NomCandidat, string PdfToAttach, string prenomRecruteur, string prenomCandidat, Quizz quizz)
         {
             string mailAutomatique = MailCredential;          
             string mailToRecruteur = MailCredential;
@@ -69,7 +69,7 @@ namespace Quizz_Models.Utils
             //SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, quizz));
 
 
-            SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, this.contentMailRecruteur(NomRecruteur, NomCandidat, prenomCandidat, prenomRecruteur, quizz));
+            SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, prenomCandidat, prenomRecruteur, quizz));
 
 
         }
@@ -128,7 +128,7 @@ namespace Quizz_Models.Utils
 
         }
         //methode sui gerent le contenu du mail recruteur
-        public string contentMailRecruteur(string NomRecruteur, string NomCandidat, string prenomCandidat, string prenomRecruteur, Quizz quizz)
+        public static string contentMailRecruteur(string NomRecruteur, string NomCandidat, string prenomCandidat, string prenomRecruteur, Quizz quizz)
         {
 
 
@@ -136,7 +136,7 @@ namespace Quizz_Models.Utils
             string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur + prenomRecruteur +
                 "<br><b>Ceci est un mail automatique </b><br> " +
                 "Vous trouverez ci-joint les resultas du test de compétence du candidat " + NomCandidat + " " + prenomCandidat +
-                 " pour le quizz <br> " + this._ThemeRepository.GetThemeByID(quizz.FkTheme) + "." +
+                 
                 "Cordialement,<br>" +
                 "</html></body> ";
             return htmlBody;
