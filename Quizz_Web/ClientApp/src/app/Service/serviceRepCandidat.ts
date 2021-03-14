@@ -10,7 +10,10 @@ import { ReponseCandidatDTO } from "../DTO/ReponseCandidatDTO";
 
 export class serviceRepCandidat
 {
-  // * Retoune les details du quizz avec le code unique pa
+
+
+
+  // *Poste la réponse du candidat
   public static PostReponse(prmDTO: ReponseCandidatDTO): Promise<Response>
   {
     return fetch(

@@ -56,7 +56,6 @@ export class PageReponseQcmComponent implements OnInit
 
 
   /* ------ Methodes ------*/
-  // Envoi de la réponse a la base de données
   handleClick (event)
   {
     let data = new reponseDTO();
