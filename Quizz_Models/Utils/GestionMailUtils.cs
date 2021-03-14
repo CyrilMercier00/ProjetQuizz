@@ -3,20 +3,22 @@ using System;
 using System.Net.Mail;
 using System.Net.Mime;
 using Quizz_Models.Repositories;
+using EO.WebBrowser.DOM;
 
 namespace Quizz_Models.Utils
 {
     class GestionMailUtils
     {
         public static MailMessage msg = new MailMessage();
-        private readonly ThemeRepository _ThemeRepository;
+       // private readonly ThemeRepository _ThemeRepository;
         const string MailCredential = "comptequizztechnique@gmail.com";
         const string PswCredential = "QuizzTech625+";
-        const string UrlSite = "https://localhost:5001/api/quizz/";
-        public GestionMailUtils(ThemeRepository ThemeRepository)
-        {
-            _ThemeRepository = ThemeRepository;
-        }
+        //const string UrlSite = "https://localhost:5001/api/quizz/";
+        const string UrlSite = "https://localhost:44380/page-demarrage/";
+        //public GestionMailUtils(ThemeRepository ThemeRepository)
+        //{
+        //    _ThemeRepository = ThemeRepository;
+        //}
 
 
         //fonction qui gere l'envoi des mail 
@@ -136,8 +138,8 @@ namespace Quizz_Models.Utils
             string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur + prenomRecruteur +
                 "<br><b>Ceci est un mail automatique </b><br> " +
                 "Vous trouverez ci-joint les resultas du test de compétence du candidat " + NomCandidat + " " + prenomCandidat +
-                 
-                "Cordialement,<br>" +
+
+                "<br>Cordialement,<br>" +
                 "</html></body> ";
             return htmlBody;
 

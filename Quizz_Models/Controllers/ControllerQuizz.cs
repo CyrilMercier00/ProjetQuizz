@@ -100,7 +100,8 @@ namespace Quizz_Web.Controllers
                 QuizzDTO quizz = new QuizzDTO();
                 quizz = this.servQuizz.GetQuizz(codeQuizz);
                 int idQuizz = quizz.PkQuizz;
-                int idRecruteur=quizz.FKCompteRecruteur;
+                //************modifier*********
+                int idRecruteur = 1;//quizz.FKCompteRecruteur;
 
 
                 this.servQuizz.ValiderQuizz(idQuizz, idCandidat, idRecruteur);

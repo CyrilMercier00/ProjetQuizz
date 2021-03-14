@@ -14,8 +14,8 @@ namespace Quizz_Models.Utils
 {
     class PdfUtils
     {
-        public static string pdfPath = @"..\TestCompetence.pdf";
-        //private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
+       // public static string pdfPath = @"..\TestCompetence.pdf";
+        private static string pdfPath = @"C:\Users\Public\Downloads\TestCompetence.pdf";
         private static PdfWriter writer = new PdfWriter(pdfPath);
         private static PdfDocument pdf = new PdfDocument(writer);
         private static iText.Layout.Document document = new iText.Layout.Document(pdf);
@@ -23,14 +23,14 @@ namespace Quizz_Models.Utils
        
 
         //********************************************************************************
-        private static Compte candidat { get; set; }
-        private static Compte recruteur { get; set; }
+        private static Compte Ccandidat { get; set; }
+        private static Compte Crecruteur { get; set; }
         private static List<AffichageQuizzDto> question { get; set; } //Question
       //  private static string reponsesQuestion { get; set; } //Reponse q
        // private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse Candidat
        // private static string commentaireCandidat { get; set; }//commentaire
         private static string technologie { get; set; }//Technologie
-        private static string nomCandidat { get; set; }//nom candidat
+        private static string nomCandidat { get; set; }//nom Ccandidat
         private static string prenomCandidat { get; set; }//prenom candidat
         private static string nomRecruteur { get; set; }//nom
         private static string prenomRecruteur { get; set; }//nom
@@ -50,12 +50,12 @@ namespace Quizz_Models.Utils
             try
             {
                 //affichageQuizz = GetQuestionReponsesRepCandidat(quizz.Urlcode);
-                candidat = candidatQuizz;
-                recruteur = recruteurQuizz;
-                nomCandidat = candidat.Nom;
-                prenomCandidat = candidat.Prenom;
-                nomRecruteur =recruteur.Nom;//modifier test
-                prenomRecruteur = recruteur.Prenom;
+                Ccandidat = candidatQuizz;
+                Crecruteur =  recruteurQuizz;
+                nomCandidat = Ccandidat.Nom;
+                prenomCandidat = Ccandidat.Prenom;
+                nomRecruteur =Crecruteur.Nom;//modifier test
+                prenomRecruteur = Crecruteur.Prenom;
                // question = affichageQuizz.ListeReponses;
               //  Nb_QUEST = affichageQuizz.
                //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
@@ -182,6 +182,8 @@ namespace Quizz_Models.Utils
 
         public static void ScoreTable()
         {
+            Nb_QUEST = 20;
+            Nb_RepOk = 10;
             // Table
             Table scoreTable = new Table(2, false);
             Cell cell11 = new Cell(1, 1)
