@@ -23,12 +23,28 @@ export class ServiceQuizz
     return fetch(VariableGlobales.apiURLQuizz + prmCode, { method: "PUT" })
   }
 
-  
-  
-  // * Retourne la route de validation du Quizz 
+
+
+  // * Retourne la route de validation du Quizz
   public static ValidateQuizz(prmCodeQuizz: string): Promise<Response>
   {
     return fetch(VariableGlobales.apiURLQuizz + prmCodeQuizz, { method: "PUT" })
   }
- 
+
+
+  public static InsertQuizz(prmDTO: DTOQuizz): Promise<Response>
+  {
+    return fetch(
+      VariableGlobales.apiURLQuizz,
+      {
+        method: "POST",
+        headers:
+        {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(prmDTO)
+      }
+    )
+  }
 }
