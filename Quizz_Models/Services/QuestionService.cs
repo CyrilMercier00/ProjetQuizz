@@ -168,7 +168,7 @@ namespace Quizz_Models.Services
         //    return listQuestRepRepCandidatDTO;
         //}
 
-        internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
+        public List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
             return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
         }

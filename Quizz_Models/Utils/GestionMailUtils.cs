@@ -29,15 +29,12 @@ namespace Quizz_Models.Utils
                 msg.From = new MailAddress(mailFrom, nameFrom);
                 msg.To.Add(new MailAddress(MailCredential));
                 msg.To.Add(new MailAddress(mailTo));
-
                 msg.Body = bodyMail;
                 msg.IsBodyHtml = true;
                 // Create SMTP.  
                 SmtpClient smtp = new SmtpClient();
-
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtp.Credentials = new System.Net.NetworkCredential(MailCredential, PswCredential);
-
                 //smtp.UseDefaultCredentials = false;
                 smtp.EnableSsl = true;
                 smtp.Host = "smtp.gmail.com";
@@ -70,13 +67,8 @@ namespace Quizz_Models.Utils
             string nomRecruteur = CompteRecruteur.Nom;
             string prenomCandidat = CompteCandidat.Prenom;
             string prenomRecruteur = CompteRecruteur.Prenom;
-            // string PdfToAttach = "C:/dev/Dev Projet Quizz/28_01_2021/ProjQuizz_oldold/ProjQuizz/Resources/Test.pdf";
             attachmentpdf(PdfToAttach);
             msg.Subject = "Test de Compétense " + nomCandidat+ " "+ prenomCandidat;
-
-            //SendMail(mailAutomatique, NomRecruteur, mailToRecruteur, contentMailRecruteur(NomRecruteur, NomCandidat, quizz));
-
-
             SendMail(mailAutomatique, nomRecruteur, mailToRecruteur, contentMailRecruteur(nomRecruteur, nomCandidat, prenomCandidat, prenomRecruteur, quizz));
 
 
@@ -142,9 +134,9 @@ namespace Quizz_Models.Utils
 
 
     
-            string htmlBody = " <html><body> Bonjour, <br><br>" + NomRecruteur +" "+ prenomRecruteur +
+            string htmlBody = " <html><body> Bonjour, <br><br><b>" + NomRecruteur +" "+ prenomRecruteur + "</b>" +
                 "<br><b>Ceci est un mail automatique </b><br> " +
-                "Vous trouverez ci-joint les resultas du test de compétence du candidat " + NomCandidat + " " + prenomCandidat +
+                "Vous trouverez ci-joint les resultas du test de compétence du candidat <b>" + NomCandidat + " " + prenomCandidat + "</b>" +
                 "<br><br>Cordialement,<br>" +
                 "</html></body> ";
             return htmlBody;

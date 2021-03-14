@@ -42,6 +42,28 @@ namespace Quizz_Models.Repositories
                 .ToList();
                 
         }
+
+        public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
+        {
+            
+            Compte c = null;
+            try
+            {
+               c= bdd_entities.Compte.Join(bdd_entities.CompteQuizz,
+                         c => c.PkCompte,
+                         cQ => cQ.FkCompte,
+                         (c, cQ) => new { compte = c, compte_Q = cQ })
+                .Where(ccQ=> ccQ.compte_Q.FkQuizz == prmIdQuizz & ccQ.compte_Q.EstCreateur == 1)
+                .Select(ccQ => ccQ.compte)
+                .Single();
+            }
+            catch (Exception)
+            { 
+            }
+
+            return c;
+        }
+
         /// <summary>
         /// Retourne les comptes ayant comme referent le compte avec l'id passé.
         /// </summary>

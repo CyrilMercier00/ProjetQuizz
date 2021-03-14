@@ -9,6 +9,7 @@ using iText.Layout.Properties;
 using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
+using Quizz_Web.Controllers;
 
 namespace Quizz_Models.Utils
 {
@@ -25,7 +26,7 @@ namespace Quizz_Models.Utils
         //********************************************************************************
         private static Compte Ccandidat { get; set; }
         private static Compte Crecruteur { get; set; }
-        private static List<AffichageQuizzDto> question { get; set; } //Question
+        private static List<AffichageQuizzDto> listQuestion { get; set; } //Question
       //  private static string reponsesQuestion { get; set; } //Reponse q
        // private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse Candidat
        // private static string commentaireCandidat { get; set; }//commentaire
@@ -37,8 +38,8 @@ namespace Quizz_Models.Utils
         public static int Nb_QUEST { get; set; }
         public static int Nb_RepOk { get; set; }
         public static AffichageQuizzDto affichageQuizz { get; set; }
-       
 
+        public static Quizz quizz { get; set; }
         //modifier les attributs et methode pour faire le lien avec la bdd
 
 
@@ -56,9 +57,10 @@ namespace Quizz_Models.Utils
                 prenomCandidat = Ccandidat.Prenom;
                 nomRecruteur =Crecruteur.Nom;//modifier test
                 prenomRecruteur = Crecruteur.Prenom;
-               // question = affichageQuizz.ListeReponses;
-              //  Nb_QUEST = affichageQuizz.
-               //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
+               // listQuestion= GetQuestionReponsesRepCandidat();
+                // question = affichageQuizz.ListeReponses;
+                //  Nb_QUEST = affichageQuizz.
+                //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
 
 
 
@@ -67,16 +69,12 @@ namespace Quizz_Models.Utils
                 PdfHeader();
                 PdfSubHeader();
                 ScoreTable();
-                PdfPageNumber();
                 PdfBody();
-
+                PdfPageNumber();
                 document.Close();
                 writer.Dispose();
 
                 document.Close();
-                //quizz, candidatQuizz, recruteurQuizz
-               // GestionMailUtils.SendMailRecruteur(nomRecruteur, nomCandidat, pdfPath, prenomRecruteur, prenomCandidat, quizz);
-
                 GestionMailUtils.SendMailRecruteur(candidatQuizz, pdfPath, recruteurQuizz, quizz);
                 System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
@@ -128,6 +126,7 @@ namespace Quizz_Models.Utils
         }
         public static void PdfBody()
         {
+           
             for (int i = 1; i <Nb_QUEST; i++)
             {
 
@@ -182,13 +181,25 @@ namespace Quizz_Models.Utils
                     VerticalAlignment.BOTTOM, 0);
             }
         }
-
+        public static int NoteSur20(int nb_QUEST ,int nb_RepOk) {
+            
+            int nb_Note = nb_RepOk*20;
+            if (nb_Note > 0)
+            {nb_Note= nb_Note / Nb_QUEST;}
+            else {
+                nb_Note = 0;
+            }
+                
+            return nb_Note;
+        }
         public static void ScoreTable()
         {
-            Nb_QUEST = 20;
+            //Nb_QUEST = affichageQuizz.nbRepOK;
+            Nb_QUEST = 40;
             Nb_RepOk = 10;
+            int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
             // Table
-            Table scoreTable = new Table(3, false);
+            Table scoreTable = new Table(4,false);
             Cell cell11 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
@@ -196,7 +207,7 @@ namespace Quizz_Models.Utils
             Cell cell12 = new Cell(1, 2)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph(" Nombre de bonne réponse "));
+               .Add(new Paragraph(" Nombre de bonnes réponses "));
             Cell cell13 = new Cell(1, 3)
                 .SetBackgroundColor(ColorConstants.BLUE)
                 .SetTextAlignment(TextAlignment.RIGHT)
@@ -210,10 +221,7 @@ namespace Quizz_Models.Utils
                .Add(new Paragraph(Nb_RepOk.ToString()));
             Cell cell23 = new Cell(2, 3)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph(
-                                    ((((Nb_QUEST-(Nb_QUEST-Nb_RepOk)))/Nb_QUEST)*20).ToString()+" / 20 "
-                                 )
-                );
+               .Add(new Paragraph(nb_Note +" / 20 "));
 
             scoreTable.AddCell(cell11);
             scoreTable.AddCell(cell12);

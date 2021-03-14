@@ -10,12 +10,14 @@ namespace Quizz_Web.Controllers
     [Route("api/quizz/")]
     public class ControllerQuizz : Controller
     {
-        readonly ServiceQuizz servQuizz;
+        readonly ServiceQuizz _servQuizz;
+        readonly CompteService _servCompte;
         ActionResult<QuizzDTO> valRetour;
 
-        public ControllerQuizz(ServiceQuizz serviceQuizz)
+        public ControllerQuizz(ServiceQuizz serviceQuizz, CompteService servCompte)
         {
-            this.servQuizz = serviceQuizz;
+            this._servQuizz = serviceQuizz;
+            this._servCompte = servCompte;
         }
 
 
@@ -27,7 +29,7 @@ namespace Quizz_Web.Controllers
 
             try
             {
-                servQuizz.GenererQuizz(prmQuizzDTO);
+                _servQuizz.GenererQuizz(prmQuizzDTO);
                 valRetour = Ok();
             }
             catch (Exception e)
@@ -50,7 +52,7 @@ namespace Quizz_Web.Controllers
         [Route("{idQuizz}/{idCandidat}")]
         public ActionResult<QuizzDTO> AssignCandidatToQuizz(int idQuizz, int idCandidat)
         {
-            switch (servQuizz.assignCandidatToQuizz(idQuizz, idCandidat))
+            switch (_servQuizz.assignCandidatToQuizz(idQuizz, idCandidat))
             {
                 case 0:
                     valRetour = Problem();
@@ -76,7 +78,7 @@ namespace Quizz_Web.Controllers
         {
             QuizzDTO quizz = new QuizzDTO();
 
-            quizz = this.servQuizz.GetQuizz(codeQuizz);
+            quizz = this._servQuizz.GetQuizz(codeQuizz);
 
             if (quizz == null)
             {
@@ -98,13 +100,14 @@ namespace Quizz_Web.Controllers
             try
             {//recup le quizz 
                 QuizzDTO quizz = new QuizzDTO();
-                quizz = this.servQuizz.GetQuizz(codeQuizz);
+                quizz = this._servQuizz.GetQuizz(codeQuizz);
                 int idQuizz = quizz.PkQuizz;
-                //************modifier*********
-                int idRecruteur = 2;//int idRecruteur =quizz.FKCompteRecruteur;
+               
+                Compte compteRecruteur= this._servCompte.GetCompteRecruteurByIdQuizz(quizz.PkQuizz);
+                int idRecruteur = compteRecruteur.PkCompte;
 
-
-                this.servQuizz.ValiderQuizz(idQuizz, idCandidat, idRecruteur);
+                
+                this._servQuizz.ValiderQuizz(idQuizz, idCandidat, idRecruteur);
 
             }
             catch (Exception e)
@@ -122,7 +125,7 @@ namespace Quizz_Web.Controllers
             valRetour = Ok();
             try
             {
-                servQuizz.SupprimerQuizz(prmIDQuizz);
+                _servQuizz.SupprimerQuizz(prmIDQuizz);
             }
             catch (Exception e)
             {
