@@ -32,8 +32,23 @@ namespace Quizz_Web.Controllers
 
             return compte;
         }
-        
 
+
+        [HttpGet("{vide}/{prmCode}/{jwt}")]
+        public CompteDTO Get(string prmCode)
+        {
+            CompteDTO compte = this.compteService.GetCompteByCode(prmCode);
+
+            if (compte == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            return compte;
+        }
+
+        
         [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte)]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
@@ -48,11 +63,11 @@ namespace Quizz_Web.Controllers
 
             return comptes;
         }
+        
 
 
-
-        [HttpGet("{methode}/{idCompteRef}")]
-        public List<CompteDTO> GetCompteByRef(string methode, int idCompteRef)
+        [HttpGet("{vide}/{idCompteRef}")]
+        public List<CompteDTO> GetCompteByRef(string vide, int idCompteRef)
         {
             // Recuperation et transformation en DTO des comptes lié a cette ref
             List<CompteDTO> listDTO = this.compteService.listCompteToDTO(this.compteService.GetCandidatByCompteRef(idCompteRef));
