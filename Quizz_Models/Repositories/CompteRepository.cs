@@ -23,6 +23,11 @@ namespace Quizz_Models.Repositories
             return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
         }
 
+        /// <summary>
+        /// Méthode qui trouve un compte par email.
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns>Retourne l'entité compte correspondante.</returns>
         public Compte FindCompteByMail(string mail)
         {
             Compte c = null;
@@ -35,11 +40,18 @@ namespace Quizz_Models.Repositories
             return c;
         }
 
+        /// <summary>
+        /// Obtenir les comptes d'une certaines permissions.
+        /// </summary>
+        /// <param name="prmidPerm">ID de la permission</param>
+        /// <returns>Les comptes ayant prmidPerm comme id de permission.</returns>
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
         {
             return bdd_entities.Compte
                 .Where(x => x.FkPermission == prmidPerm)
                 .ToList();
+        }
+
                 
         }
 
@@ -75,10 +87,6 @@ namespace Quizz_Models.Repositories
                 .Where(x => x.FkCompteReferent == prmID)
                 .ToList();
         }
-
-
-
-
 
         /// <summary>
         /// Méthode qui retourne un compte par son ID.

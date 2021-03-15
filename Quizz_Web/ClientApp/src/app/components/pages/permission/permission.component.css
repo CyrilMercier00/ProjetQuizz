@@ -1,33 +1,35 @@
+.wrapper {
+    margin: 3rem 0rem;
+}
 
-.wrapper-select-niveau {
-    margin: 1rem 0rem;
-    font-size: x-large;
-  }
-  .admin{
-
-    display: flex;
-    flex-direction : column;
-    
+.admin{
+  display: flex;
+  flex-direction : column;
 }
 
 h1 {
   text-align: center;
- 
 }
+
 .bouttonPermission{
-  height: 600px;
+  height: 25em;
   display: flex;
   flex-direction : column;
   justify-content: space-between;
   justify-content: space-around;
   
-  
-  }
- input{
-    height: 60px;
-    width: 300px;
-    align-self: center;
-    
-  }
+}
+
+.bouttonPermission > input {
+  align-self: center;
+  border-radius: 8px;
+  width: 22rem;
+  height: 3rem;
+  margin: 0.1rem;
+  border: unset;
+  outline: none;
+  color: white;
+  background-color: #21db4f;
+}
   
   
