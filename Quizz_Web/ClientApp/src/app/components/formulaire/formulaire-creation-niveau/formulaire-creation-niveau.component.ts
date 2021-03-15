@@ -24,11 +24,12 @@ export class FormulaireCreationNiveauComponent implements OnInit {
   onSubmit(): void {
     console.log(this.niveauForm.value);
     console.log(this.pourcent());
+    this.envoiFormulaire();
   }
 
   async envoiFormulaire() {
     {
-      await fetch(VariableGlobales.apiURLReponseCandidat, {
+      await fetch(VariableGlobales.apiURLComplexite, {
         method: "POST",
         headers: {
           Accept: "application/json",

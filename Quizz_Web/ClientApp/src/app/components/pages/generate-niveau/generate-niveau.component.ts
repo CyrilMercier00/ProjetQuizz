@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-generate-niveau',
   templateUrl: './generate-niveau.component.html',
-  styleUrls: ['./generate-niveau.component.css']
+  styleUrls: ['./generate-niveau.component.css', '../../../app.flex-util.css']
 })
 export class GenerateNiveauComponent implements OnInit {
 

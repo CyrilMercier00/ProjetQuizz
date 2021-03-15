@@ -8,6 +8,7 @@ import { VariableGlobales } from 'src/app/url_api';
 })
 export class AfficherNiveauComponent implements OnInit {
   valRetourRequeteComplex: string;  
+  
   constructor() { }
 
   ngOnInit(): void {
@@ -23,4 +24,12 @@ export class AfficherNiveauComponent implements OnInit {
       });
       console.log(this.valRetourRequeteComplex);
   }
+
+  async supprimerNiveau(id){
+    await fetch(VariableGlobales.apiURLComplexite + id, { method: "DELETE" })
+    .then(res => res.json()) 
+.then(res => console.log(res))
+    
+  }
+  
 }
