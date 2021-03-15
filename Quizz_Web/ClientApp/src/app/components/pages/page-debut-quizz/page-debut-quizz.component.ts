@@ -3,11 +3,14 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { ChronoComponent } from '../../chrono/chrono.component';
+import { ComptePersonnelDTO } from 'src/app/DTO/ComptePersonnelDTO';
+import { CompteService } from 'src/app/Service/CompteService'
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { Globals } from 'src/app/globals';
+import { PermissionService } from 'src/app/Service/permissionService';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
-import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { utilDTO } from 'src/app/DTO/utilDTO';
 
 @Component({
@@ -31,6 +34,7 @@ export class PageDebutQuizzComponent implements OnInit
   isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
   showWelcome = true                      // Cache l'ecran de debut de quizz si false
   nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
+  idCompte: number                       // ID du compte qui passe le quizz
 
   /***chrono**/
   TimeQ;
@@ -48,27 +52,39 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    // * Récuperation des données du quizz
-    ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+    CompteService.GetCompteLinkedToCode(this.code)
       .then(repFetch =>
       {
-        repFetch.json()                                  // Extraire les données json de la promesse
-          .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
-          .then(x =>
+        repFetch.json()
+          .then(retour =>
           {
-            ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)       // Chercher les questions associées a ce quizz
+            console.log(retour)
+            let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
+            compte.$PkCompte = retour.PkCompte
+          }).then(() =>
+            // * Récuperation des données du quizz
+            ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
               .then(repFetch =>
               {
-                repFetch.json()                          // Extraire les données json de la promesse
-                  .then(retour =>                        // Sauvegarder les données dans un array
+                repFetch.json()                                  // Extraire les données json de la promesse
+                  .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
+                  .then(x =>
                   {
-                    console.log(retour)
-                    this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                    this.isReady = true;
-                  }
-                  )
+                    ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)       // Chercher les questions associées a ce quizz
+                      .then(repFetch =>
+                      {
+                        repFetch.json()                          // Extraire les données json de la promesse
+                          .then(retour =>                        // Sauvegarder les données dans un array
+                          {
+                            console.log(retour)
+                            this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
+                            this.isReady = true;
+                          }
+                          )
+                      })
+                  });
               })
-          });
+          )
       })
   }
 
@@ -119,6 +135,7 @@ export class PageDebutQuizzComponent implements OnInit
       this.componentRepQCMEnabled = true
       this.componentChronoEnabled = true
     }
+    // STop chrono
   }
 
 
