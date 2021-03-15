@@ -52,9 +52,6 @@ namespace Quizz_Models.Repositories
                 .ToList();
         }
 
-                
-        }
-
         public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
         {
             

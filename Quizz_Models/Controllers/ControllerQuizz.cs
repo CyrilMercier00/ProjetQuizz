@@ -45,7 +45,7 @@ namespace Quizz_Web.Controllers
         [Route("{idCreateur}")]
         public QuizzDTO GetAllQuizzFromCreateur(int idCreateur)
         {
-            return this.servQuizz.GetQuizz(idCreateur);
+            return this._servQuizz.GetQuizz(idCreateur);
         }
 
         /// <summary>
