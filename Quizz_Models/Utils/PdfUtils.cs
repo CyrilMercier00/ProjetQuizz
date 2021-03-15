@@ -37,8 +37,10 @@ namespace Quizz_Models.Utils
         private static string prenomRecruteur { get; set; }//nom
         public static int Nb_QUEST { get; set; }
         public static int Nb_RepOk { get; set; }
+        public static string Complexite { get; set; }
         public static AffichageQuizzDto affichageQuizz { get; set; }
-
+        private static string  chrono { get; set; }
+        private static List<QuestionReponseDTO> listQuestionRep { get; set; } //Question
         public static Quizz quizz { get; set; }
         //modifier les attributs et methode pour faire le lien avec la bdd
 
@@ -46,29 +48,34 @@ namespace Quizz_Models.Utils
 
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
-        public static void ContentPdf(Quizz quizz, Compte candidatQuizz, Compte recruteurQuizz)
+        public static void ContentPdf(AffichageQuizzDto quizz, Compte candidatQuizz, Compte recruteurQuizz)
         {
             try
             {
-                //affichageQuizz = GetQuestionReponsesRepCandidat(quizz.Urlcode);
+                affichageQuizz = quizz;
                 Ccandidat = candidatQuizz;
                 Crecruteur =  recruteurQuizz;
                 nomCandidat = Ccandidat.Nom;
                 prenomCandidat = Ccandidat.Prenom;
                 nomRecruteur =Crecruteur.Nom;//modifier test
                 prenomRecruteur = Crecruteur.Prenom;
-               // listQuestion= GetQuestionReponsesRepCandidat();
+                technologie = affichageQuizz.NomTheme;
+                Complexite = affichageQuizz.Complexite;
+                listQuestionRep = affichageQuizz.listQuestionrep;
+                // listQuestion= GetQuestionReponsesRepCandidat();
                 // question = affichageQuizz.ListeReponses;
-                //  Nb_QUEST = affichageQuizz.
-                //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
-
+                Nb_QUEST = affichageQuizz.NbQuestions;
+                chrono = affichageQuizz.Chrono;
 
 
                 //ajout attribut et modif methode
 
                 PdfHeader();
                 PdfSubHeader();
+                NewLine();
                 ScoreTable();
+               
+                QuizzTable();
                 PdfBody();
                 PdfPageNumber();
                 document.Close();
@@ -91,8 +98,14 @@ namespace Quizz_Models.Utils
             }
 
         }
+        public static void NewLine()
+        {
+             Paragraph newline = new Paragraph(new Text("\n"));
+             document.Add(newline);
 
-    
+
+        }
+
 
         public static void PdfLogo()
         {
@@ -127,32 +140,43 @@ namespace Quizz_Models.Utils
         public static void PdfBody()
         {
            
-            for (int i = 1; i <Nb_QUEST; i++)
-            {
-
-                Paragraph question = new Paragraph(" Question ")
-                   .SetTextAlignment(TextAlignment.LEFT)
-                   .SetFontSize(15);
-                document.Add(question);
-
-                //Paragraph reponse = new Paragraph(" Reponse ")
-                //    .SetTextAlignment(TextAlignment.LEFT)
-                //    .SetFontSize(15);
-                //document.Add(reponse);
-
-                //Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
-                //   .SetTextAlignment(TextAlignment.LEFT)
-                //   .SetFontSize(15);
-                //document.Add(reponsecandidat);
-
-                //Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
-                //    .SetTextAlignment(TextAlignment.LEFT)
-                //    .SetFontSize(15);
-                //document.Add(commentaireCandidat);
-            }
-
+           
             // Line separator
             LineSeparator ls = new LineSeparator(new SolidLine());
+            
+
+            for (int i = 1; i <Nb_QUEST; i++)
+            {
+                Paragraph SubTitle = new Paragraph("Question" +i +" : ")
+                   .SetTextAlignment(TextAlignment.CENTER)
+                   .SetFontSize(15);
+                    
+                Paragraph question = new Paragraph(listQuestionRep[i].Enonce)
+                   .SetTextAlignment(TextAlignment.LEFT)
+                   .SetFontSize(11);
+                document.Add(question);
+                document.Add(ls);
+
+                Paragraph reponse = new Paragraph("")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(11);
+                document.Add(reponse);
+                document.Add(ls);
+
+                Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
+                   .SetTextAlignment(TextAlignment.LEFT)
+                   .SetFontSize(11);
+                document.Add(reponsecandidat);
+                document.Add(ls);
+
+                Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
+                    .SetTextAlignment(TextAlignment.LEFT)
+                    .SetFontSize(11);
+                document.Add(commentaireCandidat);
+                document.Add(ls);
+                NewLine();
+            }
+
             document.Add(ls);
 
         }
@@ -194,43 +218,107 @@ namespace Quizz_Models.Utils
         }
         public static void ScoreTable()
         {
-            //Nb_QUEST = affichageQuizz.nbRepOK;
-            Nb_QUEST = 40;
+            //Nb_RepOk = affichageQuizz.nbRepOK;
+            //Nb_QUEST = affichageQuizz.NbQuestions;
+            LineSeparator ls = new LineSeparator(new SolidLine());
+
             Nb_RepOk = 10;
             int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
-            // Table
-            Table scoreTable = new Table(4,false);
-            Cell cell11 = new Cell(1, 1)
-               .SetBackgroundColor(ColorConstants.BLUE)
-               .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph(" Nombre de question "));
-            Cell cell12 = new Cell(1, 2)
-               .SetBackgroundColor(ColorConstants.BLUE)
-               .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph(" Nombre de bonnes réponses "));
-            Cell cell13 = new Cell(1, 3)
-                .SetBackgroundColor(ColorConstants.BLUE)
-                .SetTextAlignment(TextAlignment.RIGHT)
-                .Add(new Paragraph(" Note "));
+            // création Tableau avec 4 col
+            Table scoreTable = new Table(4,true);
 
-            Cell cell21 = new Cell(2, 1)
+            //creation des cellule de la prem ligne
+            Cell cell11 = new Cell(1,1)
+               .SetBackgroundColor(ColorConstants.CYAN)
+               .SetTextAlignment(TextAlignment.CENTER)
+               .Add(new Paragraph("Nombre de questions"));
+
+            Cell cell12 = new Cell(1,2)
+               .SetBackgroundColor(ColorConstants.CYAN)
+               .SetTextAlignment(TextAlignment.CENTER)
+               .Add(new Paragraph("Nombre de bonnes réponses"));
+
+            Cell cell13 = new Cell(1,3)
+                .SetBackgroundColor(ColorConstants.CYAN)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .Add(new Paragraph("Note"));
+
+
+
+            // Complexite
+            //creation des cellule de la deuxieme ligne
+            Cell cell21 = new Cell(2,1)
                .SetTextAlignment(TextAlignment.CENTER)
                .Add(new Paragraph(Nb_QUEST.ToString()));
-            Cell cell22 = new Cell(2, 2)
+
+            Cell cell22 = new Cell(2,2)
                .SetTextAlignment(TextAlignment.CENTER)
                .Add(new Paragraph(Nb_RepOk.ToString()));
-            Cell cell23 = new Cell(2, 3)
+
+            Cell cell23 = new Cell(2,3)
                .SetTextAlignment(TextAlignment.CENTER)
                .Add(new Paragraph(nb_Note +" / 20 "));
 
+          
+
+            //ajout des cellules au tableau
+
+            //1er ligne (5 col)
             scoreTable.AddCell(cell11);
             scoreTable.AddCell(cell12);
             scoreTable.AddCell(cell13);
+         
+
+            //2eme ligne (5 col)
             scoreTable.AddCell(cell21);
             scoreTable.AddCell(cell22);
             scoreTable.AddCell(cell23);
+          
 
+            //Ajout du tableau à la cellule 
             document.Add(scoreTable);
+            document.Add(ls);
+
+
+
+
+        }
+        public static void QuizzTable()
+        {
+
+            LineSeparator ls = new LineSeparator(new SolidLine());
+
+            // création Tableau avec 4 col
+            Table TableQuizz = new Table(3, true);
+
+            Cell qcell11 = new Cell(1, 1)
+                .SetBackgroundColor(ColorConstants.CYAN)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .Add(new Paragraph("Temps total du quizz"));
+
+            Cell qcell12 = new Cell(1, 2)
+              .SetBackgroundColor(ColorConstants.CYAN)
+              .SetTextAlignment(TextAlignment.CENTER)
+              .Add(new Paragraph("Niveau"));
+
+            Cell qcell21 = new Cell(2, 1)
+           .SetTextAlignment(TextAlignment.CENTER)
+           .Add(new Paragraph(chrono));
+
+            Cell qcell22 = new Cell(2, 2)
+             .SetTextAlignment(TextAlignment.CENTER)
+             .Add(new Paragraph(Complexite));
+
+
+            TableQuizz.AddCell(qcell11);
+            TableQuizz.AddCell(qcell12);
+
+            TableQuizz.AddCell(qcell21);
+            TableQuizz.AddCell(qcell22);
+            //Ajout du tableau à la cellule 
+            document.Add(TableQuizz);
+            document.Add(ls);
+
 
         }
     }

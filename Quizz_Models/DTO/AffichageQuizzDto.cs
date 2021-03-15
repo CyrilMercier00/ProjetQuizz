@@ -46,6 +46,8 @@ namespace Quizz_Models.DTO
         
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
         public List<ReponseCandidatDTO> ListeReponsesCandidat { get; set; }
+
+        public List<QuestionReponseDTO> listQuestionrep { get; set; }
         public int nbRepOK { get; set; }
         
 
