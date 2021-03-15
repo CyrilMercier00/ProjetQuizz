@@ -12,7 +12,6 @@ namespace Quizz_Models.DTO
         public QuestionReponseReponseCandidatDTO()
         {
             ListeReponses = new List<PropositionReponseDTO>();
-            ListReponsecandidat = new List<ReponseCandidatDTO>();
         }
         public String Solution { get; set; }
        
@@ -24,12 +23,11 @@ namespace Quizz_Models.DTO
         public String NomComplexite { get; set; }
         public String NomTheme { get; set; }
 
-        public String RepCandidat { get; set; }//fk question et fkcompte
+        public ReponseCandidatDTO RepCandidat { get; set; }//fk question et fkcompte
 
-        public String Commentaire { get; set; }
 
 
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
-        public List<ReponseCandidatDTO> ListReponsecandidat { get; set; } = new List<ReponseCandidatDTO>();
+        //public List<ReponseCandidatDTO> ListReponsecandidat { get; set; } = new List<ReponseCandidatDTO>();
     }
 }

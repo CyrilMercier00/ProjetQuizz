@@ -13,15 +13,17 @@ namespace Quizz_Models.Services
         readonly QuestionRepository repoQuestion;
         readonly PropositionReponseRepository repoPropoReponse;
         readonly ReponseCandidatRepository _repoReponseCandidat;
+        readonly QuestionRepository _questionRepository;
 
-        public QuestionService(ReponseCandidatRepository repoReponseCandidat,ThemeRepository prmRepoTheme, ComplexiteRepository prmRepoComplex, QuestionRepository prmRepoQuestion, PropositionReponseRepository prmRepoPropoReponse)
+        public QuestionService(QuestionRepository questionRepository, ReponseCandidatRepository repoReponseCandidat, ThemeRepository prmRepoTheme, ComplexiteRepository prmRepoComplex, QuestionRepository prmRepoQuestion, PropositionReponseRepository prmRepoPropoReponse)
         {
             this.repoTheme = prmRepoTheme;
             this.repoComplex = prmRepoComplex;
             this.repoQuestion = prmRepoQuestion;
             this.repoPropoReponse = prmRepoPropoReponse;
 
-            this._repoReponseCandidat= repoReponseCandidat;
+            this._repoReponseCandidat = repoReponseCandidat;
+            this._questionRepository = questionRepository;
         }
 
 
@@ -60,13 +62,13 @@ namespace Quizz_Models.Services
         }
         //**************question et reponse et rep candidat
         /// <summary>
-        /// Retourne la liste des questions générées pour ce quizz.
+        /// Retourne la liste des rep candidat générées pour ce quizz.
         /// </summary>
         /// <param name="idQuizz"></param>
         /// <returns></returns>
-        public List<Question> GetListReponseCandidatByIDQuizz(int idQuizz)
+        public List<PropositionReponse> GetListReponseCandidatByIDQuizz(int idQuizz)
         {
-            return repoQuestion.GetQuestionByIDQuizz(idQuizz);
+            return repoQuestion.GetListReponseCandidatByIDQuizz(idQuizz);
         }
         /// <summary>
         /// Retourne la liste des questions générées pour ce quizz.
@@ -77,7 +79,7 @@ namespace Quizz_Models.Services
         {
             return repoQuestion.GetQuestionByIDQuizz(idQuizz);
         }
-       
+
         //*****************
 
 
@@ -154,7 +156,7 @@ namespace Quizz_Models.Services
         /// La methode recupere les propositions de reponse possible pour la liste de question passée+ rep candidat
         /// </summary>
         /// <param name="listQuestion"></param>
-        public List<QuestionReponseReponseCandidatDTO> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
+        public List<QuestionReponseReponseCandidatDTO> AddReponseCandidatToQuestion(List<Question> prmListQuestion, int idQuizz)
         {
             List<QuestionReponseReponseCandidatDTO> listQuestRepDTO = new List<QuestionReponseReponseCandidatDTO>();   // Liste des DTO contenant ls questions et leur reponses
             List<PropositionReponse> listReponse = new List<PropositionReponse>();       // Liste des reponses pour la question
@@ -162,7 +164,7 @@ namespace Quizz_Models.Services
 
             //candidat
             List<ReponseCandidat> listReponsecandidat = new List<ReponseCandidat>();       // Liste des reponses pour la question
-            List<ReponseCandidatDTO> listeRepcandidatDTO = new List<ReponseCandidatDTO> (); // Liste des DTO de reponses pour la question 
+            List<ReponseCandidatDTO> listeRepcandidatDTO = new List<ReponseCandidatDTO>(); // Liste des DTO de reponses pour la question 
 
 
             int i = 0;
@@ -170,20 +172,33 @@ namespace Quizz_Models.Services
             // Pour chaque questions de la liste passée
             foreach (Question q in prmListQuestion)
             {
+                ReponseCandidat repC = this._questionRepository.GetReponseCandidatByIDQuestion(q.PkQuestion);
+                ReponseCandidatDTO repCDto;
+                if (repC is null)
+                {
+                    repCDto = null;
+                }
+                else
+                {
+                    repCDto = this._repoReponseCandidat.TransformRepCandidatEnRepCandidatDto(this._questionRepository.GetReponseCandidatByIDQuestion(q.PkQuestion));
+                }
                 // Initialisationd du DTO pour cette question
                 listQuestRepDTO.Add(new QuestionReponseReponseCandidatDTO()
                 {
                     Enonce = q.Enonce,
                     RepLibre = Convert.ToBoolean(q.RepLibre),
-                    PKQuestion = q.PkQuestion
+                    PKQuestion = q.PkQuestion,
+                    RepCandidat = repCDto
+
                 });
+
 
                 // Si ce n'est pas une question a réponse libre
                 if (q.RepLibre == Convert.ToByte(false))
                 {
                     // Ajouter les reponses pour cette question
                     listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
-                    listReponsecandidat= this._repoReponseCandidat.SelectReponseCandidatByIDQuestion(q.PkQuestion);
+                    listReponsecandidat = this._repoReponseCandidat.SelectReponseCandidatByIDQuestion(q.PkQuestion);
                     // Convertion en DTO pour eviter l'auto-referencement
                     foreach (PropositionReponse pr in listReponse)
                     {
@@ -194,34 +209,42 @@ namespace Quizz_Models.Services
                             estBonne = Convert.ToBoolean(pr.EstBonne),
                             FkQuestion = pr.FkQuestion
                         });
-                        
+
                     }
-                    foreach (ReponseCandidat rc in listReponsecandidat)
-                    {
-                        listQuestRepDTO[i].ListReponsecandidat.Add(new ReponseCandidatDTO()
-                        {
-                            Reponse = rc.Reponse,
-                            Commentaire = rc.Commentaire,
-                            FkCompte = rc.FkCompte,
-                            FkQuestion = rc.FkQuestion
-                        });
-                    }
+
                 }
                 i++;
             }
-            return listQuestRepDTO;
+            return listQuestRepDTO;//je suis icicicicici
         }
 
         public int GetNbbnRep(List<PropositionReponse> listRepCand)
         {
             int nbBQuestok = 0;
-            foreach (PropositionReponse l in listRepCand)
+            try
             {
-                if (l.EstBonne is 0) {
-                    nbBQuestok++;
+                if (listRepCand.Count > 0) {
+                    foreach (PropositionReponse l in listRepCand)
+                    {
+                        if (l is null)
+                        {
+                        }
+                        else if (l.EstBonne is 0)
+                        {
+                            nbBQuestok++;
+                        }
+                        else {
+                            nbBQuestok = 0;
+                        }
+
+                    }
                 }
-               
             }
+            catch
+            {
+                nbBQuestok=0;
+            }
+
 
             return nbBQuestok;
         }

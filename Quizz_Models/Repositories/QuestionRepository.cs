@@ -1,4 +1,5 @@
 using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,74 @@ namespace Quizz_Models.Repositories
             return listeRetour;
 
         }
+        /// <summary>
+        /// Retourne les Rep asociées au quizz avec l'id passé.
+        /// </summary>
+        /// <param name="prmIDQuizz"></param>
+        /// <returns></returns>
+        public List<PropositionReponse> GetListReponseCandidatByIDQuizz(int prmIDQuizz)
+        {
+
+            List<PropositionReponse> listeRetour = new List<PropositionReponse>();
+
+            List<Question> listQuizzQuestion = this.GetQuestionByIDQuizz(prmIDQuizz);
+
+            foreach (Question q in listQuizzQuestion)
+            {
+                listeRetour.Add(
+                    bdd_entities.PropositionReponse
+                    .Where(x => x.FkQuestion == q.PkQuestion)
+                    .SingleOrDefault()
+                    );
+            }
+
+            return listeRetour;
+        }
+        //get rep candidat 
+        public ReponseCandidat GetReponseCandidatByIDQuestion(int prmIDquestion)
+        {
+            ReponseCandidat Retour = new ReponseCandidat();
+            try
+            {
+               
+                 List<Question> listQuizzQuestion = this.GetQuestionByIDQuizz(prmIDquestion);
+
+
+                Retour = bdd_entities.ReponseCandidat
+                    .Where(x => x.FkQuestion == prmIDquestion)
+                    .SingleOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Retour = null;
+            }
+
+            return Retour;
+        }
+
+        //get rep candidat 
+        public PropositionReponse GetPropositionReponsetByIDQuestion(int prmIDquestion)
+        {
+            PropositionReponse Retour = new PropositionReponse();
+            try
+            {
+
+                List<Question> listQuizzQuestion = this.GetQuestionByIDQuizz(prmIDquestion);
+
+
+                Retour = bdd_entities.PropositionReponse
+                    .Where(x => x.FkQuestion == prmIDquestion)
+                    .SingleOrDefault();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Retour = null;
+            }
+
+            return Retour;
+        }
 
         /// <summary>
         /// Sauvegarder les changements effectués.
@@ -144,6 +213,8 @@ namespace Quizz_Models.Repositories
             }
             return listeRetour;
         }
+
+       
     }
 
 }
