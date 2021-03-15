@@ -37,11 +37,13 @@ export class AfficherNiveauComponent implements OnInit {
   
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
-    
+
     await fetch(VariableGlobales.apiURLComplexite + id, { method: "DELETE" , headers: requestHeaders})
-    .then(res => res.json()) 
+
 .then(res => console.log(res))
-    
+    this.reloadPage();
   }
-  
+  reloadPage() {
+    window.location.reload();
+ }
 }
