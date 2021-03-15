@@ -83,7 +83,7 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   /*redirige vers la page quizz success*/
-  redirectNotFind()
+  redirect()
   {
     let jwt = Globals.decodeJwt();
     this.router.navigate(['/quizzsuccess/' + this.code + '/' + jwt['id']]);
@@ -132,7 +132,7 @@ export class PageDebutQuizzComponent implements OnInit
   {
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
-      this.redirectNotFind();
+      this.redirect();
 
     } else
     {

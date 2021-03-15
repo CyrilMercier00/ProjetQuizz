@@ -147,32 +147,30 @@ namespace Quizz_Models.Utils
 
             for (int i = 1; i <Nb_QUEST; i++)
             {
+                NewLine();
                 Paragraph SubTitle = new Paragraph("Question" +i +" : ")
                    .SetTextAlignment(TextAlignment.CENTER)
-                   .SetFontSize(15);
-                    
+                   .SetFontSize(20);
+                document.Add(SubTitle);
+
                 Paragraph question = new Paragraph(listQuestionRep[i].Enonce)
                    .SetTextAlignment(TextAlignment.LEFT)
                    .SetFontSize(11);
                 document.Add(question);
-                document.Add(ls);
+                
 
-                Paragraph reponse = new Paragraph("")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(11);
-                document.Add(reponse);
-                document.Add(ls);
 
                 Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
                    .SetTextAlignment(TextAlignment.LEFT)
                    .SetFontSize(11);
                 document.Add(reponsecandidat);
-                document.Add(ls);
+                
 
                 Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
                     .SetTextAlignment(TextAlignment.LEFT)
                     .SetFontSize(11);
                 document.Add(commentaireCandidat);
+                NewLine();
                 document.Add(ls);
                 NewLine();
             }

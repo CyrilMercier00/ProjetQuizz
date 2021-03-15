@@ -18,5 +18,12 @@ namespace Quizz_Models.Repositories
             bdd_entities.ReponseCandidat.Add (prmReponseCandidat);
             bdd_entities.SaveChanges ();
         }
+
+        public List<ReponseCandidat> SelectReponseCandidatByIDQuestion(int prmIDQuestion)
+        {
+            return bdd_entities.ReponseCandidat
+                .Where(x => x.FkQuestion == prmIDQuestion)
+                .ToList();
+        }
     }
 }

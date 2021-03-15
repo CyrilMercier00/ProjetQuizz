@@ -45,7 +45,7 @@ export class ServiceQuizz
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
 
-    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz + "/" + jwt['id'], { method: "GET", headers: requestHeaders })
+    return fetch(VariableGlobales.apiURLFinQuizz + prmCodeQuizz + "/" + jwt['id']+ "/" +"f", { method: "GET", headers: requestHeaders })
   }
 
 

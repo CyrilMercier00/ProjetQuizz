@@ -90,10 +90,10 @@ namespace Quizz_Web.Controllers
             }
 
         }
-        /*
+        
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
-        [Route("quizzsuccess/{codeQuizz}/{idCandidat}")]
+        [Route("quizzsuccess/{codeQuizz}/{idCandidat}/{vide}")]
         public ActionResult<QuizzDTO> FinQuizz(string codeQuizz,int idCandidat)
         {
            
@@ -118,7 +118,7 @@ namespace Quizz_Web.Controllers
             }
             return valRetour;
         }
-        */
+        
 
         [HttpDelete]
         public ActionResult<QuizzDTO> Delete([FromBody] int prmIDQuizz)

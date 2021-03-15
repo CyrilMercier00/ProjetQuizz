@@ -279,7 +279,8 @@ namespace Quizz_Models.Services
                 NomTheme=this._servTheme.GetThemeNameByID(quizz.FkTheme),
                 Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
                 Urlcode = quizz.Urlcode,
-                listQuestionrep = listQuestionrepDTO
+                listQuestionrep = listQuestionrepDTO,
+                //ListeReponsesCandidat= this._servRepCandidat.GetReponsesCandidatbyIdQuestionIdQuizz(quizz.PkQuizz)
 
             };
         }
