@@ -4,6 +4,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using Quizz_Models.Repositories;
 using EO.WebBrowser.DOM;
+using Quizz_Models.DTO;
 
 namespace Quizz_Models.Utils
 {
@@ -58,7 +59,7 @@ namespace Quizz_Models.Utils
 
         //methode gerent l'envoi du mail recruteur (utilise SendMail)
        
-        public static void SendMailRecruteur(Compte CompteRecruteur, string PdfToAttach, Compte CompteCandidat, Quizz quizz)
+        public static void SendMailRecruteur(Compte CompteRecruteur, string PdfToAttach, Compte CompteCandidat, AffichageQuizzDto quizz)
         {
             string mailAutomatique = MailCredential;
             //string mailToRecruteur = MailCredential;
@@ -129,7 +130,7 @@ namespace Quizz_Models.Utils
 
         }
         //methode sui gerent le contenu du mail recruteur
-        public static string contentMailRecruteur(string NomRecruteur, string NomCandidat, string prenomCandidat, string prenomRecruteur, Quizz quizz)
+        public static string contentMailRecruteur(string NomRecruteur, string NomCandidat, string prenomCandidat, string prenomRecruteur, AffichageQuizzDto quizz)
         {
 
 
