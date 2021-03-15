@@ -20,7 +20,6 @@ export class ServiceQuestions
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
 
-    console.log(VariableGlobales.apiURLQuestion + "AvecLesQuesitionsSVP/" + prmCodeQuizz, { method: "GET", headers: requestHeaders })
     return fetch(VariableGlobales.apiURLQuestion + "AvecLesQuesitionsSVP/" + prmCodeQuizz, { method: "GET", headers: requestHeaders })
   }
 
