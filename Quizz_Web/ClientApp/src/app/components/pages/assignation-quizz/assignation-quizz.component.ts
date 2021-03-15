@@ -7,7 +7,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { DTOQuizz } from '../../../DTO/dto-quizz';
 import { Router } from "@angular/router";
 import { VariableGlobales } from '../../../url_api';
 import { Globals } from 'src/app/globals';
@@ -28,6 +27,7 @@ export class AssignationQuizzComponent implements OnInit
   resultatForm: FormGroup;               // Contiens les valeurs du formulaire d'assignation de quizz
   dataQuizz: any;                        // Contiens le quizz passé de la page generation de quizz
   concatForms: any;                      // Contiens les valeur des deux formulaires pour l'envoi a l'api
+  idCandidat: number;
 
 
 
@@ -37,8 +37,9 @@ export class AssignationQuizzComponent implements OnInit
     this.dataQuizz = this.router.getCurrentNavigation().extras.state;
     this.resultatForm = this.builder.group
       ({
-        compte: ['', Validators.required]
-      })
+        compte: [0, Validators.required]
+      });
+    this.idCandidat = 0;
   }
 
 
@@ -58,11 +59,13 @@ export class AssignationQuizzComponent implements OnInit
     let quizzGen: CreationQuizzDTO = new CreationQuizzDTO;
 
     let nbQuestion : number = parseInt(this.dataQuizz.form.nbQuestions);
-    console.log(nbQuestion);
+    let FKCompteCandidat: number = parseInt(this.idCandidat.toString());
+    let FKCompteRecruteur: number = parseInt(this.getCompteRecruteurID().toString());
+    quizzGen.$FKCompteCandidat = FKCompteCandidat;
     quizzGen.$NbQuestions = nbQuestion;
     quizzGen.$Theme = this.dataQuizz.form.theme;
     quizzGen.$Complexite = this.dataQuizz.form.complexite;
-    quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
+    quizzGen.$FKCompteRecruteur = FKCompteRecruteur;
 
     this.insertQuizz(quizzGen);
   }
@@ -72,15 +75,16 @@ export class AssignationQuizzComponent implements OnInit
 
   setValeurFormIDCandidat(prmID: number)
   {
-    this.resultatForm.patchValue({ "compte": prmID })
+    this.idCandidat = prmID;
   }
 
 
 
   /* ---  Retourne l'id du compte qui a créer le quizz --- */
   getCompteRecruteurID(): number
-  { /* ---------- TODO ---------- */
-    return 1;
+  { 
+    let jwt = Globals.decodeJwt();
+    return jwt['id'];
   }
 
 

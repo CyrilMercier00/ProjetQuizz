@@ -101,6 +101,14 @@ namespace Quizz_Models.Services
                 EstCreateur = Convert.ToByte(true)
             });
 
+            // Création du candidat lié
+            quizzCreation.CompteQuizz.Add(new CompteQuizz
+            {
+                FkCompte = prmDTO.FKCompteCandidat,
+                FkQuizz = quizzCreation.PkQuizz,
+                EstCreateur = Convert.ToByte(false)
+            });
+
             // Creation d'une list de questions associées au quizz
             foreach (Question q in listQuestionCreation)        // Pour chaques questions
             {

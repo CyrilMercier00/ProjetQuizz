@@ -8,6 +8,7 @@ namespace Quizz_Models.DTO
     public class CreationQuizzDTO
     {
         public int FKCompteRecruteur { get; set; }
+        public int FKCompteCandidat { get; set; }
         public int NbQuestions { get; set; }
         public String Theme { get; set; }
         public String Complexite { get; set; }

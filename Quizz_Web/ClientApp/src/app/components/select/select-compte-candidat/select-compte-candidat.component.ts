@@ -53,7 +53,6 @@ export class SelectCompteCandidatComponent implements OnInit
       .then((json) =>
       {
         this.valRetourRequeteCompteAssigne = json;
-        console.log(this.valRetourRequeteCompteAssigne);
       });
   }
 

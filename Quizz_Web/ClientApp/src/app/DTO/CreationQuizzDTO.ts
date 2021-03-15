@@ -1,6 +1,7 @@
 export class CreationQuizzDTO
 {
   private FKCompteRecruteur: number;
+  private FKCompteCandidat: number;
   private NbQuestions: number;
   private Theme: string;
   private Complexite: string;
@@ -11,6 +12,14 @@ export class CreationQuizzDTO
      */
 	public get $FKCompteRecruteur(): number {
 		return this.FKCompteRecruteur;
+	}
+
+    /**
+     * Getter $FKCompteRecruteur
+     * @return {number}
+     */
+	public get $FKCompteCandidat(): number {
+		return this.FKCompteCandidat;
 	}
 
     /**
@@ -43,6 +52,14 @@ export class CreationQuizzDTO
      */
 	public set $FKCompteRecruteur(value: number) {
 		this.FKCompteRecruteur = value;
+	}
+    
+    /**
+     * Setter $FKCompteRecruteur
+     * @param {number} value
+     */
+	public set $FKCompteCandidat(value: number) {
+		this.FKCompteCandidat = value;
 	}
 
     /**
