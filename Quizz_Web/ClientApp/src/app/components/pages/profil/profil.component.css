@@ -1,0 +1,20 @@
+#rectangle{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+
+    height : 7rem;
+    width : 30rem;
+    background-color: #50536f;
+    margin: 10px;
+    border-radius: 25px;
+    justify-content: center;
+    align-items: stretch;
+    transition: background-color 1s, color 1s;
+}
+
+#permissions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}

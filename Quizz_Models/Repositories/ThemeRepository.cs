@@ -26,6 +26,9 @@ namespace Quizz_Models.Repositories
             .Where(x => x.NomTheme == prmNomTheme)
             .Single().PkTheme;
         }
+
+     
+
         /// <summary>
         /// Retourne l'objet Teme en fonction du nom du theme passé
         /// </summary>
@@ -42,7 +45,7 @@ namespace Quizz_Models.Repositories
         /// </summary>
         /// <param name="fkTheme"></param>
         /// <returns></returns>
-        internal Theme GetThemeByID(int prmFKTheme)
+        public Theme GetThemeByID(int prmFKTheme)
         {
             return bdd_entities.Theme.Find(prmFKTheme);
         }

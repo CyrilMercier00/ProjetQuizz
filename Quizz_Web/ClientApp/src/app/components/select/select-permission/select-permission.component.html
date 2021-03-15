@@ -1,0 +1,10 @@
+<div class="wrapper-select-permission">
+  <div class="mybox">
+    <span class="myarrow"></span>
+    <select [ngModel]="selectedPerm" (ngModelChange)="changePermission($event)">
+      <option *ngFor="let permissionName of permissionsNames" [ngValue]="permissionName">
+        {{ permissionName.nom | titlecase }}
+      </option>
+    </select>
+  </div>
+</div>

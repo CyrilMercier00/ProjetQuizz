@@ -1,44 +1,81 @@
-export class reponseDTO {
+export class reponseDTO
+{
 
-     _Commentaire : string;
-     _Reponse : string;
-     _FKCompte: number;
-     _FKQuestion:number;
+  private Commentaire: string;
+  private Reponse: string;
+  private FKCompte: number;
+  private FKQuestion: number;
 
-    public get Commentaire(): string {
-        return this._Commentaire;
-    }
+  /**
+   * Getter $Commentaire
+   * @return {string}
+   */
+  public get $Commentaire(): string
+  {
+    return this.Commentaire;
+  }
 
-    public set Commentaire(Commentaire: string) {
-        this._Commentaire = Commentaire;
-    }
+  /**
+   * Getter $Reponse
+   * @return {string}
+   */
+  public get $Reponse(): string
+  {
+    return this.Reponse;
+  }
 
-    public get Reponse(): string {
-        return this._Reponse;
-    }
+  /**
+   * Getter $FKCompte
+   * @return {number}
+   */
+  public get $FKCompte(): number
+  {
+    return this.FKCompte;
+  }
 
-    public set Reponse(Reponse: string) {
-        this._Reponse = Reponse;
-    }
+  /**
+   * Getter $FKQuestion
+   * @return {number}
+   */
+  public get $FKQuestion(): number
+  {
+    return this.FKQuestion;
+  }
 
-    public get FKCompte(): number
- {
-        return this._FKCompte;
-    }
+  /**
+   * Setter $Commentaire
+   * @param {string} value
+   */
+  public set $Commentaire(value: string)
+  {
+    this.Commentaire = value;
+  }
 
-    public set FKCompte(FKCompte: number
-) {
-        this._FKCompte = FKCompte;
-    }
+  /**
+   * Setter $Reponse
+   * @param {string} value
+   */
+  public set $Reponse(value: string)
+  {
+    this.Reponse = value;
+  }
 
-    public get FKQuestion(): number {
-        return this._FKQuestion;
-    }
+  /**
+   * Setter $FKCompte
+   * @param {number} value
+   */
+  public set $FKCompte(value: number)
+  {
+    this.FKCompte = value;
+  }
 
-    public set FKQuestion(FKQuestion: number) {
-        this._FKQuestion = FKQuestion;
-    }
-
-
+  /**
+   * Setter $FKQuestion
+   * @param {number} value
+   */
+  public set $FKQuestion(value: number)
+  {
+    this.FKQuestion = value;
+  }
 
 }

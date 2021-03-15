@@ -2,7 +2,8 @@
     <div>
         <p>{{this.compte.nom}} {{this.compte.prenom}}</p>
         <div>
-            <p>{{this.compte.role}}</p>
+            <p *ngIf="!modifying">{{this.compte.role}}</p>
+            <app-select-permission *ngIf="modifying" [compte]="compte" (choixEvent)="permissionSelect($event)"></app-select-permission>
         </div>
         <div>
             <p>{{this.compte.mail}}</p>
@@ -10,7 +11,8 @@
     </div>
     
     <div class="containerButton">
-        <button class="modifyButton" [routerLinkActive]="['link-active']" [routerLink]="['/permission']" >Modifier</button>
-        <button class="deleteButton" (click)="supprimerCompte()">Supprimer</button>
+        <button class="modifyButton" (click)="startModify()" >Modifier</button>
+        <button *ngIf="modifying" class="ValidateButton" (click)="validateModifyPermission($event)">Valider</button>
+        <button *ngIf="!modifying" class="deleteButton" (click)="supprimerCompte()">Supprimer</button>
     </div>
 </div>

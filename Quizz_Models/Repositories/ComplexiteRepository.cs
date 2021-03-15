@@ -38,12 +38,12 @@ namespace Quizz_Models.Repositories
            
         }
 
-        internal TauxComplexite GetComplexiteByID(int id)
-        {   // Note : Remplacement de Find
+        public TauxComplexite GetComplexiteByID(int id)
+        {
             return bdd_entities.TauxComplexite.Find(id);
         }
 
-        internal void Delete(int id)
+        public void Delete(int id)
         {
             TauxComplexite Taux= bdd_entities.TauxComplexite.Find(id);
             bdd_entities.TauxComplexite.Remove(Taux);
@@ -58,8 +58,6 @@ namespace Quizz_Models.Repositories
         /// <returns></returns>
         public TauxComplexite GetComplexiteByNom(String prmNomComplexite)
         {
-
-            
             return bdd_entities.TauxComplexite
                 .Where(x => x.Niveau.Equals( prmNomComplexite)).Single();
          

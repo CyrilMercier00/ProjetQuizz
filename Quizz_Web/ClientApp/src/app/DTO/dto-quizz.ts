@@ -1,12 +1,20 @@
 export class DTOQuizz
 {
-    private FKCompteRecruteur: number;
-    private FKCompteAssigne: number;
-    private NbQuestions: number;
-    private Chrono: string;
-    private Theme: String;
-    private Complexite: String;
-    private Urlcode: String;
+
+  private UrlCode: string;
+  private FKCompteRecruteur: number;
+  private NbQuestions: number;
+  private Chrono: string;
+  private Theme: string;
+  private Complexite: string;
+
+    /**
+     * Getter $UrlCode
+     * @return {string}
+     */
+	public get $UrlCode(): string {
+		return this.UrlCode;
+	}
 
     /**
      * Getter $FKCompteRecruteur
@@ -14,14 +22,6 @@ export class DTOQuizz
      */
 	public get $FKCompteRecruteur(): number {
 		return this.FKCompteRecruteur;
-	}
-
-    /**
-     * Getter $FKCompteAssigne
-     * @return {number}
-     */
-	public get $FKCompteAssigne(): number {
-		return this.FKCompteAssigne;
 	}
 
     /**
@@ -42,26 +42,26 @@ export class DTOQuizz
 
     /**
      * Getter $Theme
-     * @return {String}
+     * @return {string}
      */
-	public get $Theme(): String {
+	public get $Theme(): string {
 		return this.Theme;
 	}
 
     /**
-     * Getter Complexite
-     * @return {String}
+     * Getter $Complexite
+     * @return {string}
      */
-	public get $Complexite(): String {
+	public get $Complexite(): string {
 		return this.Complexite;
 	}
 
     /**
-     * Getter $Urlcode
-     * @return {String}
+     * Setter $UrlCode
+     * @param {string} value
      */
-	public get $Urlcode(): String {
-		return this.Urlcode;
+	public set $UrlCode(value: string) {
+		this.UrlCode = value;
 	}
 
     /**
@@ -70,14 +70,6 @@ export class DTOQuizz
      */
 	public set $FKCompteRecruteur(value: number) {
 		this.FKCompteRecruteur = value;
-	}
-
-    /**
-     * Setter $FKCompteAssigne
-     * @param {number} value
-     */
-	public set $FKCompteAssigne(value: number) {
-		this.FKCompteAssigne = value;
 	}
 
     /**
@@ -98,25 +90,18 @@ export class DTOQuizz
 
     /**
      * Setter $Theme
-     * @param {String} value
+     * @param {string} value
      */
-	public set $Theme(value: String) {
+	public set $Theme(value: string) {
 		this.Theme = value;
 	}
 
     /**
-     * Setter Complexite
-     * @param {String} value
+     * Setter $Complexite
+     * @param {string} value
      */
-	public set $Complexite(value: String) {
+	public set $Complexite(value: string) {
 		this.Complexite = value;
 	}
 
-    /**
-     * Setter $Urlcode
-     * @param {String} value
-     */
-	public set $Urlcode(value: String) {
-		this.Urlcode = value;
-	}
 }

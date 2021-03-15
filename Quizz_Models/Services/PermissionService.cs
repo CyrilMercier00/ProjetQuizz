@@ -28,6 +28,34 @@ namespace Quizz_Models.Services
             return TransformListPermissionToListPermissionDTO(permissions);
         }
 
+        public List<AffichagePermissionDTO> GetPermissionsNames()
+        {
+            List<Permission> permissions = this.repoPermission.GetAllPermissions();
+
+            return TransformListPermissionNamesToListPermissionNamesDTO(permissions);
+        }
+
+        private List<AffichagePermissionDTO> TransformListPermissionNamesToListPermissionNamesDTO(List<Permission> permissions)
+        {
+            List<AffichagePermissionDTO> permissionsNames = new List<AffichagePermissionDTO>();
+
+            foreach(Permission p in permissions)
+            {
+                permissionsNames.Add(TransformPermissionToPermissionNameDTO(p));
+            }
+
+            return permissionsNames;
+        }
+
+        private AffichagePermissionDTO TransformPermissionToPermissionNameDTO(Permission p)
+        {
+            return new AffichagePermissionDTO
+            {
+                PkPermission = p.PkPermission,
+                Nom = p.Nom
+            };
+        }
+
         /// <summary>
         /// Transforme une liste de permission (entité) en liste de PermissionDTO.
         /// </summary>
@@ -53,7 +81,7 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="p">Permission(entité) à transformer.</param>
         /// <returns>PermissionDTO correspondant.</returns>
-        private PermissionDTO TransformPermissionToPermissionDTO(Permission p)
+        public static PermissionDTO TransformPermissionToPermissionDTO(Permission p)
         {
             return new PermissionDTO
             {

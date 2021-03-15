@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { questionDTO } from 'src/app/DTO/questionDTO';
+
+import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
@@ -21,7 +22,7 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
 
 
   /* ------ Constructeur ------ */
-  constructor(private builder: FormBuilder) 
+  constructor(private builder: FormBuilder)
   {
     this.resultatForm = this.builder.group
       ({
@@ -85,11 +86,11 @@ export class FormulaireAjoutQuestionBddComponent implements OnInit
   InsertQuestion(data)
   {
 
-    let q = new questionDTO();
-    q.enonce = data.value.texteQuestion;
-    q.repLibre = data.value.repLibre;
-    q.nomComplexite = data.value.complexite;
-    q.nomTheme = data.value.theme;
+    let q = new DTOQuestion();
+    q.$Enonce = data.value.texteQuestion;
+    q.$RepLibre = data.value.repLibre;
+    q.$complexite = data.value.complexite;
+    q.$Theme = data.value.theme;
 
     fetch(
       VariableGlobales.apiURLQuestion,

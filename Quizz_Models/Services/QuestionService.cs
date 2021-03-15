@@ -18,6 +18,7 @@ namespace Quizz_Models.Services
             this.repoTheme = prmRepoTheme;
             this.repoComplex = prmRepoComplex;
             this.repoQuestion = prmRepoQuestion;
+            this.repoPropoReponse = prmRepoPropoReponse;
         }
 
 
@@ -76,29 +77,106 @@ namespace Quizz_Models.Services
             };
         }
 
+
+
         /// <summary>
         /// La methode recupere les propositions de reponse possible pour la liste de question passée
         /// </summary>
         /// <param name="listQuestion"></param>
         public List<QuestionReponseDTO> AddReponseToQuestion(List<Question> prmListQuestion)
         {
-            List<QuestionReponseDTO> listQRepDTO = new List<QuestionReponseDTO>();
+            List<QuestionReponseDTO> listQuestRepDTO = new List<QuestionReponseDTO>();   // Liste des DTO contenant ls questions et leur reponses
+            List<PropositionReponse> listReponse = new List<PropositionReponse>();       // Liste des reponses pour la question
+            List<PropositionReponseDTO> listeRepDTO = new List<PropositionReponseDTO>(); // Liste des DTO de reponses pour la question 
+            int i = 0;
 
+            // Pour chaque questions de la liste passée
             foreach (Question q in prmListQuestion)
             {
-                listQRepDTO.Add(new QuestionReponseDTO()
+                // Initialisationd du DTO pour cette question
+                listQuestRepDTO.Add(new QuestionReponseDTO()
                 {
                     Enonce = q.Enonce,
                     RepLibre = Convert.ToBoolean(q.RepLibre),
-                    PKQuestion= q.PkQuestion
+                    PKQuestion = q.PkQuestion
                 });
 
-                if (q.RepLibre == 0x0000)
-                {   // Ajouter a la liste des reponse dans le DTO les reponses recuperees pour cet ID
-                    listQRepDTO[listQRepDTO.Count - 1].ListeReponses = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+                // Si ce n'est pas une question a réponse libre
+                if (q.RepLibre == Convert.ToByte(false))
+                {
+                    // Ajouter les reponses pour cette question
+                    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+                    // Convertion en DTO pour eviter l'auto-referencement
+                    foreach (PropositionReponse pr in listReponse)
+                    {
+                        listQuestRepDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+                        {
+                            PkReponse = pr.PkReponse,
+                            Text = pr.Texte,
+                            estBonne = Convert.ToBoolean(pr.EstBonne),
+                            FkQuestion = pr.FkQuestion
+                        });
+                    }
                 }
+                i++;
             }
-            return listQRepDTO;
+            return listQuestRepDTO;
+        }
+
+        public List<QuestionReponseReponseCandidatDTO> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
+        {
+            // Liste des DTO contenant ls questions et leur reponses et la rep candidat
+            List<QuestionReponseReponseCandidatDTO> listQuestRepRepCandidatDTO = new List<QuestionReponseReponseCandidatDTO>();
+            // Liste des reponses pour la question
+            List<PropositionReponse> listReponse = new List<PropositionReponse>();       
+            int i = 0;
+
+
+            // Pour chaque questions de la liste passée
+            foreach (Question q in prmListQuestion)
+            {
+                // Initialisationd du DTO pour cette question
+                listQuestRepRepCandidatDTO.Add(new QuestionReponseReponseCandidatDTO()
+                {
+                    //Solution= q.,
+                    //Commentaire = q.,
+                    //FkCompte = q.,
+                    //FkQuestion = q.,
+
+                    // Enonce = q.Enonce,
+                    //RepLibre = Convert.ToBoolean(q.RepLibre),
+                    //PKQuestion = q.PkQuestion
+
+                });
+
+                // Si ce n'est pas une question a réponse libre
+                if (q.RepLibre == Convert.ToByte(false))
+                {
+                    // Ajouter les reponses pour cette question
+                    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+                    // Convertion en DTO pour eviter l'auto-referencement
+                    foreach (PropositionReponse pr in listReponse)
+                    {
+                        listQuestRepRepCandidatDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+                        {
+                            PkReponse = pr.PkReponse,
+                            Text = pr.Texte,
+                            estBonne = Convert.ToBoolean(pr.EstBonne),
+                            FkQuestion = pr.FkQuestion
+                        });
+                    }
+                }
+                i++;
+            }
+
+            return listQuestRepRepCandidatDTO;
+        }
+
+        public List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
+        {
+            return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
         }
     }
 }

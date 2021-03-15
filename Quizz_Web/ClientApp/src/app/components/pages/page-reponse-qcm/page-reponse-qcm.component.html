@@ -1,22 +1,23 @@
+
 <div class="flex flex-align-i-center flex-column wrapper">
 
-    <app-enonce text={{textEnonce}}></app-enonce>
+  <app-enonce text={{textEnonce}}></app-enonce>
 
-    <div class="flex">
+  <div class="flex">
 
-        <app-enonce></app-enonce>
-        <div class="flex flex-column">
-            <app-bouton-reponse-qcm [text-bouton]="rep1"></app-bouton-reponse-qcm>
-            <app-bouton-reponse-qcm [text-bouton]="rep2"></app-bouton-reponse-qcm>
-        </div>
-
-        <div class="flex flex-column">
-            <app-bouton-reponse-qcm [text-bouton]="rep3"></app-bouton-reponse-qcm>
-            <app-bouton-reponse-qcm [text-bouton]="rep4"></app-bouton-reponse-qcm>
-        </div>
-
+    <app-enonce [text]="enonce"></app-enonce>
+    <div class="flex flex-column">
+      <app-bouton-reponse-qcm [text]="rep1"></app-bouton-reponse-qcm>
+      <app-bouton-reponse-qcm [text]="rep2"></app-bouton-reponse-qcm>
     </div>
 
-    <app-dragabble-text-input></app-dragabble-text-input>
+    <div class="flex flex-column">
+      <app-bouton-reponse-qcm [text]="rep3"></app-bouton-reponse-qcm>
+      <app-bouton-reponse-qcm [text]="rep4"></app-bouton-reponse-qcm>
+    </div>
+
+  </div>
+
+  <app-dragabble-text-input></app-dragabble-text-input>
 
 </div>

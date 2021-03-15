@@ -1,8 +1,32 @@
-
 <div class="container wrapper flex flex-column flex-align-i-center">
+
+  <div *ngIf="showWelcome">
     <h2>Vous allez debuter le quizz</h2>
     <p>Nous vous souhaitons bonne chance !</p>
+    <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
+    <app-button-valid Message="Test fin Quizz" (click)="redirectNotFind()"></app-button-valid>
+  </div>
+  <div class="row">
+    <div class="col-md-9">
+     
+    </div>
+    <div class="col-md-3">
+        <div class="chrono">
+          <app-chrono *ngIf="componentChronoEnabled"
+          ></app-chrono>
+        </div>
+    </div>
+  </div>
+  <app-page-reponse-qcm
+    *ngIf="componentRepQCMEnabled"
+    [dataQuestion]="dataQuestion"
+    (estRepondu)="incrementNBQuestionRep()">
+  </app-page-reponse-qcm>
 
-    <app-button-valid Message="Commencer" onClick="handleClick()"></app-button-valid>
+  <app-page-reponse-libre
+    *ngIf="componentRepLibreEnabled"
+    [dataQuestion]="dataQuestion"
+    (estRepondu)="incrementNBQuestionRep()">
+  </app-page-reponse-libre>
 
 </div>

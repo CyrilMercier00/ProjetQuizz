@@ -9,11 +9,18 @@ namespace Quizz_Models.DTO
 {
     public class QuestionReponseDTO
     {
+        public QuestionReponseDTO()
+        {
+            ListeReponses = new List<PropositionReponseDTO>();
+        }
+
         public int PKQuestion { get; set; }
         public String Enonce { get; set; }
         public bool RepLibre { get; set; }
         public String NomComplexite { get; set; }
         public String NomTheme { get; set; }
-        public List<PropositionReponse> ListeReponses { get; set; }
+        public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
+
+
     }
 }

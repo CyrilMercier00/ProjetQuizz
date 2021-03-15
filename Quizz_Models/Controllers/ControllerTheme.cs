@@ -49,5 +49,20 @@ namespace Quizz_Web.Controllers
                 return BadRequest("Le parametre n'est pas un nom");
             }
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetThemeNameByID(int prmId)
+        {
+           
+                try
+                {
+                    return Ok(this.servTheme.GetThemeNameByID(prmId));
+                }
+                catch (Exception e)
+                {
+                    return NotFound(e.Message);
+                }
+          
+        }
     }
 }

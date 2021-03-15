@@ -12,10 +12,6 @@ namespace Quizz_Models.Services
         readonly PermissionRepository repoPermission;
         readonly CompteRepository repoCompte;
 
-        const int ADMIN_PERMISSION_ID = 1;
-        const int RECRUTEUR_PERMISSION_ID = 2;
-        const int CANDIDAT_PERMISSION_ID = 3;
-
         public CompteService(PermissionRepository repoPermission, CompteRepository repoCompte)
         {
             this.repoPermission = repoPermission;
@@ -32,6 +28,16 @@ namespace Quizz_Models.Services
         }
 
         /// <summary>
+        /// Renvoie un compte createur à partir du Quizz 
+        /// </summary>
+        /// <param name="prmIdQuizz"></param>
+        /// <returns>Compte </returns>
+        public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
+        {
+            return repoCompte.GetCompteRecruteurByIdQuizz(prmIdQuizz);
+        }
+        
+        // <summary>
         /// Transforme une liste de compte en liste de DTO
         /// </summary>
         /// <param name="lists"></param>
@@ -95,6 +101,7 @@ namespace Quizz_Models.Services
         }
 
 
+
         /// <summary>
         /// Méthode qui crée un Compte avec un CompteDTO et le nom d'une Permission.<br></br>
         /// Cette méthode doit être utilisée pour les Permissions de base (Compte candidat, recruteur, administrateur).
@@ -133,6 +140,20 @@ namespace Quizz_Models.Services
 
             if (compte == null) return null;
             return TransformCompteEntityToCompteDTOAdmin(compte);
+        }
+
+        public PermissionDTO GetCurrentComptePermission(int compteID)
+        {
+            PermissionDTO permissionDTO = null;
+            Compte c = this.repoCompte.GetCompteByID(compteID);
+
+            if(c != null)
+            {
+                Permission p = this.repoPermission.GetPermissionById(c.FkPermission);
+                permissionDTO = PermissionService.TransformPermissionToPermissionDTO(p);
+            }
+
+            return permissionDTO;
         }
 
         /// <summary>

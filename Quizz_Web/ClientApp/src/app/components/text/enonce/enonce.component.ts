@@ -13,18 +13,19 @@ export class EnonceComponent implements OnInit
 
   /* --- Variables --- */
   @Input("text") text: string;
-  
+
 
 
 
   /* --- Constructeur --- */
-  constructor() { }
+  constructor() {}
 
 
 
   /* --- Methodes Angular --- */
   ngOnInit()
   {
+    console.log(this.text)
   }
 
 

@@ -9,10 +9,12 @@ namespace Quizz_Models.Repositories
     {
         private readonly bdd_quizzContext bdd_entities;
         private readonly ThemeRepository repoTheme;
-        public QuestionRepository(bdd_quizzContext context, ThemeRepository repoTheme)
+        private readonly QuizzRepository repoQuizz;
+        public QuestionRepository(bdd_quizzContext context, ThemeRepository repoTheme, QuizzRepository repoQuizz)
         {
             bdd_entities = context;
             this.repoTheme = repoTheme;
+            this.repoQuizz = repoQuizz;
         }
 
         /// <summary>
@@ -110,7 +112,38 @@ namespace Quizz_Models.Repositories
                 prmListQuestion.Add(q);
             }
         }
+        /// <summary>
+        /// Retourne la liste des questions pour le quizz avec le code passé. Retourne null si le code est invalide
+        /// </summary>
+        /// <param name="prmCodeQuizz"></param>
+        /// <returns></returns>
+        internal List<Question> GetQuestionByCodeQuizz(string prmCodeQuizz)
+        {
+            List<Question> listeRetour = new List<Question>();                      // Liste des questions recupérées 
+            Quizz quizzRecup = repoQuizz.GetQuizzByCode(prmCodeQuizz);              // PK du quizz correspondant au code passé 
 
+            if (quizzRecup != null)
+            {
+                // Recup de la table de liaison pour ce quizz questions
+                List<QuizzQuestion> listQuizzQuestion = bdd_entities.QuizzQuestion
+                    .Where(x => x.FkQuizz == quizzRecup.PkQuizz)
+                    .ToList();
+
+                // Recup des questions
+                foreach (QuizzQuestion qq in listQuizzQuestion)
+                {
+                    listeRetour.Add(
+                        bdd_entities.Question
+                        .Where(x => x.PkQuestion == qq.FkQuestion)
+                        .SingleOrDefault()
+                        );
+                }
+            } else
+            {
+                listeRetour = null;
+            }
+            return listeRetour;
+        }
     }
 
 }

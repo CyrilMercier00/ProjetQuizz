@@ -3,13 +3,13 @@
     TODO : Recup de l'id du compte & l'envoyer avec le quizz
 ------------------------------------------------------------
 */
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { VariableGlobales } from '../../../url_api';
-import { Router } from "@angular/router";
+
 import { DTOQuizz } from '../../../DTO/dto-quizz';
-
-
+import { Router } from "@angular/router";
+import { VariableGlobales } from '../../../url_api';
 
 @Component({
   selector: 'app-assignation-quizz',
@@ -24,8 +24,8 @@ export class AssignationQuizzComponent implements OnInit
   /* ------ Declaration des variables ------ */
 
   resultatForm: FormGroup;               // Contiens les valeurs du formulaire d'assignation de quizz
-  dataQuizz: any;                               // Contiens le quizz passé de la page generation de quizz
-  concatForms: any;                          // Contiens les valeur des deux formulaires pour l'envoi a l'api
+  dataQuizz: any;                        // Contiens le quizz passé de la page generation de quizz
+  concatForms: any;                      // Contiens les valeur des deux formulaires pour l'envoi a l'api
 
 
 
@@ -60,7 +60,6 @@ export class AssignationQuizzComponent implements OnInit
     quizzGen.$Theme = this.dataQuizz.form.theme;
     quizzGen.$Complexite = this.dataQuizz.form.complexite;
     quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
-    quizzGen.$FKCompteAssigne = this.resultatForm.value.compte;
 
     this.insertQuizz(quizzGen);
     console.log(quizzGen);
@@ -72,7 +71,7 @@ export class AssignationQuizzComponent implements OnInit
 
   setValeurFormIDCandidat(prmID: number)
   {
-    this.resultatForm.patchValue({"compte" : prmID})
+    this.resultatForm.patchValue({ "compte": prmID })
     console.log(this.resultatForm.value)
   }
 

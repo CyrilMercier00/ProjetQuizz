@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Globals } from 'src/app/globals';
+import { PermissionService } from 'src/app/Service/PermissionService';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,11 +10,21 @@ import { Component } from '@angular/core';
 export class NavMenuComponent {
   isExpanded = false;
 
+  constructor(private permissionService: PermissionService) {}
+
   collapse() {
     this.isExpanded = false;
   }
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  hasAccessTo(permission: string): boolean{
+    return this.permissionService.verifyPermission(permission);
+  }
+
+  isLoggedIn(): boolean{
+    return Globals.isLoggedIn();
   }
 }

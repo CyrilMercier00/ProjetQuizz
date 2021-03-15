@@ -22,5 +22,15 @@ namespace Quizz_Models.Services
         {
             return repoTheme.GetThemeByNom(prmNomTheme);
         }
+
+        public string GetThemeNameByID(int prmId)
+        {
+            Theme theme= repoTheme.GetThemeByID(prmId);
+            
+
+            return theme.NomTheme;
+        }
+
+        
     }
 }

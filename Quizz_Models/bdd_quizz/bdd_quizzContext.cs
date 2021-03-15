@@ -106,6 +106,8 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.Property(e => e.FkQuizz).HasColumnName("fk_quizz");
 
+                entity.Property(e => e.EstCreateur).HasColumnName("est_createur");
+
                 entity.HasOne(d => d.FkCompteNavigation)
                     .WithMany(p => p.CompteQuizz)
                     .HasForeignKey(d => d.FkCompte)
