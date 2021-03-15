@@ -1,9 +1,10 @@
 export class ReponseCandidatDTO
 {
+
   private Reponse: string;
   private Commentaire: string;
-  private FKCompte: string;
-  private FKQuestion: string;
+  private FKCompte: number;
+  private FKQuestion: number;
 
   /**
    * Getter $Reponse
@@ -25,18 +26,18 @@ export class ReponseCandidatDTO
 
   /**
    * Getter $FKCompte
-   * @return {string}
+   * @return {number}
    */
-  public get $FKCompte(): string
+  public get $FKCompte(): number
   {
     return this.FKCompte;
   }
 
   /**
    * Getter $FKQuestion
-   * @return {string}
+   * @return {number}
    */
-  public get $FKQuestion(): string
+  public get $FKQuestion(): number
   {
     return this.FKQuestion;
   }
@@ -61,20 +62,23 @@ export class ReponseCandidatDTO
 
   /**
    * Setter $FKCompte
-   * @param {string} value
+   * @param {number} value
    */
-  public set $FKCompte(value: string)
+  public set $FKCompte(value: number)
   {
     this.FKCompte = value;
   }
 
   /**
    * Setter $FKQuestion
-   * @param {string} value
+   * @param {number} value
    */
-  public set $FKQuestion(value: string)
+  public set $FKQuestion(value: number)
   {
     this.FKQuestion = value;
   }
+
+
+
 
 }
