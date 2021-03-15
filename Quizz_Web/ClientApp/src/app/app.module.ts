@@ -47,6 +47,8 @@ import { ProfilComponent } from './components/pages/profil/profil.component';
 import { ConnexionGuard } from './Guards/ConnexionGuard';
 import { BooleanPipe } from './Pipe/boolean-pipe';
 
+import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-niveau.component';
+
 @NgModule({
   declarations: [
     QuizzQuestionComponent,
@@ -86,7 +88,8 @@ import { BooleanPipe } from './Pipe/boolean-pipe';
     CheckBoxComponent,
     LoginPageComponent,
     ProfilComponent,
-    BooleanPipe
+    BooleanPipe,
+    AfficherNiveauComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
