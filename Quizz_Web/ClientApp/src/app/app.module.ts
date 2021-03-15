@@ -121,11 +121,19 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
         component: GenQuizzComponent,
         canActivate: [GenererQuizzGuard]
       },
-      {  // Page pour creer un nouveau niveau
-        path: 'creer-niveau',
-        component: GenerateNiveauComponent,
-        canActivate: [GenererQuizzGuard]
-      },
+   
+      {// Page pour creer un nouveau niveau
+         path: 'niveau', component: GenerateNiveauComponent, 
+         canActivate: [GenererQuizzGuard],
+      children:
+      [
+            { path: 'formulaire-niveau', component: FormulaireCreationNiveauComponent,
+            canActivate: [GenererQuizzGuard]},
+            
+            { path:'afficher-niveau' ,component: AfficherNiveauComponent,canActivate: [GenererQuizzGuard]
+          }
+             ],
+    }, 
       { // Page pour modifier un quizz
         path: 'gestion-quizz',
         component: GestionQuizzComponent,
