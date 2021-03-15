@@ -1,9 +1,9 @@
+import { Globals } from '../globals';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VariableGlobales } from 'src/app/url_api';
 import { PermissionNameDTO } from '../DTO/permissionNameDTO';
-import { Globals } from '../globals';
+import { VariableGlobales } from 'src/app/url_api';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class PermissionService {
         return true;
       }
     }
-    
+
     return false;
   }
 }

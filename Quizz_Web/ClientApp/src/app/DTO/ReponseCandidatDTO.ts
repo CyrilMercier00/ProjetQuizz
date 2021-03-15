@@ -1,19 +1,10 @@
-export class reponseDTO
+export class ReponseCandidatDTO
 {
 
-  private Commentaire: string;
   private Reponse: string;
+  private Commentaire: string;
   private FKCompte: number;
   private FKQuestion: number;
-
-  /**
-   * Getter $Commentaire
-   * @return {string}
-   */
-  public get $Commentaire(): string
-  {
-    return this.Commentaire;
-  }
 
   /**
    * Getter $Reponse
@@ -22,6 +13,15 @@ export class reponseDTO
   public get $Reponse(): string
   {
     return this.Reponse;
+  }
+
+  /**
+   * Getter $Commentaire
+   * @return {string}
+   */
+  public get $Commentaire(): string
+  {
+    return this.Commentaire;
   }
 
   /**
@@ -43,21 +43,21 @@ export class reponseDTO
   }
 
   /**
-   * Setter $Commentaire
-   * @param {string} value
-   */
-  public set $Commentaire(value: string)
-  {
-    this.Commentaire = value;
-  }
-
-  /**
    * Setter $Reponse
    * @param {string} value
    */
   public set $Reponse(value: string)
   {
     this.Reponse = value;
+  }
+
+  /**
+   * Setter $Commentaire
+   * @param {string} value
+   */
+  public set $Commentaire(value: string)
+  {
+    this.Commentaire = value;
   }
 
   /**
@@ -77,5 +77,8 @@ export class reponseDTO
   {
     this.FKQuestion = value;
   }
+
+
+
 
 }

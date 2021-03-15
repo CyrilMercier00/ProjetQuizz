@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
-import jwtDecode from 'jwt-decode';
-import { reponseDTO } from 'src/app/DTO/reponseDTO';
+import { ReponseCandidatDTO } from 'src/app/DTO/ReponseCandidatDTO';
+import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 @Component({
   selector: 'app-page-reponse-libre',
@@ -48,14 +48,17 @@ export class PageReponseLibreComponent implements OnInit
 
   /* ------ Methodes ------*/
   // Envoi de la réponse a la base de données
-  handleClick ()
+  handleClick()
   {
-    let data = new reponseDTO();
+
+    let data = new ReponseCandidatDTO();
 
     data.$Commentaire = this.textCommentaire;
     data.$Reponse = this.answer;
     data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
     data.$FKQuestion = this.dataQ.$PKQuestion;
+
+    serviceRepCandidat.PostReponse(data)
 
     this.estRepondu.emit(true);
    

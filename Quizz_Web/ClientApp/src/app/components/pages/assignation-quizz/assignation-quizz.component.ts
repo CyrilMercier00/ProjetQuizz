@@ -9,7 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DTOQuizz } from '../../../DTO/dto-quizz';
 import { Router } from "@angular/router";
-import { VariableGlobales } from '../../../url_api';
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
+
 
 @Component({
   selector: 'app-assignation-quizz',
@@ -87,20 +88,9 @@ export class AssignationQuizzComponent implements OnInit
 
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
-  async insertQuizz(data: DTOQuizz)
+  insertQuizz(data: DTOQuizz)
   {
-    await fetch(
-      VariableGlobales.apiURLQuizz,
-      {
-        method: "POST",
-        headers:
-        {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      }
-    )
+    ServiceQuizz.InsertQuizz(data)
   }
 
 }
