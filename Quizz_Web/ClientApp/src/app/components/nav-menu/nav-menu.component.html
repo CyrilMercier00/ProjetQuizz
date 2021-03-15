@@ -17,14 +17,10 @@
         <a class="nav-link " [routerLink]="['/creer-niveau']">Creer un niveau</a>
       </li>
 
-      <li class="nav-item" 
-        *ngIf="hasAccessTo('AjouterQuest') || hasAccessTo('ModifierQuest') || hasAccessTo('SupprQuestion')" 
+      <li class="nav-item"
+        *ngIf="hasAccessTo('AjouterQuest') || hasAccessTo('ModifierQuest') || hasAccessTo('SupprQuestion')"
         [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/gestion-quizz']">Gestion de quizz</a>
-      </li>
-
-      <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/assignation-quizz']">Assignation de quizz</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['link-active']">
@@ -32,25 +28,11 @@
       </li>
 
       <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/page-demarrage/FM8Zt7zt4UmGX6jk9o3IaA']">Page debut quizz</a>
-      </li>
-
-
-      <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/reponse-qcm']">qcm</a>
-      </li>
-
-      <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/reponse-libre']">qcmLibre</a>
+        <a class="nav-link " [routerLink]="['/page-demarrage/qjtFqUAORkC1WudxIB6w']">Page debut quizz</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/creation-question']">Creation question</a>
-      </li>
-
-
-      <li class="nav-item" *ngIf="isLoggedIn()" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/profil']">Profil</a>
       </li>
 
     </ul>
