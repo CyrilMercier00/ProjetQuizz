@@ -7,14 +7,16 @@ using iText.Kernel.Pdf.Canvas.Draw;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 using Quizz_Models.bdd_quizz;
+using Quizz_Models.DTO;
 using Quizz_Models.Services;
+using Quizz_Web.Controllers;
 
 namespace Quizz_Models.Utils
 {
     class PdfUtils
     {
-        public static string pdfPath = @"..\TestCompetence.pdf";
-        //private static string pdfPath = @"C:\Users\Public\Downloads\Test.pdf";
+       // public static string pdfPath = @"..\TestCompetence.pdf";
+        private static string pdfPath = @"C:\Users\Public\Downloads\TestCompetence.pdf";
         private static PdfWriter writer = new PdfWriter(pdfPath);
         private static PdfDocument pdf = new PdfDocument(writer);
         private static iText.Layout.Document document = new iText.Layout.Document(pdf);
@@ -22,50 +24,58 @@ namespace Quizz_Models.Utils
        
 
         //********************************************************************************
-        private static Compte candidat { get; set; }
-        private static Compte recruteur { get; set; }
-        private static ICollection<PropositionReponse> question { get; set; } //Question
-        private static string reponsesQuestion { get; set; } //Reponse q
-        private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse C
-        private static string commentaireCandidat { get; set; }//commentaire
+        private static Compte Ccandidat { get; set; }
+        private static Compte Crecruteur { get; set; }
+        private static List<AffichageQuizzDto> listQuestion { get; set; } //Question
+      //  private static string reponsesQuestion { get; set; } //Reponse q
+       // private static ICollection<ReponseCandidat> reponsesCandidat { get; set; } //Reponse Candidat
+       // private static string commentaireCandidat { get; set; }//commentaire
         private static string technologie { get; set; }//Technologie
-        private static string nomCandidat { get; set; }//nom
-        private static string prenomCandidat { get; set; }//nom
+        private static string nomCandidat { get; set; }//nom Ccandidat
+        private static string prenomCandidat { get; set; }//prenom candidat
         private static string nomRecruteur { get; set; }//nom
         private static string prenomRecruteur { get; set; }//nom
-        public static int Nb_QUEST { get; private set; }
+        public static int Nb_QUEST { get; set; }
+        public static int Nb_RepOk { get; set; }
+        public static AffichageQuizzDto affichageQuizz { get; set; }
 
+        public static Quizz quizz { get; set; }
         //modifier les attributs et methode pour faire le lien avec la bdd
 
-        readonly  static ServiceTheme _servTheme ;
-        
+
+
 
         //Methode qui la creation du pdf avec son contenue le contenu du pdf 
         public static void ContentPdf(Quizz quizz, Compte candidatQuizz, Compte recruteurQuizz)
         {
             try
             {
-                candidat = candidatQuizz;
-                recruteur = recruteurQuizz;
-                nomCandidat = candidat.Nom;
-                prenomCandidat = candidat.Prenom;
-                nomRecruteur = recruteur.Nom;
-                prenomRecruteur = recruteur.Prenom;
-                technologie = _servTheme.GetThemeNameByID(quizz.FkTheme);
-               // Nb_QUEST=
+                //affichageQuizz = GetQuestionReponsesRepCandidat(quizz.Urlcode);
+                Ccandidat = candidatQuizz;
+                Crecruteur =  recruteurQuizz;
+                nomCandidat = Ccandidat.Nom;
+                prenomCandidat = Ccandidat.Prenom;
+                nomRecruteur =Crecruteur.Nom;//modifier test
+                prenomRecruteur = Crecruteur.Prenom;
+               // listQuestion= GetQuestionReponsesRepCandidat();
+                // question = affichageQuizz.ListeReponses;
+                //  Nb_QUEST = affichageQuizz.
+                //   technologie = this._servTheme.GetThemeNameByID(quizz.FkTheme);
+
+
+
                 //ajout attribut et modif methode
 
                 PdfHeader();
                 PdfSubHeader();
                 ScoreTable();
-                PdfPageNumber();
                 PdfBody();
-
+                PdfPageNumber();
                 document.Close();
                 writer.Dispose();
 
                 document.Close();
-                //  GestionMailUtils.SendMailRecruteur(nomCandidat, prenomCandidat, nomRecruteur, prenomRecruteur, pdfPath,quizz);
+                GestionMailUtils.SendMailRecruteur(candidatQuizz, pdfPath, recruteurQuizz, quizz);
                 System.IO.File.Delete(pdfPath);
                 Console.WriteLine("pdf + mail 2 ok");
             }
@@ -82,6 +92,7 @@ namespace Quizz_Models.Utils
 
         }
 
+    
 
         public static void PdfLogo()
         {
@@ -95,7 +106,7 @@ namespace Quizz_Models.Utils
         }
         public static void PdfHeader()
         {
-            Paragraph recruter = new Paragraph(" Recruteur : " + nomRecruteur + " " + prenomRecruteur)
+            Paragraph recruteur = new Paragraph(" Recruteur : " + nomRecruteur + " " + prenomRecruteur)
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(15);
 
@@ -107,7 +118,7 @@ namespace Quizz_Models.Utils
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
 
-            document.Add(recruter);
+            document.Add(recruteur);
             document.Add(candidat);
             document.Add(header);
 
@@ -115,6 +126,7 @@ namespace Quizz_Models.Utils
         }
         public static void PdfBody()
         {
+           
             for (int i = 1; i <Nb_QUEST; i++)
             {
 
@@ -123,20 +135,20 @@ namespace Quizz_Models.Utils
                    .SetFontSize(15);
                 document.Add(question);
 
-                Paragraph reponse = new Paragraph(" Reponse ")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(15);
-                document.Add(reponse);
+                //Paragraph reponse = new Paragraph(" Reponse ")
+                //    .SetTextAlignment(TextAlignment.LEFT)
+                //    .SetFontSize(15);
+                //document.Add(reponse);
 
-                Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
-                   .SetTextAlignment(TextAlignment.LEFT)
-                   .SetFontSize(15);
-                document.Add(reponsecandidat);
+                //Paragraph reponsecandidat = new Paragraph(" Reponsecandidat ")
+                //   .SetTextAlignment(TextAlignment.LEFT)
+                //   .SetFontSize(15);
+                //document.Add(reponsecandidat);
 
-                Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
-                    .SetTextAlignment(TextAlignment.LEFT)
-                    .SetFontSize(15);
-                document.Add(commentaireCandidat);
+                //Paragraph commentaireCandidat = new Paragraph(" Commentaire Candidat ")
+                //    .SetTextAlignment(TextAlignment.LEFT)
+                //    .SetFontSize(15);
+                //document.Add(commentaireCandidat);
             }
 
             // Line separator
@@ -169,11 +181,25 @@ namespace Quizz_Models.Utils
                     VerticalAlignment.BOTTOM, 0);
             }
         }
-
+        public static int NoteSur20(int nb_QUEST ,int nb_RepOk) {
+            
+            int nb_Note = nb_RepOk*20;
+            if (nb_Note > 0)
+            {nb_Note= nb_Note / Nb_QUEST;}
+            else {
+                nb_Note = 0;
+            }
+                
+            return nb_Note;
+        }
         public static void ScoreTable()
         {
+            //Nb_QUEST = affichageQuizz.nbRepOK;
+            Nb_QUEST = 40;
+            Nb_RepOk = 10;
+            int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
             // Table
-            Table scoreTable = new Table(2, false);
+            Table scoreTable = new Table(4,false);
             Cell cell11 = new Cell(1, 1)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
@@ -181,19 +207,28 @@ namespace Quizz_Models.Utils
             Cell cell12 = new Cell(1, 2)
                .SetBackgroundColor(ColorConstants.BLUE)
                .SetTextAlignment(TextAlignment.RIGHT)
-               .Add(new Paragraph(" Nombre de bonne réponse "));
+               .Add(new Paragraph(" Nombre de bonnes réponses "));
+            Cell cell13 = new Cell(1, 3)
+                .SetBackgroundColor(ColorConstants.BLUE)
+                .SetTextAlignment(TextAlignment.RIGHT)
+                .Add(new Paragraph(" Note "));
 
             Cell cell21 = new Cell(2, 1)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("10"));
+               .Add(new Paragraph(Nb_QUEST.ToString()));
             Cell cell22 = new Cell(2, 2)
                .SetTextAlignment(TextAlignment.CENTER)
-               .Add(new Paragraph("10"));
+               .Add(new Paragraph(Nb_RepOk.ToString()));
+            Cell cell23 = new Cell(2, 3)
+               .SetTextAlignment(TextAlignment.CENTER)
+               .Add(new Paragraph(nb_Note +" / 20 "));
 
             scoreTable.AddCell(cell11);
             scoreTable.AddCell(cell12);
+            scoreTable.AddCell(cell13);
             scoreTable.AddCell(cell21);
             scoreTable.AddCell(cell22);
+            scoreTable.AddCell(cell23);
 
             document.Add(scoreTable);
 

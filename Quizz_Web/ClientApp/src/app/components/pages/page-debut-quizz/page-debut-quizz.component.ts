@@ -1,12 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-
+import { ChronoComponent } from '../../chrono/chrono.component';
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
 import { utilDTO } from 'src/app/DTO/utilDTO';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -25,9 +26,14 @@ export class PageDebutQuizzComponent implements OnInit
   dataQuestion: DTOQuestion;              // Contiens les données de la question actuellement posée
   componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
   componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
+  componentChronoEnabled: boolean         // Active ou désactive le component chrono
   isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
   showWelcome = true                      // Cache l'ecran de debut de quizz si false
   nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
+
+  /***chrono**/
+  TimeQ;
+  
 
 
 
@@ -73,13 +79,18 @@ export class PageDebutQuizzComponent implements OnInit
   {
     this.startQuizz();
   }
-
-
+  
+  /*redirige vers la page quizz success*/
+  redirectNotFind(){
+    let jwt = Globals.decodeJwt();    
+    this.router.navigate(['/quizzsuccess/'+this.code+'/'+jwt['id']]);
+  }
 
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
     this.showWelcome = false
+    this.componentChronoEnabled=false
     this.nextQuestion()
   }
 
@@ -95,15 +106,18 @@ export class PageDebutQuizzComponent implements OnInit
     {
       this.componentRepQCMEnabled = false
       this.componentRepLibreEnabled = true
+      this.componentChronoEnabled=true
 
     } else
     {
       this.componentRepLibreEnabled = false
       this.componentRepQCMEnabled = true
+      this.componentChronoEnabled=true
     }
   }
 
-
+  //****** */
+  EnregisteChrono() { ChronoComponent; }
 
   // Incremente le nombre de questions repondues et trigger l'affichage de la prochaine question
   incrementNBQuestionRep()
@@ -111,6 +125,8 @@ export class PageDebutQuizzComponent implements OnInit
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
       // Finis le quizz
+      this.redirectNotFind();
+
     } else
     {
       this.nbQuestionRepondues++

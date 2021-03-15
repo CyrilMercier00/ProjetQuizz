@@ -61,6 +61,7 @@ export class PageReponseLibreComponent implements OnInit
     serviceRepCandidat.PostReponse(data)
 
     this.estRepondu.emit(true);
+   
   }
 
 

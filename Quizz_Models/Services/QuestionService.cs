@@ -124,7 +124,57 @@ namespace Quizz_Models.Services
             return listQuestRepDTO;
         }
 
-        internal List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
+        public List<QuestionReponseReponseCandidatDTO> AddReponseCandidatToQuestion(List<Question> prmListQuestion)
+        {
+            // Liste des DTO contenant ls questions et leur reponses et la rep candidat
+            List<QuestionReponseReponseCandidatDTO> listQuestRepRepCandidatDTO = new List<QuestionReponseReponseCandidatDTO>();
+            // Liste des reponses pour la question
+            List<PropositionReponse> listReponse = new List<PropositionReponse>();       
+            int i = 0;
+
+
+            // Pour chaque questions de la liste passée
+            foreach (Question q in prmListQuestion)
+            {
+                // Initialisationd du DTO pour cette question
+                listQuestRepRepCandidatDTO.Add(new QuestionReponseReponseCandidatDTO()
+                {
+                    //Solution= q.,
+                    //Commentaire = q.,
+                    //FkCompte = q.,
+                    //FkQuestion = q.,
+
+                    // Enonce = q.Enonce,
+                    //RepLibre = Convert.ToBoolean(q.RepLibre),
+                    //PKQuestion = q.PkQuestion
+
+                });
+
+                // Si ce n'est pas une question a réponse libre
+                if (q.RepLibre == Convert.ToByte(false))
+                {
+                    // Ajouter les reponses pour cette question
+                    listReponse = repoPropoReponse.SelectReponseByIDQuestion(q.PkQuestion);
+
+                    // Convertion en DTO pour eviter l'auto-referencement
+                    foreach (PropositionReponse pr in listReponse)
+                    {
+                        listQuestRepRepCandidatDTO[i].ListeReponses.Add(new PropositionReponseDTO()
+                        {
+                            PkReponse = pr.PkReponse,
+                            Text = pr.Texte,
+                            estBonne = Convert.ToBoolean(pr.EstBonne),
+                            FkQuestion = pr.FkQuestion
+                        });
+                    }
+                }
+                i++;
+            }
+
+            return listQuestRepRepCandidatDTO;
+        }
+
+        public List<Question> GetListQuestionByCodeQuizz(string codeQuizz)
         {
             return repoQuestion.GetQuestionByCodeQuizz(codeQuizz);
         }
