@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { VariableGlobales } from 'src/app/url_api';
+import { Compte } from '../../../compte-feature/Compte/compte.model'
+import { Globals } from '../../../globals'
 
 
 
@@ -14,7 +16,7 @@ import { VariableGlobales } from 'src/app/url_api';
 export class SelectCompteCandidatComponent implements OnInit
 {
   /* ------ Declaration des variables ------ */
-  valRetourRequeteCompteAssigne: string;    // Contiens le retour de la requete get all compte assigne au recruteur
+  valRetourRequeteCompteAssigne: Compte[] = [];    // Contiens le retour de la requete get all compte assigne au recruteur
   @Output() ChoixEvent = new EventEmitter<string>();
 
 
@@ -32,9 +34,9 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* ------ Methodes ------ */
-  IDUpdate(prmEvent) 
+  IDUpdate(id) 
   {
-    this.ChoixEvent.emit(prmEvent.value);
+    this.ChoixEvent.emit(id);
   }
 
 
@@ -42,11 +44,16 @@ export class SelectCompteCandidatComponent implements OnInit
   /* --- Get des candidats assignés a ce recruteur --- */
    getCandidatAsigne()
   {
-     fetch(VariableGlobales.apiURLCompte  + "GetByRef" + "/1", { method: "GET" })
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Authorization', Globals.getJwt());
+
+     fetch(VariableGlobales.apiURLCompte, { method: "GET", headers: requestHeaders })
       .then((response) => response.json())
       .then((json) =>
       {
         this.valRetourRequeteCompteAssigne = json;
+        console.log(this.valRetourRequeteCompteAssigne);
       });
   }
 

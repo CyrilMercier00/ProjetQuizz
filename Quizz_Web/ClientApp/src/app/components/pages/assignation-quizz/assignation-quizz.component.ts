@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DTOQuizz } from '../../../DTO/dto-quizz';
 import { Router } from "@angular/router";
 import { VariableGlobales } from '../../../url_api';
+import { Globals } from 'src/app/globals';
+import { CreationQuizzDTO } from 'src/app/DTO/CreationQuizzDTO';
 
 @Component({
   selector: 'app-assignation-quizz',
@@ -53,17 +55,16 @@ export class AssignationQuizzComponent implements OnInit
   /* --- Insertion du quizz & gestion erreur --- */
   onSubmit()
   {
-    console.log(this.dataQuizz);
-    let quizzGen: DTOQuizz = new DTOQuizz;
+    let quizzGen: CreationQuizzDTO = new CreationQuizzDTO;
 
-    quizzGen.$NbQuestions = this.dataQuizz.form.nbQuestions;
+    let nbQuestion : number = parseInt(this.dataQuizz.form.nbQuestions);
+    console.log(nbQuestion);
+    quizzGen.$NbQuestions = nbQuestion;
     quizzGen.$Theme = this.dataQuizz.form.theme;
     quizzGen.$Complexite = this.dataQuizz.form.complexite;
     quizzGen.$FKCompteRecruteur = this.getCompteRecruteurID();
 
     this.insertQuizz(quizzGen);
-    console.log(quizzGen);
-    // this.router.navigate(['/'])
   }
 
 
@@ -72,7 +73,6 @@ export class AssignationQuizzComponent implements OnInit
   setValeurFormIDCandidat(prmID: number)
   {
     this.resultatForm.patchValue({ "compte": prmID })
-    console.log(this.resultatForm.value)
   }
 
 
@@ -87,17 +87,20 @@ export class AssignationQuizzComponent implements OnInit
 
   /* ------ Fonctions acces api ------ */
   /* --- Envoie a l'api pour insertion du quizz ---*/
-  async insertQuizz(data: DTOQuizz)
+  async insertQuizz(data: CreationQuizzDTO)
   {
+
+    console.log(data);
+
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Authorization', Globals.getJwt());
+
     await fetch(
       VariableGlobales.apiURLQuizz,
       {
         method: "POST",
-        headers:
-        {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
+        headers: requestHeaders,
         body: JSON.stringify(data)
       }
     )

@@ -1,9 +1,9 @@
 export class Compte {
     public id: number;
     public nom : string;
-    private prenom : string;
-    private mail : string;
-    private mdp : string;
+    public prenom : string;
+    public mail : string;
+    public mdp : string;
     public role : string;
 
     constructor(id: number, nom: string, prenom: string, mail: string, mdp: string, role: string){

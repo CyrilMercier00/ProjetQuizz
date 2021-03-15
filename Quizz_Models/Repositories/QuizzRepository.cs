@@ -62,15 +62,14 @@ namespace Quizz_Models.Repositories
                 .Find(prmIDQuizz);
         }
 
-        public List<Quizz> GetQuizzByCreateur(int idCreateur)
+        public List<CompteQuizz> GetQuizzByCreateur(int idCreateur)
         {
             List<CompteQuizz> compteQuizz = bdd_entities.CompteQuizz
                                                         .Where(cq => cq.FkCompte == idCreateur && cq.EstCreateur == (byte)1)
                                                         .Include(cq => cq.FkQuizzNavigation)
-                                                        .Select(cq => cq.F)
                                                         .ToList();
 
-            return bdd_entities.Quizz.Where(q => q.PkQuizz == compteQuizz.ForEach(cq => cq.FkQuizz));
+            return compteQuizz;
         }
 
 

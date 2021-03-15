@@ -30,7 +30,8 @@ namespace Quizz_Web.Controllers
 
             return compte;
         }
-        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte)]
+
+        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte, AuthorizationEnum.GenererQuizz)]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
         {

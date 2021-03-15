@@ -24,7 +24,7 @@ export class GenQuizzComponent implements OnInit
   {
     this.resultatForm = this.builder.group
       ({
-        nbQuestions: ['', Validators.required],
+        nbQuestions: [0, Validators.required],
         theme: ['', Validators.required],
         complexite: ['', Validators.required]
       })
