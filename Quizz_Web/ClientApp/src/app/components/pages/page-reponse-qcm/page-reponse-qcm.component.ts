@@ -75,6 +75,11 @@ export class PageReponseQcmComponent implements OnInit
 
     serviceRepCandidat.PostReponse(dtoRep)
 
+    this.rep1 = "";
+    this.rep2 = "";
+    this.rep3 = "";
+    this.rep4 = "";
+
     this.estRepondu.emit(true);
 
   }
