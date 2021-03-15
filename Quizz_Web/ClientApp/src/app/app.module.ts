@@ -89,7 +89,13 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
       { path: 'assignation-quizz', component: AssignationQuizzComponent },        // Page pour assigner un quizz une fois crée
       { path: 'chronometre', component: ChronometreComponent },             
       { path: 'creer-quizz', component: GenQuizzComponent },                              // Page pour créer un quizz
-      { path: 'creer-niveau', component: GenerateNiveauComponent },                 // Page pour creer un nouveau niveau
+      { path: 'niveau', component: GenerateNiveauComponent, // Page pour creer un nouveau niveau
+         children:
+         [
+               { path: 'formulaire-niveau', component: FormulaireCreationNiveauComponent},
+               { path:'afficher-niveau' ,component: AfficherNiveauComponent}
+                ],
+       },                
       { path: 'gestion-quizz', component: GestionQuizzComponent },                   // Page pour modifier un quizz
       { path: 'quizz-question', component: QuizzQuestionComponent },              // Page pour repondre aux questons
       { path: 'permission', component: PermissionComponent },                  
