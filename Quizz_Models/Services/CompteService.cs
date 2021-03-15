@@ -28,6 +28,16 @@ namespace Quizz_Models.Services
         }
 
         /// <summary>
+        /// Renvoie un compte createur à partir du Quizz 
+        /// </summary>
+        /// <param name="prmIdQuizz"></param>
+        /// <returns>Compte </returns>
+        public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
+        {
+            return repoCompte.GetCompteRecruteurByIdQuizz(prmIdQuizz);
+        }
+        
+        // <summary>
         /// Transforme une liste de compte en liste de DTO
         /// </summary>
         /// <param name="lists"></param>

@@ -36,7 +36,6 @@ export class ChronoComponent implements OnInit
   ngOnInit(): void
   {
     start();
-    
   }
 
   //************************ Partie page question Quizz ************************* */

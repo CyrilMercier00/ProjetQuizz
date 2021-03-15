@@ -150,7 +150,7 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
         canActivate: [ModifierCompteGuard]
       },
       { // Page de fin de quizz
-        path: 'quizzsuccess',
+        path: 'quizzsuccess/:urlQuizz/:jwtId',
         component: ResultatsComponent
       },
       {

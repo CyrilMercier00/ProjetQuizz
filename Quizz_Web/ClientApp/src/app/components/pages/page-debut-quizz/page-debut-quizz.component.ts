@@ -1,11 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-
+import { ChronoComponent } from '../../chrono/chrono.component';
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
 import { utilDTO } from 'src/app/DTO/utilDTO';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -24,8 +26,14 @@ export class PageDebutQuizzComponent implements OnInit
   dataQuestion: DTOQuestion;              // Contiens les données de la question actuellement posée
   componentRepQCMEnabled: boolean         // Active ou désactive le component de réponse aux questions QCM
   componentRepLibreEnabled: boolean       // Active ou désactive le component formulaire de réponse au questions libres
-  isReady: boolean                        // Active le bouton commencer si la recuperaion des données a bien été faite
-  started: boolean = false                // Affiche les elements qui sont présent avant de commencer le quizz
+  componentChronoEnabled: boolean         // Active ou désactive le component chrono
+  isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
+  showWelcome = true                      // Cache l'ecran de debut de quizz si false
+  nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
+
+  /***chrono**/
+  TimeQ;
+  
 
 
 
@@ -40,7 +48,6 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-
     // * Récuperation des données du quizz
     ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
       .then(repFetch =>
@@ -57,14 +64,12 @@ export class PageDebutQuizzComponent implements OnInit
                   {
                     console.log(retour)
                     this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                    console.log(this.arrayDataQuestions)
                     this.isReady = true;
                   }
                   )
               })
           });
       })
-
   }
 
 
@@ -74,31 +79,60 @@ export class PageDebutQuizzComponent implements OnInit
   {
     this.startQuizz();
   }
-
-
+  
+  /*redirige vers la page quizz success*/
+  redirectNotFind(){
+    let jwt = Globals.decodeJwt();    
+    this.router.navigate(['/quizzsuccess/'+this.code+'/'+jwt['id']]);
+  }
 
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
-    this.started = true;
-    this.arrayDataQuestions.forEach(question =>
+    this.showWelcome = false
+    this.componentChronoEnabled=false
+    this.nextQuestion()
+  }
+
+
+
+  // Passe à la prochaine question
+  nextQuestion()
+  {
+    this.dataQuestion = this.arrayDataQuestions[this.nbQuestionRepondues]
+
+    // * Afficher le component correct pour cette question
+    if (this.dataQuestion.$RepLibre)
     {
-      // * Preparation des données pour la prochaine question
-      this.dataQuestion = question;
+      this.componentRepQCMEnabled = false
+      this.componentRepLibreEnabled = true
+      this.componentChronoEnabled=true
 
-      if (question.$RepLibre == true)
-      {
-        // * Desactiver le component inutile et activer celui correspondant à la question
-        this.componentRepQCMEnabled = false;
-        this.componentRepLibreEnabled = true;
+    } else
+    {
+      this.componentRepLibreEnabled = false
+      this.componentRepQCMEnabled = true
+      this.componentChronoEnabled=true
+    }
+  }
 
-      } else
-      {
-        this.componentRepLibreEnabled = false;
-        this.componentRepQCMEnabled = true;
-      }
+  //****** */
+  EnregisteChrono() { ChronoComponent; }
 
-    })
+  // Incremente le nombre de questions repondues et trigger l'affichage de la prochaine question
+  incrementNBQuestionRep()
+  {
+    if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
+    {
+      // Finis le quizz
+      this.redirectNotFind();
+
+    } else
+    {
+      this.nbQuestionRepondues++
+      this.nextQuestion()
+    }
+
   }
 
 }
