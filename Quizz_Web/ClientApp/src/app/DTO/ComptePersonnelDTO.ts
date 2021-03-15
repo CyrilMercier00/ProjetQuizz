@@ -5,7 +5,25 @@ export class ComptePersonnelDTO
   private nom: string;
   private prenom: string;
   private permissionDTO: PermissionDTO;
-  private PkQuizz: number;
+  private PkCompte: number;
+
+  /**
+   * Getter $PkCompte
+   * @return {number}
+   */
+  public get $PkCompte(): number
+  {
+    return this.PkCompte;
+  }
+
+  /**
+   * Setter $PkCompte
+   * @param {number} value
+   */
+  public set $PkCompte(value: number)
+  {
+    this.PkCompte = value;
+  }
 
   constructor(nom: string, prenom: string, permissionDTO: PermissionDTO)
   {
@@ -30,22 +48,4 @@ export class ComptePersonnelDTO
     return this.permissionDTO;
   }
 
-
-  /**
-   * Getter $PkQuizz
-   * @return {number}
-   */
-  public get $PkQuizz(): number
-  {
-    return this.PkQuizz;
-  }
-
-  /**
-   * Setter $PkQuizz
-   * @param {number} value
-   */
-  public set $PkQuizz(value: number)
-  {
-    this.PkQuizz = value;
-  }
 }
