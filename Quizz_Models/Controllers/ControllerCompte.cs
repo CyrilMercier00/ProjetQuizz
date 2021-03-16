@@ -56,15 +56,23 @@ namespace Quizz_Web.Controllers
         [HttpGet("{vide}/{prmCode}/{jwt}")]
         public CompteDTO GetCompteLinkedToQuizz(string prmCode)
         {
-            CompteDTO compte = this.compteService.GetCompteByCode(prmCode);
-
-            if (compte == null)
+            try
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                CompteDTO compte = this.compteService.GetCompteByCode(prmCode);
+
+                if (compte == null)
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                    return null;
+                }
+
+                return compte;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
                 return null;
             }
-
-            return compte;
         }
 
         [HttpGet("{vide}/{idCompteRef}")]

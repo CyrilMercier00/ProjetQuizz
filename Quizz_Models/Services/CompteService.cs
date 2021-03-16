@@ -29,6 +29,7 @@ namespace Quizz_Models.Services
 
         internal CompteDTO GetCompteByCode(string prmCode)
         {
+            try { 
             Compte compte = repoCompte.GetCompteRecruteurByCodeQuizz(prmCode);
             return new CompteDTO()
             {
@@ -37,6 +38,10 @@ namespace Quizz_Models.Services
                 Nom = compte.Nom,
                 Prenom = compte.Prenom
             };
+            } catch(Exception e)
+            {
+                throw e;
+            }
 
         }
 
