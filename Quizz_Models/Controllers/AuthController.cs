@@ -41,11 +41,11 @@ namespace Quizz_Web.Controllers
             }
             else
             {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                 return "";
             }
         }
-
+        
         [HttpPost]
         [Route("candidat")]
         public string LoginCandidat([FromBody] LoginDTO loginDTO)
@@ -72,7 +72,7 @@ namespace Quizz_Web.Controllers
                 return "";
             }
         }
-
+        
         private string GenererJWTToken(Compte compte, PermissionDTO permissionDTO)
         {
             var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";

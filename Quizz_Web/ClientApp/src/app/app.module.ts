@@ -1,7 +1,9 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-niveau.component';
 import { AppComponent } from './app.component';
 import { AssignationQuizzComponent } from './components/pages/assignation-quizz/assignation-quizz.component';
+import { BooleanPipe } from './Pipe/boolean-pipe';
 import { BoutonReponseQcmComponent } from './components/buttons/bouton-reponse-qcm/bouton-reponse-qcm.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -11,6 +13,7 @@ import { CheckBoxComponent } from './components/input/check-box/check-box.compon
 import { ChronoComponent } from './components/chrono/chrono.component';
 import { CompteComponent } from './compte-feature/Compte/compte.component';
 import { ComptesComponent } from './compte-feature/comptes/comptes.component';
+import { ConnexionGuard } from './Guards/ConnexionGuard';
 import { DragabbleTextInputComponent } from './components/input/dragabble-text-input/dragabble-text-input.component';
 import { EnonceComponent } from './components/text/enonce/enonce.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -25,6 +28,7 @@ import { GenererQuizzGuard } from './Guards/GenererQuizzGuard';
 import { GestionQuizzComponent } from './components/pages/gestion-quizz/gestion-quizz.component';
 import {HttpClientModule} from '@angular/common/http';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
+import { ListeQuizzComponent } from './components/liste-quizz/liste-quizz.component';
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component';
 import { ModifierCompteGuard } from './Guards/ModifierCompteGuard';
 import { ModifierQuestGuard } from './Guards/ModifierQuestGuard';
@@ -36,6 +40,7 @@ import { PageNotFoundComponent } from './components/pages/page-not-found/page-no
 import { PageReponseLibreComponent } from './components/pages/page-reponse-libre/page-reponse-libre.component';
 import { PageReponseQcmComponent } from './components/pages/page-reponse-qcm/page-reponse-qcm.component';
 import { PermissionComponent } from './components/pages/permission/permission.component';
+import { ProfilComponent } from './components/pages/profil/profil.component';
 import { QuizzQuestionComponent } from './components/pages/quizz-question/quizz-question.component';
 import { ResultatsComponent } from './components/pages/resultats/resultats.component';
 import { RouterModule } from '@angular/router';
@@ -43,12 +48,6 @@ import { SelectCompteCandidatComponent } from './components/select/select-compte
 import { SelectNiveauComponent } from './components/select/select-niveau/select-niveau.component';
 import { SelectPermissionComponent } from './components/select/select-permission/select-permission.component';
 import { SelectThemeComponent } from './components/select/select-theme/select-theme.component';
-import { ProfilComponent } from './components/pages/profil/profil.component';
-import { ConnexionGuard } from './Guards/ConnexionGuard';
-import { BooleanPipe } from './Pipe/boolean-pipe';
-
-import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-niveau.component';
-import { ListeQuizzComponent } from './components/liste-quizz/liste-quizz.component';
 
 @NgModule({
   declarations: [
@@ -123,19 +122,19 @@ import { ListeQuizzComponent } from './components/liste-quizz/liste-quizz.compon
         component: GenQuizzComponent,
         canActivate: [GenererQuizzGuard]
       },
-   
+
       {// Page pour creer un nouveau niveau
-         path: 'niveau', component: GenerateNiveauComponent, 
+         path: 'niveau', component: GenerateNiveauComponent,
          canActivate: [GenererQuizzGuard],
       children:
       [
             { path: 'formulaire-niveau', component: FormulaireCreationNiveauComponent,
             canActivate: [GenererQuizzGuard]},
-            
+
             { path:'afficher-niveau' ,component: AfficherNiveauComponent,canActivate: [GenererQuizzGuard]
           }
              ],
-    }, 
+    },
       { // Page pour modifier un quizz
         path: 'gestion-quizz',
         component: GestionQuizzComponent,
