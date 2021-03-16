@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/Service/AuthService';
 import { ChronoComponent } from '../../chrono/chrono.component';
@@ -53,9 +53,6 @@ export class PageDebutQuizzComponent implements OnInit
       {
         repFetch.json().then(retour =>
         {
-          console.log(" --------- Compte qui a ce quizz --------- ")
-          console.log(retour)
-
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.PkCompte
           this.authService.connectCandidat(compte.$PkCompte);
@@ -69,8 +66,6 @@ export class PageDebutQuizzComponent implements OnInit
             {
               repFetch.json().then(retour =>
               {
-                console.log(" ------------ Données du quizz ------------ ")
-                console.log(retour)
                 this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
               })
                 .then(x =>
@@ -81,8 +76,6 @@ export class PageDebutQuizzComponent implements OnInit
                     {
                       repFetch.json().then(retour =>
                       {
-                        console.log(" ---------------- Questions ---------------- ")
-                        console.log(retour)
                         this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
                         this.isReady = true;
                       }
@@ -152,10 +145,8 @@ export class PageDebutQuizzComponent implements OnInit
   {
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
+      this.componentChronoEnabled = false;
       this.redirect();
-      this.componentChronoEnabled == false;
-      //this.redirectNotFind();
-
     } else
     {
       this.nbQuestionRepondues++
