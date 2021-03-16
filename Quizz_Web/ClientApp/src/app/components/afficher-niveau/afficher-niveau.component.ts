@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from 'src/app/globals';
 import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
@@ -8,6 +9,8 @@ import { VariableGlobales } from 'src/app/url_api';
 })
 export class AfficherNiveauComponent implements OnInit {
   valRetourRequeteComplex: string;  
+ 
+
   constructor() { }
 
   ngOnInit(): void {
@@ -15,7 +18,12 @@ export class AfficherNiveauComponent implements OnInit {
   }
   async  getAllComplexite()
   {
-    await fetch(VariableGlobales.apiURLComplexite, { method: "GET" })
+    const requestHeaders: HeadersInit = new Headers();
+  
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Authorization', Globals.getJwt());
+
+    await fetch(VariableGlobales.apiURLComplexite, { method: "GET" , headers: requestHeaders})
       .then((response) => response.json())
       .then((json) =>
       {
@@ -23,4 +31,19 @@ export class AfficherNiveauComponent implements OnInit {
       });
       console.log(this.valRetourRequeteComplex);
   }
+
+  async supprimerNiveau(id){
+    const requestHeaders: HeadersInit = new Headers();
+  
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Authorization', Globals.getJwt());
+
+    await fetch(VariableGlobales.apiURLComplexite + id, { method: "DELETE" , headers: requestHeaders})
+
+.then(res => console.log(res))
+    this.reloadPage();
+  }
+  reloadPage() {
+    window.location.reload();
+ }
 }
