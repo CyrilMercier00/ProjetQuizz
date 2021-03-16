@@ -28,13 +28,10 @@ export class PageReponseLibreComponent implements OnInit
   clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
-  constructor(private builder: FormBuilder)
+  constructor()
   {
-    this.resultatForm = this.builder.group
-      ({
-        textCommentaire: [''],
-        answer: [''],
-      })
+    this.textCommentaire = "";
+    this.answer = "";
   }
 
 
@@ -70,14 +67,14 @@ export class PageReponseLibreComponent implements OnInit
 
   onAnswerChange($event)
   {
-    this.resultatForm.patchValue({ "textCommentaire": $event.target.value });
+    this.textCommentaire = $event.target.value;
   }
 
 
 
   onComentChange($event)
   {
-    this.resultatForm.patchValue({ "answer": $event.target.value });
+    this.answer = $event.target.value;
   }
 }
 
