@@ -14,10 +14,10 @@ namespace Quizz_Models.Repositories
             bdd_entities = context;
         }
 
-        public void InsertReponseCandidat(ReponseCandidat prmReponseCandidat)
+        public int InsertReponseCandidat(ReponseCandidat prmReponseCandidat)
         {
             bdd_entities.ReponseCandidat.Add(prmReponseCandidat);
-            bdd_entities.SaveChanges();
+            return bdd_entities.SaveChanges();
         }
 
         public List<ReponseCandidat> SelectReponseCandidatByIDQuestion(int prmIDQuestion)
