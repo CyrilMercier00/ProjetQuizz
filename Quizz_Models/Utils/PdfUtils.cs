@@ -148,10 +148,11 @@ namespace Quizz_Models.Utils
          
             if (Nb_QUEST > 0)
             {
-                for (int i = 1; i < Nb_QUEST; i++)
+                for (int i = 0; i < Nb_QUEST; i++)
                 {
                     NewLine();
-                    Paragraph SubTitle = new Paragraph("Question" + i + " : ")
+                    int Nb_QuestTitre = i + 1;
+                    Paragraph SubTitle = new Paragraph("Question " + Nb_QuestTitre + " : ")
                        .SetTextAlignment(TextAlignment.CENTER)
                        .SetFontSize(20);
                     document.Add(SubTitle);
@@ -162,10 +163,10 @@ namespace Quizz_Models.Utils
                     {
                       
 
-                        Paragraph question = new Paragraph("Énoncé: X")
+                        Paragraph questionV = new Paragraph("Énoncé: X")
                       .SetTextAlignment(TextAlignment.LEFT)
                       .SetFontSize(11);
-                        document.Add(question);
+                        document.Add(questionV);
                     }
                     else
                     {
@@ -180,10 +181,10 @@ namespace Quizz_Models.Utils
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
                        
-                        Paragraph reponse = new Paragraph("Propositions réponses :  X")
+                        Paragraph reponseV = new Paragraph("Propositions réponses :  X")
                          .SetTextAlignment(TextAlignment.LEFT)
                          .SetFontSize(11);
-                        document.Add(reponse);
+                        document.Add(reponseV);
 
                     }
                     else
@@ -193,7 +194,7 @@ namespace Quizz_Models.Utils
                         foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
                         {
                            
-                            Paragraph reponse = new Paragraph("Proposition  réponses" + nb +" : " +n.Text)
+                            Paragraph reponse = new Paragraph("Proposition  réponses " + nb +" : " +n.Text)
                              .SetTextAlignment(TextAlignment.LEFT)
                              .SetFontSize(11);
                             document.Add(reponse);
@@ -209,10 +210,10 @@ namespace Quizz_Models.Utils
                         if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
                         {
                             
-                            Paragraph reponsecandidat = new Paragraph("Réponse Candidat :  " + "X")
+                            Paragraph reponsecandidatV = new Paragraph("Réponse Candidat :  X")
                                .SetTextAlignment(TextAlignment.LEFT)
                                .SetFontSize(11);
-                            document.Add(reponsecandidat);
+                            document.Add(reponsecandidatV);
                         }
                         else
                         {
@@ -227,17 +228,17 @@ namespace Quizz_Models.Utils
                         if (listQuestionrepRepCDTO[i].RepCandidat.Commentaire is null)
                         {
                            
-                            Paragraph commentaireCandidat = new Paragraph("Commentaire candidat : " + "  ")
+                            Paragraph commentaireCandidatV = new Paragraph("Commentaire candidat : " + "  ")
                            .SetTextAlignment(TextAlignment.LEFT)
                            .SetFontSize(11);
-                            document.Add(commentaireCandidat);
+                            document.Add(commentaireCandidatV);
                          
 
                         }
                         else
                         {
                             
-                            Paragraph commentaireCandidat = new Paragraph("Commentaire candidat :  " + listQuestionrepRepCDTO[i].RepCandidat.Commentaire)
+                            Paragraph commentaireCandidat = new Paragraph("Commentaire candidat : " + listQuestionrepRepCDTO[i].RepCandidat.Commentaire)
                             .SetTextAlignment(TextAlignment.LEFT)
                             .SetFontSize(11);
                             document.Add(commentaireCandidat);
@@ -245,7 +246,7 @@ namespace Quizz_Models.Utils
                         }
                         NewLine();
                         document.Add(ls);
-                        NewLine();
+                        
                     }
                 }
             }
