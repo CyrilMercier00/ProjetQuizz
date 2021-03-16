@@ -157,7 +157,7 @@ namespace Quizz_Models.Utils
                     document.Add(SubTitle);
 
 
-                    //TitleTable(" Énoncé : ");
+                   // TitleTable(" Énoncé : ");
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
                         Paragraph question = new Paragraph("X")
@@ -285,7 +285,7 @@ namespace Quizz_Models.Utils
             //Nb_QUEST = affichageQuizz.NbQuestions;
             LineSeparator ls = new LineSeparator(new SolidLine());
 
-            Nb_RepOk = 10;
+            //Nb_RepOk = 10;
             int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
             // création Tableau avec 4 col
             Table scoreTable = new Table(4, true);
