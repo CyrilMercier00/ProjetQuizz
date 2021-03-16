@@ -145,7 +145,7 @@ namespace Quizz_Models.Utils
 
             // Line separator
             LineSeparator ls = new LineSeparator(new SolidLine());
-
+         
             if (Nb_QUEST > 0)
             {
                 for (int i = 1; i < Nb_QUEST; i++)
@@ -157,17 +157,20 @@ namespace Quizz_Models.Utils
                     document.Add(SubTitle);
 
 
-                   // TitleTable(" Énoncé : ");
+                 
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
-                        Paragraph question = new Paragraph("X")
+                      
+
+                        Paragraph question = new Paragraph("Énoncé: X")
                       .SetTextAlignment(TextAlignment.LEFT)
                       .SetFontSize(11);
                         document.Add(question);
                     }
                     else
                     {
-                        Paragraph question = new Paragraph(listQuestionrepRepCDTO[i].Enonce)
+                      
+                        Paragraph question = new Paragraph(" Énoncé  : "+listQuestionrepRepCDTO[i].Enonce)
                       .SetTextAlignment(TextAlignment.LEFT)
                       .SetFontSize(11);
                         document.Add(question);
@@ -176,8 +179,8 @@ namespace Quizz_Models.Utils
                     //TitleTable("Propositions réponses : ");
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
-
-                        Paragraph reponse = new Paragraph("X")
+                       
+                        Paragraph reponse = new Paragraph("Propositions réponses :  X")
                          .SetTextAlignment(TextAlignment.LEFT)
                          .SetFontSize(11);
                         document.Add(reponse);
@@ -185,12 +188,16 @@ namespace Quizz_Models.Utils
                     }
                     else
                     {
+                        
+                        int nb = 1;
                         foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
                         {
-                            Paragraph reponse = new Paragraph(n.Text)
+                           
+                            Paragraph reponse = new Paragraph("Proposition  réponses" + nb +" : " +n.Text)
                              .SetTextAlignment(TextAlignment.LEFT)
                              .SetFontSize(11);
                             document.Add(reponse);
+                            nb++;
                         }
                     }
 
@@ -201,23 +208,26 @@ namespace Quizz_Models.Utils
 
                         if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
                         {
-                            Paragraph reponsecandidat = new Paragraph("X")
+                            
+                            Paragraph reponsecandidat = new Paragraph("Réponse Candidat :  " + "X")
                                .SetTextAlignment(TextAlignment.LEFT)
                                .SetFontSize(11);
                             document.Add(reponsecandidat);
                         }
                         else
                         {
-                            Paragraph reponsecandidat = new Paragraph(listQuestionrepRepCDTO[i].RepCandidat.Reponse)
+                            
+                            Paragraph reponsecandidat = new Paragraph("Réponse Candidat :  "+listQuestionrepRepCDTO[i].RepCandidat.Reponse)
                             .SetTextAlignment(TextAlignment.LEFT)
                             .SetFontSize(11);
                             document.Add(reponsecandidat);
                         }
-                        TitleTable("Commentaire candidat : ");
+                       // TitleTable("Commentaire candidat : ");
 
                         if (listQuestionrepRepCDTO[i].RepCandidat.Commentaire is null)
                         {
-                            Paragraph commentaireCandidat = new Paragraph("  ")
+                           
+                            Paragraph commentaireCandidat = new Paragraph("Commentaire candidat : " + "  ")
                            .SetTextAlignment(TextAlignment.LEFT)
                            .SetFontSize(11);
                             document.Add(commentaireCandidat);
@@ -226,7 +236,8 @@ namespace Quizz_Models.Utils
                         }
                         else
                         {
-                            Paragraph commentaireCandidat = new Paragraph(listQuestionrepRepCDTO[i].RepCandidat.Commentaire)
+                            
+                            Paragraph commentaireCandidat = new Paragraph("Commentaire candidat :  " + listQuestionrepRepCDTO[i].RepCandidat.Commentaire)
                             .SetTextAlignment(TextAlignment.LEFT)
                             .SetFontSize(11);
                             document.Add(commentaireCandidat);
