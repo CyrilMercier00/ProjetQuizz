@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { ReponseCandidatDTO } from 'src/app/DTO/ReponseCandidatDTO';
+import { Globals } from 'src/app/globals';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 @Component({
@@ -55,7 +56,7 @@ export class PageReponseLibreComponent implements OnInit
 
     data.$Commentaire = this.textCommentaire;
     data.$Reponse = this.answer;
-    data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
+    data.$FKCompte = Globals.getId();
     data.$FKQuestion = this.dataQ.$PKQuestion;
 
     serviceRepCandidat.PostReponse(data)

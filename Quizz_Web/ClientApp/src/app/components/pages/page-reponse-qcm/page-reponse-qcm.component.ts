@@ -4,6 +4,7 @@ import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { ReponseCandidatDTO } from '../../../DTO/ReponseCandidatDTO';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 import { utils } from 'src/app/utils';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-reponse-qcm',
@@ -70,7 +71,7 @@ export class PageReponseQcmComponent implements OnInit
 
     dtoRep.$Commentaire = this.textCommentaire;
     dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
-    dtoRep.$FKCompte = null;     // TODO : Get compte candidat qui passe
+    dtoRep.$FKCompte = Globals.getId();
     dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
     serviceRepCandidat.PostReponse(dtoRep)
