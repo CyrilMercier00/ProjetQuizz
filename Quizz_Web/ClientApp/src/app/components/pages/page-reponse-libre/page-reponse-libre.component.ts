@@ -24,7 +24,7 @@ export class PageReponseLibreComponent implements OnInit
   textCommentaire: string     // Commentaire du candidat
   answer: string              // Réponse écrite
   resultatForm: FormGroup     // Resultat du formulaire
-
+  clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
   constructor(private builder: FormBuilder)
@@ -50,18 +50,19 @@ export class PageReponseLibreComponent implements OnInit
   // Envoi de la réponse a la base de données
   handleClick()
   {
+    if (this.clicked == false)
+    {
+      this.clicked = true;
+      let data = new ReponseCandidatDTO();
 
-    let data = new ReponseCandidatDTO();
+      data.$Commentaire = this.resultatForm.value.textCommentaire;
+      data.$Reponse = this.resultatForm.value.answer;
+      data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
+      data.$FKQuestion = this.dataQ.$PKQuestion;
 
-    data.$Commentaire = this.resultatForm.value.textCommentaire;
-    data.$Reponse = this.resultatForm.value.answer;
-    data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
-    data.$FKQuestion = this.dataQ.$PKQuestion;
-
-    serviceRepCandidat.PostReponse(data)
-
-    this.estRepondu.emit(true);
-
+      serviceRepCandidat.PostReponse(data)
+        .then(x => this.estRepondu.emit(true))
+    }
   }
 
 
