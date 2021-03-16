@@ -58,24 +58,37 @@ export class PageDebutQuizzComponent implements OnInit
         repFetch.json()
           .then(retour =>
           {
+            console.log(" --------- Compte qui a ce quizz --------- ")
             console.log(retour)
+
             let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
             compte.$PkCompte = retour.PkCompte
+
           }).then(() =>
-            // * Récuperation des données du quizz
-            ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+
+            // Récuperation des données du quizz
+            ServiceQuizz.GetQuizzByCode(this.code)
+
               .then(repFetch =>
               {
-                repFetch.json()                                  // Extraire les données json de la promesse
-                  .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
+                repFetch.json()
+                  .then(retour =>
+                  {
+                    console.log(" ------------ Données du quizz ------------ ")
+                    console.log(retour)
+                    this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
+                  })
                   .then(x =>
                   {
-                    ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)       // Chercher les questions associées a ce quizz
+                    // Chercher les questions associées a ce quizz
+                    ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)
                       .then(repFetch =>
                       {
-                        repFetch.json()                          // Extraire les données json de la promesse
-                          .then(retour =>                        // Sauvegarder les données dans un array
+                        repFetch.json()
+                          .then(retour =>
                           {
+
+                            console.log(" ---------------- Questions ---------------- ")
                             console.log(retour)
                             this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
                             this.isReady = true;
@@ -110,9 +123,9 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
-    this.showWelcome = false
-    this.componentChronoEnabled = false
-    this.nextQuestion()
+    this.showWelcome = false              // Cacher l'ecran d'accueil
+    this.componentChronoEnabled = true    // Demarrer le chrono
+    this.nextQuestion()                   // Demarrer l'affichage de questions
   }
 
 
@@ -127,15 +140,12 @@ export class PageDebutQuizzComponent implements OnInit
     {
       this.componentRepQCMEnabled = false
       this.componentRepLibreEnabled = true
-      this.componentChronoEnabled = true
 
     } else
     {
       this.componentRepLibreEnabled = false
       this.componentRepQCMEnabled = true
-      this.componentChronoEnabled = true
     }
-    // STop chrono
   }
 
 
@@ -149,6 +159,7 @@ export class PageDebutQuizzComponent implements OnInit
   {
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
+      this.componentChronoEnabled == false;
       this.redirectNotFind();
 
     } else
