@@ -14,9 +14,9 @@ namespace Quizz_Models.Services
             this.reponseCandidatRepo = reponseCandidatRepository;
         }
 
-        public void InsertReponseCandidat ( ReponseCandidatDTO prmRepC )
+        public int InsertReponseCandidat ( ReponseCandidatDTO prmRepC )
         {
-            reponseCandidatRepo.InsertReponseCandidat (new ReponseCandidat ()
+           return reponseCandidatRepo.InsertReponseCandidat (new ReponseCandidat ()
             {
                 Reponse = prmRepC.Reponse,
                 Commentaire = prmRepC.Commentaire,

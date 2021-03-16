@@ -15,19 +15,11 @@ namespace Quizz_Models.DTO
         {
             ListeReponses = new List<PropositionReponseDTO>();
             ListeReponsesCandidat = new List<ReponseCandidatDTO>();
-            nbRepOK = 0;
+            ListQuestionrepRepCDTO = new List<QuestionReponseReponseCandidatDTO>();
+            
         }
 
-       
 
-        //Compte candidat { get; set; }
-        //Compte recruteur { get; set; }
-        //Quizz quizz { get; set; }
-       
-        //List<ReponseCandidatDTO> listeQuestions { get; set; }
-        //List<ReponseCandidatDTO> listeRepQuestion { get; set; }
-        //List<ReponseCandidatDTO> listeRepCandidat { get; set; }
-        //List<ReponseCandidatDTO> listeCommentaireCandidat { get; set; }
 
         //***quizz**
         public int PkQuizz { get; set; }
@@ -46,8 +38,8 @@ namespace Quizz_Models.DTO
         
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
         public List<ReponseCandidatDTO> ListeReponsesCandidat { get; set; }
-
-        public List<QuestionReponseDTO> listQuestionrep { get; set; }
+        public List<QuestionReponseReponseCandidatDTO> ListQuestionrepRepCDTO { get; set; } = new List<QuestionReponseReponseCandidatDTO>();
+        public List<QuestionReponseDTO> ListQuestionrep { get; set; }
         public int nbRepOK { get; set; }
         
 

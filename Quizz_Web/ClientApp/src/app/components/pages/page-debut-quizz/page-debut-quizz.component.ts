@@ -1,13 +1,15 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from 'src/app/Service/AuthService';
 import { ChronoComponent } from '../../chrono/chrono.component';
+import { ComptePersonnelDTO } from 'src/app/DTO/ComptePersonnelDTO';
+import { CompteService } from 'src/app/Service/CompteService'
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { Globals } from 'src/app/globals';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
-import { ServiceQuizz } from 'src/app/Service/serviceQuizz'
+import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { utilDTO } from 'src/app/DTO/utilDTO';
 
 @Component({
@@ -20,7 +22,7 @@ import { utilDTO } from 'src/app/DTO/utilDTO';
 
 export class PageDebutQuizzComponent implements OnInit
 {
-  /* --- Variables --- */
+  /* --- Declaration des variables --- */
   code: string;                           // Contiens le code url de la page
   dataQuizz: DTOQuizz;                    // Contiens le quizz correspondant au code de la page
   arrayDataQuestions: DTOQuestion[];      // Contiens toutes les questions récupérées pour ce quizz
@@ -31,14 +33,11 @@ export class PageDebutQuizzComponent implements OnInit
   isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
   showWelcome = true                      // Cache l'ecran de debut de quizz si false
   nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
-
-  /***chrono**/
-  TimeQ;
-
+  idCompte: number                        // ID du compte qui passe le quizz
 
 
   /* --- Constructeur ---*/
-  constructor(private router: Router, private actRoute: ActivatedRoute)
+  constructor(private router: Router, private actRoute: ActivatedRoute, private authService: AuthService)
   {
     this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
@@ -48,27 +47,50 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    // * Récuperation des données du quizz
-    ServiceQuizz.GetQuizzByCode(this.code)               // Aller chercher le quizz avec le code passé
+    // ! Enregistrer le compte du candidat qui passe
+    CompteService.GetCompteLinkedToCode(this.code)
       .then(repFetch =>
       {
-        repFetch.json()                                  // Extraire les données json de la promesse
-          .then(retour => { this.dataQuizz = utilDTO.DTOTransformQuizz(retour) })   // Sauvegarder les données
-          .then(x =>
-          {
-            ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)       // Chercher les questions associées a ce quizz
-              .then(repFetch =>
+        repFetch.json().then(retour =>
+        {
+          console.log(" --------- Compte qui a ce quizz --------- ")
+          console.log(retour)
+
+          let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
+          compte.$PkCompte = retour.PkCompte
+          this.authService.connectCandidat(compte.$PkCompte);
+
+        }).then(() =>
+
+          // ! Récuperation des données du quizz
+          ServiceQuizz.GetQuizzByCode(this.code)
+
+            .then(repFetch =>
+            {
+              repFetch.json().then(retour =>
               {
-                repFetch.json()                          // Extraire les données json de la promesse
-                  .then(retour =>                        // Sauvegarder les données dans un array
-                  {
-                    console.log(retour)
-                    this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                    this.isReady = true;
-                  }
-                  )
+                console.log(" ------------ Données du quizz ------------ ")
+                console.log(retour)
+                this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
               })
-          });
+                .then(x =>
+                {
+                  // ! Récuperation des questions du quizz
+                  ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)
+                    .then(repFetch =>
+                    {
+                      repFetch.json().then(retour =>
+                      {
+                        console.log(" ---------------- Questions ---------------- ")
+                        console.log(retour)
+                        this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
+                        this.isReady = true;
+                      }
+                      )
+                    })
+                });
+            })
+        )
       })
   }
 
@@ -83,7 +105,7 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   /*redirige vers la page quizz success*/
-  redirectNotFind()
+  redirect()
   {
     let jwt = Globals.decodeJwt();
     this.router.navigate(['/quizzsuccess/' + this.code + '/' + jwt['id']]);
@@ -94,9 +116,9 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Activer les component correspondant aux types de questions posée  ---  */
   startQuizz()
   {
-    this.showWelcome = false
-    this.componentChronoEnabled = false
-    this.nextQuestion()
+    this.showWelcome = false              // Cacher l'ecran d'accueil
+    this.componentChronoEnabled = true    // Demarrer le chrono
+    this.nextQuestion()                   // Demarrer l'affichage de questions
   }
 
 
@@ -111,13 +133,11 @@ export class PageDebutQuizzComponent implements OnInit
     {
       this.componentRepQCMEnabled = false
       this.componentRepLibreEnabled = true
-      this.componentChronoEnabled = true
 
     } else
     {
       this.componentRepLibreEnabled = false
       this.componentRepQCMEnabled = true
-      this.componentChronoEnabled = true
     }
   }
 
@@ -132,7 +152,9 @@ export class PageDebutQuizzComponent implements OnInit
   {
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
-      this.redirectNotFind();
+      this.redirect();
+      this.componentChronoEnabled == false;
+      //this.redirectNotFind();
 
     } else
     {

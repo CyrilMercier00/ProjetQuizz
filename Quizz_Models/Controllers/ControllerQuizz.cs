@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.Authentification;
+using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System;
@@ -46,6 +47,26 @@ namespace Quizz_Web.Controllers
         public QuizzDTO GetAllQuizzFromCreateur(int idCreateur)
         {
             return this._servQuizz.GetQuizz(idCreateur);
+        }
+
+        [HttpGet]
+        [Route("{vide}/{codeQuizz}")]
+        public QuizzDTO GetQuizzByCode(string vide , string codeQuizz)
+        {
+            QuizzDTO quizz = new QuizzDTO();
+
+            quizz = this._servQuizz.GetQuizz(codeQuizz);
+
+            if (quizz == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+            else
+            {
+                return quizz;
+            }
+
         }
 
         /// <summary>
@@ -95,10 +116,11 @@ namespace Quizz_Web.Controllers
             }
 
         }
-        /*
+        
+        
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
-        [Route("quizzsuccess/{codeQuizz}/{idCandidat}")]
+        [Route("quizzsuccess/{codeQuizz}/{idCandidat}/{vide}")]
         public ActionResult<QuizzDTO> FinQuizz(string codeQuizz,int idCandidat)
         {
            
@@ -123,7 +145,7 @@ namespace Quizz_Web.Controllers
             }
             return valRetour;
         }
-        */
+        
 
         [HttpDelete]
         public ActionResult<QuizzDTO> Delete([FromBody] int prmIDQuizz)

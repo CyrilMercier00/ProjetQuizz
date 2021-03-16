@@ -48,9 +48,27 @@ namespace Quizz_Web.Controllers
 
             return comptes;
         }
+        /// <summary>
+        /// Retourne le compte lié au quizz ayant le code passé
+        /// </summary>
+        /// <param name="prmCode"></param>
+        /// <returns></returns>
+        [HttpGet("{vide}/{prmCode}/{jwt}")]
+        public CompteDTO GetCompteLinkedToQuizz(string prmCode)
+        {
+            CompteDTO compte = this.compteService.GetCompteByCode(prmCode);
 
-        [HttpGet("{methode}/{idCompteRef}")]
-        public List<CompteDTO> GetCompteByRef(string methode, int idCompteRef)
+            if (compte == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+
+            return compte;
+        }
+
+        [HttpGet("{vide}/{idCompteRef}")]
+        public List<CompteDTO> GetCompteByRef(string vide, int idCompteRef)
         {
             // Recuperation et transformation en DTO des comptes lié a cette ref
             List<CompteDTO> listDTO = this.compteService.listCompteToDTO(this.compteService.GetCandidatByCompteRef(idCompteRef));

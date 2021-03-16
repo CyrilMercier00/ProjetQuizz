@@ -1,26 +1,51 @@
 import { PermissionDTO } from "./PermissionDTO";
 
-export class ComptePersonnelDTO {
-    private nom    : string;
-    private prenom    : string;
-    private permissionDTO   : PermissionDTO;
+export class ComptePersonnelDTO
+{
+  private nom: string;
+  private prenom: string;
+  private permissionDTO: PermissionDTO;
+  private PkCompte: number;
 
-    constructor(nom : string, prenom : string, permissionDTO : PermissionDTO){
+  /**
+   * Getter $PkCompte
+   * @return {number}
+   */
+  public get $PkCompte(): number
+  {
+    return this.PkCompte;
+  }
 
-        this.nom = nom;
-        this.prenom = prenom;
-        this.permissionDTO = permissionDTO;
-    }
+  /**
+   * Setter $PkCompte
+   * @param {number} value
+   */
+  public set $PkCompte(value: number)
+  {
+    this.PkCompte = value;
+  }
 
-    public get GetNom(): string{
-        return this.nom;
-    }
+  constructor(nom: string, prenom: string, permissionDTO: PermissionDTO)
+  {
 
-    public get GetPrenom(): string{
-        return this.prenom;
-    }
-    
-    public get GetPermissionDTO(): PermissionDTO{
-        return this.permissionDTO;
-    }
+    this.nom = nom;
+    this.prenom = prenom;
+    this.permissionDTO = permissionDTO;
+  }
+
+  public get GetNom(): string
+  {
+    return this.nom;
+  }
+
+  public get GetPrenom(): string
+  {
+    return this.prenom;
+  }
+
+  public get GetPermissionDTO(): PermissionDTO
+  {
+    return this.permissionDTO;
+  }
+
 }

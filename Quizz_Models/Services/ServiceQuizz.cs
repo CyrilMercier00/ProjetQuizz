@@ -286,6 +286,8 @@ namespace Quizz_Models.Services
 
             List<Question> listQuest = this._servQuestion.GetListQuestionByIDQuizz(quizz.PkQuizz);
             List<QuestionReponseDTO> listQuestionrepDTO = this._servQuestion.AddReponseToQuestion(listQuest);
+            List<PropositionReponse> listPropositionRep = this._servQuestion.GetListReponseCandidatByIDQuizz(quizz.PkQuizz);
+            List<QuestionReponseReponseCandidatDTO> listQuestionrepRepCDTO = this._servQuestion.AddReponseCandidatToQuestion(listQuest, quizz.PkQuizz);
             return new AffichageQuizzDto
             {
                 PkQuizz = quizz.PkQuizz,
@@ -294,7 +296,10 @@ namespace Quizz_Models.Services
                 NomTheme=this._servTheme.GetThemeNameByID(quizz.FkTheme),
                 Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
                 Urlcode = quizz.Urlcode,
-                listQuestionrep = listQuestionrepDTO
+                ListQuestionrep = listQuestionrepDTO,
+                nbRepOK= this._servQuestion.GetNbbnRep(listPropositionRep),
+                ListQuestionrepRepCDTO = listQuestionrepRepCDTO,
+                
 
             };
         }

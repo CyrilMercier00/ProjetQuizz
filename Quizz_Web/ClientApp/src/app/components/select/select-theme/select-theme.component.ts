@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { VariableGlobales } from 'src/app/url_api';
-
-
 
 @Component({
   selector: 'app-select-theme',
@@ -41,9 +40,9 @@ export class SelectThemeComponent implements OnInit
 
 
   /* --- Retourne le json des themes disponibles--- */
-  async getAllTheme()
+  getAllTheme()
   {
-    await fetch(VariableGlobales.apiURLTheme, { method: "GET" })
+    fetch(VariableGlobales.apiURLTheme, { method: "GET" })
       .then((response) => response.json())
       .then((json) =>
       {

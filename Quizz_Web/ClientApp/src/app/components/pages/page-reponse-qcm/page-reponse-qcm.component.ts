@@ -29,7 +29,7 @@ export class PageReponseQcmComponent implements OnInit
   rep4: string;               // Texte de la réponse 4
   enonce: string;             // Enonce de la question
   textCommentaire: string;    // Commentaire du candidat
-
+  clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
   constructor()
@@ -43,17 +43,6 @@ export class PageReponseQcmComponent implements OnInit
   {
     this.enonce == this.dataQ.$Enonce;
 
-    // * Choisis les reponses aléatoirement
-    // Génère un array de 4 nombre entre 0 et le nombre max de reponses disponibles pour cette question
-    let arrayNbChoisis = utils.nbAleatUnique(4, 0, this.dataQ.$ListeReponses.length)
-
-    // Utiliser ces nombres pour afficher le questions
-    /*
-    this.rep1 = this.dataQ.$ListeReponses[arrayNbChoisis[0]];
-    this.rep2 = this.dataQ.$ListeReponses[arrayNbChoisis[1]];
-    this.rep3 = this.dataQ.$ListeReponses[arrayNbChoisis[2]];
-    this.rep4 = this.dataQ.$ListeReponses[arrayNbChoisis[3]];
-    */
     this.rep1 = this.dataQ.$ListeReponses[0].Text;
     this.rep2 = this.dataQ.$ListeReponses[1].Text;
     this.rep3 = this.dataQ.$ListeReponses[2].Text;
@@ -66,22 +55,39 @@ export class PageReponseQcmComponent implements OnInit
   /* ------ Methodes ------*/
   GetClick(idRep)
   {
-    console.log("cc")
-    let dtoRep = new ReponseCandidatDTO()
+    if (this.clicked == false)
+    {
+      let dtoRep = new ReponseCandidatDTO()
 
     dtoRep.$Commentaire = this.textCommentaire;
     dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
     dtoRep.$FKCompte = Globals.getId();
     dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
-    serviceRepCandidat.PostReponse(dtoRep)
+      // Envoi de la reponse
+      serviceRepCandidat.PostReponse(dtoRep).then(x =>
+      {
+        // Vider les champs
+        this.rep1 = ""
+        this.rep2 = ""
+        this.rep3 = ""
+        this.rep4 = ""
+        this.textCommentaire = ""
 
-    this.rep1 = "";
-    this.rep2 = "";
-    this.rep3 = "";
-    this.rep4 = "";
+        // Emit pour passer a la prochaine question
+        this.estRepondu.emit(true)
 
-    this.estRepondu.emit(true);
-
+      })
+    }
   }
+
+
+
+  onComentChange($event)
+  {
+    console.log("azdazs")
+    console.log($event.target.value)
+    this.textCommentaire = $event.target.value
+  };
+
 }
