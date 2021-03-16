@@ -31,4 +31,15 @@ export class Globals
   {
     return jwt_decode(localStorage.getItem('clientJwt'));
   }
+
+  static getId(): number{
+    let decodedJwt: string;
+
+    if(this.isLoggedIn()){
+      decodedJwt = this.decodeJwt();
+      return decodedJwt['id'];
+    }
+
+    return null;
+  }
 }

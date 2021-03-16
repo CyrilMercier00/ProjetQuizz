@@ -13,6 +13,7 @@ export class FormulaireConnexionComponent implements OnInit {
   @Output() connexionEmitter = new EventEmitter<ConnexionDTO>();
   @Output() deconnexionEvent = new EventEmitter();
   @Input() isCreationOpen: boolean = false;
+  @Input() connexionFailed: boolean = false;
 
   compteConnexion: FormGroup;
 

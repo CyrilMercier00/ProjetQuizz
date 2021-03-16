@@ -15,12 +15,10 @@ namespace Quizz_Web.Controllers
     public class AuthController : Controller
     {
         readonly CompteService compteService;
-        readonly PermissionService permissionService;
 
-        public AuthController(CompteService compteService, PermissionService permissionService)
+        public AuthController(CompteService compteService)
         {
             this.compteService = compteService;
-            this.permissionService = permissionService;
         }
 
         [HttpPost]
@@ -105,7 +103,8 @@ namespace Quizz_Web.Controllers
 
         private bool VerifyPassword(LoginDTO loginDTO, Compte compte)
         {
-            if (compte != null && compte.MotDePasse == loginDTO.MotDePasse)
+            string mdpEntreeCrypte = ControllerCompte.computePassword(loginDTO.MotDePasse);
+            if(compte != null && compte.MotDePasse == mdpEntreeCrypte)
             {
                 return true;
             }

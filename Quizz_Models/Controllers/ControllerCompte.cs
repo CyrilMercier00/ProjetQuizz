@@ -3,6 +3,9 @@ using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System.Collections.Generic;
 using Quizz_Models.Authentification;
+using System.Security.Cryptography;
+using System.Text;
+using System;
 
 namespace Quizz_Web.Controllers
 {
@@ -99,6 +102,7 @@ namespace Quizz_Web.Controllers
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
         {
+            compteDTO.MDP = computePassword(compteDTO.MDP);
             int lignes = this.compteService.AjoutCompte(compteDTO);
 
             if (lignes == -1)
@@ -119,6 +123,21 @@ namespace Quizz_Web.Controllers
             {
                 Response.StatusCode = (int)System.Net.HttpStatusCode.Created;
             }
+        }
+
+        /// <summary>
+        /// Méthode qui crypte un mot de passe via l'algorithme SHA256.
+        /// </summary>
+        /// <param name="motdepasse">Mot de passe à crypter.</param>
+        /// <returns>Mot de passe crypté.</returns>
+        public static string computePassword(string motdepasse)
+        {
+            SHA256 sha256Hash = SHA256.Create();
+            byte[] mdpByte = Encoding.UTF8.GetBytes(motdepasse);
+            byte[] hashByte = sha256Hash.ComputeHash(mdpByte);
+
+            // retourne le hash convertie en string
+            return BitConverter.ToString(hashByte).Replace("-", String.Empty);
         }
 
         [HttpPut]
