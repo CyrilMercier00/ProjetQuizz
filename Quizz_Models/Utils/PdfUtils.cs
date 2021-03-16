@@ -79,7 +79,8 @@ namespace Quizz_Models.Utils
 
                 QuizzTable();
                 PdfBody();
-                PdfPageNumber();
+               // PdfPageNumber();
+                //writer.SetCompressionLevel(9);
                 document.Close();
                 writer.Dispose();
 
@@ -201,6 +202,36 @@ namespace Quizz_Models.Utils
                             nb++;
                         }
                     }
+                    //////****
+                    ////if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
+                    ////{
+
+                    ////    Paragraph reponsetrueorfalsevide = new Paragraph(" La réponse est fausse ")
+                    ////       .SetFontColor(ColorConstants.RED)
+                    ////       .SetTextAlignment(TextAlignment.LEFT)
+                    ////       .SetFontSize(11);
+                    ////    document.Add(reponsetrueorfalsevide);
+                    ////}
+                    ////else
+                    ////{
+                    ////    if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
+                    ////    {
+                    ////        Paragraph reponsecandidatTrue = new Paragraph(" La réponse est fausse ")
+                    ////            .SetFontColor(ColorConstants.RED)
+                    ////            .SetTextAlignment(TextAlignment.LEFT)
+                    ////            .SetFontSize(11);
+                    ////        document.Add(reponsecandidatTrue);
+                    ////    }
+                    ////    else
+                    ////    {
+                    ////        Paragraph reponsecandidatfalse = new Paragraph(" La réponse est bonne ")
+                    ////           .SetFontColor(ColorConstants.GREEN)
+                    ////           .SetTextAlignment(TextAlignment.LEFT)
+                    ////           .SetFontSize(11);
+                    ////        document.Add(reponsecandidatfalse);
+                    ////    }
+
+                    ////}
 
                     //TitleTable("Réponse Candidat : ");
                     if (listQuestionrepRepCDTO[i].RepCandidat is null) { }
@@ -209,21 +240,72 @@ namespace Quizz_Models.Utils
 
                         if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
                         {
-                            
+
                             Paragraph reponsecandidatV = new Paragraph("Réponse Candidat :  X")
+                                .SetFontColor(ColorConstants.RED)
                                .SetTextAlignment(TextAlignment.LEFT)
                                .SetFontSize(11);
                             document.Add(reponsecandidatV);
+
+                      
                         }
                         else
                         {
-                            
-                            Paragraph reponsecandidat = new Paragraph("Réponse Candidat :  "+listQuestionrepRepCDTO[i].RepCandidat.Reponse)
-                            .SetTextAlignment(TextAlignment.LEFT)
-                            .SetFontSize(11);
-                            document.Add(reponsecandidat);
+
+                         
+
+
+                            if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
+                            {
+                                Paragraph reponsecandidatT = new Paragraph("Réponse Candidat :  " + listQuestionrepRepCDTO[i].RepCandidat.Reponse)
+                                    .SetFontColor(ColorConstants.GREEN)
+                                    .SetTextAlignment(TextAlignment.LEFT)
+                                    .SetFontSize(11);
+                                document.Add(reponsecandidatT);
+
+                            }
+                            else
+                            {
+                                Paragraph reponsecandidatF = new Paragraph("Réponse Candidat :  " + listQuestionrepRepCDTO[i].RepCandidat.Reponse)
+                                    .SetFontColor(ColorConstants.RED)
+                                    .SetTextAlignment(TextAlignment.LEFT)
+                                        .SetFontSize(11);
+                                document.Add(reponsecandidatF);
+                               
+                            }
                         }
-                       // TitleTable("Commentaire candidat : ");
+
+                        if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
+                        {
+
+                            Paragraph reponsetrueorfalsevide = new Paragraph(" La réponse est fausse ")
+                               .SetFontColor(ColorConstants.RED)
+                               .SetTextAlignment(TextAlignment.LEFT)
+                               .SetFontSize(11);
+                            document.Add(reponsetrueorfalsevide);
+                        }
+                        else
+                        {
+                            if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
+                            {
+                                Paragraph reponsecandidatTrue = new Paragraph(" La réponse est bonne")
+                                    .SetFontColor(ColorConstants.GREEN)
+                                    .SetTextAlignment(TextAlignment.LEFT)
+                                    .SetFontSize(11);
+                                document.Add(reponsecandidatTrue);
+                            }
+                            else
+                            {
+                                Paragraph reponsecandidatfalse = new Paragraph(" La réponse est fausse")
+                                   .SetFontColor(ColorConstants.RED)
+                                   .SetTextAlignment(TextAlignment.LEFT)
+                                   .SetFontSize(11);
+                                document.Add(reponsecandidatfalse);
+                            }
+
+                        }
+                        NewLine();
+                        // TitleTable("Commentaire candidat : ");
 
                         if (listQuestionrepRepCDTO[i].RepCandidat.Commentaire is null)
                         {
@@ -244,6 +326,8 @@ namespace Quizz_Models.Utils
                             document.Add(commentaireCandidat);
                             
                         }
+
+                        
                         NewLine();
                         document.Add(ls);
                         
@@ -268,13 +352,14 @@ namespace Quizz_Models.Utils
         }
         public static void PdfPageNumber()
         {
+           
             // Page numbers
             int n = pdf.GetNumberOfPages();
             for (int i = 1; i <= n; i++)
             {
                 document.ShowTextAligned(new Paragraph(String
-                    .Format("page" + i + " of " + n)),
-                    559, 806, i, TextAlignment.CENTER,
+                    .Format("p" + i + "/" + n)),
+                    559, 806, i, TextAlignment.RIGHT,
                     VerticalAlignment.BOTTOM, 0);
             }
         }

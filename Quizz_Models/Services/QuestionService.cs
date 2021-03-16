@@ -215,7 +215,7 @@ namespace Quizz_Models.Services
                 }
                 i++;
             }
-            return listQuestRepDTO;//je suis icicicicici
+            return listQuestRepDTO;
         }
 
         public int GetNbbnRep(List<PropositionReponse> listRepCand)
@@ -233,7 +233,8 @@ namespace Quizz_Models.Services
                         {
                             nbBQuestok++;
                         }
-                        else {
+                        else 
+                        {
                             nbBQuestok = 0;
                         }
 
