@@ -29,7 +29,7 @@ namespace Quizz_Web.Controllers
             if (compte != null && VerifyPassword(loginDTO, compte))
             {
                 PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
-                if(permissionDTO != null)
+                if (permissionDTO != null)
                 {
                     return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
                 }
@@ -50,7 +50,7 @@ namespace Quizz_Web.Controllers
         [Route("candidat")]
         public string LoginCandidat([FromBody] LoginDTO loginDTO)
         {
-           Compte compte = this.compteService.GetCompteCandidat(loginDTO.PkCompte);
+            Compte compte = this.compteService.GetCompteCandidat(loginDTO.PkCompte);
 
             if (compte != null)
             {
