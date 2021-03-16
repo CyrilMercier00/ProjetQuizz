@@ -14,10 +14,13 @@ namespace Quizz_Models.Services
         readonly ThemeRepository repoTheme;
         readonly CompteRepository repoCompte;
         readonly CompteService _servCompte;
+        readonly QuestionService _servQuestion;
+        readonly ComplexiteService _servComplexite;
+        readonly ServiceTheme _servTheme;
         // readonly Compte repoCompteQuizz;
 
 
-        public ServiceQuizz(CompteService servCompte, ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
+        public ServiceQuizz(ServiceTheme servTheme,ComplexiteService servComplexite,QuestionService servQuestion, CompteService servCompte, ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
         {
             repoComplex = complexiteRepository;
             repoQuest = questionRepository;
@@ -26,6 +29,9 @@ namespace Quizz_Models.Services
             repoCompte = compteRepository;
 
             this._servCompte = servCompte;
+            this._servQuestion = servQuestion;
+            this._servComplexite = servComplexite;
+            this._servTheme = servTheme;
         }
 
 
@@ -151,8 +157,8 @@ namespace Quizz_Models.Services
                 Quizz quizz= repoQuizz.GetQuizzByID(prmIDQuizz);
                 Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
                 Compte recruteurQuizz= repoCompte.GetCompteByID(prmIDRecruteur);
-            
-                Utils.PdfUtils.ContentPdf(quizz, candidatQuizz, recruteurQuizz);
+                AffichageQuizzDto quizzAffichage =TransformQuizzToAffichageQuizzDTO(quizz);
+                Utils.PdfUtils.ContentPdf(quizzAffichage, candidatQuizz, recruteurQuizz);
          
             }
         //**********************************************************************************************
@@ -260,15 +266,20 @@ namespace Quizz_Models.Services
 
         private AffichageQuizzDto TransformQuizzToAffichageQuizzDTO(Quizz quizz)
         {
+            
+
+
+            List<Question> listQuest = this._servQuestion.GetListQuestionByIDQuizz(quizz.PkQuizz);
+            List<QuestionReponseDTO> listQuestionrepDTO = this._servQuestion.AddReponseToQuestion(listQuest);
             return new AffichageQuizzDto
             {
                 PkQuizz = quizz.PkQuizz,
-                NbQuestions = quizz.PkQuizz,
-                Chrono = Convert.ToString(quizz.Chrono),
-                Theme = Convert.ToString(quizz.FkTheme),
-                Complexite = Convert.ToString(quizz.FkComplexite),
-                Urlcode = quizz.Urlcode
-
+                NbQuestions = listQuest.Count,
+                Chrono = quizz.Chrono.Value.ToString(),
+                NomTheme=this._servTheme.GetThemeNameByID(quizz.FkTheme),
+                Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
+                Urlcode = quizz.Urlcode,
+                listQuestionrep = listQuestionrepDTO
 
             };
         }
