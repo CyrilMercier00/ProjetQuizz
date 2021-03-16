@@ -130,7 +130,7 @@ function update_chrono()
   sp[0].innerHTML = h + " h";
   sp[1].innerHTML = mn + " min";
   sp[2].innerHTML = s + " s";
-  // sp[3].innerHTML=ms+" ms";
+
   this.TimeQToSend = this.TimeQ;
 
 }
