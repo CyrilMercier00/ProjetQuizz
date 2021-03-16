@@ -48,6 +48,26 @@ namespace Quizz_Web.Controllers
             return this._servQuizz.GetQuizz(idCreateur);
         }
 
+        [HttpGet]
+        [Route("{vide}/{codeQuizz}")]
+        public QuizzDTO GetQuizzByCode(string vide , string codeQuizz)
+        {
+            QuizzDTO quizz = new QuizzDTO();
+
+            quizz = this._servQuizz.GetQuizz(codeQuizz);
+
+            if (quizz == null)
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
+                return null;
+            }
+            else
+            {
+                return quizz;
+            }
+
+        }
+
         /// <summary>
         /// Assignation d'un candidat a un quizz
         /// </summary>
@@ -75,26 +95,6 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
-
-
-        [HttpGet]
-        [Route("{codeQuizz}")]
-        public QuizzDTO GetQuizzByCode(string codeQuizz)
-        {
-            QuizzDTO quizz = new QuizzDTO();
-
-            quizz = this._servQuizz.GetQuizz(codeQuizz);
-
-            if (quizz == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            } else
-            {
-                return quizz;
-            }
-
-        }
         /*
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
