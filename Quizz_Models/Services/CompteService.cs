@@ -52,10 +52,7 @@ namespace Quizz_Models.Services
 
         internal Compte GetCompteCandidat(int prmkCompte)
         {
-            Compte compte = repoCompte.GetCompteByID(prmkCompte);
-
-            if (compte == null) return null;
-            return TransformCompteEntityToCompteDTO(compte);
+            return repoCompte.GetCompteByID(prmkCompte);
         }
 
         private CompteDTO TransformCompteEntityToCompteDTO(Compte compte)
