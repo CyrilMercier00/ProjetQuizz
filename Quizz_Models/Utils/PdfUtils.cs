@@ -129,7 +129,7 @@ namespace Quizz_Models.Utils
                 .SetTextAlignment(TextAlignment.LEFT)
                 .SetFontSize(15);
 
-            Paragraph header = new Paragraph(" Test Competence ")
+            Paragraph header = new Paragraph(" Test Compétences ")
                 .SetTextAlignment(TextAlignment.CENTER)
                 .SetFontSize(20);
 
@@ -155,6 +155,9 @@ namespace Quizz_Models.Utils
                        .SetTextAlignment(TextAlignment.CENTER)
                        .SetFontSize(20);
                     document.Add(SubTitle);
+
+
+                    //TitleTable(" Énoncé : ");
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
                         Paragraph question = new Paragraph("X")
@@ -170,6 +173,7 @@ namespace Quizz_Models.Utils
                         document.Add(question);
                     }
 
+                    //TitleTable("Propositions réponses : ");
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
 
@@ -190,6 +194,7 @@ namespace Quizz_Models.Utils
                         }
                     }
 
+                    //TitleTable("Réponse Candidat : ");
                     if (listQuestionrepRepCDTO[i].RepCandidat is null) { }
                     else
                     {
@@ -208,10 +213,7 @@ namespace Quizz_Models.Utils
                             .SetFontSize(11);
                             document.Add(reponsecandidat);
                         }
-
-
-
-
+                        TitleTable("Commentaire candidat : ");
 
                         if (listQuestionrepRepCDTO[i].RepCandidat.Commentaire is null)
                         {
@@ -219,9 +221,7 @@ namespace Quizz_Models.Utils
                            .SetTextAlignment(TextAlignment.LEFT)
                            .SetFontSize(11);
                             document.Add(commentaireCandidat);
-                            NewLine();
-                            document.Add(ls);
-                            NewLine();
+                         
 
                         }
                         else
@@ -230,10 +230,11 @@ namespace Quizz_Models.Utils
                             .SetTextAlignment(TextAlignment.LEFT)
                             .SetFontSize(11);
                             document.Add(commentaireCandidat);
-                            NewLine();
-                            document.Add(ls);
-                            NewLine();
+                            
                         }
+                        NewLine();
+                        document.Add(ls);
+                        NewLine();
                     }
                 }
             }
@@ -379,6 +380,30 @@ namespace Quizz_Models.Utils
             TableQuizz.AddCell(qcell22);
             //Ajout du tableau à la cellule 
             document.Add(TableQuizz);
+            document.Add(ls);
+
+
+        }
+
+        //tab titre
+        public static void TitleTable(String title)
+        {
+
+            LineSeparator ls = new LineSeparator(new SolidLine());
+
+            // création Tableau avec 1 col
+            Table TitleTable = new Table(1, true);
+
+            Cell TitleTablecell11 = new Cell(1, 1)
+                .SetBackgroundColor(ColorConstants.LIGHT_GRAY)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .Add(new Paragraph(title));
+
+
+
+            TitleTable.AddCell(TitleTablecell11);
+            //Ajout du tableau à la cellule 
+            document.Add(TitleTable);
             document.Add(ls);
 
 
