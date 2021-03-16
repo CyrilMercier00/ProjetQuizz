@@ -107,7 +107,10 @@ export class AssignationQuizzComponent implements OnInit
         headers: requestHeaders,
         body: JSON.stringify(data)
       }
-    )
+    ).then(lambda => this.returnHome());
   }
 
+  returnHome(): void{
+    this.router.navigateByUrl('login');
+  }
 }
