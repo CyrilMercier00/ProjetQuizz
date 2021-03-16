@@ -53,15 +53,15 @@ export class PageReponseLibreComponent implements OnInit
 
     let data = new ReponseCandidatDTO();
 
-    data.$Commentaire = this.textCommentaire;
-    data.$Reponse = this.answer;
+    data.$Commentaire = this.resultatForm.value.textCommentaire;
+    data.$Reponse = this.resultatForm.value.answer;
     data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
     data.$FKQuestion = this.dataQ.$PKQuestion;
 
     serviceRepCandidat.PostReponse(data)
 
     this.estRepondu.emit(true);
-   
+
   }
 
 
