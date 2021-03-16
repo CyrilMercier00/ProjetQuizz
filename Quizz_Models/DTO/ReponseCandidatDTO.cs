@@ -8,5 +8,6 @@ namespace Quizz_Models.DTO
         public string Commentaire { get; set; }
         public int FkCompte { get; set; }
         public int FkQuestion { get; set; }
+        public bool isTrue { get; set; }
     }
 }
