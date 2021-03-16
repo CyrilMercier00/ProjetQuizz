@@ -26,7 +26,7 @@ import { GenQuizzComponent } from './components/pages/gen-quizz/gen-quizz.compon
 import { GenerateNiveauComponent } from './components/pages/generate-niveau/generate-niveau.component';
 import { GenererQuizzGuard } from './Guards/GenererQuizzGuard';
 import { GestionQuizzComponent } from './components/pages/gestion-quizz/gestion-quizz.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { InputNumberComponent } from './components/input/input-number/input-number.component';
 import { ListeQuizzComponent } from './components/liste-quizz/liste-quizz.component';
 import { LoginPageComponent } from './components/pages/login/login-page/login-page.component';
@@ -124,17 +124,20 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
       },
 
       {// Page pour creer un nouveau niveau
-         path: 'niveau', component: GenerateNiveauComponent,
-         canActivate: [GenererQuizzGuard],
-      children:
-      [
-            { path: 'formulaire-niveau', component: FormulaireCreationNiveauComponent,
-            canActivate: [GenererQuizzGuard]},
+        path: 'niveau', component: GenerateNiveauComponent,
+        canActivate: [GenererQuizzGuard],
+        children:
+          [
+            {
+              path: 'formulaire-niveau', component: FormulaireCreationNiveauComponent,
+              canActivate: [GenererQuizzGuard]
+            },
 
-            { path:'afficher-niveau' ,component: AfficherNiveauComponent,canActivate: [GenererQuizzGuard]
-          }
-             ],
-    },
+            {
+              path: 'afficher-niveau', component: AfficherNiveauComponent, canActivate: [GenererQuizzGuard]
+            }
+          ],
+      },
       { // Page pour modifier un quizz
         path: 'gestion-quizz',
         component: GestionQuizzComponent,
