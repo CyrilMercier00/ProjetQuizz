@@ -57,7 +57,7 @@ export class PageReponseLibreComponent implements OnInit
 
       data.$Commentaire = this.resultatForm.value.textCommentaire;
       data.$Reponse = this.resultatForm.value.answer;
-      data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
+      data.$FKCompte = 2;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
       data.$FKQuestion = this.dataQ.$PKQuestion;
 
       serviceRepCandidat.PostReponse(data)
@@ -76,7 +76,7 @@ export class PageReponseLibreComponent implements OnInit
 
   onComentChange($event)
   {
-    this.resultatForm.patchValue({ "enonce": $event.target.value });
+    this.resultatForm.patchValue({ "answer": $event.target.value });
   }
 }
 

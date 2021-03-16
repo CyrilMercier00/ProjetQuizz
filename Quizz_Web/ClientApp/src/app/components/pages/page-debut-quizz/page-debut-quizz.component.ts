@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
+import { AuthService } from 'src/app/Service/AuthService';
 import { ChronoComponent } from '../../chrono/chrono.component';
 import { ComptePersonnelDTO } from 'src/app/DTO/ComptePersonnelDTO';
 import { CompteService } from 'src/app/Service/CompteService'
@@ -35,9 +36,8 @@ export class PageDebutQuizzComponent implements OnInit
   idCompte: number                        // ID du compte qui passe le quizz
 
 
-
   /* --- Constructeur ---*/
-  constructor(private router: Router, private actRoute: ActivatedRoute)
+  constructor(private router: Router, private actRoute: ActivatedRoute, private authService: AuthService)
   {
     this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
@@ -58,6 +58,7 @@ export class PageDebutQuizzComponent implements OnInit
 
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.PkCompte
+          this.authService.connectCandidat(compte.$PkCompte);
 
         }).then(() =>
 

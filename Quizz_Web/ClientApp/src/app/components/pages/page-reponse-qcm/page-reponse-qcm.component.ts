@@ -58,20 +58,36 @@ export class PageReponseQcmComponent implements OnInit
     {
       let dtoRep = new ReponseCandidatDTO()
 
+      // Creation du dto
       dtoRep.$Commentaire = this.textCommentaire;
       dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
-      dtoRep.$FKCompte = null;     // TODO : Get compte candidat qui passe
+      dtoRep.$FKCompte = 2;     // TODO : Get compte candidat qui passe
       dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
-      serviceRepCandidat.PostReponse(dtoRep)
+      // Envoi de la reponse
+      serviceRepCandidat.PostReponse(dtoRep).then(x =>
+      {
+        // Vider les champs
+        this.rep1 = ""
+        this.rep2 = ""
+        this.rep3 = ""
+        this.rep4 = ""
+        this.textCommentaire = ""
 
-      this.rep1 = "";
-      this.rep2 = "";
-      this.rep3 = "";
-      this.rep4 = "";
+        // Emit pour passer a la prochaine question
+        this.estRepondu.emit(true)
 
-      this.estRepondu.emit(true);
+      })
     }
   }
+
+
+
+  onComentChange($event)
+  {
+    console.log("azdazs")
+    console.log($event.target.value)
+    this.textCommentaire = $event.target.value
+  };
 
 }
