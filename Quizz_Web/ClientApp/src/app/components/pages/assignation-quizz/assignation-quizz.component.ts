@@ -96,8 +96,6 @@ export class AssignationQuizzComponent implements OnInit
   async insertQuizz(data: CreationQuizzDTO)
   {
 
-    console.log(data);
-
     const requestHeaders: HeadersInit = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
