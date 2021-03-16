@@ -116,7 +116,7 @@ namespace Quizz_Web.Controllers
 
         }
         
-        /*
+        
         //Envoi mail automatique à l'arriver de la page renvoi vers la page resultat 
         [HttpGet]
         [Route("quizzsuccess/{codeQuizz}/{idCandidat}/{vide}")]
