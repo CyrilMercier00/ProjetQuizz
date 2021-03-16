@@ -17,8 +17,6 @@ namespace Quizz_Web.Controllers
             this.compteService = compteService;
         }
 
-        
-
         [HttpGet("{id}")]
         public CompteDTOAdmin Get(int id)
         {
@@ -33,23 +31,7 @@ namespace Quizz_Web.Controllers
             return compte;
         }
 
-
-        [HttpGet("{vide}/{prmCode}/{jwt}")]
-        public CompteDTO Get(string prmCode)
-        {
-            CompteDTO compte = this.compteService.GetCompteByCode(prmCode);
-
-            if (compte == null)
-            {
-                Response.StatusCode = (int)System.Net.HttpStatusCode.NotFound;
-                return null;
-            }
-
-            return compte;
-        }
-
-        
-        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte)]
+        [Authorize(AuthorizationEnum.SupprimerCompte, AuthorizationEnum.ModifierCompte, AuthorizationEnum.GenererQuizz)]
         [HttpGet]
         public List<CompteDTOAdmin> Get()
         {
@@ -63,7 +45,7 @@ namespace Quizz_Web.Controllers
 
             return comptes;
         }
-        
+
 
 
         [HttpGet("{vide}/{idCompteRef}")]
@@ -92,15 +74,11 @@ namespace Quizz_Web.Controllers
             this.compteService.DeleteCompte(id);
         }
 
-
-
         [HttpPut("{idCompte}/permission")]
         public void Put(int idCompte, [FromBody] AffichagePermissionDTO affichagePermissionDTO)
         {
             this.compteService.ModifyComptePermission(idCompte, affichagePermissionDTO.PkPermission);
         }
-
-
 
         [HttpPost]
         public void Post([FromBody] CompteDTO compteDTO)
@@ -127,8 +105,6 @@ namespace Quizz_Web.Controllers
             }
         }
 
-
-
         [HttpPut]
         public void Put([FromBody] ModifyCompteDTO modifyCompteDTO)
         {
@@ -141,10 +117,5 @@ namespace Quizz_Web.Controllers
                 this.compteService.ModifyCompte(modifyCompteDTO);
             }
         }
-
-
-
-        
-
     }
 }

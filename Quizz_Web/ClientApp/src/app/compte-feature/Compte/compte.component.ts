@@ -28,7 +28,6 @@ export class CompteComponent implements OnInit {
 
   supprimerCompte(): void{
     this.compteService.delete(this.compte).subscribe(response => {
-      console.log('Le compte ' + this.compte.nom + ' a été supprimé.');
       this.refreshEvent.emit();
     });;
   }

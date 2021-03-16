@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Quizz_Models.bdd_quizz;
+using Quizz_Models.Authentification;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System;
@@ -21,9 +21,9 @@ namespace Quizz_Web.Controllers
         }
 
 
-
+        [Authorize(AuthorizationEnum.GenererQuizz)]
         [HttpPost]
-        public ActionResult<QuizzDTO> Post([FromBody] QuizzDTO prmQuizzDTO)
+        public ActionResult<QuizzDTO> Post([FromBody] CreationQuizzDTO prmQuizzDTO)
         {
             ActionResult valRetour;
 
@@ -41,7 +41,12 @@ namespace Quizz_Web.Controllers
             return valRetour;
         }
 
-
+        [HttpGet]
+        [Route("{idCreateur}")]
+        public QuizzDTO GetAllQuizzFromCreateur(int idCreateur)
+        {
+            return this._servQuizz.GetQuizz(idCreateur);
+        }
 
         /// <summary>
         /// Assignation d'un candidat a un quizz

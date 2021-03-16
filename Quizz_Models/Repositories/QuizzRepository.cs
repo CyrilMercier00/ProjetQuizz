@@ -1,6 +1,9 @@
 using Quizz_Models.bdd_quizz;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+
 namespace Quizz_Models.Repositories
 {
     public class QuizzRepository
@@ -59,6 +62,16 @@ namespace Quizz_Models.Repositories
                 .Find(prmIDQuizz);
         }
 
+        public List<CompteQuizz> GetQuizzByCreateur(int idCreateur)
+        {
+            List<CompteQuizz> compteQuizz = bdd_entities.CompteQuizz
+                                                        .Where(cq => cq.FkCompte == idCreateur && cq.EstCreateur == (byte)1)
+                                                        .Include(cq => cq.FkQuizzNavigation)
+                                                        .ToList();
+
+            return compteQuizz;
+        }
+
 
 
         /// <summary>
@@ -80,6 +93,7 @@ namespace Quizz_Models.Repositories
         public void SupprimerQuizz(Quizz prmQuizz)
         {
             bdd_entities.Quizz.Remove(prmQuizz);
+            bdd_entities.SaveChanges();
         }
 
 

@@ -80,7 +80,7 @@ namespace Quizz_Models.Services
         /// <param name="prmChrono">Le temps que le candidat aura pour passer le quizz</param>
         /// /// <param name="prmUrlCode">Le code unique associer au quizz dans l'url</param>
         /// <returns>Retourne l'entitée du quizz généré ou null si il y a eu une erreur</returns>
-        public void GenererQuizz(QuizzDTO prmDTO)
+        public void GenererQuizz(CreationQuizzDTO prmDTO)
         {
             Theme leTheme = repoTheme.GetThemeByNom(prmDTO.Theme);                             // Objet theme pour ce param
             TauxComplexite leTaux = repoComplex.GetComplexiteByNom(prmDTO.Complexite);         // Objet taux de complexite pour ce param
@@ -91,9 +91,7 @@ namespace Quizz_Models.Services
             Quizz quizzCreation = new Quizz()
             {
                 FkTheme = leTheme.PkTheme,
-                FkComplexite = leTaux.PkComplexite,
-                Chrono = TimeSpan.Parse(prmDTO.Chrono),
-                Urlcode = prmDTO.Urlcode
+                FkComplexite = leTaux.PkComplexite
             };
 
             //Ajouter code Unique pour l'url du Quizz
@@ -111,6 +109,14 @@ namespace Quizz_Models.Services
                 FkCompte = prmDTO.FKCompteRecruteur,
                 FkQuizz = quizzCreation.PkQuizz,
                 EstCreateur = Convert.ToByte(true)
+            });
+
+            // Création du candidat lié
+            quizzCreation.CompteQuizz.Add(new CompteQuizz
+            {
+                FkCompte = prmDTO.FKCompteCandidat,
+                FkQuizz = quizzCreation.PkQuizz,
+                EstCreateur = Convert.ToByte(false)
             });
 
             // Creation d'une list de questions associées au quizz
@@ -254,6 +260,15 @@ namespace Quizz_Models.Services
             return retour;
         }
 
+        /// <summary>
+        /// Méthode qui retourne tout les quizz crées par un recruteur.
+        /// </summary>
+        /// <param name="idCreateur">ID du créateur du quizz.</param>
+        /// <returns>Les quizz sous forme QuizzDTO.</returns>
+        public QuizzDTO GetQuizz(int idCreateur)
+        {
+            return TransformCompteQuizzToCompteQuizzDTO(this.repoQuizz.GetQuizzByCreateur(idCreateur));
+        }
         //*********************valider Quizz
         public void ValiderQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
         {
@@ -285,6 +300,10 @@ namespace Quizz_Models.Services
         }
 
         //*********************
+        private QuizzDTO TransformCompteQuizzToCompteQuizzDTO(List<CompteQuizz> lists)
+        {
+            return new QuizzDTO();
+        }
 
         private QuizzDTO TransformQuizzToQuizzDTO(Quizz quizz)
         {
