@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class LoginPageComponent{
 
   creationIsOpen: boolean = false;
+  erreurConnexion: boolean = false;
 
   public constructor(private router : Router, private compteService: CompteService, private authService : AuthService){}
 
@@ -40,9 +41,16 @@ export class LoginPageComponent{
   connexion(connexionDTO: ConnexionDTO){
     this.authService.connect(connexionDTO).subscribe(
       jwt => {
-        Globals.initJwt(jwt);
+          Globals.initJwt(jwt);
+      },
+      error => {
+        this.affichageErreurConnexion();
       }
     );
+  }
+
+  affichageErreurConnexion(): void{
+    this.erreurConnexion = true;
   }
 
   logout(){
