@@ -78,7 +78,8 @@ namespace Quizz_Web.Controllers
 
         private bool VerifyPassword(LoginDTO loginDTO, Compte compte)
         {
-            if(compte != null && compte.MotDePasse == loginDTO.MotDePasse)
+            string mdpEntreeCrypte = ControllerCompte.computePassword(loginDTO.MotDePasse);
+            if(compte != null && compte.MotDePasse == mdpEntreeCrypte)
             {
                 return true;
             }
