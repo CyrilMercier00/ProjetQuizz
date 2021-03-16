@@ -1,9 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { VariableGlobales } from 'src/app/url_api';
+
 import { Compte } from '../../../compte-feature/Compte/compte.model'
 import { Globals } from '../../../globals'
-
-
+import { VariableGlobales } from 'src/app/url_api';
 
 @Component({
   selector: 'app-select-compte-candidat',
@@ -34,7 +33,7 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* ------ Methodes ------ */
-  IDUpdate(id) 
+  IDUpdate(id)
   {
     this.ChoixEvent.emit(id);
   }
@@ -42,13 +41,13 @@ export class SelectCompteCandidatComponent implements OnInit
 
 
   /* --- Get des candidats assignés a ce recruteur --- */
-   getCandidatAsigne()
+  getCandidatAsigne()
   {
     const requestHeaders: HeadersInit = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
 
-     fetch(VariableGlobales.apiURLCompte, { method: "GET", headers: requestHeaders })
+    fetch(VariableGlobales.apiURLCompte, { method: "GET", headers: requestHeaders })
       .then((response) => response.json())
       .then((json) =>
       {
