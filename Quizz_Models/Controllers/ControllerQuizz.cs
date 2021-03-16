@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Quizz_Models.Authentification;
+using Quizz_Models.bdd_quizz;
 using Quizz_Models.DTO;
 using Quizz_Models.Services;
 using System;
