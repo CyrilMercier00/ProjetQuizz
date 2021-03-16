@@ -4,12 +4,12 @@
 
   <div class="flex flex-align-i-center flex-column wrapper">
     <h2>Votre réponse : </h2>
-    <app-dragabble-text-input (change)="onAnswerChange"></app-dragabble-text-input>
+    <app-dragabble-text-input (change)="onAnswerChange($event)"></app-dragabble-text-input>
   </div>
 
   <div class="flex flex-align-i-center flex-column wrapper">
     <h2>Commentaire : </h2>
-    <app-dragabble-text-input (change)="onComentChange"></app-dragabble-text-input>
+    <app-dragabble-text-input (change)="onComentChange($event)"></app-dragabble-text-input>
   </div>
 
   <app-button-valid Message="Valider la réponse" (click)="handleClick()"></app-button-valid>

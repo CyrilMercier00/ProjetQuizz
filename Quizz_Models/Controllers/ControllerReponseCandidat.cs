@@ -5,7 +5,7 @@ using Quizz_Models.Services;
 namespace Quizz_Web.Controllers
 {
     [ApiController]
-    [Route ("api/reponse-candidat")]
+    [Route("api/reponse-candidat")]
     public class ControllerReponseCandidat : Controller
     {
         readonly ServiceReponseCandidat repService;
@@ -16,9 +16,21 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPost]
-        public void Post ( [FromBody] ReponseCandidatDTO prmDTO )
+        [Route("{prmDTO}")]
+
+        public IActionResult Post([FromBody] ReponseCandidatDTO prmDTO)
         {
-            repService.InsertReponseCandidat (prmDTO);
+            switch (repService.InsertReponseCandidat(prmDTO))
+            {
+                case 0:
+                    return NotFound();
+
+                case 1:
+                    return Ok();
+
+                default:
+                    return Problem("More than one column were inserted");
+            }
         }
     }
 }

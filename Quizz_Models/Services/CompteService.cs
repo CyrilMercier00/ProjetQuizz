@@ -27,6 +27,19 @@ namespace Quizz_Models.Services
             return repoCompte.GetCompteByCompteRef(prmIDCompteRef);
         }
 
+        internal CompteDTO GetCompteByCode(string prmCode)
+        {
+            Compte compte = repoCompte.GetCompteRecruteurByCodeQuizz(prmCode);
+            return new CompteDTO()
+            {
+                Mail = compte.Mail,
+                MDP = compte.MotDePasse,
+                Nom = compte.Nom,
+                Prenom = compte.Prenom
+            };
+            
+        }
+
         /// <summary>
         /// Renvoie un compte createur à partir du Quizz 
         /// </summary>

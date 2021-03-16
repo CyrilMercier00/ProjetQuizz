@@ -272,10 +272,10 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 
 -- Proposition de reponse
 insert into proposition_reponse (texte,est_bonne,fk_question) values
-("Salut c'est moi",  1, 1),
-("Salut c'est lui", 1,1),
-("Salut c'est nous",  1,1),
-("Salut c'est eux",  1,1);
+("Salut c'est moi",  1, 2),
+("Salut c'est lui", 1,2),
+("Salut c'est nous",  1,2),
+("Salut c'est eux",  1,2);
 
 -- Insert Quizz:
 INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES

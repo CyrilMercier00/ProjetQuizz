@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Quizz_Models.DTO;
 
 namespace Quizz_Models.Repositories
 {
     public class CompteRepository
     {
-        private readonly bdd_quizzContext bdd_entities ;
-        public CompteRepository(bdd_quizzContext quizzContext) 
+        private readonly bdd_quizzContext bdd_entities;
+        public CompteRepository(bdd_quizzContext quizzContext)
         {
             bdd_entities = quizzContext;
         }
@@ -23,42 +24,84 @@ namespace Quizz_Models.Repositories
             return bdd_entities.Compte.Include(c => c.FkPermissionNavigation).ToList();
         }
 
+        /// <summary>
+        /// Méthode qui trouve un compte par email.
+        /// </summary>
+        /// <param name="mail"></param>
+        /// <returns>Retourne l'entité compte correspondante.</returns>
         public Compte FindCompteByMail(string mail)
         {
             Compte c = null;
             try
             {
                 c = bdd_entities.Compte.Where(c => c.Mail == mail).First();
-            } catch(Exception)
+            }
+            catch (Exception)
             { }
 
             return c;
         }
 
+        /// <summary>
+        /// Obtenir les comptes d'une certaines permissions.
+        /// </summary>
+        /// <param name="prmidPerm">ID de la permission</param>
+        /// <returns>Les comptes ayant prmidPerm comme id de permission.</returns>
         public List<Compte> GetCompteByNomPerm(int prmidPerm)
         {
             return bdd_entities.Compte
                 .Where(x => x.FkPermission == prmidPerm)
                 .ToList();
-                
+
+        }
+
+        public Compte GetCompteRecruteurByCodeQuizz(string prmCode)
+        {
+            Quizz quizz = bdd_entities.Quizz
+                .Include(x => x.CompteQuizz)
+                .Where(x => x.Urlcode == prmCode)
+                .SingleOrDefault();
+
+            if (quizz != null)
+            {
+                try
+                {
+                    CompteQuizz comptequizz = bdd_entities.CompteQuizz
+                        .Where(x => x.FkQuizz == quizz.PkQuizz)
+                        .Where(x => x.EstCreateur == Convert.ToByte(false))
+                        .SingleOrDefault();
+
+                    return bdd_entities.Compte
+                        .Where(x => x.PkCompte == comptequizz.FkCompte)
+                        .Single();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+            else
+            {
+                throw new Exception("Quizz not found");
+            }
         }
 
         public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
         {
-            
+
             Compte c = null;
             try
             {
-               c= bdd_entities.Compte.Join(bdd_entities.CompteQuizz,
-                         c => c.PkCompte,
-                         cQ => cQ.FkCompte,
-                         (c, cQ) => new { compte = c, compte_Q = cQ })
-                .Where(ccQ=> ccQ.compte_Q.FkQuizz == prmIdQuizz & ccQ.compte_Q.EstCreateur == 1)
-                .Select(ccQ => ccQ.compte)
-                .Single();
+                c = bdd_entities.Compte.Join(bdd_entities.CompteQuizz,
+                          c => c.PkCompte,
+                          cQ => cQ.FkCompte,
+                          (c, cQ) => new { compte = c, compte_Q = cQ })
+                 .Where(ccQ => ccQ.compte_Q.FkQuizz == prmIdQuizz & ccQ.compte_Q.EstCreateur == 1)
+                 .Select(ccQ => ccQ.compte)
+                 .Single();
             }
             catch (Exception)
-            { 
+            {
             }
 
             return c;
@@ -69,16 +112,12 @@ namespace Quizz_Models.Repositories
         /// </summary>
         /// <param name="iDPerm"></param>
         /// <returns></returns>
-        internal List<Compte> GetCompteByCompteRef(int prmID=1)
+        internal List<Compte> GetCompteByCompteRef(int prmID = 1)
         {
             return bdd_entities.Compte
                 .Where(x => x.FkCompteReferent == prmID)
                 .ToList();
         }
-
-
-
-
 
         /// <summary>
         /// Méthode qui retourne un compte par son ID.
@@ -91,7 +130,8 @@ namespace Quizz_Models.Repositories
             try
             {
                 c = bdd_entities.Compte.Where(c => c.PkCompte == prmID).Include(c => c.FkPermissionNavigation).Single();
-            } catch (Exception)
+            }
+            catch (Exception)
             { }
 
             return c;
@@ -114,7 +154,7 @@ namespace Quizz_Models.Repositories
         public void ModifyPermission(int idCompte, int idPermission)
         {
             Compte c = bdd_entities.Compte.Find(idCompte);
-            if(c != null)
+            if (c != null)
             {
                 c.FkPermission = idPermission;
             }

@@ -46,6 +46,7 @@ import { SelectThemeComponent } from './components/select/select-theme/select-th
 import { ProfilComponent } from './components/pages/profil/profil.component';
 import { ConnexionGuard } from './Guards/ConnexionGuard';
 import { BooleanPipe } from './Pipe/boolean-pipe';
+import { ModificationQuizzComponent } from './components/pages/modification-quizz/modification-quizz.component';
 
 import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-niveau.component';
 
@@ -89,6 +90,7 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
     LoginPageComponent,
     ProfilComponent,
     BooleanPipe,
+    ModificationQuizzComponent,
     AfficherNiveauComponent,
   ],
   imports: [
@@ -147,7 +149,7 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
       {
         path: 'permission',
         component: PermissionComponent,
-        canActivate: [ModifierCompteGuard]
+        canActivate: [GenererQuizzGuard]
       },
       { // Page de fin de quizz
         path: 'quizzsuccess/:urlQuizz/:jwtId',
@@ -157,6 +159,11 @@ import { AfficherNiveauComponent } from './components/afficher-niveau/afficher-n
         path: 'comptes',
         component: ComptesComponent,
         canActivate: [ModifierCompteGuard]
+      },
+      {
+        path: 'permission/quizzlist',
+        component: ModificationQuizzComponent,
+        canActivate: [GenererQuizzGuard]
       },
       { // Page de creation des questions
         path: 'creation-question',

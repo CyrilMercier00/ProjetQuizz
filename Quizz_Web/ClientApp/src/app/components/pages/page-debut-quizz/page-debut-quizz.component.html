@@ -3,8 +3,7 @@
   <div *ngIf="showWelcome">
     <h2>Vous allez debuter le quizz</h2>
     <p>Nous vous souhaitons bonne chance !</p>
-    <app-button-valid Message="Commencer" (click)="handleClick()"></app-button-valid>
-    
+    <app-button-valid Message="Commencer" (click)="handleClick()" [isDisabled]="!isReady"></app-button-valid>
   </div>
 
   <div class="row">
