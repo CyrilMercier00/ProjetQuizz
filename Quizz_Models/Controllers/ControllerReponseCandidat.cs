@@ -31,8 +31,6 @@ namespace Quizz_Web.Controllers
                 default:
                     return Problem("More than one column were inserted");
             }
-
-
         }
     }
 }
