@@ -7,11 +7,23 @@ import { VariableGlobales } from 'src/app/url_api';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService
+{
 
-  constructor(private httpClient : HttpClient) { }
 
-  connect(connexionDTO : ConnexionDTO): Observable<string>
+
+  constructor(private httpClient: HttpClient) { }
+
+
+
+  connectCandidat(prmPKCompte: number): Observable<string>
+  {
+    return this.httpClient.post<string>(VariableGlobales.apiURLLogin + "candidat", prmPKCompte);
+  }
+
+
+
+  connect(connexionDTO: ConnexionDTO): Observable<string>
   {
     return this.httpClient.post<string>(VariableGlobales.apiURLLogin, connexionDTO);
   }

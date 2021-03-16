@@ -20,19 +20,17 @@ export class serviceRepCandidat
     console.log("Envoi de la réponse...")
     console.log(prmDTO)
 
-    return fetch(
-      VariableGlobales.apiURLQuizz,
+    const requestHeaders: HeadersInit = new Headers();
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Authorization', Globals.getJwt());
+
+    return fetch(VariableGlobales.apiURLReponseCandidat,
       {
         method: "POST",
-        headers:
-        {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': Globals.getJwt()
-        },
+        headers: requestHeaders,
         body: JSON.stringify(prmDTO)
-      }
-    )
+      })
+
   }
 
 

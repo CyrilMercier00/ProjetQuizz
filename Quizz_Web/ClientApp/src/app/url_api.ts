@@ -7,7 +7,7 @@ export class VariableGlobales
   static apiURLComplexite = VariableGlobales.apiURL + "complexite/";
   static apiURLQuizz = VariableGlobales.apiURL + "quizz/";
   static apiURLQuestion = VariableGlobales.apiURL + "question/";
-  static apiURLReponseCandidat = VariableGlobales.apiURL + "reponsecandidat";
-  static apiURLPermission = VariableGlobales.apiURL + "permission/";  
+  static apiURLReponseCandidat = VariableGlobales.apiURL + "reponse-candidat";
+  static apiURLPermission = VariableGlobales.apiURL + "permission/";
   static apiURLFinQuizz = VariableGlobales.apiURLQuizz+ "quizzsuccess/";
 }

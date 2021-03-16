@@ -48,6 +48,33 @@ namespace Quizz_Web.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("candidat")]
+        public string LoginCandidat([FromBody] LoginDTO loginDTO)
+        {
+           Compte compte = this.compteService.GetCompteCandidat(loginDTO.PkCompte);
+
+            if (compte != null)
+            {
+                PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
+
+                if (permissionDTO != null && permissionDTO.PkPermission == 3)
+                {
+                    return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                    return "";
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                return "";
+            }
+        }
+
         private string GenererJWTToken(Compte compte, PermissionDTO permissionDTO)
         {
             var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";
