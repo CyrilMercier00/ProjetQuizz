@@ -15,12 +15,10 @@ namespace Quizz_Web.Controllers
     public class AuthController : Controller
     {
         readonly CompteService compteService;
-        readonly PermissionService permissionService;
 
-        public AuthController(CompteService compteService, PermissionService permissionService)
+        public AuthController(CompteService compteService)
         {
             this.compteService = compteService;
-            this.permissionService = permissionService;
         }
 
         [HttpPost]
