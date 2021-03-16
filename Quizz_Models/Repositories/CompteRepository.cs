@@ -64,13 +64,21 @@ namespace Quizz_Models.Repositories
 
             if (quizz != null)
             {
-                CompteQuizz comptequizz = bdd_entities.CompteQuizz
-                    .Where(x => x.FkQuizz == quizz.PkQuizz)
-                    .SingleOrDefault();
+                try
+                {
+                    CompteQuizz comptequizz = bdd_entities.CompteQuizz
+                        .Where(x => x.FkQuizz == quizz.PkQuizz)
+                        .Where(x => x.EstCreateur == Convert.ToByte(false))
+                        .SingleOrDefault();
 
-                return bdd_entities.Compte
-                    .Where(x => x.PkCompte == comptequizz.FkCompte)
-                    .Single();
+                    return bdd_entities.Compte
+                        .Where(x => x.PkCompte == comptequizz.FkCompte)
+                        .Single();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
             }
             else
             {
