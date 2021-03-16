@@ -10,12 +10,11 @@
       </li>
 
       <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/creer-quizz']">Generation de quizz</a>
+        <a class="nav-link " [routerLink]="['/creer-quizz']">Génération de quizz</a>
       </li>
 
       <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/niveau']">niveau</a>
-     
+        <a class="nav-link " [routerLink]="['/niveau']">GEstio des niveaux</a>
       </li>
 
       <li class="nav-item"
@@ -24,21 +23,16 @@
         <a class="nav-link " [routerLink]="['/gestion-quizz']">Gestion de quizz</a>
       </li>
 
-      <li class="nav-item" [routerLinkActive]="['link-active']">
-      <li class="nav-item" *ngIf="hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/assignation-quizz']">Assignation de quizz</a>
-      </li>
-
       <li class="nav-item" *ngIf="hasAccessTo('ModifierCompte') || hasAccessTo('SupprimerCompte') || hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/permission']">Permissions</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/page-demarrage/qjtFqUAORkC1WudxIB6w']">Page debut quizz</a>
+        <a class="nav-link " [routerLink]="['/page-demarrage/pZyDwaTPG0OZe01jAw4K6Q']">Démarrer quizz</a>
       </li>
 
       <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/creation-question']">Creation question</a>
+        <a class="nav-link " [routerLink]="['/creation-question']">Création de questions</a>
       </li>
 
     </ul>
