@@ -1,5 +1,4 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 import { ChronoComponent } from '../../chrono/chrono.component';
@@ -8,7 +7,6 @@ import { CompteService } from 'src/app/Service/CompteService'
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { Globals } from 'src/app/globals';
-import { PermissionService } from 'src/app/Service/permissionService';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { utilDTO } from 'src/app/DTO/utilDTO';
@@ -23,7 +21,7 @@ import { utilDTO } from 'src/app/DTO/utilDTO';
 
 export class PageDebutQuizzComponent implements OnInit
 {
-  /* --- Variables --- */
+  /* --- Declaration des variables --- */
   code: string;                           // Contiens le code url de la page
   dataQuizz: DTOQuizz;                    // Contiens le quizz correspondant au code de la page
   arrayDataQuestions: DTOQuestion[];      // Contiens toutes les questions récupérées pour ce quizz
@@ -34,10 +32,7 @@ export class PageDebutQuizzComponent implements OnInit
   isReady: boolean                        // Active le bouton commencer si la recuperation des données a bien été faite
   showWelcome = true                      // Cache l'ecran de debut de quizz si false
   nbQuestionRepondues = 0                 // Contiens l'index de la question actuelle
-  idCompte: number                       // ID du compte qui passe le quizz
-
-  /***chrono**/
-  TimeQ;
+  idCompte: number                        // ID du compte qui passe le quizz
 
 
 
@@ -52,52 +47,49 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
+    // ! Enregistrer le compte du candidat qui passe
     CompteService.GetCompteLinkedToCode(this.code)
       .then(repFetch =>
       {
-        repFetch.json()
-          .then(retour =>
-          {
-            console.log(" --------- Compte qui a ce quizz --------- ")
-            console.log(retour)
+        repFetch.json().then(retour =>
+        {
+          console.log(" --------- Compte qui a ce quizz --------- ")
+          console.log(retour)
 
-            let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
-            compte.$PkCompte = retour.PkCompte
+          let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
+          compte.$PkCompte = retour.PkCompte
 
-          }).then(() =>
+        }).then(() =>
 
-            // Récuperation des données du quizz
-            ServiceQuizz.GetQuizzByCode(this.code)
+          // ! Récuperation des données du quizz
+          ServiceQuizz.GetQuizzByCode(this.code)
 
-              .then(repFetch =>
+            .then(repFetch =>
+            {
+              repFetch.json().then(retour =>
               {
-                repFetch.json()
-                  .then(retour =>
-                  {
-                    console.log(" ------------ Données du quizz ------------ ")
-                    console.log(retour)
-                    this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
-                  })
-                  .then(x =>
-                  {
-                    // Chercher les questions associées a ce quizz
-                    ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)
-                      .then(repFetch =>
-                      {
-                        repFetch.json()
-                          .then(retour =>
-                          {
-
-                            console.log(" ---------------- Questions ---------------- ")
-                            console.log(retour)
-                            this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
-                            this.isReady = true;
-                          }
-                          )
-                      })
-                  });
+                console.log(" ------------ Données du quizz ------------ ")
+                console.log(retour)
+                this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
               })
-          )
+                .then(x =>
+                {
+                  // ! Récuperation des questions du quizz
+                  ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)
+                    .then(repFetch =>
+                    {
+                      repFetch.json().then(retour =>
+                      {
+                        console.log(" ---------------- Questions ---------------- ")
+                        console.log(retour)
+                        this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
+                        this.isReady = true;
+                      }
+                      )
+                    })
+                });
+            })
+        )
       })
   }
 
