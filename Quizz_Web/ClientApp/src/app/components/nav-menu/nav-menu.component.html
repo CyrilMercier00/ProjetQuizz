@@ -17,22 +17,8 @@
         <a class="nav-link " [routerLink]="['/niveau']">Gestion des niveaux</a>
       </li>
 
-      <li class="nav-item"
-        *ngIf="hasAccessTo('AjouterQuest') || hasAccessTo('ModifierQuest') || hasAccessTo('SupprQuestion')"
-        [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/gestion-quizz']">Gestion de quizz</a>
-      </li>
-
       <li class="nav-item" *ngIf="hasAccessTo('ModifierCompte') || hasAccessTo('SupprimerCompte') || hasAccessTo('GenererQuizz')" [routerLinkActive]="['link-active']">
         <a class="nav-link " [routerLink]="['/permission']">Permissions</a>
-      </li>
-
-      <li class="nav-item" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/page-demarrage/wJgXcMWdX0qKfg8XKDvLVQ']">Démarrer quizz</a>
-      </li>
-
-      <li class="nav-item" *ngIf="hasAccess('AjouterQuest')" [routerLinkActive]="['link-active']">
-        <a class="nav-link " [routerLink]="['/creation-question']">Création de questions</a>
       </li>
 
     </ul>
