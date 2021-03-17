@@ -73,8 +73,6 @@ export class ChronoComponent implements OnInit
           {
             let q = this.quizz;
             q.$Chrono = q.$Chrono + this.TimeQ.value;
-            console.log('Chrono');
-            console.log(this.TimeQ.value);
             fetch(
               VariableGlobales.apiURLQuizz + this.code,
               {

@@ -318,7 +318,24 @@ insert into proposition_reponse (texte,est_bonne,fk_question) values
 ("Virtual",  1, 10),
 ("Public",  1, 10),
 ("Friendly",  0, 10),
-("Internal",  1, 10);
+("Internal",  1, 10),
+
+("Virtual",  1, 11),
+("Abstrat",  1, 11),
+("Interface",  1,11),
+("sealed",  1, 11),
+
+("Virtual",  1,12 ),
+("Abstrat",  1, 12),
+("Interface",  1, 12),
+("sealed",  1, 12),
+
+("Virtual",  1, 13),
+("Abstrat",  1, 13),
+("Interface",  1, 13),
+("sealed",  1, 13);
+
+
 
 -- Insert compte:
 Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "admin@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  1) ;
