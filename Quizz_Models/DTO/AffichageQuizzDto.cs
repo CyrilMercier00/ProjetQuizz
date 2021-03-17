@@ -23,7 +23,7 @@ namespace Quizz_Models.DTO
 
         //***quizz**
         public int PkQuizz { get; set; }
-        public int FKCompteRecruteur { get; set; }
+        public int FKCompteRecruteur { get; set; }//
         public int NbQuestions { get; set; }
         public String Chrono { get; set; }
         public String Theme { get; set; }
@@ -37,7 +37,7 @@ namespace Quizz_Models.DTO
         public String NomTheme { get; set; }
         
         public List<PropositionReponseDTO> ListeReponses { get; set; } = new List<PropositionReponseDTO>();
-        public List<ReponseCandidatDTO> ListeReponsesCandidat { get; set; }
+        public List<ReponseCandidatDTO> ListeReponsesCandidat { get; set; } = new List<ReponseCandidatDTO>();
         public List<QuestionReponseReponseCandidatDTO> ListQuestionrepRepCDTO { get; set; } = new List<QuestionReponseReponseCandidatDTO>();
         public List<QuestionReponseDTO> ListQuestionrep { get; set; }
         public int nbRepOK { get; set; }
