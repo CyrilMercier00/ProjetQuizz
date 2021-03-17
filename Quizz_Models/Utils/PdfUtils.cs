@@ -79,7 +79,7 @@ namespace Quizz_Models.Utils
 
                 QuizzTable();
                 PdfBody();
-               // PdfPageNumber();
+                PdfPageNumber();
                 //writer.SetCompressionLevel(9);
                 document.Close();
                 writer.Dispose();
