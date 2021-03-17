@@ -67,9 +67,10 @@ namespace Quizz_Models.Utils
                 // listQuestion= GetQuestionReponsesRepCandidat();
                 // question = affichageQuizz.ListeReponses;
                 Nb_QUEST = affichageQuizz.NbQuestions;
-                Nb_RepOk = 0;
+                
                 if (Nb_QUEST > 0)
                 {
+                    Nb_RepOk = 0;
                     for (int i = 0; i < Nb_QUEST; i++)
                     {
                         foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
@@ -358,10 +359,10 @@ namespace Quizz_Models.Utils
                     VerticalAlignment.BOTTOM, 0);
             }
         }
-        public static int NoteSur20(int nb_Q, int nb_RepOk)
+        public static int NoteSur20(int nb_Q, int nb_Ok)
         {
 
-            int nb_Note = nb_RepOk * 20;
+            int nb_Note = nb_Ok * 20;
             if (nb_Note > 0)
             { nb_Note = nb_Note / nb_Q; }
             else
@@ -373,11 +374,9 @@ namespace Quizz_Models.Utils
         }
         public static void ScoreTable()
         {
-            //Nb_RepOk = affichageQuizz.nbRepOK;
-            //Nb_QUEST = affichageQuizz.NbQuestions;
+            
             LineSeparator ls = new LineSeparator(new SolidLine());
 
-           // Nb_RepOk = 10;
             int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
             // création Tableau avec 4 col
             Table scoreTable = new Table(4, true);
