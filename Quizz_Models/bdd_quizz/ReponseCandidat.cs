@@ -8,6 +8,7 @@ namespace Quizz_Models.bdd_quizz
         public int PkReponse { get; set; }
         public string Reponse { get; set; }
         public string Commentaire { get; set; }
+        public TimeSpan? Chrono { get; set; }
         public int FkCompte { get; set; }
         public int FkQuestion { get; set; }
 

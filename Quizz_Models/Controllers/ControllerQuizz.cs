@@ -69,6 +69,7 @@ namespace Quizz_Web.Controllers
 
         }
 
+        /*
         /// <summary>
         /// Assignation d'un candidat a un quizz
         /// </summary>
@@ -95,7 +96,7 @@ namespace Quizz_Web.Controllers
 
             return valRetour;
         }
-
+        */
 
 
         [HttpGet]
