@@ -14,8 +14,7 @@ import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 
 
-export class PageReponseLibreComponent implements OnInit
-{
+export class PageReponseLibreComponent implements OnInit {
 
   /* ------ Declaration des variables ------ */
   @Input("dataQuestion") dataQ: DTOQuestion;                                             // DTO de la question passée
@@ -28,8 +27,7 @@ export class PageReponseLibreComponent implements OnInit
   clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
-  constructor()
-  {
+  constructor() {
     this.textCommentaire = "";
     this.answer = "";
   }
@@ -41,26 +39,21 @@ export class PageReponseLibreComponent implements OnInit
 
 
 
-  setVal()
-  {
+  setVal() {
     this.enonce = this.dataQ.$Enonce;
   }
 
   /* ------ Methodes ------*/
   // Envoi de la réponse a la base de données
-  handleClick()
-  {
-    if (this.clicked == false)
-    {
+  handleClick() {
+    if (this.clicked == false) {
       this.clicked = true;
       let data = new ReponseCandidatDTO();
-
       data.$Commentaire = this.textCommentaire;
       data.$Reponse = this.answer;
       data.$FKCompte = Globals.getId();
       data.$FKQuestion = this.dataQ.$PKQuestion;
-
-      console.log(data)
+      this.clicked = false
 
       serviceRepCandidat.PostReponse(data)
         .then(x => this.estRepondu.emit(true))
@@ -69,15 +62,13 @@ export class PageReponseLibreComponent implements OnInit
 
 
 
-  onAnswerChange($event)
-  {
+  onAnswerChange($event) {
     this.textCommentaire = $event.target.value;
   }
 
 
 
-  onComentChange($event)
-  {
+  onComentChange($event) {
     this.answer = $event.target.value;
   }
 }

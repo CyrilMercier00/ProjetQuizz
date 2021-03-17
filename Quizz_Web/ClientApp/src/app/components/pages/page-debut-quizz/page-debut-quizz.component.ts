@@ -23,8 +23,7 @@ import { utilDTO } from 'src/app/DTO/utilDTO';
 
 
 
-export class PageDebutQuizzComponent implements OnInit
-{
+export class PageDebutQuizzComponent implements OnInit {
   /* --- Declaration des variables --- */
   code: string;                           // Contiens le code url de la page
   dataQuizz: DTOQuizz;                    // Contiens le quizz correspondant au code de la page
@@ -43,28 +42,23 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   /* --- Constructeur ---*/
-  constructor(private router: Router, private actRoute: ActivatedRoute, private authService: AuthService)
-  {
+  constructor(private router: Router, private actRoute: ActivatedRoute, private authService: AuthService) {
     this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
 
 
 
   /* --- Methodes Angular --- */
-  ngOnInit()
-  {
-    if (Globals.isLoggedOut())
-    {
+  ngOnInit() {
+    if (Globals.isLoggedOut()) {
       Globals.initJwt('');
     }
 
     // ! Enregistrer le compte du candidat qui passe
     CompteService.GetCompteLinkedToCode(this.code)
-      .then(repFetch =>
-      {
+      .then(repFetch => {
 
-        repFetch.json().then(retour =>
-        {
+        repFetch.json().then(retour => {
 
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.pk
@@ -72,8 +66,7 @@ export class PageDebutQuizzComponent implements OnInit
 
           this.authService.connectCandidat(new ConnexionDTO(compte.$Mail, null))
             .subscribe(
-              jwt =>
-              {
+              jwt => {
                 Globals.initJwt(jwt);
               }
             )
@@ -82,20 +75,15 @@ export class PageDebutQuizzComponent implements OnInit
           // ! Récuperation des données du quizz
           ServiceQuizz.GetQuizzByCode(this.code)
 
-            .then(repFetch =>
-            {
-              repFetch.json().then(retour =>
-              {
+            .then(repFetch => {
+              repFetch.json().then(retour => {
                 this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
               })
-                .then(x =>
-                {
+                .then(x => {
                   // ! Récuperation des questions du quizz
                   ServiceQuestions.GetQuestionsByCodeQuizz(this.dataQuizz.$UrlCode)
-                    .then(repFetch =>
-                    {
-                      repFetch.json().then(retour =>
-                      {
+                    .then(repFetch => {
+                      repFetch.json().then(retour => {
                         this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
                         this.isReady = true;
                       }
@@ -110,28 +98,25 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   /*--- Methodes ---*/
-  handleClick()
-  {
+  handleClick() {
     this.startQuizz();
   }
 
 
 
   /*redirige vers la page quizz success*/
-  redirect()
-  {
-    
+  redirect() {
+
     let jwt = Globals.decodeJwt();
-    
+
     this.router.navigate(['/quizzsuccess/' + this.code + '/' + jwt['id']]);
-    
+
   }
 
 
 
   /* --- Activer les component correspondant aux types de questions posée  ---  */
-  startQuizz()
-  {
+  startQuizz() {
     this.showWelcome = false              // Cacher l'ecran d'accueil
     this.componentChronoEnabled = true    // Demarrer le chrono
     this.nextQuestion()                   // Demarrer l'affichage de questions
@@ -140,18 +125,17 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   // Passe à la prochaine question
-  nextQuestion()
-  {
+  nextQuestion() {
     this.dataQuestion = this.arrayDataQuestions[this.nbQuestionRepondues]
 
+    this.componentRepQCMEnabled = false
+    
     // * Afficher le component correct pour cette question
-    if (this.dataQuestion.$RepLibre)
-    {
+    if (this.dataQuestion.$RepLibre) {
       this.componentRepQCMEnabled = false
       this.componentRepLibreEnabled = true
 
-    } else
-    {
+    } else {
       this.componentRepLibreEnabled = false
       this.componentRepQCMEnabled = true
     }
@@ -161,32 +145,24 @@ export class PageDebutQuizzComponent implements OnInit
 
 
   // Incremente le nombre de questions repondues et trigger l'affichage de la prochaine question
-  incrementNBQuestionRep()
-  {
+  incrementNBQuestionRep() {
 
     if (this.childRefLibre) { this.childRefLibre.setVal() }
     else if (this.childRefChrono) { this.childRefQCM.setVal() }
 
-    console.log(this.nbQuestionRepondues)
+    if (this.nbQuestionRepondues >= this.arrayDataQuestions.length) {
 
-    if (this.nbQuestionRepondues + 1 >= this.arrayDataQuestions.length)
-    {
 
-      console.log("redirect")
-      console.log("redirect")
-      console.log("redirect")
       this.componentChronoEnabled = false;
       this.redirect();
 
-    } else
-    {
-
-      console.log("pas redirect")
+    } else {
       this.nbQuestionRepondues++
       this.nextQuestion()
 
     }
-
+    console.log("1", this.nbQuestionRepondues)
+    console.log("2:", this.arrayDataQuestions)
   }
 
 }

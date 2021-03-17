@@ -39,7 +39,7 @@ namespace Quizz_Models.Utils
         public static int Nb_RepOk { get; set; }
         public static string Complexite { get; set; }
         public static AffichageQuizzDto affichageQuizz { get; set; }
-        private static string chrono { get; set; }
+        //private static string chrono { get; set; }
         private static List<QuestionReponseDTO> listQuestionRep { get; set; } //Question
         private static List<QuestionReponseReponseCandidatDTO> listQuestionrepRepCDTO { get; set; }//question solution rep candidat
         public static Quizz quizz { get; set; }
@@ -67,6 +67,7 @@ namespace Quizz_Models.Utils
                 // listQuestion= GetQuestionReponsesRepCandidat();
                 // question = affichageQuizz.ListeReponses;
                 Nb_QUEST = affichageQuizz.NbQuestions;
+                Nb_RepOk= affichageQuizz.NbQuestions;
                 //chrono = affichageQuizz.Chrono;
 
 
@@ -162,7 +163,6 @@ namespace Quizz_Models.Utils
                  
                     if (listQuestionrepRepCDTO[i].ListeReponses is null)
                     {
-                      
 
                         Paragraph questionV = new Paragraph("Énoncé: X")
                       .SetTextAlignment(TextAlignment.LEFT)
