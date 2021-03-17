@@ -253,11 +253,7 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 ("Dans une classe, un champ 'static' : ", 0, 1, 1, 0),
 ("Comment declarer une valeure numerique entiere", 0, 1, 1,0),
 ("pour mettre une ligne en commentaire, on place au debut de celle-ci:", 0, 1, 1,0),
-(":)", 0, 1, 1,0),
-("singe", 0, 1, 1,0),
-("pitié monsieur", 0, 1, 1,0),
-("maité", 0, 1, 1,0),
-("des orlotans ", 0, 1, 1,0),
+
 
 -- Questions Confimé
 ("Dans une sous classe, une methode redefinie doit être declarée:", 0, 1, 2, 0),
@@ -307,7 +303,17 @@ insert into proposition_reponse (texte,est_bonne,fk_question) values
 ("%",  1, 7),
 ("//",  1, 7),
 ("#",  1, 7),
-("!",  1, 7);
+("!",  1, 7),
+
+("internal",  1, 8),
+("virtual",  1, 8),
+("override",  1, 8),
+("sealed",  1, 8),
+
+("Virtual",  1, 9),
+("Abstrat",  1, 9),
+("Interface",  1, 9),
+("sealed",  1, 9);
 
 -- Insert compte:
 Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "admin@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  1) ;
