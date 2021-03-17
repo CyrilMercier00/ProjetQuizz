@@ -73,10 +73,10 @@ namespace Quizz_Models.Utils
                     Nb_RepOk = 0;
                     for (int i = 0; i < Nb_QUEST; i++)
                     {
-                        foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
-                        {
+                        //foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
+                        //{
                             if (listQuestionrepRepCDTO[i].RepCandidat.isTrue is true) { Nb_RepOk++; }
-                        }
+                        //}
                     }
                 }
 
