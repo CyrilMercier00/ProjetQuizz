@@ -120,8 +120,11 @@ export class PageDebutQuizzComponent implements OnInit
   /*redirige vers la page quizz success*/
   redirect()
   {
+    
     let jwt = Globals.decodeJwt();
+    
     this.router.navigate(['/quizzsuccess/' + this.code + '/' + jwt['id']]);
+    
   }
 
 
@@ -170,8 +173,7 @@ export class PageDebutQuizzComponent implements OnInit
     {
 
       console.log("redirect")
-      console.log("redirect")
-      console.log("redirect")
+
       this.componentChronoEnabled = false;
       this.redirect();
 

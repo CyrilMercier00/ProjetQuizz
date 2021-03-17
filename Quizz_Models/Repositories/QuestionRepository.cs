@@ -90,11 +90,11 @@ namespace Quizz_Models.Repositories
 
             foreach (Question q in listQuizzQuestion)
             {
-                listeRetour.Add(
+                return 
                     bdd_entities.PropositionReponse
                     .Where(x => x.FkQuestion == q.PkQuestion)
-                    .SingleOrDefault()
-                    );
+                    .ToList()
+                     ;
             }
 
             return listeRetour;
