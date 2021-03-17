@@ -27,9 +27,33 @@ namespace Quizz_Models.Repositories
                 .ToList();
         }
 
+        //reponse vrai ou faux
+        private bool getReponseCandidatIstrueByIDQuestion(int fkQuestion)
+        {
+            bool b = false;
+            try {
+                  b=  Convert.ToBoolean(
+                   bdd_entities.PropositionReponse.Join(bdd_entities.ReponseCandidat,
+                              p => p.PkReponse,
+                              pC => pC.PkReponse,
+                              (p, pC) => new { props = p, question_C = pC })
+                     .Where(pqC => pqC.question_C.FkQuestion == fkQuestion )
+                     .Select(pqC => pqC.props.EstBonne)
+                     .Single());
+
+            } catch {
+                b = false;
+            }
+            return b;
+        }
         public ReponseCandidatDTO TransformRepCandidatEnRepCandidatDto(ReponseCandidat reponseCandidat)
         {
             ReponseCandidatDTO retour;
+            //traitement vrai ou faux 
+            bool TrueOrFalse = this.getReponseCandidatIstrueByIDQuestion(reponseCandidat.FkQuestion);
+
+
+
             try
             {
                 retour = new ReponseCandidatDTO
@@ -37,8 +61,11 @@ namespace Quizz_Models.Repositories
                     Reponse = reponseCandidat.Reponse,
                     Commentaire = reponseCandidat.Commentaire,
                     FkCompte = reponseCandidat.FkCompte,
-                    FkQuestion = reponseCandidat.FkQuestion
+                    FkQuestion = reponseCandidat.FkQuestion,
+                    isTrue = TrueOrFalse
                 };
+
+
             }
             catch
             {
@@ -53,6 +80,7 @@ namespace Quizz_Models.Repositories
             
 
         }
+
     }
 }
 

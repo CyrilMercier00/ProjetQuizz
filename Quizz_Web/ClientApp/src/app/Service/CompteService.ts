@@ -13,12 +13,18 @@ export class CompteService
 
   public static GetCompteLinkedToCode(prmCode: string): Promise<Response>
   {
-    let jwt = Globals.decodeJwt();
+    let jwt: string;
+    if(Globals.isLoggedIn()){
+      jwt = Globals.decodeJwt();
+    } else{
+      jwt = '';
+    }
+    
 
     const requestHeaders: HeadersInit = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
-    return fetch(VariableGlobales.apiURLCompte + "kko/" + prmCode + "/" + jwt['id'], { method: "GET", headers: requestHeaders })
+    return fetch(VariableGlobales.apiURLCompte + "kko/" + prmCode + "/deconnecte", { method: "GET", headers: requestHeaders })
 
   }
 }

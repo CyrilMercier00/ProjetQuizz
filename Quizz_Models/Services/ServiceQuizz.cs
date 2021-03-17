@@ -3,7 +3,7 @@ using Quizz_Models.DTO;
 using System;
 using System.Collections.Generic;
 using Quizz_Models.Repositories;
-//
+
 namespace Quizz_Models.Services
 {
     public class ServiceQuizz
@@ -17,10 +17,10 @@ namespace Quizz_Models.Services
         readonly QuestionService _servQuestion;
         readonly ComplexiteService _servComplexite;
         readonly ServiceTheme _servTheme;
-        // readonly Compte repoCompteQuizz;
 
 
-        public ServiceQuizz(ServiceTheme servTheme,ComplexiteService servComplexite,QuestionService servQuestion, CompteService servCompte, ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
+
+        public ServiceQuizz(ServiceTheme servTheme, ComplexiteService servComplexite, QuestionService servQuestion, CompteService servCompte, ComplexiteRepository complexiteRepository, QuestionRepository questionRepository, QuizzRepository quizzRepository, ThemeRepository themeRepository, CompteRepository compteRepository)
         {
             repoComplex = complexiteRepository;
             repoQuest = questionRepository;
@@ -53,18 +53,13 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="prmIDQuizz"></param>
         /// <param name="prmIDCandidat"></param>
-        public int assignCandidatToQuizz(int prmIDQuizz, int prmIDCandidat)
+        public void assignCandidatToQuizz(int prmIDQuizz, int prmIDCandidat)
         {
-            repoQuizz.InsertLiaisonCompte(prmIDQuizz, new CompteQuizz()
-            {
-                FkCompte = prmIDCandidat,
-                FkQuizz = prmIDQuizz
-            });
+ 
             Compte compteRecruteur = this._servCompte.GetCompteRecruteurByIdQuizz(prmIDQuizz);
             int prmIDRecruteurQuizz = compteRecruteur.PkCompte;
-           
-          SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteurQuizz);
-            return repoQuizz.Sauvegarde();
+
+            SendMailQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteurQuizz);
         }
 
 
@@ -133,6 +128,7 @@ namespace Quizz_Models.Services
 
             // Sauvegarde & throw si aucunes ligne insert
             repoQuizz.InsertQuizz(quizzCreation);
+
             if (repoQuizz.Sauvegarde() <= 1)
             {
                 throw new Exception("Probleme lors de la sauvegarde du quizz");
@@ -141,36 +137,37 @@ namespace Quizz_Models.Services
             // Assigantion du quizz au candidat
             assignCandidatToQuizz(quizzCreation.PkQuizz, prmDTO.FKCompteCandidat);
 
+            repoQuizz.Sauvegarde();
         }
 
         //**********************************************************************************************
         //--------------------------------------- Envoi mail ------------------------------------------
         //**********************************************************************************************
         //Envoi  un mail au candidat avec l'url
-            public void SendMailQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
-            {
-                //****envoi automatique mail candidat à l'assignation
-                Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
+        public void SendMailQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
+        {
+            //****envoi automatique mail candidat à l'assignation
+            Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
 
-                Compte compteCandidat = repoCompte.GetCompteByID(prmIDCandidat);
-                Compte compteRecruteur = repoCompte.GetCompteByID(prmIDRecruteur);
+            Compte compteCandidat = repoCompte.GetCompteByID(prmIDCandidat);
+            Compte compteRecruteur = repoCompte.GetCompteByID(prmIDRecruteur);
 
-                Utils.GestionMailUtils.SendMailCandidat(compteRecruteur, compteCandidat, quizz);
-                //********
-            }
+            Utils.GestionMailUtils.SendMailCandidat(compteRecruteur, compteCandidat, quizz);
+            //********
+        }
 
-            //Cree le pdf recrutrue et envoi  un mail au recruteur
+        //Cree le pdf recrutrue et envoi  un mail au recruteur
 
-            public void SendMailFinQuizz(int prmIDQuizz,int prmIDCandidat, int prmIDRecruteur)
-            {
-                //Cree le pdf recrutrue et envoi  un mail au recruteur  
-                Quizz quizz= repoQuizz.GetQuizzByID(prmIDQuizz);
-                Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
-                Compte recruteurQuizz= repoCompte.GetCompteByID(prmIDRecruteur);
-                AffichageQuizzDto quizzAffichage =TransformQuizzToAffichageQuizzDTO(quizz);
-                Utils.PdfUtils.ContentPdf(quizzAffichage, candidatQuizz, recruteurQuizz);
-         
-            }
+        public void SendMailFinQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
+        {
+            //Cree le pdf recrutrue et envoi  un mail au recruteur  
+            Quizz quizz = repoQuizz.GetQuizzByID(prmIDQuizz);
+            Compte candidatQuizz = repoCompte.GetCompteByID(prmIDCandidat);
+            Compte recruteurQuizz = repoCompte.GetCompteByID(prmIDRecruteur);
+            AffichageQuizzDto quizzAffichage = TransformQuizzToAffichageQuizzDTO(quizz);
+            Utils.PdfUtils.ContentPdf(quizzAffichage, candidatQuizz, recruteurQuizz);
+
+        }
         //**********************************************************************************************
         //--------------------------------------- Fin Envoi mail ------------------------------------------
         //**********************************************************************************************
@@ -276,8 +273,8 @@ namespace Quizz_Models.Services
         //*********************valider Quizz
         public void ValiderQuizz(int prmIDQuizz, int prmIDCandidat, int prmIDRecruteur)
         {
-            
-            SendMailFinQuizz(prmIDQuizz,prmIDCandidat,prmIDRecruteur);
+
+            SendMailFinQuizz(prmIDQuizz, prmIDCandidat, prmIDRecruteur);
 
         }
 
@@ -285,7 +282,7 @@ namespace Quizz_Models.Services
 
         private AffichageQuizzDto TransformQuizzToAffichageQuizzDTO(Quizz quizz)
         {
-            
+
 
 
             List<Question> listQuest = this._servQuestion.GetListQuestionByIDQuizz(quizz.PkQuizz);
@@ -296,13 +293,13 @@ namespace Quizz_Models.Services
             {
                 PkQuizz = quizz.PkQuizz,
                 NbQuestions = listQuest.Count,
-                NomTheme=this._servTheme.GetThemeNameByID(quizz.FkTheme),
+                NomTheme = this._servTheme.GetThemeNameByID(quizz.FkTheme),
                 Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
                 Urlcode = quizz.Urlcode,
                 ListQuestionrep = listQuestionrepDTO,
-                nbRepOK= this._servQuestion.GetNbbnRep(listPropositionRep),
+                nbRepOK = this._servQuestion.GetNbbnRep(listPropositionRep),
                 ListQuestionrepRepCDTO = listQuestionrepRepCDTO,
-                
+
 
             };
         }
