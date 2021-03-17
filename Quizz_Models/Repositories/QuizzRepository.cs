@@ -52,7 +52,7 @@ namespace Quizz_Models.Repositories
 
 
         /// <summary>
-        /// Retourne l'objet quizz avec la pk passÈ
+        /// Retourne l'objet quizz avec la pk passÅE
         /// </summary>
         /// <param name="prmIDQuizz"></param>
         /// <returns></returns>
@@ -87,7 +87,7 @@ namespace Quizz_Models.Repositories
         
 
         /// <summary>
-        /// Supprimer l'objet quizz passÈ
+        /// Supprimer l'objet quizz passÅE
         /// </summary>
         /// <param name="prmQuizz"></param>
         public void SupprimerQuizz(Quizz prmQuizz)
@@ -99,7 +99,7 @@ namespace Quizz_Models.Repositories
 
 
         /// <summary>
-        /// CrÈer un nouvel objet CompteQuizz avec les clÈ passÈe
+        /// CrÈer un nouvel objet CompteQuizz avec les clÅEpassÈe
         /// </summary>
         /// <param name="prmIDQuizz"></param>
         /// <param name="prmIDCompte"></param>
@@ -115,7 +115,7 @@ namespace Quizz_Models.Repositories
 
 
         /// <summary>
-        /// Retourn le quizz avec le champs codeurl correspondant au code passÈ. Retourne null si n'existe pas
+        /// Retourn le quizz avec le champs codeurl correspondant au code passÅE Retourne null si n'existe pas
         /// </summary>
         /// <param name="prmCodeQuizz"></param>
         /// <returns></returns>
