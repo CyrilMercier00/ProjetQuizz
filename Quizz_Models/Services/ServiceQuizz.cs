@@ -241,15 +241,10 @@ namespace Quizz_Models.Services
                 _ => throw new Exception("Le taux de complexitée n'existe pas"),
             };
 
-            /*
-                listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionJunior));
-                listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionConfirme));
-                listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionExperimente));
-            */
 
-            listValComplex.Add(3);
-            listValComplex.Add(1);
-            listValComplex.Add(1);
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionJunior));
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionConfirme));
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionExperimente));
 
             return listValComplex;
         }
@@ -258,7 +253,7 @@ namespace Quizz_Models.Services
         {
             float n1 = float.Parse(prmNBQuestionTotal);
             float n2 = float.Parse("0," + taux.ToString());
-            return (int)Math.Round(n1 / float.Parse(n2.ToString().Replace(',', '0')));
+            return (int)Math.Round(n1 * float.Parse(n2.ToString()));
         }
 
 
