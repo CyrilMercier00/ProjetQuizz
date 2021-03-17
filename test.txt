@@ -12,3 +12,5 @@ POST :
   "complexite": "junior",
   "urlcode": "aqsdfGhJKoLLlb"
 }
+  const string MailCredential = "comptequizztechnique@gmail.com";
+  const string PswCredential = "QuizzTech625+";

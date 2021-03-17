@@ -86,6 +86,24 @@ namespace Quizz_Models.Repositories
             }
         }
 
+        internal Compte GetCompteByMail(string prmMail)
+        {
+
+            Compte c = null;
+            try
+            {
+                c = bdd_entities.Compte
+                    .Where(c => c.Mail == prmMail)
+                    .Include(c => c.FkPermissionNavigation).Single();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return c;
+        }
+
         public Compte GetCompteRecruteurByIdQuizz(int prmIdQuizz)
         {
 

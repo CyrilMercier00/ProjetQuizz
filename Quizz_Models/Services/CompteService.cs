@@ -36,7 +36,8 @@ namespace Quizz_Models.Services
                 Mail = compte.Mail,
                 MDP = compte.MotDePasse,
                 Nom = compte.Nom,
-                Prenom = compte.Prenom
+                Prenom = compte.Prenom,
+                Pk = compte.PkCompte
             };
             } catch(Exception e)
             {
@@ -55,9 +56,9 @@ namespace Quizz_Models.Services
             return repoCompte.GetCompteRecruteurByIdQuizz(prmIdQuizz);
         }
 
-        internal Compte GetCompteCandidat(int prmkCompte)
+        internal Compte GetCompteCandidat(string prmMail)
         {
-            return repoCompte.GetCompteByID(prmkCompte);
+            return repoCompte.GetCompteByMail(prmMail);
         }
 
         private CompteDTO TransformCompteEntityToCompteDTO(Compte compte)

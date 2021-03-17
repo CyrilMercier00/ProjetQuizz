@@ -7,8 +7,7 @@ import { VariableGlobales } from 'src/app/url_api';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService
-{
+export class AuthService {
 
 
 
@@ -16,15 +15,13 @@ export class AuthService
 
 
 
-  connectCandidat(prmPKCompte: number): Observable<string>
-  {
-    return this.httpClient.post<string>(VariableGlobales.apiURLLogin + "candidat", prmPKCompte);
+  connectCandidat(connexionDTO: ConnexionDTO): Observable<string> {
+    return this.httpClient.post<string>(VariableGlobales.apiURLLogin + "candidat", connexionDTO);
   }
 
 
 
-  connect(connexionDTO: ConnexionDTO): Observable<string>
-  {
+  connect(connexionDTO: ConnexionDTO): Observable<string> {
     return this.httpClient.post<string>(VariableGlobales.apiURLLogin, connexionDTO);
   }
 

@@ -50,7 +50,7 @@ namespace Quizz_Web.Controllers
         [Route("candidat")]
         public string LoginCandidat([FromBody] LoginDTO loginDTO)
         {
-            Compte compte = this.compteService.GetCompteCandidat(loginDTO.PkCompte);
+            Compte compte = this.compteService.GetCompteCandidat(loginDTO.Mail);
 
             if (compte != null)
             {

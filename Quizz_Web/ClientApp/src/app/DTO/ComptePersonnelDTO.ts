@@ -2,10 +2,11 @@ import { PermissionDTO } from "./PermissionDTO";
 
 export class ComptePersonnelDTO
 {
+  private Mail : string;
   private nom: string;
   private prenom: string;
   private permissionDTO: PermissionDTO;
-  private PkCompte: number;
+  private pk: number;
 
   /**
    * Getter $PkCompte
@@ -13,7 +14,7 @@ export class ComptePersonnelDTO
    */
   public get $PkCompte(): number
   {
-    return this.PkCompte;
+    return this.pk;
   }
 
   /**
@@ -22,9 +23,29 @@ export class ComptePersonnelDTO
    */
   public set $PkCompte(value: number)
   {
-    this.PkCompte = value;
+    this.pk = value;
   }
 
+  
+  /**
+   * Getter $PkCompte
+   * @return {number}
+   */
+   public get $Mail(): string
+   {
+     return this.Mail;
+   }
+ 
+   /**
+    * Setter $PkCompte
+    * @param {number} value
+    */
+   public set $Mail(value: string)
+   {
+     this.Mail = value;
+   }
+
+   
   constructor(nom: string, prenom: string, permissionDTO: PermissionDTO)
   {
 
