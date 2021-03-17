@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { ReponseCandidatDTO } from 'src/app/DTO/ReponseCandidatDTO';
+import { Globals } from 'src/app/globals';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 @Component({
@@ -27,13 +28,10 @@ export class PageReponseLibreComponent implements OnInit
   clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
-  constructor(private builder: FormBuilder)
+  constructor()
   {
-    this.resultatForm = this.builder.group
-      ({
-        textCommentaire: [''],
-        answer: [''],
-      })
+    this.textCommentaire = "";
+    this.answer = "";
   }
 
 
@@ -55,10 +53,10 @@ export class PageReponseLibreComponent implements OnInit
       this.clicked = true;
       let data = new ReponseCandidatDTO();
 
-      data.$Commentaire = this.resultatForm.value.textCommentaire;
-      data.$Reponse = this.resultatForm.value.answer;
-      data.$FKCompte = null;                                        // TODO : Recuperer l'id du cadidat a partir du lien gen
-      data.$FKQuestion = this.dataQ.$PKQuestion;
+    data.$Commentaire = this.textCommentaire;
+    data.$Reponse = this.answer;
+    data.$FKCompte = Globals.getId();
+    data.$FKQuestion = this.dataQ.$PKQuestion;
 
       serviceRepCandidat.PostReponse(data)
         .then(x => this.estRepondu.emit(true))
@@ -69,14 +67,14 @@ export class PageReponseLibreComponent implements OnInit
 
   onAnswerChange($event)
   {
-    this.resultatForm.patchValue({ "textCommentaire": $event.target.value });
+    this.textCommentaire = $event.target.value;
   }
 
 
 
   onComentChange($event)
   {
-    this.resultatForm.patchValue({ "enonce": $event.target.value });
+    this.answer = $event.target.value;
   }
 }
 

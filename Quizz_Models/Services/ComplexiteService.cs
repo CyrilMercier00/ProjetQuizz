@@ -39,7 +39,7 @@ namespace Quizz_Models.Services
 
         private Taux_complexiteDTO TransferModelToDto(TauxComplexite taux)
         {
-            return new Taux_complexiteDTO(taux.Niveau, taux.QuestionJunior, taux.QuestionConfirme, taux.QuestionExperimente);
+            return new Taux_complexiteDTO(taux.PkComplexite, taux.Niveau, taux.QuestionJunior, taux.QuestionConfirme, taux.QuestionExperimente);
         }
 
         public Taux_complexiteDTO GetComplexite(int id)

@@ -67,7 +67,7 @@ namespace Quizz_Models.bdd_quizz
                 entity.Property(e => e.MotDePasse)
                     .IsRequired()
                     .HasColumnName("mot_de_passe")
-                    .HasMaxLength(45);
+                    .HasMaxLength(255);
 
                 entity.Property(e => e.Nom)
                     .HasColumnName("nom")
@@ -163,6 +163,8 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.Property(e => e.PkReponse).HasColumnName("pk_reponse");
 
+                entity.Property(e => e.Chrono).HasColumnName("chrono");
+
                 entity.Property(e => e.EstBonne).HasColumnName("est_bonne");
 
                 entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
@@ -232,8 +234,6 @@ namespace Quizz_Models.bdd_quizz
                     .HasName("fk_quizz_theme1_idx");
 
                 entity.Property(e => e.PkQuizz).HasColumnName("pk_quizz");
-
-                entity.Property(e => e.Chrono).HasColumnName("chrono");
 
                 entity.Property(e => e.FkComplexite).HasColumnName("fk_complexite");
 

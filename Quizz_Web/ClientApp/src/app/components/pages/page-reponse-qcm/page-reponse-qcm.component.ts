@@ -4,6 +4,7 @@ import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { ReponseCandidatDTO } from '../../../DTO/ReponseCandidatDTO';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 import { utils } from 'src/app/utils';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-reponse-qcm',
@@ -58,20 +59,35 @@ export class PageReponseQcmComponent implements OnInit
     {
       let dtoRep = new ReponseCandidatDTO()
 
-      dtoRep.$Commentaire = this.textCommentaire;
-      dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
-      dtoRep.$FKCompte = null;     // TODO : Get compte candidat qui passe
-      dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
+    dtoRep.$Commentaire = this.textCommentaire;
+    dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
+    dtoRep.$FKCompte = Globals.getId();
+    dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
-      serviceRepCandidat.PostReponse(dtoRep)
+      // Envoi de la reponse
+      serviceRepCandidat.PostReponse(dtoRep).then(x =>
+      {
+        // Vider les champs
+        this.rep1 = ""
+        this.rep2 = ""
+        this.rep3 = ""
+        this.rep4 = ""
+        this.textCommentaire = ""
 
-      this.rep1 = "";
-      this.rep2 = "";
-      this.rep3 = "";
-      this.rep4 = "";
+        // Emit pour passer a la prochaine question
+        this.estRepondu.emit(true)
 
-      this.estRepondu.emit(true);
+      })
     }
   }
+
+
+
+  onComentChange($event)
+  {
+    console.log("azdazs")
+    console.log($event.target.value)
+    this.textCommentaire = $event.target.value
+  };
 
 }

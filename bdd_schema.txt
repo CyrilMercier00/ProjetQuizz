@@ -38,17 +38,17 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   `nom` VARCHAR(45) NULL,
   `prenom` VARCHAR(45) NULL,
   `mail` VARCHAR(45) NULL,
-  `mot_de_passe` VARCHAR(45) NOT NULL,
+  `mot_de_passe` VARCHAR(255) NOT NULL,
   `fk_permission` INT NOT NULL,
   `fk_compteReferent` INT NULL,
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
   INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
-    
+
     CONSTRAINT `fk_compte_compte1`
     FOREIGN KEY (`fk_compteReferent`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`),
-    
+
 	CONSTRAINT `fk_compte_permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
@@ -85,7 +85,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
   `pk_quizz` INT NOT NULL AUTO_INCREMENT,
-  `chrono` TIME NULL,
   `urlcode` VARCHAR(45) NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
@@ -164,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`proposition_reponse` (
   `pk_reponse` INT NOT NULL AUTO_INCREMENT,
   `texte` LONGTEXT NULL,
   `est_bonne` TINYINT NULL,
+  `chrono` TIME NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
   INDEX `fk_reponse_question1_idx` (`fk_question` ASC)  ,
@@ -277,16 +277,10 @@ insert into proposition_reponse (texte,est_bonne,fk_question) values
 ("Salut c'est nous",  1,2),
 ("Salut c'est eux",  1,2);
 
--- Insert Quizz:
-INSERT INTO `quizz` (`pk_quizz`, `chrono`, `urlcode`, `fk_theme`, `fk_complexite`) VALUES
-(NULL, NULL, 'JqWeBiSlQ0mcJQqYXLqD5Q', '1', '1'),
-(NULL, NULL, 'TsMlAjEtNEWaZxTYZwk83w', '2', '3'),
-(NULL, NULL, 'PysIrb4Do0TI7GY9kRpAp2', '1', '2');
-
 -- Insert compte:
-Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "Patoche@hotmail.fr","123" ,  1) ;
-Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission, fk_compteReferent) values ("toto", "tata", "toto@hotmail.fr","123" ,  1, 1) ;
-Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission, fk_compteReferent) values ("candi", "dat", "candidatdqs@hotmail.fr","123" ,  1, 1) ;
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "admin@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  1) ;
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission, fk_compteReferent) values ("toto", "tata", "recruteur@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  2, 1) ;
+Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission, fk_compteReferent) values ("candi", "dat", "candidat@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  3, 1) ;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

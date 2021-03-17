@@ -6,6 +6,7 @@
       <div class="home-input">
         <input type="password" id="home-passwordInput" placeholder="Mot de passe" formControlName="MotDePasse">
       </div>
+      <p id="errorP" *ngIf="connexionFailed">Le mail ou le mot de passe est incorrect.</p>
       <div class="div-connexion">
         <div>
           <button class="connexion-button" [disabled]="compteConnexion.invalid" (click)="onSubmit()">Connexion</button>

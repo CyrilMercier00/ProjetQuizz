@@ -1,14 +1,7 @@
-/*
-------------------------------------------------------------
-    TODO : Recup de l'id du compte & l'envoyer avec le quizz
-------------------------------------------------------------
-*/
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from "@angular/router";
-import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { VariableGlobales } from '../../../url_api';
 import { Globals } from 'src/app/globals';
 import { CreationQuizzDTO } from 'src/app/DTO/CreationQuizzDTO';
@@ -107,7 +100,10 @@ export class AssignationQuizzComponent implements OnInit
         headers: requestHeaders,
         body: JSON.stringify(data)
       }
-    )
+    ).then(lambda => this.returnHome());
   }
 
+  returnHome(): void{
+    this.router.navigateByUrl('login');
+  }
 }

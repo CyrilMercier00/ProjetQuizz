@@ -16,8 +16,6 @@ namespace Quizz_Web.Controllers
         }
 
         [HttpPost]
-        [Route("{prmDTO}")]
-
         public IActionResult Post([FromBody] ReponseCandidatDTO prmDTO)
         {
             switch (repService.InsertReponseCandidat(prmDTO))

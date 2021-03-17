@@ -1,6 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
+import { AuthService } from 'src/app/Service/AuthService';
 import { ChronoComponent } from '../../chrono/chrono.component';
 import { ComptePersonnelDTO } from 'src/app/DTO/ComptePersonnelDTO';
 import { CompteService } from 'src/app/Service/CompteService'
@@ -35,9 +36,8 @@ export class PageDebutQuizzComponent implements OnInit
   idCompte: number                        // ID du compte qui passe le quizz
 
 
-
   /* --- Constructeur ---*/
-  constructor(private router: Router, private actRoute: ActivatedRoute)
+  constructor(private router: Router, private actRoute: ActivatedRoute, private authService: AuthService)
   {
     this.code = this.actRoute.snapshot.params['urlQuizz'];
   }
@@ -53,11 +53,9 @@ export class PageDebutQuizzComponent implements OnInit
       {
         repFetch.json().then(retour =>
         {
-          console.log(" --------- Compte qui a ce quizz --------- ")
-          console.log(retour)
-
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.PkCompte
+          this.authService.connectCandidat(compte.$PkCompte);
 
         }).then(() =>
 
@@ -68,8 +66,6 @@ export class PageDebutQuizzComponent implements OnInit
             {
               repFetch.json().then(retour =>
               {
-                console.log(" ------------ Données du quizz ------------ ")
-                console.log(retour)
                 this.dataQuizz = utilDTO.DTOTransformQuizz(retour)
               })
                 .then(x =>
@@ -80,8 +76,6 @@ export class PageDebutQuizzComponent implements OnInit
                     {
                       repFetch.json().then(retour =>
                       {
-                        console.log(" ---------------- Questions ---------------- ")
-                        console.log(retour)
                         this.arrayDataQuestions = utilDTO.DTOTransformQuestion(retour);
                         this.isReady = true;
                       }
@@ -151,10 +145,8 @@ export class PageDebutQuizzComponent implements OnInit
   {
     if (this.nbQuestionRepondues + 1 == this.arrayDataQuestions.length)
     {
+      this.componentChronoEnabled = false;
       this.redirect();
-      this.componentChronoEnabled == false;
-      //this.redirectNotFind();
-
     } else
     {
       this.nbQuestionRepondues++

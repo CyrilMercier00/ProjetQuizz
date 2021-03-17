@@ -18,7 +18,6 @@ export class CompteService
     const requestHeaders: HeadersInit = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
     requestHeaders.set('Authorization', Globals.getJwt());
-
     return fetch(VariableGlobales.apiURLCompte + "kko/" + prmCode + "/" + jwt['id'], { method: "GET", headers: requestHeaders })
 
   }

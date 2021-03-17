@@ -1,10 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { VariableGlobales } from 'src/app/url_api';
-import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-chrono',
@@ -18,6 +17,7 @@ export class ChronoComponent implements OnInit
 
   /* --- Variables --- */
   code: string;
+  @Input() enabled: boolean = false;
 
   //******************/
 
@@ -35,6 +35,10 @@ export class ChronoComponent implements OnInit
   ngOnInit(): void
   {
     start();
+  }
+
+  ngOnDestroy(): void{
+    reset();
   }
 
   //************************ Partie page question Quizz ************************* */
@@ -68,6 +72,8 @@ export class ChronoComponent implements OnInit
           {
             let q = this.quizz;
             q.$Chrono = q.$Chrono + this.TimeQ.value;
+            console.log('Chrono');
+            console.log(this.TimeQ.value);
             fetch(
               VariableGlobales.apiURLQuizz + this.code,
               {

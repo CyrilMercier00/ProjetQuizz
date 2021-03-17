@@ -29,6 +29,7 @@ namespace Quizz_Models.Services
 
         internal CompteDTO GetCompteByCode(string prmCode)
         {
+            try { 
             Compte compte = repoCompte.GetCompteRecruteurByCodeQuizz(prmCode);
             return new CompteDTO()
             {
@@ -37,7 +38,11 @@ namespace Quizz_Models.Services
                 Nom = compte.Nom,
                 Prenom = compte.Prenom
             };
-            
+            } catch(Exception e)
+            {
+                throw e;
+            }
+
         }
 
         /// <summary>
@@ -49,7 +54,24 @@ namespace Quizz_Models.Services
         {
             return repoCompte.GetCompteRecruteurByIdQuizz(prmIdQuizz);
         }
-        
+
+        internal Compte GetCompteCandidat(int prmkCompte)
+        {
+            return repoCompte.GetCompteByID(prmkCompte);
+        }
+
+        private CompteDTO TransformCompteEntityToCompteDTO(Compte compte)
+        {
+            CompteDTO compteDTO = new CompteDTO
+            {
+                Mail = compte.Mail,
+                Nom = compte.Nom,
+                Pk = compte.PkCompte
+            };
+
+            return compteDTO;
+        }
+
         // <summary>
         /// Transforme une liste de compte en liste de DTO
         /// </summary>
@@ -160,7 +182,7 @@ namespace Quizz_Models.Services
             PermissionDTO permissionDTO = null;
             Compte c = this.repoCompte.GetCompteByID(compteID);
 
-            if(c != null)
+            if (c != null)
             {
                 Permission p = this.repoPermission.GetPermissionById(c.FkPermission);
                 permissionDTO = PermissionService.TransformPermissionToPermissionDTO(p);

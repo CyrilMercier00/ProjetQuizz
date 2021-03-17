@@ -15,12 +15,10 @@ namespace Quizz_Web.Controllers
     public class AuthController : Controller
     {
         readonly CompteService compteService;
-        readonly PermissionService permissionService;
 
-        public AuthController(CompteService compteService, PermissionService permissionService)
+        public AuthController(CompteService compteService)
         {
             this.compteService = compteService;
-            this.permissionService = permissionService;
         }
 
         [HttpPost]
@@ -31,7 +29,34 @@ namespace Quizz_Web.Controllers
             if (compte != null && VerifyPassword(loginDTO, compte))
             {
                 PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
-                if(permissionDTO != null)
+                if (permissionDTO != null)
+                {
+                    return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
+                }
+                else
+                {
+                    Response.StatusCode = (int)System.Net.HttpStatusCode.ServiceUnavailable;
+                    return "";
+                }
+            }
+            else
+            {
+                Response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                return "";
+            }
+        }
+        
+        [HttpPost]
+        [Route("candidat")]
+        public string LoginCandidat([FromBody] LoginDTO loginDTO)
+        {
+            Compte compte = this.compteService.GetCompteCandidat(loginDTO.PkCompte);
+
+            if (compte != null)
+            {
+                PermissionDTO permissionDTO = this.compteService.GetCurrentComptePermission(compte.PkCompte);
+
+                if (permissionDTO != null && permissionDTO.PkPermission == 3)
                 {
                     return JsonSerializer.Serialize(GenererJWTToken(compte, permissionDTO));
                 }
@@ -47,7 +72,7 @@ namespace Quizz_Web.Controllers
                 return "";
             }
         }
-
+        
         private string GenererJWTToken(Compte compte, PermissionDTO permissionDTO)
         {
             var mySecret = "Y2VjaWVzdG1vbnNlY3JldA==";
@@ -78,7 +103,8 @@ namespace Quizz_Web.Controllers
 
         private bool VerifyPassword(LoginDTO loginDTO, Compte compte)
         {
-            if(compte != null && compte.MotDePasse == loginDTO.MotDePasse)
+            string mdpEntreeCrypte = ControllerCompte.computePassword(loginDTO.MotDePasse);
+            if(compte != null && compte.MotDePasse == mdpEntreeCrypte)
             {
                 return true;
             }

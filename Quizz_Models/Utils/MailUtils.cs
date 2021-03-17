@@ -8,6 +8,8 @@ namespace Quizz_Models.Utils
 {
     class MailUtils
     {
+        private const int MAXIMUM_HASH_LENGTH = 255;
+
         /// <summary>
         /// Méthode qui vérifie si un mail est valide.
         /// </summary>
@@ -32,7 +34,7 @@ namespace Quizz_Models.Utils
         public static bool VerifyMotDePasse(string mdp)
         {
             if (mdp == null) return false;
-            if (mdp.Length <= 0 || mdp.Length > 20) return false;
+            if (mdp.Length <= 0 || mdp.Length > MAXIMUM_HASH_LENGTH) return false;
 
             return true;
         }

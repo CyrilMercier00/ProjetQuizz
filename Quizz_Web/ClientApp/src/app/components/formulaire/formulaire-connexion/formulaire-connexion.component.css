@@ -50,6 +50,12 @@
     color: white;
 }
 
+#errorP{
+    color: rgb(197, 0, 0);
+    margin-top: 1rem;
+    margin-left: 2rem;
+}
+
 .connexion-button{
     background-color: rgb(66, 103, 178);
 }
