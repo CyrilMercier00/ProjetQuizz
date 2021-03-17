@@ -53,7 +53,7 @@ namespace Quizz_Web.Controllers
         /// </summary>
         /// <param name="prmCode"></param>
         /// <returns></returns>
-        [HttpGet("{vide}/{prmCode}/{jwt}")]
+        [HttpGet("{vide}/{prmCode}/{deco}")]
         public CompteDTO GetCompteLinkedToQuizz(string prmCode)
         {
             try

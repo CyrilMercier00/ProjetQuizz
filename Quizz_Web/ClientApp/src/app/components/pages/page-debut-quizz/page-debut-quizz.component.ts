@@ -47,16 +47,24 @@ export class PageDebutQuizzComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
+    if(Globals.isLoggedOut())
+    {
+      Globals.initJwt('');
+    }
+    
     // ! Enregistrer le compte du candidat qui passe
     CompteService.GetCompteLinkedToCode(this.code)
       .then(repFetch =>
       {
+        console.log('premier');
+        console.log(repFetch);
         repFetch.json().then(retour =>
         {
+          console.log(retour);
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.PkCompte
           this.authService.connectCandidat(compte.$PkCompte);
-
+          console.log(compte);
         }).then(() =>
 
           // ! Récuperation des données du quizz
