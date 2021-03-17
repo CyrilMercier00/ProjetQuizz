@@ -55,7 +55,7 @@ namespace Quizz_Models.Services
         /// <param name="prmIDCandidat"></param>
         public void assignCandidatToQuizz(int prmIDQuizz, int prmIDCandidat)
         {
- 
+
             Compte compteRecruteur = this._servCompte.GetCompteRecruteurByIdQuizz(prmIDQuizz);
             int prmIDRecruteurQuizz = compteRecruteur.PkCompte;
 
@@ -93,7 +93,12 @@ namespace Quizz_Models.Services
             quizzCreation.Urlcode = leCodeUrl;
 
             // Ajouter des questions dans la liste des questions
-            GenererQuestions(listQuestionCreation, prmDTO.NbQuestions, leTheme);
+            GenererQuestions(
+                listQuestionCreation,
+                prmDTO.NbQuestions, leTheme,
+                (Enum)Enum.Parse(typeof(Globales.EnumNiveauxComplexiteDispo),
+                prmDTO.Complexite.ToLower())
+                );
 
             // Traquer le quizz pour permettre un updates
             repoQuizz.AttachQuizz(quizzCreation);
@@ -171,12 +176,15 @@ namespace Quizz_Models.Services
         //**********************************************************************************************
         //--------------------------------------- Fin Envoi mail ------------------------------------------
         //**********************************************************************************************
-        private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions)
+        private void GenererQuestions(List<Question> prmListQuestions, int prmNBQuestTotal, Theme prmThemeQuestions, Enum prmNiveauQuizz)
         {
+
+            List<int> listTaux = CalculerNombreQuestion(prmNBQuestTotal, prmNiveauQuizz);
+
             // Gen questions junior
             repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.junior),
+                listTaux[0],
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.junior
             );
@@ -184,7 +192,7 @@ namespace Quizz_Models.Services
             // Gen questions confirmé
             repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.confirme),
+                listTaux[1],
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.confirme
             );
@@ -192,7 +200,7 @@ namespace Quizz_Models.Services
             // Gen questions experimenté
             repoQuest.GenererQuestions(
                 prmListQuestions,
-                CalculerNombreQuestion(prmNBQuestTotal, Globales.EnumNiveauxComplexiteDispo.experimente),
+                listTaux[2],
                 prmThemeQuestions,
                 Globales.EnumNiveauxComplexiteDispo.experimente
             );
@@ -220,23 +228,32 @@ namespace Quizz_Models.Services
         /// <param name="prmNBQuestion"> nombre de question total du quizz</param>
         /// <param name="prmTauxComplexiteQuizz"> taux de complexité du quizz</param>
         /// <returns></returns>
-        private int CalculerNombreQuestion(int prmNBQuestionTotal, Enum prmNomComplex)
+        private List<int> CalculerNombreQuestion(int prmNBQuestionTotal, Enum prmNomComplex)
         {
             String complex = prmNomComplex.ToString().ToLower();
+            List<int> listValComplex = new List<int>();
 
-            var valRet = complex switch
+            TauxComplexite valRet = complex switch
             {
-                "junior" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()).QuestionJunior.GetValueOrDefault(),
-                "confirme" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()).QuestionConfirme.GetValueOrDefault(),
-                "experimente" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()).QuestionExperimente.GetValueOrDefault(),
+                "junior" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()),
+                "confirme" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()),
+                "experimente" => repoComplex.GetComplexiteByNom(prmNomComplex.ToString()),
                 _ => throw new Exception("Le taux de complexitée n'existe pas"),
             };
 
-            String s1 = prmNBQuestionTotal.ToString();
-            String s2 = "0." + valRet.ToString();
-            float n1 = float.Parse(s1);
-            float n2 = float.Parse(s2.Replace(".", ","));
-            return (int)Math.Round(n1 * n2);
+
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionJunior));
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionConfirme));
+            listValComplex.Add(toFloat(prmNBQuestionTotal.ToString(), valRet.QuestionExperimente));
+
+            return listValComplex;
+        }
+
+        private int toFloat(string prmNBQuestionTotal, int? taux)
+        {
+            float n1 = float.Parse(prmNBQuestionTotal);
+            float n2 = float.Parse("0," + taux.ToString());
+            return (int)Math.Round(n1 * float.Parse(n2.ToString()));
         }
 
 
@@ -289,7 +306,7 @@ namespace Quizz_Models.Services
             List<QuestionReponseDTO> listQuestionrepDTO = this._servQuestion.AddReponseToQuestion(listQuest);
             List<PropositionReponse> listPropositionRep = this._servQuestion.GetListReponseCandidatByIDQuizz(quizz.PkQuizz);
             List<QuestionReponseReponseCandidatDTO> listQuestionrepRepCDTO = this._servQuestion.AddReponseCandidatToQuestion(listQuest, quizz.PkQuizz);
-            var a= new AffichageQuizzDto
+            var a = new AffichageQuizzDto
             {
                 PkQuizz = quizz.PkQuizz,
                 NbQuestions = listQuest.Count,

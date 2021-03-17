@@ -140,15 +140,15 @@ export class PageDebutQuizzComponent implements OnInit {
       this.componentRepQCMEnabled = true
     }
 
+    if (this.componentRepQCMEnabled && this.componentRepQCMEnabled != null) { this.childRefQCM.setVal() }
+    else if (this.componentRepLibreEnabled && this.componentRepLibreEnabled != null) { this.childRefLibre.setVal() }
+
   }
 
 
 
   // Incremente le nombre de questions repondues et trigger l'affichage de la prochaine question
   incrementNBQuestionRep() {
-
-    if (this.childRefLibre) { this.childRefLibre.setVal() }
-    else if (this.childRefChrono) { this.childRefQCM.setVal() }
 
     if (this.nbQuestionRepondues +1 >= this.arrayDataQuestions.length) {
 
