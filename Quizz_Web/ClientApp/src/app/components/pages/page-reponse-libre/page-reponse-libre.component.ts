@@ -53,9 +53,7 @@ export class PageReponseLibreComponent implements OnInit {
       data.$FKCompte = Globals.getId();
       data.$FKQuestion = this.dataQ.$PKQuestion;
 
-      console.log("------ID------")
-      console.log(Globals.getId)
-      console.log(data.$FKCompte)
+      console.log(data)
 
       serviceRepCandidat.PostReponse(data)
         .then(x => this.estRepondu.emit(true))

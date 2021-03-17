@@ -59,8 +59,9 @@ export class PageReponseQcmComponent implements OnInit
     {
       let dtoRep = new ReponseCandidatDTO()
 
+      console.log(this.dataQ)
     dtoRep.$Commentaire = this.textCommentaire;
-    dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep];
+    dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep].Text;
     dtoRep.$FKCompte = Globals.getId();
     dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
@@ -85,8 +86,6 @@ export class PageReponseQcmComponent implements OnInit
 
   onComentChange($event)
   {
-    console.log("azdazs")
-    console.log($event.target.value)
     this.textCommentaire = $event.target.value
   };
 
