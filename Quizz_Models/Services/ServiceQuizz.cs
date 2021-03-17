@@ -292,7 +292,6 @@ namespace Quizz_Models.Services
             {
                 PkQuizz = quizz.PkQuizz,
                 NbQuestions = listQuest.Count,
-                Chrono = quizz.Chrono.Value.ToString(),
                 NomTheme=this._servTheme.GetThemeNameByID(quizz.FkTheme),
                 Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
                 Urlcode = quizz.Urlcode,
@@ -316,7 +315,6 @@ namespace Quizz_Models.Services
             {
                 PkQuizz = quizz.PkQuizz,
                 NbQuestions = quizz.PkQuizz,
-                Chrono = Convert.ToString(quizz.Chrono),
                 Theme = Convert.ToString(quizz.FkTheme),
                 Complexite = Convert.ToString(quizz.FkComplexite),
                 Urlcode = quizz.Urlcode
