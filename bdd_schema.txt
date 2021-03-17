@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte_quizz` (
   CONSTRAINT `fk_compte_has_quizz_quizz1`
     FOREIGN KEY (`fk_quizz`)
     REFERENCES `bdd_quizz`.`quizz` (`pk_quizz`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -246,7 +246,7 @@ Insert into taux_complexite (niveau, question_junior, question_confirme, questio
 Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) values
 
 -- Question junior
-("Pour traiter les exceptions, le compilateur doit verifier la presence d'un bloc catch ?", 0, 1, 1,1),
+("Pour traiter les exceptions, le compilateur doit verifier la presence d'un bloc catch ?", 0, 1, 1,0),
 ("Que devez vous ecrire pour que la clase A herite de B ?", 0, 1, 1,0),
 ("Le point d'entrée du programme est une méthode:", 0, 1, 1,0),
 ("Dans une sous classe, quel mot clé utilise-t-on pour appeler le constructeur de la classe mère", 0, 1, 1, 0),
