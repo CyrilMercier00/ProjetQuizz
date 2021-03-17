@@ -206,13 +206,25 @@ namespace Quizz_Models.Utils
                         int nb = 1;
                         foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
                         {
-                           
-                            Paragraph reponse = new Paragraph("Proposition  réponses " + nb +" : " +n.Text)
-                             .SetTextAlignment(TextAlignment.LEFT)
-                             .SetFontSize(11);
-                            document.Add(reponse);
-                            nb++;
+                            if (n.estBonne == true)
+                            {
+                                Paragraph reponse = new Paragraph("V - Proposition  réponses " + nb + " : " + n.Text)
+                                    .SetFontColor(ColorConstants.BLUE)
+                                    .SetTextAlignment(TextAlignment.LEFT)
+                                 .SetFontSize(11);
+                                document.Add(reponse);
+                                nb++;
+                            }
+                            else
+                            {
+                                Paragraph reponse = new Paragraph("X - Proposition  réponses " + nb + " : " + n.Text)
+                              .SetTextAlignment(TextAlignment.LEFT)
+                              .SetFontSize(11);
+                                document.Add(reponse);
+                                nb++;
+                            }
                         }
+                            
                     }
                    
                    
