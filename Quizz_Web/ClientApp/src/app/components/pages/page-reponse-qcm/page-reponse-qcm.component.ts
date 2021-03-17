@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
-import { Globals } from 'src/app/globals';
 import { ReponseCandidatDTO } from '../../../DTO/ReponseCandidatDTO';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 import { utils } from 'src/app/utils';
+import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-reponse-qcm',
@@ -75,10 +75,7 @@ export class PageReponseQcmComponent implements OnInit
         this.textCommentaire = ""
 
         // Emit pour passer a la prochaine question
-        x.json().then(response =>
-        {
-          this.estRepondu.emit(true)
-        })
+        this.estRepondu.emit(true)
 
       })
     }
