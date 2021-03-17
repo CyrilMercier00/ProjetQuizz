@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
-import { ReponseCandidatDTO } from 'src/app/DTO/ReponseCandidatDTO';
 import { Globals } from 'src/app/globals';
+import { ReponseCandidatDTO } from 'src/app/DTO/ReponseCandidatDTO';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 @Component({
@@ -14,7 +14,8 @@ import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 
 
 
-export class PageReponseLibreComponent implements OnInit {
+export class PageReponseLibreComponent implements OnInit
+{
 
   /* ------ Declaration des variables ------ */
   @Input("dataQuestion") dataQ: DTOQuestion;                                             // DTO de la question passée
@@ -27,7 +28,8 @@ export class PageReponseLibreComponent implements OnInit {
   clicked: boolean = false    // Pour empecher plusieurs envois
 
   /* ------ Constructeur ------ */
-  constructor() {
+  constructor()
+  {
     this.textCommentaire = "";
     this.answer = "";
   }
@@ -35,7 +37,8 @@ export class PageReponseLibreComponent implements OnInit {
 
 
   /* ------ Methodes Angular --- */
-  ngOnInit() {
+  ngOnInit()
+  {
     this.enonce = this.dataQ.$Enonce;
   }
 
@@ -43,8 +46,10 @@ export class PageReponseLibreComponent implements OnInit {
 
   /* ------ Methodes ------*/
   // Envoi de la réponse a la base de données
-  handleClick() {
-    if (this.clicked == false) {
+  handleClick()
+  {
+    if (this.clicked == false)
+    {
       this.clicked = true;
       let data = new ReponseCandidatDTO();
 
@@ -58,19 +63,21 @@ export class PageReponseLibreComponent implements OnInit {
       console.log(data.$FKCompte)
 
       serviceRepCandidat.PostReponse(data)
-        .then(x => this.estRepondu.emit(true))
+        .then(x => x.json().then(response => this.estRepondu.emit(true)))
     }
   }
 
 
 
-  onAnswerChange($event) {
+  onAnswerChange($event)
+  {
     this.textCommentaire = $event.target.value;
   }
 
 
 
-  onComentChange($event) {
+  onComentChange($event)
+  {
     this.answer = $event.target.value;
   }
 }
