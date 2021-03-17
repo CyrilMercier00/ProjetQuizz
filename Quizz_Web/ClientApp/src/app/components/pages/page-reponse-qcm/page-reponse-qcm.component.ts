@@ -41,6 +41,7 @@ export class PageReponseQcmComponent implements OnInit
   /* ------ Methodes Angular --- */
   ngOnInit()
   {
+    console.log("Init !! ")
     this.enonce == this.dataQ.$Enonce;
 
     this.rep1 = this.dataQ.$ListeReponses[0].Text;
@@ -51,8 +52,9 @@ export class PageReponseQcmComponent implements OnInit
 
 
 
-  setVal()
+  public setVal()
   {
+    console.log("----- SetVal !! -----", this.dataQ)
     this.enonce == this.dataQ.$Enonce;
 
     this.rep1 = this.dataQ.$ListeReponses[0].Text;
@@ -78,6 +80,14 @@ export class PageReponseQcmComponent implements OnInit
       // Envoi de la reponse
       serviceRepCandidat.PostReponse(dtoRep).then(x =>
       {
+
+        this.enonce == "";
+
+        this.rep1 = "";
+        this.rep2 = "";
+        this.rep3 = "";
+        this.rep4 = "";
+
         // Emit pour passer a la prochaine question
         this.estRepondu.emit(true)
 

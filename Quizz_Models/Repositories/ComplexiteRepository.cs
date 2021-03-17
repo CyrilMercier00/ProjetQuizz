@@ -59,8 +59,9 @@ namespace Quizz_Models.Repositories
         public TauxComplexite GetComplexiteByNom(String prmNomComplexite)
         {
             return bdd_entities.TauxComplexite
-                .Where(x => x.Niveau.Equals( prmNomComplexite)).Single();
-         
+                .Where(x => x.Niveau
+                .Equals( prmNomComplexite))
+                .Single();
         }
 
         /// <summary>
