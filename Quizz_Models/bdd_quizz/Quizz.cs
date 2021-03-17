@@ -12,7 +12,6 @@ namespace Quizz_Models.bdd_quizz
         }
 
         public int PkQuizz { get; set; }
-        public TimeSpan? Chrono { get; set; }
         public string Urlcode { get; set; }
         public int FkTheme { get; set; }
         public int FkComplexite { get; set; }
