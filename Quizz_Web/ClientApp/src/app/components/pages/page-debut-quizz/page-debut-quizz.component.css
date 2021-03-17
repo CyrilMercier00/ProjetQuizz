@@ -17,11 +17,18 @@ app-chrono{
     margin-top: 2rem;
 }
 
-#container2{
+#container-rep{
     display: flex;
-    flex-flow: row-reverse;
+    flex-flow: row;
     justify-content: space-between;
-    margin-left: 22rem;
+}
+
+#reponse{
     margin-top: 3rem;
     margin-bottom: 3rem;
+    margin-left: 20rem;
+}
+
+app-chrono{
+    margin-top: 1rem;
 }
