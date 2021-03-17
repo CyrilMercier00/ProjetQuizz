@@ -129,7 +129,7 @@ export class PageDebutQuizzComponent implements OnInit {
     this.dataQuestion = this.arrayDataQuestions[this.nbQuestionRepondues]
 
     this.componentRepQCMEnabled = false
-    
+
     // * Afficher le component correct pour cette question
     if (this.dataQuestion.$RepLibre) {
       this.componentRepQCMEnabled = false
@@ -150,7 +150,7 @@ export class PageDebutQuizzComponent implements OnInit {
     if (this.childRefLibre) { this.childRefLibre.setVal() }
     else if (this.childRefChrono) { this.childRefQCM.setVal() }
 
-    if (this.nbQuestionRepondues >= this.arrayDataQuestions.length) {
+    if (this.nbQuestionRepondues +1 >= this.arrayDataQuestions.length) {
 
 
       this.componentChronoEnabled = false;
@@ -161,8 +161,7 @@ export class PageDebutQuizzComponent implements OnInit {
       this.nextQuestion()
 
     }
-    console.log("1", this.nbQuestionRepondues)
-    console.log("2:", this.arrayDataQuestions)
+
   }
 
 }
