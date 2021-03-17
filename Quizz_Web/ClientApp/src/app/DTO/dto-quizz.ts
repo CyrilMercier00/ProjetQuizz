@@ -1,10 +1,14 @@
+import { Time } from "@angular/common";
+
+
+
 export class DTOQuizz
 {
 
   private UrlCode: string;
   private FKCompteRecruteur: number;
   private NbQuestions: number;
-  private Chrono: string;
+  private Chrono: Date;
   private Theme: string;
   private Complexite: string;
 
@@ -34,9 +38,9 @@ export class DTOQuizz
 
     /**
      * Getter $Chrono
-     * @return {string}
+     * @return {Date}
      */
-	public get $Chrono(): string {
+	public get $Chrono(): Date {
 		return this.Chrono;
 	}
 
@@ -84,7 +88,7 @@ export class DTOQuizz
      * Setter $Chrono
      * @param {string} value
      */
-	public set $Chrono(value: string) {
+	public set $Chrono(value: Date) {
 		this.Chrono = value;
 	}
 

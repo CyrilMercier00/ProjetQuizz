@@ -68,6 +68,7 @@ namespace Quizz_Models.Utils
                 // question = affichageQuizz.ListeReponses;
                 Nb_QUEST = affichageQuizz.NbQuestions;
                 chrono = affichageQuizz.Chrono;
+                Nb_RepOk = calculNote();
 
 
                 //ajout attribut et modif methode
@@ -79,7 +80,7 @@ namespace Quizz_Models.Utils
 
                 QuizzTable();
                 PdfBody();
-               // PdfPageNumber();
+                PdfPageNumber();
                 //writer.SetCompressionLevel(9);
                 document.Close();
                 writer.Dispose();
@@ -105,8 +106,6 @@ namespace Quizz_Models.Utils
         {
             Paragraph newline = new Paragraph(new Text("\n"));
             document.Add(newline);
-
-
         }
 
 
@@ -202,36 +201,7 @@ namespace Quizz_Models.Utils
                             nb++;
                         }
                     }
-                    //////****
-                    ////if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
-                    ////{
-
-                    ////    Paragraph reponsetrueorfalsevide = new Paragraph(" La réponse est fausse ")
-                    ////       .SetFontColor(ColorConstants.RED)
-                    ////       .SetTextAlignment(TextAlignment.LEFT)
-                    ////       .SetFontSize(11);
-                    ////    document.Add(reponsetrueorfalsevide);
-                    ////}
-                    ////else
-                    ////{
-                    ////    if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
-                    ////    {
-                    ////        Paragraph reponsecandidatTrue = new Paragraph(" La réponse est fausse ")
-                    ////            .SetFontColor(ColorConstants.RED)
-                    ////            .SetTextAlignment(TextAlignment.LEFT)
-                    ////            .SetFontSize(11);
-                    ////        document.Add(reponsecandidatTrue);
-                    ////    }
-                    ////    else
-                    ////    {
-                    ////        Paragraph reponsecandidatfalse = new Paragraph(" La réponse est bonne ")
-                    ////           .SetFontColor(ColorConstants.GREEN)
-                    ////           .SetTextAlignment(TextAlignment.LEFT)
-                    ////           .SetFontSize(11);
-                    ////        document.Add(reponsecandidatfalse);
-                    ////    }
-
-                    ////}
+             
 
                     //TitleTable("Réponse Candidat : ");
                     if (listQuestionrepRepCDTO[i].RepCandidat is null) { }
@@ -251,8 +221,6 @@ namespace Quizz_Models.Utils
                         }
                         else
                         {
-
-                         
 
 
                             if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
@@ -359,7 +327,7 @@ namespace Quizz_Models.Utils
             {
                 document.ShowTextAligned(new Paragraph(String
                     .Format("p" + i + "/" + n)),
-                    559, 806, i, TextAlignment.RIGHT,
+                    600, 900, i, TextAlignment.RIGHT,
                     VerticalAlignment.BOTTOM, 0);
             }
         }
@@ -504,6 +472,28 @@ namespace Quizz_Models.Utils
             document.Add(ls);
 
 
+        }
+
+        public static int calculNote()
+        {
+            if (Nb_QUEST > 0)
+            {
+                for (int i = 0; i < Nb_QUEST; i++)
+                {
+                    if (listQuestionrepRepCDTO[i].RepCandidat != null)
+                    {
+                        if (listQuestionrepRepCDTO[i].RepCandidat.Reponse != null)
+                        {
+                            if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
+                            {
+                                Nb_RepOk++;
+                            }
+                        }
+                    } 
+
+                }
+            }else Nb_RepOk = 0;
+            return Nb_RepOk = 0;
         }
     }
 }
