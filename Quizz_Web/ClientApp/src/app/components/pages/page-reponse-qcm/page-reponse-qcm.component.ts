@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
+import { Globals } from 'src/app/globals';
 import { ReponseCandidatDTO } from '../../../DTO/ReponseCandidatDTO';
 import { serviceRepCandidat } from 'src/app/Service/serviceRepCandidat';
 import { utils } from 'src/app/utils';
-import { Globals } from 'src/app/globals';
 
 @Component({
   selector: 'app-page-reponse-qcm',
@@ -47,9 +47,19 @@ export class PageReponseQcmComponent implements OnInit
     this.rep2 = this.dataQ.$ListeReponses[1].Text;
     this.rep3 = this.dataQ.$ListeReponses[2].Text;
     this.rep4 = this.dataQ.$ListeReponses[3].Text;
-
   }
 
+
+
+  setVal()
+  {
+    this.enonce == this.dataQ.$Enonce;
+
+    this.rep1 = this.dataQ.$ListeReponses[0].Text;
+    this.rep2 = this.dataQ.$ListeReponses[1].Text;
+    this.rep3 = this.dataQ.$ListeReponses[2].Text;
+    this.rep4 = this.dataQ.$ListeReponses[3].Text;
+  }
 
 
   /* ------ Methodes ------*/
@@ -60,21 +70,14 @@ export class PageReponseQcmComponent implements OnInit
       let dtoRep = new ReponseCandidatDTO()
 
       console.log(this.dataQ)
-    dtoRep.$Commentaire = this.textCommentaire;
-    dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep].Text;
-    dtoRep.$FKCompte = Globals.getId();
-    dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
+      dtoRep.$Commentaire = this.textCommentaire;
+      dtoRep.$Reponse = this.dataQ.$ListeReponses[idRep].Text;
+      dtoRep.$FKCompte = Globals.getId();
+      dtoRep.$FKQuestion = this.dataQ.$PKQuestion;
 
       // Envoi de la reponse
       serviceRepCandidat.PostReponse(dtoRep).then(x =>
       {
-        // Vider les champs
-        this.rep1 = ""
-        this.rep2 = ""
-        this.rep3 = ""
-        this.rep4 = ""
-        this.textCommentaire = ""
-
         // Emit pour passer a la prochaine question
         this.estRepondu.emit(true)
 

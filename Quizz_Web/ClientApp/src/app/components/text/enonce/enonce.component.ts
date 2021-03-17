@@ -25,7 +25,7 @@ export class EnonceComponent implements OnInit
   /* --- Methodes Angular --- */
   ngOnInit()
   {
-    console.log(this.text)
+
   }
 
 
