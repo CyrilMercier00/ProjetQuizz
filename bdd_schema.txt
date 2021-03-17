@@ -136,7 +136,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`reponse_candidat` (
   `pk_reponse` INT NOT NULL AUTO_INCREMENT,
   `reponse` LONGTEXT NULL,
-  `commentaire` VARCHAR(45) NULL,
+  `commentaire` LONGTEXT NULL,
+  `chrono` TIME NULL,
   `fk_compte` INT NOT NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
@@ -163,7 +164,6 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`proposition_reponse` (
   `pk_reponse` INT NOT NULL AUTO_INCREMENT,
   `texte` LONGTEXT NULL,
   `est_bonne` TINYINT NULL,
-  `chrono` TIME NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
   INDEX `fk_reponse_question1_idx` (`fk_question` ASC)  ,
@@ -277,50 +277,6 @@ insert into proposition_reponse (texte,est_bonne,fk_question) values
 ("Salut c'est nous",  1,2),
 ("Salut c'est eux",  1,2);
 
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
-
-("Salut c'est moi",  1, 2),
-("Salut c'est lui", 1,2),
-("Salut c'est nous",  1,2),
-("Salut c'est eux",  1,2);
 
 -- Insert compte:
 Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "admin@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  1) ;
