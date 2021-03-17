@@ -38,6 +38,7 @@ export class ChronoComponent implements OnInit
   }
 
   ngOnDestroy(): void{
+    this.OnSubmitQuest();
     reset();
   }
 

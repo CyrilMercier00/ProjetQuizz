@@ -1,12 +1,27 @@
-h2 {
-    margin-top: 1em;
-}
-
 p {
     font-size: large;
-    margin   : 1em;
+    margin   : 2em;
 }
 
 ::ng-deep button {
-    margin: 3em;
+    margin-left: 4em;
+    margin-top: 2em;
+}
+
+app-chrono{
+    margin: 2em;
+}
+
+#container1{
+    margin-left: 22rem;
+    margin-top: 2rem;
+}
+
+#container2{
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    margin-left: 22rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
 }

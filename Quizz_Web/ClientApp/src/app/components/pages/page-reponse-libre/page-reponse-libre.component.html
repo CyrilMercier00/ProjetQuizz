@@ -1,17 +1,13 @@
-<div class="flex flex-align-i-center flex-column wrapper">
+<app-enonce [text]="enonce"></app-enonce>
 
-  <app-enonce [text]="enonce"></app-enonce>
-
-  <div class="flex flex-align-i-center flex-column wrapper">
-    <h2>Votre réponse : </h2>
-    <app-dragabble-text-input (change)="onAnswerChange($event)"></app-dragabble-text-input>
-  </div>
-
-  <div class="flex flex-align-i-center flex-column wrapper">
-    <h2>Commentaire : </h2>
-    <app-dragabble-text-input (change)="onComentChange($event)"></app-dragabble-text-input>
-  </div>
-
-  <app-button-valid Message="Valider la réponse" (click)="handleClick()"></app-button-valid>
-
+<div class="reponse">
+  <h5>Votre réponse : </h5>
+  <app-dragabble-text-input (change)="onAnswerChange($event)"></app-dragabble-text-input>
 </div>
+
+<div class="comment">
+  <h5>Commentaire : </h5>
+  <app-dragabble-text-input (change)="onComentChange($event)"></app-dragabble-text-input>
+</div>
+
+<app-button-valid Message="Valider la réponse" (click)="handleClick()"></app-button-valid>
