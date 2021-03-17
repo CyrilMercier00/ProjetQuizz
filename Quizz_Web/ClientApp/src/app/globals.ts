@@ -36,10 +36,11 @@ export class Globals
     let decodedJwt: string;
 
     if(this.isLoggedIn()){
+      console.log("connecté")
       decodedJwt = this.decodeJwt();
       return decodedJwt['id'];
     }
-
+console.log("pas co")
     return null;
   }
 }
