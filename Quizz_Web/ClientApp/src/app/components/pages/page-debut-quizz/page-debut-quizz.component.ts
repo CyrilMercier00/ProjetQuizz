@@ -170,8 +170,7 @@ export class PageDebutQuizzComponent implements OnInit
     {
 
       console.log("redirect")
-      console.log("redirect")
-      console.log("redirect")
+
       this.componentChronoEnabled = false;
       this.redirect();
 

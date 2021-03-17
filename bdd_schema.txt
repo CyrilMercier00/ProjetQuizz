@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte_quizz` (
   CONSTRAINT `fk_compte_has_quizz_quizz1`
     FOREIGN KEY (`fk_quizz`)
     REFERENCES `bdd_quizz`.`quizz` (`pk_quizz`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
