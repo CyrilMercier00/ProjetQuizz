@@ -9,15 +9,10 @@
 
   .tim{
       margin: auto;
-      width: 300px;
-      border: 1px solid rgba(241, 208, 17, 0.897);
-      padding:5px 0;
+      width: 11rem;
       text-align: center;
       font-size: 1.5em;
       font-family: digital;
-      margin-bottom: 10px;
-
-
   }
  
   
