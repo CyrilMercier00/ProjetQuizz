@@ -163,8 +163,6 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.Property(e => e.PkReponse).HasColumnName("pk_reponse");
 
-                entity.Property(e => e.Chrono).HasColumnName("chrono");
-
                 entity.Property(e => e.EstBonne).HasColumnName("est_bonne");
 
                 entity.Property(e => e.FkQuestion).HasColumnName("fk_question");
@@ -301,9 +299,11 @@ namespace Quizz_Models.bdd_quizz
 
                 entity.Property(e => e.PkReponse).HasColumnName("pk_reponse");
 
+                entity.Property(e => e.Chrono).HasColumnName("chrono");
+
                 entity.Property(e => e.Commentaire)
                     .HasColumnName("commentaire")
-                    .HasMaxLength(45);
+                    .HasColumnType("longtext");
 
                 entity.Property(e => e.FkCompte).HasColumnName("fk_compte");
 
