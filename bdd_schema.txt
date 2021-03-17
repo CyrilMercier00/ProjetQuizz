@@ -249,8 +249,10 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 ("Pour traiter les exceptions, le compilateur doit verifier la presence d'un bloc catch ?", 0, 1, 1,1),
 ("Que devez vous ecrire pour que la clase A herite de B ?", 0, 1, 1,0),
 ("Le point d'entrée du programme est une méthode:", 0, 1, 1,0),
+("Dans une sous classe, quel mot clé utilise-t-on pour appeler le constructeur de la classe mère", 0, 1, 1, 0),
+("Dans une classe, un champ 'static' : ", 0, 1, 1, 0),
 ("Comment declarer une valeure numerique entiere", 0, 1, 1,0),
-("davidlafargepokemon", 0, 1, 1,0),
+("pour mettre une ligne en commentaire, on place au debut de celle-ci:", 0, 1, 1,0),
 (":)", 0, 1, 1,0),
 ("singe", 0, 1, 1,0),
 ("pitié monsieur", 0, 1, 1,0),
@@ -264,9 +266,9 @@ Insert into question (enonce, a_repondu, fk_theme ,fk_complexite, rep_libre) val
 ("", 0, 1, 2, 0),
 
 -- Question experimenté
-("Dans une classe, un champ 'static' : ", 0, 1, 3, 0),
+
 ("Dans une classe, un champ declaré sans preciser son niveau de visibilté est visible", 0, 1, 3, 0),
-("Dans une sous classe, quel mot clé utilise-t-on pour appeler le constructeur de la classe mère", 0, 1, 3, 0),
+
 ("Une classe peut-elle avoir un constructeur private ? ", 0, 1, 3, 0);
 
 
@@ -295,9 +297,17 @@ insert into proposition_reponse (texte,est_bonne,fk_question) values
 ("est constant",  1, 5),
 ("Ne peut être hérité",  1, 5),
 ("ne peut être accedé depuis une autre classe",  1, 5),
-("les 3",  1, 5);
+("les 3",  1, 5),
 
+("float",  1, 6),
+("int",  1, 6),
+("number",  1, 6),
+("const",  1, 6),
 
+("%",  1, 7),
+("//",  1, 7),
+("#",  1, 7),
+("!",  1, 7);
 
 -- Insert compte:
 Insert into compte( nom, prenom, mail, mot_de_passe , fk_permission) values ("Balkany", "Patrick", "admin@gmail.com","A665A45920422F9D417E4867EFDC4FB8A04A1F3FFF1FA07E998E86F7F7A27AE3" ,  1) ;
