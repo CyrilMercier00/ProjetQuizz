@@ -44,11 +44,11 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`compte` (
   PRIMARY KEY (`pk_compte`),
   UNIQUE INDEX `mail_UNIQUE` (`mail` ASC)  ,
   INDEX `fk_compte_Permission1_idx` (`fk_permission` ASC) ,
-    
+
     CONSTRAINT `fk_compte_compte1`
     FOREIGN KEY (`fk_compteReferent`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`),
-    
+
 	CONSTRAINT `fk_compte_permission1`
     FOREIGN KEY (`fk_permission`)
     REFERENCES `bdd_quizz`.`Permission` (`pk_permission`)
@@ -85,7 +85,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bdd_quizz`.`quizz` (
   `pk_quizz` INT NOT NULL AUTO_INCREMENT,
-  `chrono` TIME NULL,
   `urlcode` VARCHAR(45) NULL,
   `fk_theme` INT NOT NULL,
   `fk_complexite` INT NOT NULL,
@@ -164,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `bdd_quizz`.`proposition_reponse` (
   `pk_reponse` INT NOT NULL AUTO_INCREMENT,
   `texte` LONGTEXT NULL,
   `est_bonne` TINYINT NULL,
+  `chrono` TIME NULL,
   `fk_question` INT NOT NULL,
   PRIMARY KEY (`pk_reponse`),
   INDEX `fk_reponse_question1_idx` (`fk_question` ASC)  ,
