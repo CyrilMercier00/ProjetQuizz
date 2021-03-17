@@ -66,7 +66,17 @@ namespace Quizz_Models.Services
         /// </summary>
         /// <param name="idQuizz"></param>
         /// <returns></returns>
-        public List<PropositionReponse> GetListReponseCandidatByIDQuizz(int idQuizz)
+        public List<PropositionReponse> GetListPropositionReponseByIDQuizz(int idQuizz)
+        {
+            return repoQuestion.GetListPropositionReponseByIDQuizz(idQuizz);
+        }
+        //**************question et reponse et rep candidat
+        /// <summary>
+        /// Retourne la liste des rep candidat générées pour ce quizz.
+        /// </summary>
+        /// <param name="idQuizz"></param>
+        /// <returns></returns>
+        public List<ReponseCandidat> GetListReponseCandidatByIDQuizz(int idQuizz)
         {
             return repoQuestion.GetListReponseCandidatByIDQuizz(idQuizz);
         }
@@ -168,7 +178,7 @@ namespace Quizz_Models.Services
 
 
             int i = 0;
-
+            int nbtrue=0;
             // Pour chaque questions de la liste passée
             foreach (Question q in prmListQuestion)
             {
@@ -180,8 +190,10 @@ namespace Quizz_Models.Services
                 }
                 else
                 {
-                    repCDto = this._repoReponseCandidat.TransformRepCandidatEnRepCandidatDto(this._questionRepository.GetReponseCandidatByIDQuestion(q.PkQuestion));
+                    repCDto = this._repoReponseCandidat.TransformRepCandidatEnRepCandidatDto(repC);
+                   // if (repCDto.isTrue is true) { nbtrue++; }
                 }
+
                 // Initialisationd du DTO pour cette question
                 listQuestRepDTO.Add(new QuestionReponseReponseCandidatDTO()
                 {
@@ -189,8 +201,9 @@ namespace Quizz_Models.Services
                     RepLibre = Convert.ToBoolean(q.RepLibre),
                     PKQuestion = q.PkQuestion,
                     RepCandidat = repCDto
+                    
 
-                });
+                }) ;
 
 
                 // Si ce n'est pas une question a réponse libre
@@ -217,9 +230,82 @@ namespace Quizz_Models.Services
             }
             return listQuestRepDTO;
         }
+        //TransformRepCandidatEnRepCandidatDto(ReponseCandidat reponseCandidat)
+        //public int GetNbbnReptrue(List<ReponseCandidatDTO> LrepDto)
+        //{
 
-        public int GetNbbnRep(List<PropositionReponse> listRepCand)
+        //    int nbBQuestok = 0;
+        //    try
+        //    { foreach(ReponseCandidatDTO rCDTO in LrepDto )
+        //                if (rCDTO is null)
+        //                {
+        //                }
+        //                else if (rCDTO.isTrue)
+        //                {
+        //                    nbBQuestok++;
+        //                }
+        //                else
+        //                {
+
+        //                }
+
+
+                    
+                
+        //    }
+        //    catch
+        //    {
+        //        nbBQuestok = 0;
+        //    }
+
+
+        //    return nbBQuestok;
+        //}
+
+
+        public int GetNbbnRep(List<ReponseCandidat> LreponseCandidat)
         {
+
+           
+           
+            int nbBQuestok = 0;
+            try
+            {
+                foreach (ReponseCandidat rC in LreponseCandidat)
+                {
+                    
+              
+                    if (LreponseCandidat.Count > 0)
+                    {
+                         ReponseCandidatDTO repDto=_repoReponseCandidat.TransformRepCandidatEnRepCandidatDto(rC);
+                       
+                            if (rC is null)
+                            {
+                            }
+                            else if (repDto.isTrue)
+                            {
+                                nbBQuestok++;
+                            }
+                            else
+                            {
+                               
+                            }
+
+                        
+                    }
+                }
+            }
+            catch
+            {
+                nbBQuestok = 0;
+            }
+
+
+            return nbBQuestok;
+        }
+        public int GetNbpropRep(List<PropositionReponse> listRepCand)
+        {
+
             int nbBQuestok = 0;
             try
             {

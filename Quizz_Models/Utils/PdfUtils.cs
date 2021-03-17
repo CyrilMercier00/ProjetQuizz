@@ -67,7 +67,19 @@ namespace Quizz_Models.Utils
                 // listQuestion= GetQuestionReponsesRepCandidat();
                 // question = affichageQuizz.ListeReponses;
                 Nb_QUEST = affichageQuizz.NbQuestions;
-                Nb_RepOk= affichageQuizz.NbQuestions;
+                Nb_RepOk = 0;
+                if (Nb_QUEST > 0)
+                {
+                    for (int i = 0; i < Nb_QUEST; i++)
+                    {
+                        foreach (var n in listQuestionrepRepCDTO[i].ListeReponses)
+                        {
+                            if (listQuestionrepRepCDTO[i].RepCandidat.isTrue is true) { Nb_RepOk++; }
+                        }
+                    }
+                }
+
+               
                 //chrono = affichageQuizz.Chrono;
 
 
@@ -202,37 +214,8 @@ namespace Quizz_Models.Utils
                             nb++;
                         }
                     }
-                    //////****
-                    ////if (listQuestionrepRepCDTO[i].RepCandidat.Reponse is null)
-                    ////{
-
-                    ////    Paragraph reponsetrueorfalsevide = new Paragraph(" La réponse est fausse ")
-                    ////       .SetFontColor(ColorConstants.RED)
-                    ////       .SetTextAlignment(TextAlignment.LEFT)
-                    ////       .SetFontSize(11);
-                    ////    document.Add(reponsetrueorfalsevide);
-                    ////}
-                    ////else
-                    ////{
-                    ////    if (listQuestionrepRepCDTO[i].RepCandidat.isTrue)
-                    ////    {
-                    ////        Paragraph reponsecandidatTrue = new Paragraph(" La réponse est fausse ")
-                    ////            .SetFontColor(ColorConstants.RED)
-                    ////            .SetTextAlignment(TextAlignment.LEFT)
-                    ////            .SetFontSize(11);
-                    ////        document.Add(reponsecandidatTrue);
-                    ////    }
-                    ////    else
-                    ////    {
-                    ////        Paragraph reponsecandidatfalse = new Paragraph(" La réponse est bonne ")
-                    ////           .SetFontColor(ColorConstants.GREEN)
-                    ////           .SetTextAlignment(TextAlignment.LEFT)
-                    ////           .SetFontSize(11);
-                    ////        document.Add(reponsecandidatfalse);
-                    ////    }
-
-                    ////}
-
+                   
+                   
                     //TitleTable("Réponse Candidat : ");
                     if (listQuestionrepRepCDTO[i].RepCandidat is null) { }
                     else
@@ -378,7 +361,7 @@ namespace Quizz_Models.Utils
         }
         public static void ScoreTable()
         {
-            Nb_RepOk = affichageQuizz.nbRepOK;
+            //Nb_RepOk = affichageQuizz.nbRepOK;
             //Nb_QUEST = affichageQuizz.NbQuestions;
             LineSeparator ls = new LineSeparator(new SolidLine());
 

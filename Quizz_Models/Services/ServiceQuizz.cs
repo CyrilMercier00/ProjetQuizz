@@ -287,7 +287,9 @@ namespace Quizz_Models.Services
 
             List<Question> listQuest = this._servQuestion.GetListQuestionByIDQuizz(quizz.PkQuizz);
             List<QuestionReponseDTO> listQuestionrepDTO = this._servQuestion.AddReponseToQuestion(listQuest);
-            List<PropositionReponse> listPropositionRep = this._servQuestion.GetListReponseCandidatByIDQuizz(quizz.PkQuizz);
+            List<PropositionReponse> listPropositionRep = this._servQuestion.GetListPropositionReponseByIDQuizz(quizz.PkQuizz);
+            List<ReponseCandidat> listRepCandidat = this._servQuestion.GetListReponseCandidatByIDQuizz(quizz.PkQuizz);
+
             List<QuestionReponseReponseCandidatDTO> listQuestionrepRepCDTO = this._servQuestion.AddReponseCandidatToQuestion(listQuest, quizz.PkQuizz);
             var a= new AffichageQuizzDto
             {
@@ -297,11 +299,13 @@ namespace Quizz_Models.Services
                 Complexite = this._servComplexite.GetComplexite(quizz.FkComplexite).niveau,
                 Urlcode = quizz.Urlcode,
                 ListQuestionrep = listQuestionrepDTO,
-                nbRepOK = this._servQuestion.GetNbbnRep(listPropositionRep),
+                nbRepOK = this._servQuestion.GetNbbnRep(listRepCandidat),
                 ListQuestionrepRepCDTO = listQuestionrepRepCDTO,
+                  //
+               
 
 
-            };
+                    };
             return a;
         }
 

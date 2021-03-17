@@ -17,7 +17,7 @@ namespace Quizz_Models.DTO
        
         public int PKQuestion { get; set; }
 
-        //
+        public int nbRepTRue { get; set; }
         public String Enonce { get; set; }
         public bool RepLibre { get; set; }
         public String NomComplexite { get; set; }

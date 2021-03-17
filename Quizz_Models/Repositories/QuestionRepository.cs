@@ -81,7 +81,7 @@ namespace Quizz_Models.Repositories
         /// </summary>
         /// <param name="prmIDQuizz"></param>
         /// <returns></returns>
-        public List<PropositionReponse> GetListReponseCandidatByIDQuizz(int prmIDQuizz)
+        public List<PropositionReponse> GetListPropositionReponseByIDQuizz(int prmIDQuizz)
         {
 
             List<PropositionReponse> listeRetour = new List<PropositionReponse>();
@@ -93,8 +93,30 @@ namespace Quizz_Models.Repositories
                 return 
                     bdd_entities.PropositionReponse
                     .Where(x => x.FkQuestion == q.PkQuestion)
-                    .ToList()
-                     ;
+                    .ToList();
+            }
+
+            return listeRetour;
+        }
+        /// <summary>
+        /// Retourne les Rep asociées au quizz avec l'id passé.
+        /// </summary>
+        /// <param name="prmIDQuizz"></param>
+        /// <returns></returns>
+        public List<ReponseCandidat> GetListReponseCandidatByIDQuizz(int prmIDQuizz)
+        {
+
+            List<ReponseCandidat> listeRetour = new List<ReponseCandidat>();
+
+            List<Question> listQuizzQuestion = this.GetQuestionByIDQuizz(prmIDQuizz);
+
+            foreach (Question q in listQuizzQuestion)
+            {
+                listeRetour.Add(
+                    bdd_entities.ReponseCandidat
+                    .Where(x => x.FkQuestion == q.PkQuestion)
+                    .FirstOrDefault()
+                );
             }
 
             return listeRetour;
@@ -111,7 +133,7 @@ namespace Quizz_Models.Repositories
 
                 Retour = bdd_entities.ReponseCandidat
                     .Where(x => x.FkQuestion == prmIDquestion)
-                    .SingleOrDefault();
+                    .FirstOrDefault();
             }
             catch (Exception e)
             {
