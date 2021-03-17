@@ -67,7 +67,7 @@ namespace Quizz_Models.Utils
                 // listQuestion= GetQuestionReponsesRepCandidat();
                 // question = affichageQuizz.ListeReponses;
                 Nb_QUEST = affichageQuizz.NbQuestions;
-                chrono = affichageQuizz.Chrono;
+                //chrono = affichageQuizz.Chrono;
 
 
                 //ajout attribut et modif methode
@@ -378,11 +378,11 @@ namespace Quizz_Models.Utils
         }
         public static void ScoreTable()
         {
-            //Nb_RepOk = affichageQuizz.nbRepOK;
+            Nb_RepOk = affichageQuizz.nbRepOK;
             //Nb_QUEST = affichageQuizz.NbQuestions;
             LineSeparator ls = new LineSeparator(new SolidLine());
 
-            //Nb_RepOk = 10;
+           // Nb_RepOk = 10;
             int nb_Note = NoteSur20(Nb_QUEST, Nb_RepOk);
             // création Tableau avec 4 col
             Table scoreTable = new Table(4, true);
@@ -463,7 +463,7 @@ namespace Quizz_Models.Utils
 
             Cell qcell21 = new Cell(2, 1)
            .SetTextAlignment(TextAlignment.CENTER)
-           .Add(new Paragraph(chrono));
+           .Add(new Paragraph("chrono"));
 
             Cell qcell22 = new Cell(2, 2)
              .SetTextAlignment(TextAlignment.CENTER)

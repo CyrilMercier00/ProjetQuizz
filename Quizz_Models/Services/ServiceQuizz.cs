@@ -289,7 +289,7 @@ namespace Quizz_Models.Services
             List<QuestionReponseDTO> listQuestionrepDTO = this._servQuestion.AddReponseToQuestion(listQuest);
             List<PropositionReponse> listPropositionRep = this._servQuestion.GetListReponseCandidatByIDQuizz(quizz.PkQuizz);
             List<QuestionReponseReponseCandidatDTO> listQuestionrepRepCDTO = this._servQuestion.AddReponseCandidatToQuestion(listQuest, quizz.PkQuizz);
-            return new AffichageQuizzDto
+            var a= new AffichageQuizzDto
             {
                 PkQuizz = quizz.PkQuizz,
                 NbQuestions = listQuest.Count,
@@ -302,6 +302,7 @@ namespace Quizz_Models.Services
 
 
             };
+            return a;
         }
 
         //*********************
