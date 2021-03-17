@@ -138,7 +138,11 @@ namespace Quizz_Models.Services
                 throw new Exception("Probleme lors de la sauvegarde du quizz");
             }
 
+            // Assigantion du quizz au candidat
+            assignCandidatToQuizz(quizzCreation.PkQuizz, prmDTO.FKCompteCandidat);
+
         }
+
         //**********************************************************************************************
         //--------------------------------------- Envoi mail ------------------------------------------
         //**********************************************************************************************
