@@ -5,13 +5,13 @@ import { AuthService } from 'src/app/Service/AuthService';
 import { ChronoComponent } from '../../chrono/chrono.component';
 import { ComptePersonnelDTO } from 'src/app/DTO/ComptePersonnelDTO';
 import { CompteService } from 'src/app/Service/CompteService'
+import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
 import { DTOQuestion } from 'src/app/DTO/questionDTO';
 import { DTOQuizz } from 'src/app/DTO/dto-quizz';
 import { Globals } from 'src/app/globals';
 import { ServiceQuestions } from 'src/app/Service/serviceQuestion'
 import { ServiceQuizz } from 'src/app/Service/serviceQuizz';
 import { utilDTO } from 'src/app/DTO/utilDTO';
-import { ConnexionDTO } from 'src/app/DTO/ConnexionDTO';
 
 @Component({
   selector: 'app-page-debut-quizz',
@@ -52,15 +52,13 @@ export class PageDebutQuizzComponent implements OnInit {
     // ! Enregistrer le compte du candidat qui passe
     CompteService.GetCompteLinkedToCode(this.code)
       .then(repFetch => {
-        console.log('premier');
-        console.log(repFetch);
+
         repFetch.json().then(retour => {
+
           let compte = new ComptePersonnelDTO(retour.nom, retour.prenom, null)
           compte.$PkCompte = retour.pk
           compte.$Mail = retour.mail
-          console.log(retour)
 
-          console.log(compte)
           this.authService.connectCandidat(new ConnexionDTO(compte.$Mail, null))
             .subscribe(
               jwt => {
