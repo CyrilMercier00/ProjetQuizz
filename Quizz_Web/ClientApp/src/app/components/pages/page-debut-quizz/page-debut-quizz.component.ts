@@ -120,8 +120,11 @@ export class PageDebutQuizzComponent implements OnInit
   /*redirige vers la page quizz success*/
   redirect()
   {
+    
     let jwt = Globals.decodeJwt();
+    
     this.router.navigate(['/quizzsuccess/' + this.code + '/' + jwt['id']]);
+    
   }
 
 
